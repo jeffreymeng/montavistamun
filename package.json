@@ -68,9 +68,9 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/taylorbryant/gatsby-starter-tailwind"
+		"url": "https://github.com/jeffreymeng/montavistamun"
 	},
 	"bugs": {
-		"url": "https://github.com/taylorbryant/gatsby-starter-tailwind/issues"
+		"url": "https://github.com/jeffreymeng/montavistamun/issues"
 	}
 }
