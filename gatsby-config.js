@@ -5,9 +5,9 @@ const fullConfig = resolveConfig(tailwindConfig);
 
 module.exports = {
 	siteMetadata: {
-		title: `Gatsby Starter Tailwind`,
-		description: `Gatsby starter styled with Tailwind`,
-		author: `@taylorbryant`,
+		title: `Monta Vista Model United Nations`,
+		description: `Monta Vista Model United Nations Club Website`,
+		author: `@jeffreymeng`,
 	},
 	plugins: [
 		`gatsby-plugin-eslint`,
@@ -28,6 +28,7 @@ module.exports = {
 			resolve: `gatsby-plugin-postcss`,
 			options: {
 				postCssPlugins: [
+					require("postcss-import"),
 					require(`tailwindcss`)(tailwindConfig),
 					require(`autoprefixer`),
 					...(process.env.NODE_ENV === `production`
@@ -36,6 +37,6 @@ module.exports = {
 				],
 			},
 		},
-		`gatsby-plugin-offline`,
+		// `gatsby-plugin-offline`,
 	],
 };
