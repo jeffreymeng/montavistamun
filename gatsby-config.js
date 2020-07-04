@@ -21,7 +21,7 @@ module.exports = {
 				background_color: fullConfig.theme.colors.white,
 				theme_color: fullConfig.theme.colors.teal["400"],
 				display: `minimal-ui`,
-				icon: `static/images/logo.jpg`,
+				icon: `static/images/favicons/android-chrome-512x512.png`,
 			},
 		},
 		{
