@@ -1,8 +1,107 @@
 import { graphql, useStaticQuery, Link } from "gatsby";
-import React, { useState } from "react";
+import React, { ReactElement, useState } from "react";
+import { Transition } from "react-transition-group";
+import classNames from "classnames";
+function ProfileDropdown(): ReactElement {
+	const [expanded, setExpanded] = React.useState(false);
+	const toggle = () => setExpanded((old) => !old);
+	const ref = React.useRef<HTMLDivElement>(null);
+	React.useEffect(() => {
+		// https://stackoverflow.com/a/42234988, https://stackoverflow.com/a/43851475
+		const handleClickOutside = (e: Event) => {
+			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+			//@ts-ignore
+			if (ref.current && !ref.current?.contains(e.target as Node)) {
+				setExpanded(false);
+			}
+		};
+		document.addEventListener("mousedown", handleClickOutside);
+		return () =>
+			document.removeEventListener("mousedown", handleClickOutside);
+	}, [ref]);
+	return (
+		<div className="ml-3 relative" ref={ref}>
+			<div>
+				<button
+					onClick={toggle}
+					className="flex text-sm border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out"
+					id="user-menu"
+					aria-label="User menu"
+					aria-haspopup="true"
+				>
+					<img
+						className="h-8 w-8 rounded-full"
+						src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+						alt=""
+					/>
+				</button>
+			</div>
+			{/*<!--
+                                  Profile dropdown panel, show/hide based on dropdown state.
 
+                                  Entering: "transition ease-out duration-200"
+                                    From: "transform opacity-0 scale-95"
+                                    To: "transform opacity-100 scale-100"
+                                  Leaving: "transition ease-in duration-75"
+                                    From: "transform opacity-100 scale-100"
+                                    To: "transform opacity-0 scale-95"
+                                -->*/}
+			<Transition
+				in={expanded}
+				timeout={{
+					enter: 200,
+					exit: 75,
+				}}
+			>
+				{(state: "entering" | "entered" | "exiting" | "exited") => (
+					<div
+						className={classNames(
+							"origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg transition ease-out transform ",
+							["entering", "exited"].includes(state)
+								? "opacity-0 scale-95"
+								: "opacity-100 scale-100",
+							["entering", "entered"].includes(state)
+								? "duration-200"
+								: "duration-75"
+						)}
+					>
+						<div
+							className="py-1 rounded-md bg-white shadow-xs"
+							role="menu"
+							aria-orientation="vertical"
+							aria-labelledby="user-menu"
+						>
+							<a
+								href="#"
+								className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
+								role="menuitem"
+							>
+								Your Profile
+							</a>
+							<a
+								href="#"
+								className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
+								role="menuitem"
+							>
+								Settings
+							</a>
+							<a
+								href="#"
+								className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
+								role="menuitem"
+							>
+								Sign out
+							</a>
+						</div>
+					</div>
+				)}
+			</Transition>
+		</div>
+	);
+}
 function Header() {
-	const [isExpanded, toggleExpansion] = useState(false);
+	const [isExpanded, setIsExpanded] = useState(false);
+	const toggleExpansion = () => setIsExpanded((old) => !old);
 	const { site } = useStaticQuery(graphql`
 		query SiteTitleQuery {
 			site {
@@ -14,65 +113,202 @@ function Header() {
 	`);
 
 	return (
-		<header className="bg-teal-700">
-			<div className="flex flex-wrap items-center justify-between max-w-4xl p-4 mx-auto md:p-8">
-				<Link to="/">
-					<h1 className="flex items-center text-white no-underline">
-						<svg
-							className="w-8 h-8 mr-2 fill-current"
-							height="54"
-							viewBox="0 0 54 54"
-							width="54"
-							xmlns="http://www.w3.org/2000/svg"
-						>
-							<path d="M13.5 22.1c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05zM0 38.3c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05z" />
-						</svg>
-						<span className="text-xl font-bold tracking-tight">
-							{site.siteMetadata.title}
-						</span>
-					</h1>
-				</Link>
-
-				<button
-					className="flex items-center block px-3 py-2 text-white border border-white rounded md:hidden"
-					onClick={() => toggleExpansion(!isExpanded)}
-				>
-					<svg
-						className="w-3 h-3 fill-current"
-						viewBox="0 0 20 20"
-						xmlns="http://www.w3.org/2000/svg"
-					>
-						<title>Menu</title>
-						<path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
-					</svg>
-				</button>
-
-				<nav
-					className={`${
-						isExpanded ? `block` : `hidden`
-					} md:block md:flex md:items-center w-full md:w-auto`}
-				>
-					{[
-						{
-							route: `/about`,
-							title: `About`,
-						},
-						{
-							route: `/contact`,
-							title: `Contact`,
-						},
-					].map((link) => (
-						<Link
-							className="block mt-4 text-white no-underline md:inline-block md:mt-0 md:ml-6"
-							key={link.title}
-							to={link.route}
-						>
-							{link.title}
-						</Link>
-					))}
-				</nav>
+		<nav className="bg-white shadow">
+			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<div className="flex justify-between h-16">
+					<div className="flex">
+						<div className="-ml-2 mr-2 flex items-center md:hidden">
+							<button
+								onClick={toggleExpansion}
+								className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
+								aria-label="Main menu"
+								aria-expanded="false"
+							>
+								{!isExpanded ? (
+									<svg
+										className="h-6 w-6"
+										fill="none"
+										viewBox="0 0 24 24"
+										stroke="currentColor"
+									>
+										<path
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											strokeWidth="2"
+											d="M4 6h16M4 12h16M4 18h16"
+										/>
+									</svg>
+								) : (
+									<svg
+										className="h-6 w-6"
+										fill="none"
+										viewBox="0 0 24 24"
+										stroke="currentColor"
+									>
+										<path
+											strokeLinecap="round"
+											strokeLinejoin="round"
+											strokeWidth="2"
+											d="M6 18L18 6M6 6l12 12"
+										/>
+									</svg>
+								)}
+							</button>
+						</div>
+						<div className="flex-shrink-0 flex items-center">
+							<img
+								className="block lg:hidden h-8 w-auto"
+								src="/images/logo.svg"
+								alt="Workflow logo"
+							/>
+							<img
+								className="hidden lg:block h-8 w-auto"
+								src="/images/logo.svg"
+								alt="Workflow logo"
+							/>
+						</div>
+						<div className="hidden md:ml-6 md:flex">
+							<a
+								href="#"
+								className="inline-flex items-center px-1 pt-1 border-b-2 border-indigo-500 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out"
+							>
+								Dashboard
+							</a>
+							<a
+								href="#"
+								className="ml-8 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out"
+							>
+								Team
+							</a>
+							<a
+								href="#"
+								className="ml-8 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out"
+							>
+								Projects
+							</a>
+							<a
+								href="#"
+								className="ml-8 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out"
+							>
+								Calendar
+							</a>
+						</div>
+					</div>
+					<div className="flex items-center">
+						<div className="flex-shrink-0">
+							<button
+								type="button"
+								className="relative inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 shadow-sm hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150"
+							>
+								<svg
+									className="-ml-1 mr-2 h-5 w-5"
+									viewBox="0 0 20 20"
+									fill="currentColor"
+								>
+									<path
+										fillRule="evenodd"
+										d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z"
+										clipRule="evenodd"
+									/>
+								</svg>
+								<span>Login</span>
+							</button>
+						</div>
+						<div className="hidden md:ml-4 md:flex-shrink-0 md:flex md:items-center">
+							<button
+								className="p-1 border-2 border-transparent text-gray-400 rounded-full hover:text-gray-500 focus:outline-none focus:text-gray-500 focus:bg-gray-100 transition duration-150 ease-in-out"
+								aria-label="Notifications"
+							>
+								<svg
+									className="h-6 w-6"
+									fill="none"
+									viewBox="0 0 24 24"
+									stroke="currentColor"
+								>
+									<path
+										strokeLinecap="round"
+										strokeLinejoin="round"
+										strokeWidth="2"
+										d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
+									/>
+								</svg>
+							</button>
+							<ProfileDropdown />
+						</div>
+					</div>
+				</div>
 			</div>
-		</header>
+
+			{isExpanded && (
+				<div>
+					<div className="pt-2 pb-3">
+						<a
+							href="#"
+							className="block pl-3 pr-4 py-2 border-l-4 border-indigo-500 text-base font-medium text-indigo-700 bg-indigo-50 focus:outline-none focus:text-indigo-800 focus:bg-indigo-100 focus:border-indigo-700 transition duration-150 ease-in-out sm:pl-5 sm:pr-6"
+						>
+							Dashboard
+						</a>
+						<a
+							href="#"
+							className="mt-1 block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 transition duration-150 ease-in-out sm:pl-5 sm:pr-6"
+						>
+							Team
+						</a>
+						<a
+							href="#"
+							className="mt-1 block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 transition duration-150 ease-in-out sm:pl-5 sm:pr-6"
+						>
+							Projects
+						</a>
+						<a
+							href="#"
+							className="mt-1 block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:outline-none focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300 transition duration-150 ease-in-out sm:pl-5 sm:pr-6"
+						>
+							Calendar
+						</a>
+					</div>
+					<div className="pt-4 pb-3 border-t border-gray-200">
+						<div className="flex items-center px-4 sm:px-6">
+							<div className="flex-shrink-0">
+								<img
+									className="h-10 w-10 rounded-full"
+									src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+									alt=""
+								/>
+							</div>
+							<div className="ml-3">
+								<div className="text-base font-medium leading-6 text-gray-800">
+									Tom Cook
+								</div>
+								<div className="text-sm font-medium leading-5 text-gray-500">
+									tom@example.com
+								</div>
+							</div>
+						</div>
+						<div className="mt-3">
+							<a
+								href="#"
+								className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100 focus:outline-none focus:text-gray-800 focus:bg-gray-100 transition duration-150 ease-in-out sm:px-6"
+							>
+								Your Profile
+							</a>
+							<a
+								href="#"
+								className="mt-1 block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100 focus:outline-none focus:text-gray-800 focus:bg-gray-100 transition duration-150 ease-in-out sm:px-6"
+							>
+								Settings
+							</a>
+							<a
+								href="#"
+								className="mt-1 block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100 focus:outline-none focus:text-gray-800 focus:bg-gray-100 transition duration-150 ease-in-out sm:px-6"
+							>
+								Sign out
+							</a>
+						</div>
+					</div>
+				</div>
+			)}
+		</nav>
 	);
 }
 
