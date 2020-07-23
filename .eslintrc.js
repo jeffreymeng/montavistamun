@@ -11,6 +11,7 @@ module.exports = {
 	],
 	rules: {
 		"no-mixed-spaces-and-tabs": "off",
+		"@typescript-eslint/no-var-requires": "off",
 	},
 	parser: "@typescript-eslint/parser",
 	parserOptions: {

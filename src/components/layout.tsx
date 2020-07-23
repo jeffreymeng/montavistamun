@@ -8,14 +8,27 @@ function Layout({
 	children,
 	empty,
 	title,
+	className,
 }: {
 	children: React.ReactNode | React.ReactNodeArray;
 	empty?: boolean;
 	title: string;
+	className?: string;
 }): React.ReactElement {
-	if (empty) return children as React.ReactElement;
+	if (empty) {
+		if (className) {
+			return <div className={className}>{children}</div>;
+		} else {
+			return children as React.ReactElement;
+		}
+	}
 	return (
-		<div className="flex flex-col min-h-screen font-sans text-gray-900">
+		<div
+			className={
+				"flex flex-col min-h-screen font-sans text-gray-900 " +
+				(className || "")
+			}
+		>
 			<Header />
 			<SEO
 				keywords={[

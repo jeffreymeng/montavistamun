@@ -56,13 +56,13 @@ function ProfileDropdown(): ReactElement {
 				{(state: "entering" | "entered" | "exiting" | "exited") => (
 					<div
 						className={classNames(
-							"origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg transition ease-out transform ",
+							"origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg transition transform ",
 							["entering", "exited"].includes(state)
 								? "opacity-0 scale-95"
 								: "opacity-100 scale-100",
 							["entering", "entered"].includes(state)
-								? "duration-200"
-								: "duration-75"
+								? "ease-out duration-200"
+								: "ease-in duration-75"
 						)}
 					>
 						<div
