@@ -121,7 +121,7 @@ export default function Footer({ dark }: { dark?: boolean }) {
 											className={
 												"text-base leading-6 " +
 												(dark
-													? "text-gray-300 hover:text-whitee"
+													? "text-gray-300 hover:text-white"
 													: "text-gray-500 hover:text-gray-900")
 											}
 										>
@@ -134,7 +134,7 @@ export default function Footer({ dark }: { dark?: boolean }) {
 											className={
 												"text-base leading-6 " +
 												(dark
-													? "text-gray-300 hover:text-whitee"
+													? "text-gray-300 hover:text-white"
 													: "text-gray-500 hover:text-gray-900")
 											}
 										>
@@ -147,7 +147,7 @@ export default function Footer({ dark }: { dark?: boolean }) {
 											className={
 												"text-base leading-6 " +
 												(dark
-													? "text-gray-300 hover:text-whitee"
+													? "text-gray-300 hover:text-white"
 													: "text-gray-500 hover:text-gray-900")
 											}
 										>
@@ -160,7 +160,7 @@ export default function Footer({ dark }: { dark?: boolean }) {
 											className={
 												"text-base leading-6 " +
 												(dark
-													? "text-gray-300 hover:text-whitee"
+													? "text-gray-300 hover:text-white"
 													: "text-gray-500 hover:text-gray-900")
 											}
 										>
@@ -180,7 +180,7 @@ export default function Footer({ dark }: { dark?: boolean }) {
 											className={
 												"text-base leading-6 " +
 												(dark
-													? "text-gray-300 hover:text-whitee"
+													? "text-gray-300 hover:text-white"
 													: "text-gray-500 hover:text-gray-900")
 											}
 										>
@@ -193,7 +193,7 @@ export default function Footer({ dark }: { dark?: boolean }) {
 											className={
 												"text-base leading-6 " +
 												(dark
-													? "text-gray-300 hover:text-whitee"
+													? "text-gray-300 hover:text-white"
 													: "text-gray-500 hover:text-gray-900")
 											}
 										>
@@ -206,7 +206,7 @@ export default function Footer({ dark }: { dark?: boolean }) {
 											className={
 												"text-base leading-6 " +
 												(dark
-													? "text-gray-300 hover:text-whitee"
+													? "text-gray-300 hover:text-white"
 													: "text-gray-500 hover:text-gray-900")
 											}
 										>
@@ -219,7 +219,7 @@ export default function Footer({ dark }: { dark?: boolean }) {
 											className={
 												"text-base leading-6 " +
 												(dark
-													? "text-gray-300 hover:text-whitee"
+													? "text-gray-300 hover:text-white"
 													: "text-gray-500 hover:text-gray-900")
 											}
 										>
@@ -241,7 +241,7 @@ export default function Footer({ dark }: { dark?: boolean }) {
 											className={
 												"text-base leading-6 " +
 												(dark
-													? "text-gray-300 hover:text-whitee"
+													? "text-gray-300 hover:text-white"
 													: "text-gray-500 hover:text-gray-900")
 											}
 										>
@@ -254,7 +254,7 @@ export default function Footer({ dark }: { dark?: boolean }) {
 											className={
 												"text-base leading-6 " +
 												(dark
-													? "text-gray-300 hover:text-whitee"
+													? "text-gray-300 hover:text-white"
 													: "text-gray-500 hover:text-gray-900")
 											}
 										>
@@ -267,7 +267,7 @@ export default function Footer({ dark }: { dark?: boolean }) {
 											className={
 												"text-base leading-6 " +
 												(dark
-													? "text-gray-300 hover:text-whitee"
+													? "text-gray-300 hover:text-white"
 													: "text-gray-500 hover:text-gray-900")
 											}
 										>
@@ -280,7 +280,7 @@ export default function Footer({ dark }: { dark?: boolean }) {
 											className={
 												"text-base leading-6 " +
 												(dark
-													? "text-gray-300 hover:text-whitee"
+													? "text-gray-300 hover:text-white"
 													: "text-gray-500 hover:text-gray-900")
 											}
 										>
@@ -293,7 +293,7 @@ export default function Footer({ dark }: { dark?: boolean }) {
 											className={
 												"text-base leading-6 " +
 												(dark
-													? "text-gray-300 hover:text-whitee"
+													? "text-gray-300 hover:text-white"
 													: "text-gray-500 hover:text-gray-900")
 											}
 										>
@@ -313,7 +313,7 @@ export default function Footer({ dark }: { dark?: boolean }) {
 											className={
 												"text-base leading-6 " +
 												(dark
-													? "text-gray-300 hover:text-whitee"
+													? "text-gray-300 hover:text-white"
 													: "text-gray-500 hover:text-gray-900")
 											}
 										>
@@ -326,7 +326,7 @@ export default function Footer({ dark }: { dark?: boolean }) {
 											className={
 												"text-base leading-6 " +
 												(dark
-													? "text-gray-300 hover:text-whitee"
+													? "text-gray-300 hover:text-white"
 													: "text-gray-500 hover:text-gray-900")
 											}
 										>
@@ -339,7 +339,7 @@ export default function Footer({ dark }: { dark?: boolean }) {
 											className={
 												"text-base leading-6 " +
 												(dark
-													? "text-gray-300 hover:text-whitee"
+													? "text-gray-300 hover:text-white"
 													: "text-gray-500 hover:text-gray-900")
 											}
 										>
