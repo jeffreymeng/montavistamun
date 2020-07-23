@@ -1,0 +1,9 @@
+{
+	"dependencies": {
+		"netlify-lambda": "^1.6.0",
+		"axios": "^0.19.2"
+	},
+	"scripts": {
+		"postinstall": "netlify-lambda install"
+	}
+}
