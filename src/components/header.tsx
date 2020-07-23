@@ -156,35 +156,32 @@ function Header() {
 							</button>
 						</div>
 						<div className="flex-shrink-0 flex items-center">
-							<img
-								className="block lg:hidden h-8 w-auto"
-								src="/images/logo.svg"
-								alt="Workflow logo"
-							/>
-							<img
-								className="hidden lg:block h-8 w-auto"
-								src="/images/logo.svg"
-								alt="Workflow logo"
-							/>
+							<Link to="/" aria-label="Home">
+								<img
+									className="h-8 w-auto"
+									src="/images/logo/short-name.svg"
+									alt="Workflow logo"
+								/>
+							</Link>
 						</div>
 						<div className="hidden md:ml-6 md:flex">
 							<a
 								href="#"
 								className="inline-flex items-center px-1 pt-1 border-b-2 border-indigo-500 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out"
 							>
-								Dashboard
+								About
 							</a>
 							<a
 								href="#"
 								className="ml-8 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out"
 							>
-								Team
+								Conferences
 							</a>
 							<a
 								href="#"
 								className="ml-8 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out"
 							>
-								Projects
+								Resources
 							</a>
 							<a
 								href="#"

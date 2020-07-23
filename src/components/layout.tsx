@@ -3,6 +3,7 @@ import React from "react";
 
 import Header from "./header";
 import SEO from "./seo";
+import Footer from "./Footer";
 
 function Layout({
 	children,
@@ -46,14 +47,7 @@ function Layout({
 				{children}
 			</main>
 
-			<footer className="bg-blue-700">
-				<nav className="flex justify-between max-w-4xl p-4 mx-auto text-sm md:p-8">
-					<p className="text-white">
-						&copy; Monta Vista Model United Nations. Developed by
-						Jeffrey Meng
-					</p>
-				</nav>
-			</footer>
+			<Footer dark />
 		</div>
 	);
 }

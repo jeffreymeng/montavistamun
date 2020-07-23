@@ -1,17 +1,26 @@
 import React from "react";
 
-export default function Footer() {
+export default function Footer({ dark }: { dark?: boolean }) {
 	return (
-		<div className="bg-white">
+		<div className={dark ? "bg-gray-800" : "bg-white"}>
 			<div className="max-w-screen-xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
 				<div className="xl:grid xl:grid-cols-3 xl:gap-8">
 					<div className="xl:col-span-1">
 						<img
 							className="h-15"
-							src="https://cdn.discordapp.com/attachments/622882350577221656/728323207857176636/imageedit_29_9375324134_border5_nocont.wmf_1.jpg"
+							src={
+								dark
+									? "/images/logo/full-light.svg"
+									: "/images/logo/full-dark.svg"
+							}
 							alt="Company name"
 						/>
-						<p className="mt-8 text-gray-500 text-base leading-6">
+						<p
+							className={
+								"mt-8 text-base leading-6 " +
+								(dark ? "text-gray-300" : "text-gray-500")
+							}
+						>
 							Making the world a better place through constructing
 							elegant hierarchies.
 						</p>
@@ -109,7 +118,12 @@ export default function Footer() {
 									<li>
 										<a
 											href="#"
-											className="text-base leading-6 text-gray-500 hover:text-gray-900"
+											className={
+												"text-base leading-6 " +
+												(dark
+													? "text-gray-300 hover:text-whitee"
+													: "text-gray-500 hover:text-gray-900")
+											}
 										>
 											Marketing
 										</a>
@@ -117,7 +131,12 @@ export default function Footer() {
 									<li className="mt-4">
 										<a
 											href="#"
-											className="text-base leading-6 text-gray-500 hover:text-gray-900"
+											className={
+												"text-base leading-6 " +
+												(dark
+													? "text-gray-300 hover:text-whitee"
+													: "text-gray-500 hover:text-gray-900")
+											}
 										>
 											Analytics
 										</a>
@@ -125,7 +144,12 @@ export default function Footer() {
 									<li className="mt-4">
 										<a
 											href="#"
-											className="text-base leading-6 text-gray-500 hover:text-gray-900"
+											className={
+												"text-base leading-6 " +
+												(dark
+													? "text-gray-300 hover:text-whitee"
+													: "text-gray-500 hover:text-gray-900")
+											}
 										>
 											Commerce
 										</a>
@@ -133,7 +157,12 @@ export default function Footer() {
 									<li className="mt-4">
 										<a
 											href="#"
-											className="text-base leading-6 text-gray-500 hover:text-gray-900"
+											className={
+												"text-base leading-6 " +
+												(dark
+													? "text-gray-300 hover:text-whitee"
+													: "text-gray-500 hover:text-gray-900")
+											}
 										>
 											Insights
 										</a>
@@ -148,7 +177,12 @@ export default function Footer() {
 									<li>
 										<a
 											href="#"
-											className="text-base leading-6 text-gray-500 hover:text-gray-900"
+											className={
+												"text-base leading-6 " +
+												(dark
+													? "text-gray-300 hover:text-whitee"
+													: "text-gray-500 hover:text-gray-900")
+											}
 										>
 											Pricing
 										</a>
@@ -156,7 +190,12 @@ export default function Footer() {
 									<li className="mt-4">
 										<a
 											href="#"
-											className="text-base leading-6 text-gray-500 hover:text-gray-900"
+											className={
+												"text-base leading-6 " +
+												(dark
+													? "text-gray-300 hover:text-whitee"
+													: "text-gray-500 hover:text-gray-900")
+											}
 										>
 											Documentation
 										</a>
@@ -164,7 +203,12 @@ export default function Footer() {
 									<li className="mt-4">
 										<a
 											href="#"
-											className="text-base leading-6 text-gray-500 hover:text-gray-900"
+											className={
+												"text-base leading-6 " +
+												(dark
+													? "text-gray-300 hover:text-whitee"
+													: "text-gray-500 hover:text-gray-900")
+											}
 										>
 											Guides
 										</a>
@@ -172,7 +216,12 @@ export default function Footer() {
 									<li className="mt-4">
 										<a
 											href="#"
-											className="text-base leading-6 text-gray-500 hover:text-gray-900"
+											className={
+												"text-base leading-6 " +
+												(dark
+													? "text-gray-300 hover:text-whitee"
+													: "text-gray-500 hover:text-gray-900")
+											}
 										>
 											API Status
 										</a>
@@ -189,7 +238,12 @@ export default function Footer() {
 									<li>
 										<a
 											href="#"
-											className="text-base leading-6 text-gray-500 hover:text-gray-900"
+											className={
+												"text-base leading-6 " +
+												(dark
+													? "text-gray-300 hover:text-whitee"
+													: "text-gray-500 hover:text-gray-900")
+											}
 										>
 											About
 										</a>
@@ -197,7 +251,12 @@ export default function Footer() {
 									<li className="mt-4">
 										<a
 											href="#"
-											className="text-base leading-6 text-gray-500 hover:text-gray-900"
+											className={
+												"text-base leading-6 " +
+												(dark
+													? "text-gray-300 hover:text-whitee"
+													: "text-gray-500 hover:text-gray-900")
+											}
 										>
 											Blog
 										</a>
@@ -205,7 +264,12 @@ export default function Footer() {
 									<li className="mt-4">
 										<a
 											href="#"
-											className="text-base leading-6 text-gray-500 hover:text-gray-900"
+											className={
+												"text-base leading-6 " +
+												(dark
+													? "text-gray-300 hover:text-whitee"
+													: "text-gray-500 hover:text-gray-900")
+											}
 										>
 											Jobs
 										</a>
@@ -213,7 +277,12 @@ export default function Footer() {
 									<li className="mt-4">
 										<a
 											href="#"
-											className="text-base leading-6 text-gray-500 hover:text-gray-900"
+											className={
+												"text-base leading-6 " +
+												(dark
+													? "text-gray-300 hover:text-whitee"
+													: "text-gray-500 hover:text-gray-900")
+											}
 										>
 											Press
 										</a>
@@ -221,7 +290,12 @@ export default function Footer() {
 									<li className="mt-4">
 										<a
 											href="#"
-											className="text-base leading-6 text-gray-500 hover:text-gray-900"
+											className={
+												"text-base leading-6 " +
+												(dark
+													? "text-gray-300 hover:text-whitee"
+													: "text-gray-500 hover:text-gray-900")
+											}
 										>
 											Partners
 										</a>
@@ -236,7 +310,12 @@ export default function Footer() {
 									<li>
 										<a
 											href="#"
-											className="text-base leading-6 text-gray-500 hover:text-gray-900"
+											className={
+												"text-base leading-6 " +
+												(dark
+													? "text-gray-300 hover:text-whitee"
+													: "text-gray-500 hover:text-gray-900")
+											}
 										>
 											Claim
 										</a>
@@ -244,7 +323,12 @@ export default function Footer() {
 									<li className="mt-4">
 										<a
 											href="#"
-											className="text-base leading-6 text-gray-500 hover:text-gray-900"
+											className={
+												"text-base leading-6 " +
+												(dark
+													? "text-gray-300 hover:text-whitee"
+													: "text-gray-500 hover:text-gray-900")
+											}
 										>
 											Privacy
 										</a>
@@ -252,7 +336,12 @@ export default function Footer() {
 									<li className="mt-4">
 										<a
 											href="#"
-											className="text-base leading-6 text-gray-500 hover:text-gray-900"
+											className={
+												"text-base leading-6 " +
+												(dark
+													? "text-gray-300 hover:text-whitee"
+													: "text-gray-500 hover:text-gray-900")
+											}
 										>
 											Terms
 										</a>
@@ -262,7 +351,12 @@ export default function Footer() {
 						</div>
 					</div>
 				</div>
-				<div className="mt-12 border-t border-gray-200 pt-8">
+				<div
+					className={
+						"mt-12 border-t pt-8" +
+						(dark ? " border-gray-700" : " border-gray-200")
+					}
+				>
 					<p className="text-base leading-6 text-gray-400 xl:text-center">
 						&copy; 2020 Monta Vista Model United Nations
 					</p>
