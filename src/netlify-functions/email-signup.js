@@ -1,13 +1,13 @@
 const { MAILCHIMP_API_KEY } = process.env;
 const axios = require("axios").default;
-const queryString = require("query-string");
 
 export async function handler(event, context) {
 	if (event.httpMethod !== "POST") {
 		return { statusCode: 405, body: "Method Not Allowed" };
 	}
-	const params = queryString.parse(event.body);
-	console.log(event.body);
+	if (!event.body) return { statusCode: 405, body: "Invalid parameters." };
+	const params = JSON.parse(event.body);
+
 	const { firstName, lastName, email, grade } = params;
 	if (
 		!firstName ||
@@ -44,9 +44,7 @@ export async function handler(event, context) {
 	} catch (error) {
 		return {
 			statusCode: 500,
-			body: {
-				mailchimpError: error,
-			},
+			body: `MailchimpError: ${JSON.stringify(error)}`,
 		};
 	}
 	return {

@@ -4,3 +4,5 @@
 **/node_modules/**
 public/**
 built-netlify-functions/**
+# Local Netlify folder
+.netlify
