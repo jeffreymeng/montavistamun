@@ -2,10 +2,11 @@ import React from "react";
 import BodyClassName from "react-body-classname";
 import { Transition } from "react-transition-group";
 import classNames from "classnames";
-
+import axios from "axios";
 export default function CTA() {
-	const [erorr, setError] = React.useState(false);
-	const [submitting, setSubmitting] = React.useState(false);
+	const [error, setError] = React.useState("");
+	const [submitting, setSubmitting] = React.useState(true);
+	const [success, setSuccess] = React.useState(false);
 	const [firstName, setFirstName] = React.useState("");
 	const [lastName, setLastName] = React.useState("");
 	const [email, setEmail] = React.useState("");
@@ -38,6 +39,7 @@ export default function CTA() {
 							<div className="mt-1 relative rounded-md shadow-sm">
 								<input
 									id="first_name"
+									disabled={submitting}
 									className="form-input py-3 px-4 block w-full transition ease-in-out duration-150"
 									onChange={(e) =>
 										setFirstName(e.target.value)
@@ -56,6 +58,7 @@ export default function CTA() {
 							<div className="mt-1 relative rounded-md shadow-sm">
 								<input
 									id="last_name"
+									disabled={submitting}
 									className="form-input py-3 px-4 block w-full transition ease-in-out duration-150"
 									onChange={(e) =>
 										setLastName(e.target.value)
@@ -75,6 +78,7 @@ export default function CTA() {
 								<input
 									id="email"
 									type="email"
+									disabled={submitting}
 									className="form-input py-3 px-4 block w-full transition ease-in-out duration-150"
 									onChange={(e) => setEmail(e.target.value)}
 									value={email}
@@ -94,6 +98,7 @@ export default function CTA() {
 									className="mt-1 form-select block w-full pl-3 pr-10 py-3 text-base leading-6 border-gray-300 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 sm:text-sm sm:leading-5"
 									onChange={(e) => setGrade(e.target.value)}
 									value={grade}
+									disabled={submitting}
 								>
 									<option value={""} selected disabled>
 										Select An Option...
@@ -105,22 +110,54 @@ export default function CTA() {
 								</select>
 							</div>
 						</div>
-
+						{error && (
+							<div className="sm:col-span-2">
+								<p className={"text-red-500"}>Error: {error}</p>
+							</div>
+						)}
 						<div className="sm:col-span-2">
 							<span className="w-full inline-flex rounded-md shadow-sm">
 								<button
 									type="button"
+									disabled={submitting}
 									className="w-full inline-flex items-center justify-center px-6 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150"
 									onClick={() => {
-										console.log(
-											firstName,
-											lastName,
-											email,
-											grade
-										);
+										if (
+											!firstName.trim() ||
+											!lastName.trim() ||
+											!email.trim() ||
+											![
+												"9th",
+												"10th",
+												"11th",
+												"12th",
+											].includes(grade)
+										) {
+											setError("All fields are required");
+										} else if (email.indexOf("@") === -1) {
+											setError(
+												"Please enter a valid email."
+											);
+										}
+										axios
+											.post(
+												"/.netlify/functions/email-signup",
+												{
+													firstName,
+													lastName,
+													email,
+													grade,
+												}
+											)
+											.then(() => setSuccess(true))
+											.catch(() =>
+												setError(
+													"An error occurred signing you up. Please try again later."
+												)
+											);
 									}}
 								>
-									Let&apos;s talk
+									{submitting ? "Loading..." : "Join Now"}
 								</button>
 							</span>
 						</div>

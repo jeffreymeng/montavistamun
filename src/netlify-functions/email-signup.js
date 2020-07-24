@@ -12,7 +12,7 @@ export async function handler(event, context) {
 		!firstName.trim() ||
 		!lastName.trim() ||
 		email.indexOf("@") === -1 ||
-		!["9th", "10th", "11th", "12th"].contains(grade)
+		!["9th", "10th", "11th", "12th"].includes(grade)
 	) {
 		return { statusCode: 405, body: "Invalid parameters." };
 	}
