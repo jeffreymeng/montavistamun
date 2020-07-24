@@ -10,11 +10,13 @@ function Layout({
 	empty,
 	title,
 	className,
+	wrapperClassName,
 }: {
 	children: React.ReactNode | React.ReactNodeArray;
 	empty?: boolean;
 	title: string;
 	className?: string;
+	wrapperClassName?: string;
 }): React.ReactElement {
 	if (empty) {
 		if (className) {
@@ -73,7 +75,13 @@ function Layout({
 				title={title}
 			/>
 
-			<main className="flex-1 w-full max-w-4xl px-4 py-8 mx-auto md:px-8 md:py-16">
+			<main
+				className={
+					wrapperClassName
+						? wrapperClassName
+						: "flex-1 w-full max-w-4xl px-4 py-8 mx-auto md:px-8 md:py-16"
+				}
+			>
 				{children}
 			</main>
 

@@ -1287,7 +1287,7 @@
   dependencies:
     tslib "^2.0.0"
 
-"@fullcalendar/daygrid@^5.1.0":
+"@fullcalendar/daygrid@^5.1.0", "@fullcalendar/daygrid@~5.1.0":
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/@fullcalendar/daygrid/-/daygrid-5.1.0.tgz#4f8cb30e99ff00600f064645942d21e8f668c946"
   integrity sha512-zdO/EFer8wWrr+kvkMfyizPi/F7yvOCpGOb6Arz6QqyOgFl1ffNUQoRf1iQf7h2PnIEvZWZdZs+3wuMwwmhb3g==
@@ -1317,6 +1317,15 @@
   integrity sha512-y/yeVV6doxdvcBPTfHn7SVtr/Z5+speQ6xxnvvmZEv+BMoky6XZtx/ApGETtzFPn6T22x6rcspqlFJtpM6rUpQ==
   dependencies:
     "@fullcalendar/common" "~5.1.0"
+    tslib "^2.0.0"
+
+"@fullcalendar/timegrid@^5.1.0":
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/@fullcalendar/timegrid/-/timegrid-5.1.0.tgz#618efedcbd344a61c716b02c943b0566dcaca07a"
+  integrity sha512-0PpsJeLnXl1D5B8LV5y4ky7OpFMfFaqs+Z2tPBOvhGAWZnyRH23CRuQQUIws/Cf9Uc097T714fNXwkQwwSUuLg==
+  dependencies:
+    "@fullcalendar/common" "~5.1.0"
+    "@fullcalendar/daygrid" "~5.1.0"
     tslib "^2.0.0"
 
 "@fullhuman/postcss-purgecss@^2.1.2":
