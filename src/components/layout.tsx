@@ -18,9 +18,39 @@ function Layout({
 }): React.ReactElement {
 	if (empty) {
 		if (className) {
-			return <div className={className}>{children}</div>;
+			return (
+				<>
+					<SEO
+						keywords={[
+							"cuptertino",
+							"model un",
+							"mun",
+							"monta vista",
+							"club",
+							"model united nations",
+						]}
+						title={title}
+					/>
+					<div className={className}>{children}</div>
+				</>
+			);
 		} else {
-			return children as React.ReactElement;
+			return (
+				<>
+					<SEO
+						keywords={[
+							"cuptertino",
+							"model un",
+							"mun",
+							"monta vista",
+							"club",
+							"model united nations",
+						]}
+						title={title}
+					/>
+					{children}
+				</>
+			);
 		}
 	}
 	return (
