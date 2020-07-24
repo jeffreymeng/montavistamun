@@ -7,11 +7,16 @@ export async function handler(event, context) {
 		return { statusCode: 405, body: "Method Not Allowed" };
 	}
 	const params = queryString.parse(event.body);
+	console.log(event.body);
 	const { firstName, lastName, email, grade } = params;
 	if (
+		!firstName ||
 		!firstName.trim() ||
+		!lastName ||
 		!lastName.trim() ||
+		!email ||
 		email.indexOf("@") === -1 ||
+		!grade ||
 		!["9th", "10th", "11th", "12th"].includes(grade)
 	) {
 		return { statusCode: 405, body: "Invalid parameters." };

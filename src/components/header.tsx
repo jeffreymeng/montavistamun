@@ -1,6 +1,8 @@
 import { graphql, useStaticQuery, Link } from "gatsby";
 import React, { ReactElement, useState } from "react";
 import { Transition } from "react-transition-group";
+import { useLocation } from "@reach/router";
+
 import classNames from "classnames";
 function ProfileDropdown(): ReactElement {
 	const [expanded, setExpanded] = React.useState(false);
@@ -101,6 +103,8 @@ function ProfileDropdown(): ReactElement {
 }
 function Header() {
 	const [isExpanded, setIsExpanded] = useState(false);
+	const location = useLocation();
+	console.log(location);
 	const toggleExpansion = () => setIsExpanded((old) => !old);
 	const { site } = useStaticQuery(graphql`
 		query SiteTitleQuery {
@@ -165,30 +169,25 @@ function Header() {
 							</Link>
 						</div>
 						<div className="hidden md:ml-6 md:flex">
-							<a
-								href="#"
-								className="inline-flex items-center px-1 pt-1 border-b-2 border-indigo-500 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out"
-							>
-								About
-							</a>
-							<a
-								href="#"
-								className="ml-8 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out"
-							>
-								Conferences
-							</a>
-							<a
-								href="#"
-								className="ml-8 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out"
-							>
-								Resources
-							</a>
-							<a
-								href="#"
-								className="ml-8 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out"
-							>
-								Calendar
-							</a>
+							{[
+								"About",
+								"Conferences",
+								"Resources",
+								"Calendar",
+							].map((page) => (
+								<Link
+									to={`/${page.toLowerCase()}`}
+									key={page}
+									className={
+										location.pathname.toLowerCase() ==
+										`/${page.toLowerCase()}`
+											? "ml-8 inline-flex items-center px-1 pt-1 border-b-2 border-indigo-500 text-sm font-medium leading-5 text-gray-900 focus:outline-none focus:border-indigo-700 transition duration-150 ease-in-out"
+											: "ml-8 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-500 hover:text-gray-700 hover:border-gray-300 focus:outline-none focus:text-gray-700 focus:border-gray-300 transition duration-150 ease-in-out"
+									}
+								>
+									{page}
+								</Link>
+							))}
 						</div>
 					</div>
 					<div className="flex items-center">
