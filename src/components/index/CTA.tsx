@@ -225,11 +225,21 @@ export default function CTA() {
 													setSubmitting(false);
 													setSuccess(true);
 												})
-												.catch(() => {
-													setError(
-														"An error occurred signing you up. Please try again later."
-													);
+												.catch((error) => {
 													setSubmitting(false);
+													if (
+														error.response.data
+															.code ==
+														"already_subscribed"
+													) {
+														setError(
+															"It looks like that email has already been subscribed. If you think you aren't receiving our emails, please send us an email at emailhelp@montavistamun.com."
+														);
+													} else {
+														setError(
+															"An error occurred signing you up. Please try again later."
+														);
+													}
 												});
 										}}
 									>

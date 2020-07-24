@@ -19,7 +19,10 @@ export async function handler(event, context) {
 		!grade ||
 		!["9th", "10th", "11th", "12th"].includes(grade)
 	) {
-		return { statusCode: 405, body: "Invalid parameters." };
+		return {
+			statusCode: 405,
+			body: `{"success":false, "code":"invalid_parameters", "message":"One or more POST parameters were missing or malformed."}`,
+		};
 	}
 	try {
 		await axios.post(
@@ -42,13 +45,22 @@ export async function handler(event, context) {
 			}
 		);
 	} catch (error) {
+		console.log(error);
+		if (error.response?.data?.title == "Member Exists") {
+			return {
+				statusCode: 400,
+				body: `{"success":false, "code":"already_subscribed", "message":"A member with this email has already been subscribed."}`,
+			};
+		}
 		return {
 			statusCode: 500,
-			body: `MailchimpError: ${JSON.stringify(error)}`,
+			body: `{"success":false, "code":"internal_error", "mailchimpErrorData":${JSON.stringify(
+				error
+			)}}`,
 		};
 	}
 	return {
 		statusCode: 200,
-		body: "Success",
+		body: `{"success":true}`,
 	};
 }
