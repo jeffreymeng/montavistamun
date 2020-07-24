@@ -1,10 +1,14 @@
 import React from "react";
 import Layout from "../components/layout";
-import loadable from "@loadable/component";
+import Loadable from "react-loadable";
 
-const LoadableCalendar = loadable(() =>
-	import("../components/calendar/LoadableCalendar")
+const CalendarLoadingComponent = () => (
+	<p>Loading the latest events just for you...</p>
 );
+const LoadableCalendar = Loadable({
+	loader: () => import("../components/calendar/LoadableCalendar"),
+	loading: CalendarLoadingComponent,
+});
 
 export default function AboutPage(): React.ReactElement {
 	return (

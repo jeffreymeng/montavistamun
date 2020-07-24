@@ -169,9 +169,7 @@ export default function CTA() {
 							</div>
 							{error && (
 								<div className="sm:col-span-2">
-									<p className={"text-red-500"}>
-										Error: {error}
-									</p>
+									<p className={"text-red-500"}>{error}</p>
 								</div>
 							)}
 							<div className="sm:col-span-2">
