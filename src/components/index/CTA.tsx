@@ -210,7 +210,7 @@ export default function CTA() {
 												);
 												return;
 											}
-
+											setSubmitting(true);
 											axios
 												.post(
 													"/.netlify/functions/email-signup",
