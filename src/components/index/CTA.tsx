@@ -6,7 +6,7 @@ import axios from "axios";
 export default function CTA() {
 	const [error, setError] = React.useState("");
 	const [submitting, setSubmitting] = React.useState(false);
-	const [success, setSuccess] = React.useState(true);
+	const [success, setSuccess] = React.useState(false);
 	const [firstName, setFirstName] = React.useState("");
 	const [lastName, setLastName] = React.useState("");
 	const [email, setEmail] = React.useState("");
