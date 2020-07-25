@@ -1,9 +1,12 @@
 import React from "react";
 import { Link } from "gatsby";
+import Transition from "../Transition";
 export default function HeroWithNav({
 	aboutRef,
+	joinRef,
 }: {
 	aboutRef: React.Ref<HTMLDivElement>; // ref to the about element for scrolling
+	joinRef: React.Ref<HTMLDivElement>;
 }) {
 	return (
 		<div className="relative bg-white overflow-hidden">
@@ -29,6 +32,14 @@ export default function HeroWithNav({
 									<a
 										href="#"
 										className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition duration-150 ease-in-out md:py-4 md:text-lg md:px-10"
+										onClick={() =>
+											joinRef &&
+											// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+											// @ts-ignore
+											joinRef.current.scrollIntoView({
+												behavior: "smooth",
+											})
+										}
 									>
 										Join Us
 									</a>
@@ -153,7 +164,15 @@ function MiniNav() {
 			{/*    From: "opacity-100 scale-100"*/}
 			{/*    To: "opacity-0 scale-95"*/}
 			{/*-->*/}
-			{mobileMenuOpen && (
+			<Transition
+				show={mobileMenuOpen}
+				enter="duration-150 ease-out"
+				enterFrom="opacity-0 scale-95"
+				enterTo="opacity-100 scale-100"
+				leave="duration-100 ease-in"
+				leaveFrom="opacity-100 scale-100"
+				leaveTo="opacity-0 scale-95"
+			>
 				<div className="absolute top-0 inset-x-0 p-2 transition transform origin-top-right md:hidden">
 					<div className="rounded-lg shadow-md">
 						<div
@@ -235,7 +254,7 @@ function MiniNav() {
 						</div>
 					</div>
 				</div>
-			)}
+			</Transition>
 		</>
 	);
 }

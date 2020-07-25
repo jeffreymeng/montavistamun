@@ -17,13 +17,15 @@ function IndexPage({
 }): React.ReactElement {
 	console.log(data);
 	const aboutRef = React.useRef(null);
+	const joinRef = React.useRef(null);
+
 	const [joinModalOpen, setJoinModalOpen] = React.useState(false);
 	return (
 		<Layout empty title={"Home"}>
-			<HeroWithNav aboutRef={aboutRef} />
+			<HeroWithNav aboutRef={aboutRef} joinRef={joinRef} />
 			<About aboutRef={aboutRef} />
 			<Stats />
-			<CTA />
+			<CTA joinRef={joinRef} />
 			<Footer />
 		</Layout>
 	);

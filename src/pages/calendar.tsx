@@ -19,13 +19,13 @@ export default function AboutPage(): React.ReactElement {
 		>
 			<h1
 				className={
-					"text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10 mt-10"
+					"text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10"
 				}
 			>
 				Calendar
 			</h1>
 			<p className={"my-3"}>
-				You can follow our calendar by clicking{" "}
+				You can add the MVMUN calendar to your own calendar:{" "}
 				<a
 					className={"underline text-blue-500 "}
 					href={
@@ -34,7 +34,18 @@ export default function AboutPage(): React.ReactElement {
 					target={"_blank"}
 					rel={"noopener noreferrer"}
 				>
-					here
+					add to Google Calendar
+				</a>
+				{" | "}
+				<a
+					className={"underline text-blue-500 "}
+					href={
+						"https://calendar.google.com/calendar/ical/g9h6cqiso966e96uqj1cv2ohgc%40group.calendar.google.com/public/basic.ics"
+					}
+					target={"_blank"}
+					rel={"noopener noreferrer"}
+				>
+					add to other calendar application
 				</a>
 				.
 			</p>

@@ -3,7 +3,11 @@ import BodyClassName from "react-body-classname";
 import { Transition } from "react-transition-group";
 import classNames from "classnames";
 import axios from "axios";
-export default function CTA() {
+export default function CTA({
+	joinRef,
+}: {
+	joinRef: React.Ref<HTMLDivElement>;
+}) {
 	const [error, setError] = React.useState("");
 	const [submitting, setSubmitting] = React.useState(false);
 	const [success, setSuccess] = React.useState(false);
@@ -13,7 +17,10 @@ export default function CTA() {
 	const [grade, setGrade] = React.useState("");
 
 	return (
-		<div className="bg-gray-800 py-16 px-4 overflow-hidden sm:px-6 lg:px-8 lg:py-24">
+		<div
+			className="bg-gray-800 py-16 px-4 overflow-hidden sm:px-6 lg:px-8 lg:py-24"
+			ref={joinRef}
+		>
 			<div className="relative max-w-xl mx-auto">
 				<div className="text-center">
 					<h2 className="text-3xl leading-9 font-extrabold tracking-tight text-indigo-600 sm:text-4xl sm:leading-10">
