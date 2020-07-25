@@ -47,7 +47,6 @@ export default function AboutPage(): React.ReactElement {
 				>
 					add to other calendar application
 				</a>
-				.
 			</p>
 			<div className={"w-full"}>
 				<LoadableCalendar />
