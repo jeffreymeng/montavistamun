@@ -74,27 +74,27 @@ function CSSTransition({
 			unmountOnExit
 			in={show}
 			timeout={(undefined as unknown) as any}
-			addEndListener={(node, done) => {
+			addEndListener={(node: HTMLElement, done) => {
 				node.addEventListener("transitionend", done, false);
 			}}
-			onEnter={(node) => {
+			onEnter={(node: HTMLElement) => {
 				addClasses(node, [...enterClasses, ...enterFromClasses]);
 			}}
-			onEntering={(node) => {
+			onEntering={(node: HTMLElement) => {
 				removeClasses(node, enterFromClasses);
 				addClasses(node, enterToClasses);
 			}}
-			onEntered={(node) => {
+			onEntered={(node: HTMLElement) => {
 				removeClasses(node, [...enterToClasses, ...enterClasses]);
 			}}
-			onExit={(node) => {
+			onExit={(node: HTMLElement) => {
 				addClasses(node, [...leaveClasses, ...leaveFromClasses]);
 			}}
-			onExiting={(node) => {
+			onExiting={(node: HTMLElement) => {
 				removeClasses(node, leaveFromClasses);
 				addClasses(node, leaveToClasses);
 			}}
-			onExited={(node) => {
+			onExited={(node: HTMLElement) => {
 				removeClasses(node, [...leaveToClasses, ...leaveClasses]);
 			}}
 		>
