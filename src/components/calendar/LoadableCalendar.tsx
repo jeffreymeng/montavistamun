@@ -1,9 +1,11 @@
+// organize-imports-ignore
+import React from "react";
+import FullCalendar from "@fullcalendar/react";
+
 import dayGridPlugin from "@fullcalendar/daygrid";
 import googleCalendarPlugin from "@fullcalendar/google-calendar";
 import listPlugin from "@fullcalendar/list";
-import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from "@fullcalendar/timegrid";
-import React from "react";
 
 export default function LoadableCalendar(): React.ReactElement {
 	const sharedCalendarProps = {
