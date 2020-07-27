@@ -2461,27 +2461,6 @@ declare namespace GatsbyTypes {
 		}>;
 	};
 
-	type SecretariatPageQueryQueryVariables = Exact<{ [key: string]: never }>;
-
-	type SecretariatPageQueryQuery = {
-		readonly placeholder: Maybe<{
-			readonly childImageSharp: Maybe<{
-				readonly fluid: Maybe<GatsbyImageSharpFluidFragment>;
-			}>;
-		}>;
-		readonly images: {
-			readonly edges: ReadonlyArray<{
-				readonly node: Pick<File, "name"> & {
-					readonly image: Maybe<{
-						readonly fluid: Maybe<
-							GatsbyImageSharpFluid_withWebpFragment
-						>;
-					}>;
-				};
-			}>;
-		};
-	};
-
 	type GatsbyImageSharpFixedFragment = Pick<
 		ImageSharpFixed,
 		"base64" | "width" | "height" | "src" | "srcSet"
@@ -2654,4 +2633,25 @@ declare namespace GatsbyTypes {
 		ImageSharpSizes,
 		"aspectRatio" | "src" | "srcSet" | "srcWebp" | "srcSetWebp" | "sizes"
 	>;
+
+	type SecretariatPageQueryQueryVariables = Exact<{ [key: string]: never }>;
+
+	type SecretariatPageQueryQuery = {
+		readonly placeholder: Maybe<{
+			readonly childImageSharp: Maybe<{
+				readonly fluid: Maybe<GatsbyImageSharpFluidFragment>;
+			}>;
+		}>;
+		readonly images: {
+			readonly edges: ReadonlyArray<{
+				readonly node: Pick<File, "name"> & {
+					readonly image: Maybe<{
+						readonly fluid: Maybe<
+							GatsbyImageSharpFluid_withWebpFragment
+						>;
+					}>;
+				};
+			}>;
+		};
+	};
 }
