@@ -1,9 +1,9 @@
-import React from "react";
-import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import googleCalendarPlugin from "@fullcalendar/google-calendar";
 import listPlugin from "@fullcalendar/list";
+import FullCalendar from "@fullcalendar/react";
 import timeGridPlugin from "@fullcalendar/timegrid";
+import React from "react";
 
 export default function LoadableCalendar(): React.ReactElement {
 	const sharedCalendarProps = {
@@ -25,7 +25,7 @@ export default function LoadableCalendar(): React.ReactElement {
 	return (
 		<>
 			{/* Desktop Version */}
-			<div className={"hidden md:block"}>
+			<div className={"hidden sm:block"}>
 				<FullCalendar
 					headerToolbar={{
 						left: "prev,next today",
@@ -43,7 +43,7 @@ export default function LoadableCalendar(): React.ReactElement {
 				/>
 			</div>
 			{/* Mobile Version */}
-			<div className={"block md:hidden"}>
+			<div className={"block sm:hidden"}>
 				<FullCalendar
 					headerToolbar={{
 						left: "title",

@@ -14,6 +14,10 @@ module.exports = {
 				sans: ["Inter var", ...defaultTheme.fontFamily.sans],
 			},
 		},
+		maxWidth: {
+			"7xl": "80rem",
+			"8xl": "88rem",
+		},
 	},
 	variants: {},
 	// https://github.com/tailwindcss/custom-forms

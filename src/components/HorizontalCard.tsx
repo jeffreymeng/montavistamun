@@ -4,40 +4,81 @@ import React from "react";
 export default function HorizontalCard({
 	subtitle,
 	title,
-	image,
 	children,
 	buttonText,
+	large,
+	...props
 }: {
-	image: {
-		childImageSharp: {
-			fluid: FluidObject;
-		};
-	};
 	title: React.ReactNode; // (can be string)
 	children: React.ReactNode;
 	subtitle: React.ReactNode;
 	buttonText?: string;
-}) {
+	large?: boolean;
+} & (
+	| {
+			imageURL?: undefined;
+			image: {
+				childImageSharp: {
+					fluid: FluidObject;
+				};
+			};
+	  }
+	| {
+			image?: undefined;
+			imageURL: string;
+	  }
+)) {
 	return (
 		<div className="max-w-sm w-full md:max-w-full md:flex my-10 mx-auto">
-			<div className="h-64 md:h-auto md:w-64 flex-none bg-cover rounded-t md:rounded-t-none md:rounded-l text-center overflow-hidden">
-				<Img
-					className={"w-full h-full"}
-					fluid={image.childImageSharp.fluid}
-				/>
+			<div
+				className={
+					"h-64 w-full md:w-64 md:h-auto flex-none bg-cover rounded-t md:rounded-t-none md:rounded-l text-center overflow-hidden " +
+					(large ? "md:w-1/2" : "")
+				}
+			>
+				{props.image ? (
+					<Img
+						className={"w-full h-full"}
+						fluid={props.image.childImageSharp.fluid}
+					/>
+				) : (
+					<img className={"w-full h-full"} src={props.imageURL} />
+				)}
 			</div>
-			<div className="border-r border-b border-l border-gray-300 md:border-l-0 md:border-t md:border-gray-300 bg-white rounded-b md:rounded-b-none md:rounded-r p-4 flex flex-col justify-between leading-normal">
+			<div className="border-r border-b border-l border-gray-300 md:border-l-0 md:border-t md:border-gray-300 bg-white rounded-b md:rounded-b-none md:rounded-r p-4 flex flex-col justify-between leading-normal w-full">
 				<div className={`mb-${buttonText ? "2" : "4"}`}>
-					<p className="text-md text-gray-600 flex items-center font-semibold">
+					<p
+						className={
+							"text-md text-gray-600 flex items-center font-semibold " +
+							(large ? "md:text-lg lg:text-xl" : "")
+						}
+					>
 						{subtitle}
 					</p>
-					<div className="text-gray-900 font-bold text-xl mb-2">
+					<div
+						className={
+							"text-gray-900 font-bold mb-2 " +
+							(large ? "md:text-2xl lg:text-3xl" : "")
+						}
+					>
 						{title}
 					</div>
 					{typeof children === "string" ? (
-						<p className="text-gray-700 text-base">{children}</p>
+						<p
+							className={
+								"text-gray-700 text-base" +
+								(large ? "md:text-lg lg:text-xl" : "")
+							}
+						>
+							{children}
+						</p>
 					) : (
-						<div className={"text-gray-700 text-base"}>
+						<div
+							className={
+								"text-gray-700 text-base" +
+								(large ? "md:text-lg lg:text-xl" : "")
+							}
+						>
 							{children}
 						</div>
 					)}
