@@ -32,13 +32,18 @@ export default function AboutPage({
 		edge.node.name,
 		{ childImageSharp: edge.node.image },
 	]);
-	const memeMode = window.location.hash === "#memes";
-	useKonamiCode(
-		() => {
-			window.location.hash = "#memes";
-		},
-		() => null
-	);
+	const memeMode =
+		typeof window === "undefined"
+			? false
+			: window.location.hash === "#memes";
+	React.useEffect(() => {
+		useKonamiCode(
+			() => {
+				window.location.hash = "#memes";
+			},
+			() => null
+		);
+	}, []);
 	return (
 		<Layout title={"About"}>
 			<Header
