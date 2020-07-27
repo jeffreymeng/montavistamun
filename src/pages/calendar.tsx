@@ -1,6 +1,6 @@
 import React from "react";
-import { Layout } from "../components/layout";
 import Loadable from "react-loadable";
+import { Layout } from "../components/layout";
 const CalendarLoadingComponent = () => (
 	<p>Loading the latest events just for you...</p>
 );
@@ -25,6 +25,7 @@ export default function AboutPage(): React.ReactElement {
 				Calendar
 			</h1>
 			<p className={"my-3"}>
+				You can add our calendar to your own google calendar by clicking{" "}
 				<a
 					className={"underline text-blue-500 "}
 					href={
@@ -33,8 +34,9 @@ export default function AboutPage(): React.ReactElement {
 					target={"_blank"}
 					rel={"noopener noreferrer"}
 				>
-					Follow the MVMUN calendar in Google Calendar
+					here
 				</a>
+				.
 			</p>
 			<div className={"w-full"}>
 				<LoadableCalendar />

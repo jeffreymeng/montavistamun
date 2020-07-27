@@ -1,6 +1,6 @@
-import React from "react";
-import Img from "gatsby-image";
 import { graphql, useStaticQuery } from "gatsby";
+import Img from "gatsby-image";
+import React from "react";
 
 export default function About({
 	aboutRef,
@@ -59,10 +59,11 @@ export default function About({
 
 				<div className="relative">
 					<h3 className="text-center text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10">
-						We are more than just a club
+						About MVMUN
 					</h3>
 					<p className="mt-4 max-w-xl mx-auto text-center text-3xl leading-7 text-gray-500">
-						About Us
+						Joining Monta Vista Model United Nations is the best way
+						to...
 					</p>
 				</div>
 
