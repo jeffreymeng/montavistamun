@@ -111,7 +111,7 @@ function ConferenceAwardCard({
 					<h3 className="mt-2 text-xl leading-7 font-semibold text-gray-900">
 						{name}
 					</h3>
-					<p className="mt-3 text-base leading-6 text-gray-500">
+					<div className="mt-3 text-base leading-6 text-gray-500">
 						{delegationAward && (
 							<p
 								className={
@@ -161,7 +161,7 @@ function ConferenceAwardCard({
 								</ul>
 							</div>
 						))}
-					</p>
+					</div>
 				</div>
 			</div>
 		</div>

@@ -603,7 +603,7 @@ const data: ConferenceAwardData[] = [
 		],
 	},
 	{
-		name: "BMUN LXVI",
+		name: "BMUN LXV",
 		time: "February 2017",
 		delegationAward: "Best Club",
 		delegateAwards: [
