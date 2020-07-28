@@ -8,9 +8,6 @@ export default function Stats() {
 					<h2 className="text-3xl leading-9 font-extrabold text-white sm:text-4xl sm:leading-10">
 						By The Numbers
 					</h2>
-					<p className="mt-3 text-xl leading-7 text-indigo-200 sm:mt-4">
-						Lorum Ipsum
-					</p>
 				</div>
 				<dl className="mt-10 text-center sm:max-w-3xl sm:mx-auto sm:grid sm:grid-cols-3 sm:gap-8">
 					<div className="flex flex-col">
