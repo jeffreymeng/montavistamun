@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Stats() {
+export default function Stats(): React.ReactElement {
 	return (
 		<div className="bg-indigo-800">
 			<div className="max-w-screen-xl mx-auto py-12 px-4 sm:py-16 sm:px-6 lg:px-8 lg:py-20">

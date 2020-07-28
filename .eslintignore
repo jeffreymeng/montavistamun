@@ -2,3 +2,5 @@ gatsby-config.js
 tailwind.config.js
 **/node_modules/**
 built-netlify-functions/
+public/
+src/netlify-functions/

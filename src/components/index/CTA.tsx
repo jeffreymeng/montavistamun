@@ -1,13 +1,10 @@
-import React from "react";
-import BodyClassName from "react-body-classname";
-import { Transition } from "react-transition-group";
-import classNames from "classnames";
 import axios from "axios";
+import React from "react";
 export default function CTA({
 	joinRef,
 }: {
 	joinRef: React.Ref<HTMLDivElement>;
-}) {
+}): React.ReactElement {
 	const [error, setError] = React.useState("");
 	const [submitting, setSubmitting] = React.useState(false);
 	const [success, setSuccess] = React.useState(false);

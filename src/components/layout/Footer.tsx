@@ -1,6 +1,10 @@
 import React from "react";
 
-export default function Footer({ dark }: { dark?: boolean }) {
+export default function Footer({
+	dark,
+}: {
+	dark?: boolean;
+}): React.ReactElement {
 	return (
 		<div className={dark ? "bg-gray-800" : "bg-white"}>
 			<div className="max-w-screen-xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">

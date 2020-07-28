@@ -16,7 +16,7 @@ function Navbar({
 	 * Defines a set of classes to be added to the navbar when the page has been scrolled (i.e. the navbar a drop shadow)
 	 */
 	scrolledClassName?: string;
-}) {
+}): React.ReactElement {
 	const [isExpanded, setIsExpanded] = useState(false);
 	const toggleExpansion = () => setIsExpanded((old) => !old);
 

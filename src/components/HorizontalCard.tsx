@@ -27,7 +27,7 @@ export default function HorizontalCard({
 			image?: undefined;
 			imageURL: string;
 	  }
-)) {
+)): React.ReactElement {
 	return (
 		<div className="max-w-sm w-full md:max-w-full md:flex my-10 mx-auto">
 			<div

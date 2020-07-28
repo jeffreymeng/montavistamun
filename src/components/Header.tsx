@@ -8,7 +8,7 @@ export default function Header({
 	backgroundImage: string;
 	title: React.ReactNode;
 	children: React.ReactNode;
-}) {
+}): React.ReactElement {
 	return (
 		<header
 			className="relative overflow-hidden bg-fixed bg-no-repeat bg-center"

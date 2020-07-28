@@ -11,6 +11,7 @@ module.exports = {
 	],
 	rules: {
 		"no-mixed-spaces-and-tabs": "off",
+		"react/no-unescaped-entities": "off",
 		"@typescript-eslint/no-var-requires": "off",
 	},
 	parser: "@typescript-eslint/parser",

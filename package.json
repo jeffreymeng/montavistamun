@@ -13,7 +13,7 @@
 	"version": "2.0.0",
 	"scripts": {
 		"analyze": "npm run analyze:lint && npm run analyze:prettier",
-		"analyze:lint": "eslint --ext .jsx --ext .js .",
+		"lint": "eslint --ext .jsx --ext .js --ext .ts --ext .tsx --cache .",
 		"analyze:prettier": "prettier --list-different \"**/*.{css,js,jsx,json,md}\"",
 		"build": "gatsby build && npm run functions:build",
 		"clean": "gatsby clean",

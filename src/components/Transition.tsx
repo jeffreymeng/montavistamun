@@ -1,7 +1,7 @@
 // Based on https://gist.github.com/adamwathan/3b9f3ad1a285a2d1b482769aeb862467
 
-import { CSSTransition as ReactCSSTransition } from "react-transition-group";
 import React, { useContext, useEffect, useRef } from "react";
+import { CSSTransition as ReactCSSTransition } from "react-transition-group";
 
 type TransitionContextProps = {
 	parent: {
@@ -103,7 +103,11 @@ function CSSTransition({
 	);
 }
 
-function Transition({ show, appear, ...rest }: TransitionProps) {
+function Transition({
+	show,
+	appear,
+	...rest
+}: TransitionProps): React.ReactElement {
 	const { parent } = useContext(TransitionContext);
 	const isInitialRender = useIsInitialRender();
 	const isChild = show === undefined;
