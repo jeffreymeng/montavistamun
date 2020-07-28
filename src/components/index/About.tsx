@@ -59,25 +59,20 @@ export default function About({
 
 				<div className="relative">
 					<h3 className="text-center text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10">
-						About MVMUN
+						Club. Delegation. Community.
 					</h3>
 					<p className="mt-4 max-w-xl mx-auto text-center text-3xl leading-7 text-gray-500">
-						Joining Monta Vista Model United Nations is the best way
-						to...
+						This is what makes us different.
 					</p>
 				</div>
 
 				<div className="relative mt-12 lg:mt-24 lg:grid lg:grid-cols-2 lg:gap-8 lg:items-center">
 					<div className="relative">
 						<h4 className="text-2xl leading-8 font-extrabold text-gray-900 tracking-tight sm:text-3xl sm:leading-9">
-							Improve
+							Build Lasting Skills
 						</h4>
 						<p className="mt-3 text-lg leading-7 text-gray-500">
-							Lorem ipsum dolor sit amet consectetur adipisicing
-							elit. Pariatur minima sequi recusandae, porro
-							maiores officia assumenda aliquam laborum ab aliquid
-							veritatis impedit odit adipisci optio iste
-							blanditiis facere. Totam, velit.
+							We aim to promote a wide range of skills while debating world affairs and leading others toward global solutions and individual goals. Our philosophy is centered around providing real experiences for our members and tackling real-world issues, in order to build a stronger sense of leadership and a better understanding of our world. There's so much more to global politics than giving speeches or debating policies; we provide our members with nuanced lessons from experienced veterans as well as plenty of practice at our conferences.
 						</p>
 
 						<ul className="mt-10">
@@ -85,6 +80,7 @@ export default function About({
 								<div className="flex">
 									<div className="flex-shrink-0">
 										<div className="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+											{/* todo: steal font awesome handshake icon from https://github.com/encharm/Font-Awesome-SVG-PNG/ */}
 											<svg
 												className="h-6 w-6"
 												fill="none"
@@ -102,14 +98,10 @@ export default function About({
 									</div>
 									<div className="ml-4">
 										<h5 className="text-lg leading-6 font-medium text-gray-900">
-											Learn About the World
+											Develop Your Leadership Skills
 										</h5>
 										<p className="mt-2 text-base leading-6 text-gray-500">
-											Lorem ipsum, dolor sit amet
-											consectetur adipisicing elit.
-											Maiores impedit perferendis suscipit
-											eaque, iste dolor cupiditate
-											blanditiis ratione.
+											Working with others is a key part of Model UN. Our conferences offer a unique opportunity to practice working with others, honing your skills in negotiatin, and leading your peers.
 										</p>
 									</div>
 								</div>
@@ -117,6 +109,7 @@ export default function About({
 							<li className="mt-10">
 								<div className="flex">
 									<div className="flex-shrink-0">
+										{/* todo new icon?  light-bulb ??????? (think on the fly?) think there’s a lightning icon idk if that’s any better or worse */}
 										<div className="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
 											<svg
 												className="h-6 w-6"
@@ -135,14 +128,10 @@ export default function About({
 									</div>
 									<div className="ml-4">
 										<h5 className="text-lg leading-6 font-medium text-gray-900">
-											Practice Public Speaking
+											Think on the Fly
 										</h5>
 										<p className="mt-2 text-base leading-6 text-gray-500">
-											Lorem ipsum, dolor sit amet
-											consectetur adipisicing elit.
-											Maiores impedit perferendis suscipit
-											eaque, iste dolor cupiditate
-											blanditiis ratione.
+											You might not think of Model UN as a fast-paced activity, but when participating, you always need to stay on your feet and be ready to adapt. It's why we're overhauling our approach to meetings, conferences, and more, in order to adapt to the global pandemic — but this isn’t as hard as it sounds! With a bit of practice in Model UN, you can learn to think on the fly as well… and it just might help you wing your next class presentation.
 										</p>
 									</div>
 								</div>
@@ -168,14 +157,10 @@ export default function About({
 									</div>
 									<div className="ml-4">
 										<h5 className="text-lg leading-6 font-medium text-gray-900">
-											Develop Leadership Skills
+											Learn About the World
 										</h5>
 										<p className="mt-2 text-base leading-6 text-gray-500">
-											Lorem ipsum, dolor sit amet
-											consectetur adipisicing elit.
-											Maiores impedit perferendis suscipit
-											eaque, iste dolor cupiditate
-											blanditiis ratione.
+											In Model UN, you'll learn about some of the biggest issues our world faces — and you'll have a chance to come up with real solutions to those issues. In the process, working with delegates from around the world, you’ll gain a better understanding of global perspectives.
 										</p>
 									</div>
 								</div>
@@ -262,13 +247,10 @@ export default function About({
 					<div className="lg:grid lg:grid-flow-row-dense lg:grid-cols-2 lg:gap-8 lg:items-center">
 						<div className="lg:col-start-2">
 							<h4 className="text-2xl leading-8 font-extrabold text-gray-900 tracking-tight sm:text-3xl sm:leading-9">
-								Have Fun
+								Build Lasting Connections
 							</h4>
 							<p className="mt-3 text-lg leading-7 text-gray-500">
-								Lorem ipsum dolor sit amet consectetur
-								adipisicing elit. Impedit ex obcaecati natus
-								eligendi delectus, cum deleniti sunt in labore
-								nihil quod quibusdam expedita nemo.
+								It's not just the skills you'll learn in Model UN that will stay with you throughout your life; it's the connections as well. Many of us have made new friends — and we promise, you'll fit right in!
 							</p>
 
 							<ul className="mt-10">
@@ -296,11 +278,7 @@ export default function About({
 												Make New Friends
 											</h5>
 											<p className="mt-2 text-base leading-6 text-gray-500">
-												Lorem ipsum, dolor sit amet
-												consectetur adipisicing elit.
-												Maiores impedit perferendis
-												suscipit eaque, iste dolor
-												cupiditate blanditiis ratione.
+												We know most things are more fun when you do them with friends, and Model UN is no exception. But especially with online classes, we know that can be easier said than done. That's why we emphasize our club community not just in our social events, but in our regular club meetings as well.
 											</p>
 										</div>
 									</div>
@@ -326,14 +304,10 @@ export default function About({
 										</div>
 										<div className="ml-4">
 											<h5 className="text-lg leading-6 font-medium text-gray-900">
-												Attend Overnight Conferences
+												Join Our Community
 											</h5>
 											<p className="mt-2 text-base leading-6 text-gray-500">
-												Lorem ipsum, dolor sit amet
-												consectetur adipisicing elit.
-												Maiores impedit perferendis
-												suscipit eaque, iste dolor
-												cupiditate blanditiis ratione.
+												Beyond meeting new friends, at MV Model UN you’ll also be joining a community of not just fellow delegates, but also veterans, mentors, and alumni. No matter who you are, our community will be here to support you. Everybody is welcome — don’t be shy!
 											</p>
 										</div>
 									</div>

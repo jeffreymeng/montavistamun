@@ -8,25 +8,23 @@ export default function Stats() {
 					<h2 className="text-3xl leading-9 font-extrabold text-white sm:text-4xl sm:leading-10">
 						By The Numbers
 					</h2>
-					<p className="mt-3 text-xl leading-7 text-indigo-200 sm:mt-4">
-						Lorum Ipsum
-					</p>
 				</div>
 				<dl className="mt-10 text-center sm:max-w-3xl sm:mx-auto sm:grid sm:grid-cols-3 sm:gap-8">
 					<div className="flex flex-col">
 						<dt className="order-2 mt-2 text-lg leading-6 font-medium text-indigo-200">
-							Members
+							International Delegation (Best Delegate Rankings)
 						</dt>
-						<dd className="order-1 text-5xl leading-none font-extrabold text-white">
-							1000
+						<dd className="order-1 text-5xl leading-none font-extrabold text-white tracking-tight">
+							Top 50
 						</dd>
 					</div>
 					<div className="flex flex-col mt-10 sm:mt-0">
 						<dt className="order-2 mt-2 text-lg leading-6 font-medium text-indigo-200">
-							Average Award Rate
+							Members
 						</dt>
 						<dd className="order-1 text-5xl leading-none font-extrabold text-white">
-							110%
+							{/* todo actually get a legit number */}
+							50+
 						</dd>
 					</div>
 					<div className="flex flex-col mt-10 sm:mt-0">
