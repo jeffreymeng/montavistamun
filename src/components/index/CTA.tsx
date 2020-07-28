@@ -20,7 +20,8 @@ export default function CTA({
 		>
 			<div className="relative max-w-xl mx-auto">
 				<div className="text-center">
-					<h2 className="text-3xl leading-9 font-extrabold tracking-tight text-indigo-600 sm:text-4xl sm:leading-10">
+					{/* I changed from text-indigo-600 to text-indigo-400. Don't know which is better, feel free to undo */}
+					<h2 className="text-3xl leading-9 font-extrabold tracking-tight text-indigo-400 sm:text-4xl sm:leading-10">
 						Ready to start your MUN journey?
 					</h2>
 					<p className="mt-4 text-lg leading-6 text-gray-300">
