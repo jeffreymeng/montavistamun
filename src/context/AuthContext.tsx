@@ -3,21 +3,13 @@ import React, { ReactElement, ReactNode, useEffect, useState } from "react";
 import firebaseConfig from "../../firebase-config";
 
 const AuthContext = React.createContext<{
-	user:
-		| {
-				email: null;
-				displayName: null;
-		  }
-		| FirebaseUser;
+	user: FirebaseUser | null;
 	loading: boolean | null;
 	error: boolean | null;
 	admin: boolean | null;
 	verified: boolean | null;
 }>({
-	user: {
-		email: null,
-		displayName: null,
-	},
+	user: null,
 	loading: true,
 	error: null,
 	admin: null,
@@ -81,10 +73,7 @@ const AuthProvider = ({ children }: { children: ReactNode }): ReactElement => {
 	return (
 		<AuthContext.Provider
 			value={{
-				user: user || {
-					email: null,
-					displayName: null,
-				},
+				user,
 				loading,
 				error,
 				admin,

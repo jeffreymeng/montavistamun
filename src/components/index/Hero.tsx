@@ -25,7 +25,7 @@ export default function Hero({
 						<div className="sm:text-center lg:text-left">
 							<h2 className="text-4xl tracking-tight leading-10 font-extrabold text-gray-900 sm:text-5xl sm:leading-none md:text-6xl">
 								Become a{" "}
-								<span className="text-indigo-600">leader</span>
+								<span className="text-indigo-600">leader</span>{" "}
 								with MV Model UN.
 							</h2>
 							<p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">

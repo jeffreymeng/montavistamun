@@ -194,10 +194,7 @@ function Navbar({
 }
 function ProfileDropdown(): ReactElement {
 	const [expanded, setExpanded] = React.useState(false);
-	const {
-		user: { email, displayName },
-		loading,
-	} = React.useContext(AuthContext);
+	const { user, loading } = React.useContext(AuthContext);
 	const toggleExpanded = () => {
 		setExpanded((old) => !old);
 	};
@@ -226,7 +223,7 @@ function ProfileDropdown(): ReactElement {
 					aria-haspopup="true"
 					onClick={toggleExpanded}
 				>
-					Hello, {displayName || email}
+					Hello, {user?.displayName || user?.email}
 					<svg
 						className="-mr-1 ml-2 h-5 w-5"
 						viewBox="0 0 20 20"
