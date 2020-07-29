@@ -15,7 +15,7 @@ export default function ConferencesPage({
 	};
 }): React.ReactElement {
 	return (
-		<Layout title={"About"}>
+		<Layout title={"Conferences"}>
 			<Header
 				backgroundImage={
 					"https://previews.123rf.com/images/annagolant/annagolant1612/annagolant161200049/70849730-orange-stripes-on-white-background-striped-diagonal-pattern-blue-diagonal-lines-background-winter-or.jpg"

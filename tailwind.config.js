@@ -17,6 +17,13 @@ module.exports = {
 				"7xl": "80rem",
 				"8xl": "88rem",
 			},
+			height: {
+				// ca = content-area (i.e. screen minus navbar)
+				ca: "calc(100vh - 64px)",
+			},
+			minHeight: {
+				ca: "calc(100vh - 64px)",
+			},
 		},
 	},
 	variants: {},

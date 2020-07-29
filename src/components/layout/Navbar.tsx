@@ -1,6 +1,7 @@
 import { useLocation } from "@reach/router";
 import { Link } from "gatsby";
 import React, { ReactElement, useState } from "react";
+import AuthContext from "../../context/AuthContext";
 import Transition from "../Transition";
 import navLinks from "./navLinks";
 
@@ -18,6 +19,7 @@ function Navbar({
 	scrolledClassName?: string;
 }): React.ReactElement {
 	const [isExpanded, setIsExpanded] = useState(false);
+	const auth = React.useContext(AuthContext);
 	const toggleExpansion = () => setIsExpanded((old) => !old);
 
 	// only show a box shadow when the user has scrolled a little bit
@@ -111,17 +113,20 @@ function Navbar({
 							</div>
 						</div>
 						<div className="flex items-center">
-							<div className="flex-shrink-0">
-								<button
-									type="button"
-									className="relative inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 shadow-sm hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150"
-								>
-									<span>Login</span>
-								</button>
-							</div>
-							<div className="hidden md:ml-4 md:flex-shrink-0 md:flex md:items-center">
-								<ProfileDropdown />
-							</div>
+							{auth.loading || !auth.user ? (
+								<div className="flex-shrink-0">
+									<Link
+										to={"/account/login"}
+										className="relative inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 shadow-sm hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150"
+									>
+										<span>Login</span>
+									</Link>
+								</div>
+							) : (
+								<div className="hidden md:ml-4 md:flex-shrink-0 md:flex md:items-center">
+									<ProfileDropdown />
+								</div>
+							)}
 						</div>
 					</div>
 				</div>
@@ -152,10 +157,10 @@ function Navbar({
 							<div className="flex items-center px-4 sm:px-6">
 								<div>
 									<div className="text-base leading-6 text-gray-800 font-semibold">
-										Tom Cook
+										{auth.user.displayName}
 									</div>
 									<div className="text-sm font-medium leading-5 text-gray-500">
-										tom@example.com
+										{auth.user.email}
 									</div>
 								</div>
 							</div>
@@ -189,6 +194,10 @@ function Navbar({
 }
 function ProfileDropdown(): ReactElement {
 	const [expanded, setExpanded] = React.useState(false);
+	const {
+		user: { email, displayName },
+		loading,
+	} = React.useContext(AuthContext);
 	const toggleExpanded = () => {
 		setExpanded((old) => !old);
 	};
@@ -211,13 +220,13 @@ function ProfileDropdown(): ReactElement {
 		<div className="ml-3 relative" ref={ref}>
 			<div>
 				<button
-					className="flex text-sm border-2 border-transparent rounded-md focus:outline-none focus:border-gray-300 py-2 px-3 transition duration-150 ease-in-out"
+					className="flex text-sm text-gray-500 hover:text-gray-700 font-medium leading-5 border-2 border-transparent rounded-md focus:outline-none focus:border-gray-300 py-2 px-3 transition duration-150 ease-in-out"
 					id="user-menu"
 					aria-label="User menu"
 					aria-haspopup="true"
 					onClick={toggleExpanded}
 				>
-					Hello, John Smith
+					Hello, {displayName || email}
 					<svg
 						className="-mr-1 ml-2 h-5 w-5"
 						viewBox="0 0 20 20"
