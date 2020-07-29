@@ -72,7 +72,7 @@ export default function Hero({
 			<div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
 				<img
 					className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full"
-					src="https://scontent-sjc3-1.xx.fbcdn.net/v/t1.0-9/p960x960/84347383_185126385916191_4275987186978914304_o.jpg?_nc_cat=107&_nc_sid=730e14&_nc_ohc=5GidYRT9pt8AX89gE95&_nc_ht=scontent-sjc3-1.xx&_nc_tp=6&oh=6509163283c87102ad36a249fc1b4643&oe=5F219892"
+					src="/images/hero.jpg"
 					alt=""
 				/>
 			</div>
