@@ -3,8 +3,7 @@ import React from "react";
 import FluidImage from "../components/FluidImage";
 import Header from "../components/Header";
 import HorizontalCard from "../components/HorizontalCard";
-import { Layout } from "../components/layout";
-import Main from "../components/Main";
+import { Layout, Main } from "../components/layout";
 
 export default function ConferencesPage({
 	data,
