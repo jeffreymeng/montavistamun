@@ -356,12 +356,7 @@ export default function CreatePage(): React.ReactElement {
 																i == 0
 																	? ""
 																	: "pl-3"
-															} ${
-																i ==
-																arr.length - 1
-																	? ""
-																	: "pr-3"
-															} inline-flex items-center py-2`}
+															} pr-3 inline-flex items-center py-2`}
 														>
 															<input
 																id={`grade${el}`}
