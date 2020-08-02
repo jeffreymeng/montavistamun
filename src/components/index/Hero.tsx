@@ -1,3 +1,5 @@
+import { graphql, useStaticQuery } from "gatsby";
+import Img from "gatsby-image";
 import React from "react";
 export default function Hero({
 	aboutRef,
@@ -6,6 +8,19 @@ export default function Hero({
 	aboutRef: React.Ref<HTMLDivElement>; // ref to the about element for scrolling
 	joinRef: React.Ref<HTMLDivElement>;
 }): React.ReactElement {
+	const data = useStaticQuery(graphql`
+		query {
+			hero: file(relativePath: { eq: "hero.jpg" }) {
+				childImageSharp {
+					# Specify a fixed image and fragment.
+					# The default width is 400 pixels
+					fluid(maxWidth: 1200) {
+						...GatsbyImageSharpFluid_withWebp
+					}
+				}
+			}
+		}
+	`);
 	return (
 		<div className="relative bg-white overflow-hidden">
 			<div className="max-w-screen-xl mx-auto">
@@ -70,9 +85,9 @@ export default function Hero({
 				</div>
 			</div>
 			<div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-				<img
+				<Img
 					className="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full"
-					src="/images/hero.jpg"
+					fluid={data.hero.childImageSharp.fluid}
 					alt=""
 				/>
 			</div>

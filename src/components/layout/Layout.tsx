@@ -11,6 +11,8 @@ export default function Layout({
 	navbarScrolledClassName,
 	navbarUnscrolledClassName,
 	lightFooter,
+	gray,
+	navbarShadow,
 }: {
 	children: React.ReactNode | React.ReactNodeArray | Element[];
 	/**
@@ -40,17 +42,28 @@ export default function Layout({
 	 * If provided, the footer will be rendered in its light theme
 	 */
 	lightFooter?: boolean;
+	/**
+	 * If provided, the page will be rendered with a gray background (for cards)
+	 */
+	gray?: boolean;
+	/**
+	 * Specify the shadow for the navbar.
+	 */
+	navbarShadow?: "always" | "scroll" | "never";
 }): React.ReactElement {
 	return (
 		<div
 			className={
 				"flex flex-col min-h-screen font-sans text-gray-900 " +
-				(className || "")
+				(className || "") +
+				" " +
+				(gray ? "bg-gray-100" : "")
 			}
 		>
 			<Navbar
 				scrolledClassName={navbarScrolledClassName}
 				unscrolledClassName={navbarUnscrolledClassName}
+				shadow={navbarShadow}
 			/>
 			<SEO
 				keywords={[
@@ -63,7 +76,6 @@ export default function Layout({
 				]}
 				title={title}
 			/>
-
 			<div className={wrapperClassName}>{children}</div>
 
 			<Footer dark={!lightFooter} />

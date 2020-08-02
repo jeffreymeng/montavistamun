@@ -10,7 +10,7 @@ function IndexPage(): React.ReactElement {
 	const joinRef = React.useRef(null);
 
 	return (
-		<Layout lightFooter title={"Home"}>
+		<Layout lightFooter title={"Home"} navbarShadow="always">
 			<Hero aboutRef={aboutRef} joinRef={joinRef} />
 			<About aboutRef={aboutRef} />
 			<Stats />
