@@ -52,7 +52,7 @@ const AuthProvider = ({ children }: { children: ReactNode }): ReactElement => {
 						.then(({ claims }) => {
 							// console.log("CLAIMS", claims);
 							setAdmin(claims.admin);
-							setVerified(claims.setupComplete);
+							setVerified(claims.verified);
 							setLoading(false);
 						})
 						.catch((error) => {

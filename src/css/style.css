@@ -6,3 +6,13 @@
 /*! purgecss end ignore */
 /*noinspection CssInvalidAtRule*/
 @tailwind utilities;
+
+.link {
+	@apply text-blue-500;
+}
+.link:hover {
+	@apply text-blue-700;
+}
+.link:active {
+	@apply underline;
+}
