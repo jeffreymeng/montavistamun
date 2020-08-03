@@ -127,9 +127,7 @@ export default function LoginPage(): React.ReactElement {
 												email,
 												password
 											)
-											.then(() =>
-												navigate("/account/dashboard")
-											)
+											.then(() => navigate("/account/"))
 											.catch((error) => {
 												setSubmitting(false);
 												console.log(error);

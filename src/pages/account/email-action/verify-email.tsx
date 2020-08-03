@@ -1,6 +1,6 @@
 import { Link } from "gatsby";
 import React from "react";
-import { Layout, Main } from "../../../components/layout";
+import { AuthLayout } from "../../../components/layout";
 import useFirebase from "../../../components/useFirebase";
 
 export default function HandleEmailActionPage({
@@ -121,21 +121,27 @@ export default function HandleEmailActionPage({
 	}, [firebase]);
 	console.log(code, continueURL);
 	return (
-		<Layout title="Loading...">
-			<Main className="h-ca">
-				{!success && !error && (
-					<h1 className="text-3xl font-bold">Loading...</h1>
-				)}
-				{success && (
-					<>
-						<h1 className="text-3xl font-bold">
-							Your email has been successfully verified.
-						</h1>
-						<p>You may now safely close this page.</p>
-					</>
-				)}
-				{error && <h1 className="text-3xl font-bold">{error}</h1>}
-			</Main>
-		</Layout>
+		<AuthLayout title={"Email Verified"}>
+			{!success && !error && (
+				<h2 className="mt-6 text-3xl leading-9 font-extrabold text-gray-900">
+					Verifying Your Email...
+				</h2>
+			)}
+			{success && (
+				<>
+					<h2 className="mt-6 text-3xl leading-9 font-extrabold text-gray-900">
+						Your email has been successfully verified.
+					</h2>
+					<p className="text-xl font-bold">
+						You may now safely close this page.
+					</p>
+				</>
+			)}
+			{error && (
+				<h2 className="mt-6 text-3xl leading-9 font-extrabold text-gray-900">
+					{error}
+				</h2>
+			)}
+		</AuthLayout>
 	);
 }
