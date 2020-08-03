@@ -2439,11 +2439,9 @@ declare namespace GatsbyTypes {
 	type Unnamed_2_QueryVariables = Exact<{ [key: string]: never }>;
 
 	type Unnamed_2_Query = {
-		readonly logo: Maybe<{
+		readonly hero: Maybe<{
 			readonly childImageSharp: Maybe<{
-				readonly fixed: Maybe<
-					GatsbyImageSharpFixed_withWebp_noBase64Fragment
-				>;
+				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
 			}>;
 		}>;
 	};
@@ -2451,9 +2449,11 @@ declare namespace GatsbyTypes {
 	type Unnamed_3_QueryVariables = Exact<{ [key: string]: never }>;
 
 	type Unnamed_3_Query = {
-		readonly hero: Maybe<{
+		readonly logo: Maybe<{
 			readonly childImageSharp: Maybe<{
-				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
+				readonly fixed: Maybe<
+					GatsbyImageSharpFixed_withWebp_noBase64Fragment
+				>;
 			}>;
 		}>;
 	};
@@ -2465,6 +2465,21 @@ declare namespace GatsbyTypes {
 			readonly siteMetadata: Maybe<
 				Pick<SiteSiteMetadata, "title" | "description" | "author">
 			>;
+		}>;
+	};
+
+	type ConferencesPageQueryQueryVariables = Exact<{ [key: string]: never }>;
+
+	type ConferencesPageQueryQuery = {
+		readonly gmunc: Maybe<{
+			readonly childImageSharp: Maybe<{
+				readonly fluid: Maybe<GatsbyImageSharpFluidFragment>;
+			}>;
+		}>;
+		readonly smunc: Maybe<{
+			readonly childImageSharp: Maybe<{
+				readonly fluid: Maybe<GatsbyImageSharpFluidFragment>;
+			}>;
 		}>;
 	};
 
@@ -2661,19 +2676,4 @@ declare namespace GatsbyTypes {
 		ImageSharpSizes,
 		"aspectRatio" | "src" | "srcSet" | "srcWebp" | "srcSetWebp" | "sizes"
 	>;
-
-	type ConferencesPageQueryQueryVariables = Exact<{ [key: string]: never }>;
-
-	type ConferencesPageQueryQuery = {
-		readonly gmunc: Maybe<{
-			readonly childImageSharp: Maybe<{
-				readonly fluid: Maybe<GatsbyImageSharpFluidFragment>;
-			}>;
-		}>;
-		readonly smunc: Maybe<{
-			readonly childImageSharp: Maybe<{
-				readonly fluid: Maybe<GatsbyImageSharpFluidFragment>;
-			}>;
-		}>;
-	};
 }

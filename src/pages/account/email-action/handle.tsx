@@ -25,6 +25,7 @@ export default function HandleEmailActionPage({ location }: PageProps) {
 						code: params.get("oobCode"),
 						continueURL: params.get("continueUrl"),
 					},
+					replace: true,
 				}
 			);
 		} else {

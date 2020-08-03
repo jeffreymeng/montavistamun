@@ -180,42 +180,60 @@ function Navbar({
 									{page}
 								</Link>
 							))}
+							{!auth.user && (
+								<Link
+									to={"/account/login"}
+									className={
+										"block pl-3 pr-4 py-2 border-l-4 text-base font-medium focus:outline-none transition duration-150 ease-in-out sm:pl-5 sm:pr-6 " +
+										(location.pathname
+											.toLowerCase()
+											.replace(/\//g, "") ==
+										"/account/login"
+											? /*     ACTIVE: */ "border-indigo-500 text-indigo-700 bg-indigo-50 focus:text-indigo-800 focus:bg-indigo-100 focus:border-indigo-700"
+											: /* NOT ACTIVE: */ "border-transparent text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300")
+									}
+								>
+									Login
+								</Link>
+							)}
 						</div>
-						<div className="pt-4 pb-3 border-t border-gray-200">
-							<div className="flex items-center px-4 sm:px-6">
-								<div>
-									<div className="text-base leading-6 text-gray-800 font-semibold">
-										{auth.user?.displayName}
-									</div>
-									<div className="text-sm font-medium leading-5 text-gray-500">
-										{auth.user?.email}
+						{auth.user && (
+							<div className="pt-4 pb-3 border-t border-gray-200">
+								<div className="flex items-center px-4 sm:px-6">
+									<div>
+										<div className="text-base leading-6 text-gray-800 font-semibold">
+											{auth.user?.displayName}
+										</div>
+										<div className="text-sm font-medium leading-5 text-gray-500">
+											{auth.user?.email}
+										</div>
 									</div>
 								</div>
+								<div className="mt-3">
+									<Link
+										to="/account"
+										className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100 focus:outline-none focus:text-gray-800 focus:bg-gray-100 transition duration-150 ease-in-out sm:px-6"
+									>
+										Member Dashboard
+									</Link>
+									<Link
+										to="/account/settings"
+										className="mt-1 block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100 focus:outline-none focus:text-gray-800 focus:bg-gray-100 transition duration-150 ease-in-out sm:px-6"
+									>
+										Settings
+									</Link>
+									<Link
+										to="/account/logout"
+										state={{
+											cancelReturnURL: location.pathname,
+										}}
+										className="mt-1 block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100 focus:outline-none focus:text-gray-800 focus:bg-gray-100 transition duration-150 ease-in-out sm:px-6"
+									>
+										Sign out
+									</Link>
+								</div>
 							</div>
-							<div className="mt-3">
-								<a
-									href="#"
-									className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100 focus:outline-none focus:text-gray-800 focus:bg-gray-100 transition duration-150 ease-in-out sm:px-6"
-								>
-									Your Profile
-								</a>
-								<a
-									href="#"
-									className="mt-1 block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100 focus:outline-none focus:text-gray-800 focus:bg-gray-100 transition duration-150 ease-in-out sm:px-6"
-								>
-									Settings
-								</a>
-								<Link
-									to="/account/logout"
-									state={{
-										cancelReturnURL: location.pathname,
-									}}
-									className="mt-1 block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100 focus:outline-none focus:text-gray-800 focus:bg-gray-100 transition duration-150 ease-in-out sm:px-6"
-								>
-									Sign out
-								</Link>
-							</div>
-						</div>
+						)}
 					</div>
 				)}
 			</nav>
@@ -294,20 +312,20 @@ function ProfileDropdown(): ReactElement {
 						aria-orientation="vertical"
 						aria-labelledby="user-menu"
 					>
-						<a
-							href="#"
+						<Link
+							to="/account"
 							className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
 							role="menuitem"
 						>
-							Your Profile
-						</a>
-						<a
-							href="#"
+							Member Dashboard
+						</Link>
+						<Link
+							to="/account/settings"
 							className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
 							role="menuitem"
 						>
 							Settings
-						</a>
+						</Link>
 						<Link
 							to="/account/logout"
 							state={{

@@ -22,6 +22,12 @@ export default function CreatePage(): React.ReactElement {
 	const [done, setDone] = React.useState(false);
 	const [resendTimeLeft, setResendTimeLeft] = React.useState(120);
 	const [timesResent, setTimesResent] = React.useState(0);
+	const [verificationComplete, setVerificationComplete] = React.useState(
+		false
+	);
+	const [sysend, setSysend] = React.useState<
+		Record<string, function> | undefined
+	>();
 	React.useEffect(() => {
 		if (!done) return;
 		const interval = setInterval(() => {
@@ -39,8 +45,21 @@ export default function CreatePage(): React.ReactElement {
 				getIsSummer(),
 				moment().month()
 			),
-		[123]
+		[]
 	);
+	React.useEffect(() => {
+		import("sysend").then((module) => setSysend(module));
+	}, []);
+	React.useEffect(() => {
+		if (!sysend) return;
+
+		const handler = (email: string) => {
+			console.log("EMAIL_VERIFIED", email);
+			setVerificationComplete(true);
+		};
+		sysend.on("email-verified", handler);
+		return () => sysend.off("email-verified", handler);
+	}, [sysend]);
 	return (
 		<Layout title={"Join MVMUN"} navbarShadow="always">
 			<div className="min-h-ca bg-gray-50 flex">
@@ -57,58 +76,83 @@ export default function CreatePage(): React.ReactElement {
 									United Nations!
 								</h3>
 							</div>
-
-							<div className="mt-8">
-								<h4 className="text-lg">
-									We've sent a verification email to{" "}
-									<b>{email}</b>. <br />
-									In order to fully use your account, you'll
-									need to click the link in that email.
-								</h4>
-								<span className="block w-full rounded-md shadow-sm mt-5">
-									<button
-										type="submit"
-										disabled={resendTimeLeft > 0}
+							{verificationComplete && (
+								<div className="mt-8">
+									<h4 className="text-xl font-bold">
+										Hooray! You've verified your email in
+										another tab.
+									</h4>
+									<Link
+										to="/account/"
 										className={classNames(
-											"w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white transition duration-150 ease-in-out",
-											resendTimeLeft > 0
-												? "bg-indigo-400 cursor-not-allowed"
-												: "bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700"
+											"mt-4 w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white transition duration-150 ease-in-out bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700"
 										)}
-										onClick={() => {
-											if (resendTimeLeft > 0) return;
-											setResendTimeLeft(120);
-											setTimesResent((old) => old + 1);
-										}}
 									>
-										{resendTimeLeft > 0
-											? `If you don't get the email after ${resendTimeLeft} second${
-													resendTimeLeft === 1
-														? ""
-														: "s"
-											  }, you can resend it`
-											: "Didn't get the email? Resend it"}
-									</button>
-								</span>
-								{timesResent >= 1 && (
-									<p className="text-md mt-5">
-										<b>
-											Having problems getting our emails?
-										</b>
-										<br />
-										Remeber to check your spam folder. If
-										you still don't see it, send us an email
-										at{" "}
-										<a
-											href="mailto:websitehelp@montavistamun.com"
-											className="link"
-										>
-											websitehelp@montavistamun.com
-										</a>
-										.
+										Continue to Account Overview
+									</Link>
+								</div>
+							)}
+							{!verificationComplete && (
+								<div className="mt-8">
+									<h4 className="text-lg">
+										We've sent a verification email to{" "}
+										<b>{email}</b>. <br />
+										In order to fully use your account,
+										you'll need to click the link in that
+										email.
+									</h4>
+									<p className="text-md italic mt-4">
+										Once you've verified your email, you can
+										close this tab.
 									</p>
-								)}
-							</div>
+									<span className="block w-full rounded-md shadow-sm mt-5">
+										<button
+											type="submit"
+											disabled={resendTimeLeft > 0}
+											className={classNames(
+												"w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white transition duration-150 ease-in-out",
+												resendTimeLeft > 0
+													? "bg-indigo-400 cursor-not-allowed"
+													: "bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700"
+											)}
+											onClick={() => {
+												if (resendTimeLeft > 0) return;
+												setResendTimeLeft(120);
+												setTimesResent(
+													(old) => old + 1
+												);
+											}}
+										>
+											{resendTimeLeft > 0
+												? `If you don't get the email after ${resendTimeLeft} second${
+														resendTimeLeft === 1
+															? ""
+															: "s"
+												  }, you can resend it`
+												: "Didn't get the email? Resend it"}
+										</button>
+									</span>
+									{timesResent >= 1 && (
+										<p className="text-md mt-5">
+											<b>
+												Having problems getting our
+												emails?
+											</b>
+											<br />
+											Remeber to check your spam folder.
+											If you still don't see it, send us
+											an email at{" "}
+											<a
+												href="mailto:websitehelp@montavistamun.com"
+												className="link"
+											>
+												websitehelp@montavistamun.com
+											</a>
+											.
+										</p>
+									)}
+								</div>
+							)}
 						</div>
 					) : (
 						<div className="mx-auto w-full max-w-sm">
@@ -348,7 +392,7 @@ export default function CreatePage(): React.ReactElement {
 											</legend>
 											<div className="mt-1">
 												{["9", "10", "11", "12"].map(
-													(el, i, arr) => (
+													(el, i) => (
 														<label
 															key={el}
 															htmlFor={`grade${el}`}
