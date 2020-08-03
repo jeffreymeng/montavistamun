@@ -26,7 +26,7 @@ export default function CreatePage(): React.ReactElement {
 		false
 	);
 	const [sysend, setSysend] = React.useState<
-		Record<string, function> | undefined
+		Record<string, any> | undefined
 	>();
 	React.useEffect(() => {
 		if (!done) return;
