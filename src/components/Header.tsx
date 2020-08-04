@@ -5,13 +5,13 @@ export default function Header({
 	title,
 	children,
 }: {
-	backgroundImage: string;
+	backgroundImage?: string;
 	title: React.ReactNode;
 	children: React.ReactNode;
 }): React.ReactElement {
 	return (
 		<header
-			className="relative overflow-hidden bg-fixed bg-no-repeat bg-center"
+			className="relative overflow-hidden bg-no-repeat bg-center bg-cover"
 			style={{
 				backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('${backgroundImage}')`,
 			}}

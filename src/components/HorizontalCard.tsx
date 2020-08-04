@@ -39,6 +39,9 @@ export default function HorizontalCard({
 				{props.image ? (
 					<Img
 						className={"w-full h-full"}
+						imgStyle={{
+							objectPosition: "top",
+						}}
 						fluid={props.image.childImageSharp.fluid}
 					/>
 				) : (

@@ -12,6 +12,7 @@ export default function AboutPage({
 	data,
 }: {
 	data: {
+		headerImage: FluidImage;
 		placeholder: FluidImage;
 		images: {
 			edges: {
@@ -43,13 +44,12 @@ export default function AboutPage({
 			() => null
 		);
 	}, []);
+
 	return (
 		<Layout title={"Secretariat"}>
 			<Header
 				title={"Secretariat"}
-				backgroundImage={
-					"https://previews.123rf.com/images/annagolant/annagolant1612/annagolant161200049/70849730-orange-stripes-on-white-background-striped-diagonal-pattern-blue-diagonal-lines-background-winter-or.jpg"
-				}
+				backgroundImage={"/images/headers/secretariat.jpg"}
 			>
 				Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui
 				lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat
@@ -145,6 +145,13 @@ export default function AboutPage({
 
 export const query = graphql`
 	query SecretariatPageQuery {
+		headerImage: file(relativePath: { eq: "headers/secretariat.jpg" }) {
+			childImageSharp {
+				fluid(maxWidth: 1200, quality: 90) {
+					...GatsbyImageSharpFluid
+				}
+			}
+		}
 		placeholder: file(relativePath: { eq: "secretariat/placeholder.png" }) {
 			childImageSharp {
 				fluid(maxWidth: 960, quality: 100) {
