@@ -1,8 +1,8 @@
 import classNames from "classnames";
 import { Link, navigate } from "gatsby";
 import React from "react";
+import useFirebase from "../../auth/useFirebase";
 import { Layout } from "../../components/layout";
-import useFirebase from "../../components/useFirebase";
 export default function LoginPage(): React.ReactElement {
 	const [email, setEmail] = React.useState("");
 	const [password, setPassword] = React.useState("");
@@ -117,10 +117,24 @@ export default function LoginPage(): React.ReactElement {
 							</>
 							<div className="mt-6">
 								<form
+									noValidate
 									onSubmit={(e) => {
 										e.preventDefault();
 										if (!firebase) return;
+										if (!email) {
+											setError(
+												"Please enter your email."
+											);
+											return;
+										}
+										if (!password) {
+											setError(
+												"Please enter your password."
+											);
+											return;
+										}
 										setSubmitting(true);
+
 										firebase
 											.auth()
 											.signInWithEmailAndPassword(
@@ -166,9 +180,7 @@ export default function LoginPage(): React.ReactElement {
 														setError(
 															<p>
 																This account has
-																been disabled by
-																an
-																administrator.
+																been disabled.
 																If you believe
 																this is an
 																error, please

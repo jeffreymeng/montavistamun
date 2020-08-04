@@ -1,7 +1,7 @@
 import { Link } from "gatsby";
 import React from "react";
+import useFirebase from "../../auth/useFirebase";
 import { Layout, Main } from "../../components/layout";
-import useFirebase from "../../components/useFirebase";
 
 interface LogoutProps {
 	/**

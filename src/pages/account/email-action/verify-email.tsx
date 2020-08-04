@@ -1,7 +1,7 @@
 import { Link } from "gatsby";
 import React from "react";
+import useFirebase from "../../../auth/useFirebase";
 import { AuthLayout } from "../../../components/layout";
-import useFirebase from "../../../components/useFirebase";
 
 export default function HandleEmailActionPage({
 	location,
@@ -72,8 +72,8 @@ export default function HandleEmailActionPage({
 						setError(
 							<>
 								The account you are trying to verify an email
-								for was disabled by an administrator. If you
-								believe this is an error, please email{" "}
+								for was disabled. If you believe this is an
+								error, please email{" "}
 								<a
 									href="mailto:websitehelp@montavistamun.com"
 									className="link"

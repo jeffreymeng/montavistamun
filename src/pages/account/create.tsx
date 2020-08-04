@@ -3,8 +3,9 @@ import { Link } from "gatsby";
 import { Eye, EyeOff } from "heroicons-react";
 import moment from "moment";
 import React from "react";
+import FirebaseStoredUserData from "../../auth/FirebaseStoredUserData";
+import useFirebase from "../../auth/useFirebase";
 import { Layout } from "../../components/layout";
-import useFirebase from "../../components/useFirebase";
 import {
 	getClassOf,
 	getFirstDayOfSchool,
@@ -292,7 +293,7 @@ export default function CreatePage(): React.ReactElement {
 															classOf: getClassOf(
 																gradeNum
 															),
-														}),
+														} as FirebaseStoredUserData),
 													user.updateProfile({
 														displayName: name,
 													}),

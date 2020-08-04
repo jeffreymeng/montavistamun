@@ -1,8 +1,8 @@
 import classNames from "classnames";
 import { Link } from "gatsby";
 import React from "react";
+import useFirebase from "../../auth/useFirebase";
 import { AuthLayout } from "../../components/layout";
-import useFirebase from "../../components/useFirebase";
 export default function LoginPage(): React.ReactElement {
 	const [email, setEmail] = React.useState("");
 	const [emailSent, setEmailSent] = React.useState(false);
