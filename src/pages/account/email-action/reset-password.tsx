@@ -76,10 +76,10 @@ export default function HandleEmailActionPage({
 								for was disabled. If you believe this is an
 								error, please email{" "}
 								<a
-									href="mailto:websitehelp@montavistamun.com"
+									href="mailto:support@montavistamun.com"
 									className="link"
 								>
-									websitehelp@montavistamun.com
+									support@montavistamun.com
 								</a>
 								.
 							</>
@@ -92,10 +92,10 @@ export default function HandleEmailActionPage({
 								for was deleted. If you believe this is an
 								error, please email{" "}
 								<a
-									href="mailto:websitehelp@montavistamun.com"
+									href="mailto:support@montavistamun.com"
 									className="link"
 								>
-									websitehelp@montavistamun.com
+									support@montavistamun.com
 								</a>
 								.
 							</>
@@ -107,10 +107,10 @@ export default function HandleEmailActionPage({
 								{error.message} <br />
 								If this was unexpected, please email{" "}
 								<a
-									href="mailto:websitehelp@montavistamun.com"
+									href="mailto:support@montavistamun.com"
 									className="link"
 								>
-									websitehelp@montavistamun.com
+									support@montavistamun.com
 								</a>
 								.
 							</>
@@ -181,13 +181,13 @@ export default function HandleEmailActionPage({
 														please email us at{" "}
 														<a
 															href={
-																"mailto:websitehelp@montavistamun.com"
+																"mailto:support@montavistamun.com"
 															}
 															className={
 																"text-blue-500 active:text-blue-700 hover:underline"
 															}
 														>
-															websitehelp@montavistamun.com
+															support@montavistamun.com
 														</a>
 														.
 													</p>

@@ -10,12 +10,18 @@ export default function HandleEmailActionPage({ location }: PageProps) {
 		const mode = params.get("mode");
 		if (
 			mode &&
-			["resetPassword", "recoverEmail", "verifyEmail"].includes(mode)
+			[
+				"resetPassword",
+				"recoverEmail",
+				"verifyEmail",
+				"verifyAndChangeEmail",
+			].includes(mode)
 		) {
 			const pageMap = {
 				resetPassword: "reset-password",
 				recoverEmail: "recover-email",
 				verifyEmail: "verify-email",
+				verifyAndChangeEmail: "confirm-email-change",
 			};
 			navigate(
 				"/account/email-action/" +
@@ -47,10 +53,10 @@ export default function HandleEmailActionPage({ location }: PageProps) {
 							that we send you. If you followed a link to get to
 							this page, please email{" "}
 							<a
-								href="mailto:websitehelp@montavistamun.com"
+								href="mailto:support@montavistamun.com"
 								className="link"
 							>
-								websitehelp@montavistamun.com
+								support@montavistamun.com
 							</a>{" "}
 							and let us know how you got to this page.
 						</p>

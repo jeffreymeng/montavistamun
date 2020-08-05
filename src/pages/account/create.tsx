@@ -144,10 +144,10 @@ export default function CreatePage(): React.ReactElement {
 											If you still don't see it, send us
 											an email at{" "}
 											<a
-												href="mailto:websitehelp@montavistamun.com"
+												href="mailto:support@montavistamun.com"
 												className="link"
 											>
-												websitehelp@montavistamun.com
+												support@montavistamun.com
 											</a>
 											.
 										</p>
@@ -347,13 +347,13 @@ export default function CreatePage(): React.ReactElement {
 																	us at{" "}
 																	<a
 																		href={
-																			"mailto:websitehelp@montavistamun.com"
+																			"mailto:support@montavistamun.com"
 																		}
 																		className={
 																			"link"
 																		}
 																	>
-																		websitehelp@montavistamun.com
+																		support@montavistamun.com
 																	</a>
 																	.
 																</p>

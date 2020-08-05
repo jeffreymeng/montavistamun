@@ -1,8 +1,8 @@
+import * as Icon from "heroicons-react";
 import React from "react";
 import Transition from "../Transition";
 import Navbar from "./Navbar";
 import SEO from "./SEO";
-
 export default function SidebarLayout({
 	title,
 	children,
@@ -34,7 +34,6 @@ export default function SidebarLayout({
 					<Transition show={mobileSidebarExpanded}>
 						<div className="fixed inset-0 flex z-40">
 							<Transition
-								show={mobileSidebarExpanded}
 								enter="transition-opacity ease-linear duration-300"
 								enterFrom="opacity-0"
 								enterTo="opacity-100"
@@ -57,7 +56,6 @@ export default function SidebarLayout({
               To: "-translate-x-full"
           */}
 							<Transition
-								show={mobileSidebarExpanded}
 								enter="transition ease-in-out duration-300 transform"
 								enterFrom="-translate-x-full"
 								enterTo="translate-x-0"
@@ -77,19 +75,7 @@ export default function SidebarLayout({
 													)
 												}
 											>
-												<svg
-													className="h-6 w-6 text-white"
-													stroke="currentColor"
-													fill="none"
-													viewBox="0 0 24 24"
-												>
-													<path
-														strokeLinecap="round"
-														strokeLinejoin="round"
-														strokeWidth="2"
-														d="M6 18L18 6M6 6l12 12"
-													/>
-												</svg>
+												<Icon.X className="h-6 w-6 text-white" />
 											</button>
 										</div>
 										<div className="flex-1 h-0 pt-5 pb-4 overflow-y-auto">
@@ -470,15 +456,12 @@ function ExpandableSidebarLink() {
 					/>
 				</svg>
 				Team
-				<svg
+				<Icon.ChevronRight
 					className={
 						"ml-auto h-5 w-5 transform group-hover:text-gray-400 group-focus:text-gray-400 transition-colors ease-in-out duration-150 " +
 						(expanded ? "text-gray-400 rotate-90" : "text-gray-300")
 					}
-					viewBox="0 0 20 20"
-				>
-					<path d="M6 6L14 10L6 14V6Z" fill="currentColor" />
-				</svg>
+				/>
 			</button>
 			{expanded && (
 				<div className="mt-1">

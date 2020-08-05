@@ -41,6 +41,20 @@ export const getClassOf = (grade: number): number => {
 };
 
 /**
+ * get the grade given their graduation year
+ * @param classOf - The year they will graduate high school
+ * @returns their grade
+ */
+export const getGrade = (classOf: number): number => {
+	const currentLastDay = getLastDayOfSchool();
+	const gradYearLastDay = moment(currentLastDay).add(
+		classOf - currentLastDay.year()
+	);
+	const yearsUntilGraduation = gradYearLastDay.diff(moment(), "years"); // this is floored
+	return 12 - yearsUntilGraduation;
+};
+
+/**
  * returns whether or not it is summer
  */
 export const getIsSummer = (): boolean => {

@@ -3,59 +3,44 @@ import React from "react";
 import useFirebase from "../../../auth/useFirebase";
 import { AuthLayout } from "../../../components/layout";
 
-export default function HandleEmailActionPage({
+export default function RecoverEmailPage({
 	location,
 }: {
 	location: { state?: { code?: string; continueURL?: string } };
 }): React.ReactElement {
 	const [success, setSuccess] = React.useState(false);
 	const [error, setError] = React.useState<React.ReactNode>("");
+	const [email, setEmail] = React.useState("");
 	const code = location?.state?.code;
 	const continueURL = location?.state?.continueURL;
 	const firebase = useFirebase();
 	React.useEffect(() => {
 		if (!firebase) return;
 		if (!code) {
-			setError(
-				<>
-					The link you used to access this page was malformed.{" "}
-					<Link
-						to="/account/send-email-verification"
-						className="link"
-					>
-						Click here to request a new verification email
-					</Link>
-					.
-				</>
-			);
+			setError(<>The link you used to access this page was malformed.</>);
 			return;
 		}
 		(async () => {
 			try {
 				const codeInfo = await firebase.auth().checkActionCode(code);
-				const [, sysend] = await Promise.all([
-					firebase.auth().applyActionCode(code),
-					import("sysend"),
-				]);
-				setSuccess(true);
+				setEmail(codeInfo.data?.email as string);
+				await firebase.auth().applyActionCode(code);
 
-				sysend.broadcast("email-verified", {
-					email: codeInfo.data.email,
-				});
+				setSuccess(true);
 			} catch (error) {
 				switch (error.code) {
 					case "auth/expired-action-code":
 						setError(
 							<>
 								The email you used to access this page has
-								expired.{" "}
-								<Link
-									to="/account/send-email-verification"
+								expired. If you believe this is an error, please
+								email{" "}
+								<a
+									href="mailto:support@montavistamun.com"
 									className="link"
 								>
-									Click here to request a new verification
-									email
-								</Link>
+									support@montavistamun.com
+								</a>
 								.
 							</>
 						);
@@ -63,7 +48,7 @@ export default function HandleEmailActionPage({
 					case "auth/invalid-action-code":
 						setError(
 							<>
-								You've already verified your email using this
+								You've already reverted your email using this
 								link.
 							</>
 						);
@@ -71,9 +56,9 @@ export default function HandleEmailActionPage({
 					case "auth/user-disabled":
 						setError(
 							<>
-								The account you are trying to verify an email
-								for was disabled. If you believe this is an
-								error, please email{" "}
+								The account you are trying to recover for was
+								disabled. If you believe this is an error,
+								please email{" "}
 								<a
 									href="mailto:support@montavistamun.com"
 									className="link"
@@ -87,9 +72,9 @@ export default function HandleEmailActionPage({
 					case "auth/user-not-found":
 						setError(
 							<>
-								The account you are trying to verify an email
-								for was deleted. If you believe this is an
-								error, please email{" "}
+								The account you are trying to recover was
+								deleted. If you believe this is an error, please
+								email{" "}
 								<a
 									href="mailto:support@montavistamun.com"
 									className="link"
@@ -117,24 +102,34 @@ export default function HandleEmailActionPage({
 						break;
 				}
 			}
+			firebase.auth().signOut();
 		})();
 	}, [firebase]);
 	console.log(code, continueURL);
 	return (
-		<AuthLayout title={success ? "Email Verified" : "Verify Your Email"}>
+		<AuthLayout title={"Recover Your Email"}>
 			{!success && !error && (
 				<h2 className="mt-6 text-3xl leading-9 font-extrabold text-gray-900">
-					Verifying Your Email...
+					Loading...
 				</h2>
 			)}
 			{success && (
 				<>
 					<h2 className="mt-6 text-3xl leading-9 font-extrabold text-gray-900">
-						Your email has been successfully verified.
+						Your account email has been reverted to {email}
 					</h2>
 					<p className="text-xl font-bold">
-						You may now safely close this page.
+						If your account has been hacked, you should also change
+						your password.
 					</p>
+					<Link
+						to={"/account/login"}
+						className={
+							"mt-4 w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white transition duration-150 ease-in-out bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700"
+						}
+					>
+						Log In
+					</Link>
 				</>
 			)}
 			{error && (

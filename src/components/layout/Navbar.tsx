@@ -1,6 +1,7 @@
 import { useLocation } from "@reach/router";
 import { graphql, Link, useStaticQuery } from "gatsby";
 import Img from "gatsby-image";
+import * as Icon from "heroicons-react";
 import React, { ReactElement, useState } from "react";
 import AuthContext from "../../context/AuthContext";
 import Transition from "../Transition";
@@ -79,33 +80,9 @@ function Navbar({
 									aria-expanded="false"
 								>
 									{!isExpanded ? (
-										<svg
-											className="h-6 w-6"
-											fill="none"
-											viewBox="0 0 24 24"
-											stroke="currentColor"
-										>
-											<path
-												strokeLinecap="round"
-												strokeLinejoin="round"
-												strokeWidth="2"
-												d="M4 6h16M4 12h16M4 18h16"
-											/>
-										</svg>
+										<Icon.Menu className="h-6 w-6" />
 									) : (
-										<svg
-											className="h-6 w-6"
-											fill="none"
-											viewBox="0 0 24 24"
-											stroke="currentColor"
-										>
-											<path
-												strokeLinecap="round"
-												strokeLinejoin="round"
-												strokeWidth="2"
-												d="M6 18L18 6M6 6l12 12"
-											/>
-										</svg>
+										<Icon.X className="h-6 w-6" />
 									)}
 								</button>
 							</div>
@@ -273,17 +250,7 @@ function ProfileDropdown(): ReactElement {
 					onClick={toggleExpanded}
 				>
 					Hello, {user?.displayName || user?.email}
-					<svg
-						className="-mr-1 ml-2 h-5 w-5"
-						viewBox="0 0 20 20"
-						fill="currentColor"
-					>
-						<path
-							fillRule="evenodd"
-							d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-							clipRule="evenodd"
-						/>
-					</svg>
+					<Icon.ChevronDown className="-mr-1 ml-2 h-5 w-5" />
 				</button>
 			</div>
 			{/*}<!--

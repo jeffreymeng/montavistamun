@@ -88,10 +88,10 @@ export default function LoginPage(): React.ReactElement {
 															<a
 																className="link"
 																href={
-																	"mailto:websitehelp@montavistamun.com"
+																	"mailto:support@montavistamun.com"
 																}
 															>
-																websitehelp@montavistamun.com
+																support@montavistamun.com
 															</a>
 														</p>
 													);
@@ -110,13 +110,13 @@ export default function LoginPage(): React.ReactElement {
 																at{" "}
 																<a
 																	href={
-																		"mailto:websitehelp@montavistamun.com"
+																		"mailto:support@montavistamun.com"
 																	}
 																	className={
 																		"text-blue-500 active:text-blue-700 hover:underline"
 																	}
 																>
-																	websitehelp@montavistamun.com
+																	support@montavistamun.com
 																</a>
 																.
 															</p>

@@ -25,8 +25,8 @@ export default function Footer({
 								(dark ? "text-gray-300" : "text-gray-500")
 							}
 						>
-							Making the world a better place through constructing
-							elegant hierarchies.
+							Working to empower the next generation of global
+							thinkers.
 						</p>
 						<div className="mt-8 flex">
 							<a
