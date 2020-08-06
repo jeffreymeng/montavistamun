@@ -1,11 +1,14 @@
 import moment from "moment";
 
 /**
- * get the last day of school during the current calendar year
+ * get the last day of school during a calendar year
+ * @param year - The calendar year for which to return the last day of school. Defaults to the current calendar year.
  */
-export const getLastDayOfSchool = (): moment.Moment => {
+export const getLastDayOfSchool = (year?: number): moment.Moment => {
+	year = year || moment().year();
+
 	// the cutoff for the grade (for this website) is the first thursday of June, at noon.
-	const startOfMonth = moment().month("June");
+	const startOfMonth = moment().year(year).month("June");
 	let daysUntilThursday = 4 - startOfMonth.day(); // thursday = 4
 	if (daysUntilThursday == 0) return startOfMonth.startOf("day").hours(12); // already first thursday
 	if (daysUntilThursday < 0) daysUntilThursday += 7;
@@ -46,11 +49,9 @@ export const getClassOf = (grade: number): number => {
  * @returns their grade
  */
 export const getGrade = (classOf: number): number => {
-	const currentLastDay = getLastDayOfSchool();
-	const gradYearLastDay = moment(currentLastDay).add(
-		classOf - currentLastDay.year()
-	);
-	const yearsUntilGraduation = gradYearLastDay.diff(moment(), "years"); // this is floored
+	const lastDayOfSchool = getLastDayOfSchool(classOf);
+
+	const yearsUntilGraduation = lastDayOfSchool.diff(moment(), "years"); // this is floored
 	return 12 - yearsUntilGraduation;
 };
 

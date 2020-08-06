@@ -1,63 +1,27 @@
 import firebaseType from "firebase";
 import { Check, InformationCircle } from "heroicons-react";
+import moment from "moment";
 import React from "react";
+import Select from "react-select";
 import FirebaseStoredUserData from "../../auth/FirebaseStoredUserData";
 import useFirebase from "../../auth/useFirebase";
+import useRequireLogin from "../../components/accounts/useRequireLogin";
 import { Layout, Main } from "../../components/layout";
 import Transition from "../../components/Transition";
 import AuthContext from "../../context/AuthContext";
-import { getGrade } from "../../utils/schoolYearUtils";
+import "../../css/select.css";
+import { getGrade, getLastDayOfSchool } from "../../utils/schoolYearUtils";
 export default function SettingsPage(): React.ReactElement {
 	const { user, loading } = React.useContext(AuthContext);
 	const firebase = useFirebase();
-	const [currentFirstName, setCurrentFirstName] = React.useState("");
-	const [currentLastName, setCurrentLastName] = React.useState("");
-	const [classOf, setClassOf] = React.useState("Loading...");
-	const [firstName, setFirstName] = React.useState("Loading...");
-	const [lastName, setLastName] = React.useState("Loading...");
-	const [loadingProfile, setLoadingProfile] = React.useState(true);
-	const [profileChangeSuccess, setProfileChangeSuccess] = React.useState(
-		false
-	);
-	const [profileChangeError, setProfileChangeError] = React.useState<
-		React.ReactNode
-	>("");
-	const [
-		profileChangeSubmitting,
-		setProfileChangeSubmitting,
-	] = React.useState(false);
-	const profileNotChanged =
-		firstName == currentFirstName && lastName == currentLastName;
+
 	const [passwordModalOpen, setPasswordModalOpen] = React.useState(false);
 	const [emailModalOpen, setEmailModalOpen] = React.useState(false);
-	React.useEffect(() => {
-		if (!firebase || !user) return;
-		if (currentFirstName != "") return;
-		firebase
-			.firestore()
-			.collection("users")
-			.doc(user?.uid)
-			.get()
-			.then((snapshot) => snapshot.data() as FirebaseStoredUserData)
-			.then((data) => {
-				console.log(data);
-				setCurrentFirstName(data.firstName);
-				setCurrentLastName(data.lastName);
-				setFirstName(data.firstName);
-				setLastName(data.lastName);
-				console.log(
-					[2020, 2021, 2022, 2023, 2024, 2025].map((yr) =>
-						getGrade(yr)
-					)
-				);
+	useRequireLogin();
 
-				setClassOf(data.classOf + ` (Grade ${getGrade(data.classOf)})`);
-				setLoadingProfile(false);
-			});
-	}, [firebase, user]);
 	return (
 		<Layout title="Account Settings">
-			<Main wide>
+			<Main wide className={"min-h-ca"}>
 				<h2 className="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:leading-9 sm:truncate">
 					Account Settings
 				</h2>
@@ -72,198 +36,7 @@ export default function SettingsPage(): React.ReactElement {
 							</div>
 						</div>
 						<div className="mt-5 md:mt-0 md:col-span-2">
-							<form
-								noValidate
-								onSubmit={(e) => {
-									e.preventDefault();
-
-									if (
-										profileNotChanged ||
-										loadingProfile ||
-										profileChangeSubmitting
-									)
-										return;
-									setProfileChangeError("");
-									setProfileChangeSuccess(false);
-									if (!firebase || !user) return;
-									if (!firstName || !lastName) {
-										setProfileChangeError(
-											"Please enter a first and last name."
-										);
-										return;
-									}
-
-									setProfileChangeSubmitting(true);
-									Promise.all([
-										user.updateProfile({
-											displayName:
-												firstName + " " + lastName,
-										}),
-										firebase
-											.firestore()
-											.collection("users")
-											.doc(user.uid)
-											.update({
-												firstName: firstName,
-												lastName: lastName,
-											}),
-									])
-										.then(() => {
-											setProfileChangeSubmitting(false);
-											setProfileChangeSuccess(true);
-											setCurrentFirstName(firstName);
-											setCurrentLastName(lastName);
-										})
-										.catch((e) => {
-											setProfileChangeSubmitting(false);
-											setProfileChangeError(
-												<>
-													<p>Error: {e.message}</p>
-													<p>
-														If this was unexpected,
-														please email us at{" "}
-														<a
-															href={
-																"mailto:support@montavistamun.com"
-															}
-															className={
-																"text-blue-500 active:text-blue-700 hover:underline"
-															}
-														>
-															support@montavistamun.com
-														</a>
-														.
-													</p>
-												</>
-											);
-										});
-								}}
-							>
-								<div className="shadow overflow-hidden sm:rounded-md">
-									<div className="px-4 py-5 bg-white sm:p-6">
-										<div className="grid grid-cols-6 gap-6">
-											<div className="col-span-6 sm:col-span-3">
-												<label
-													htmlFor="first_name"
-													className="block text-sm font-medium leading-5 text-gray-700"
-												>
-													First name
-												</label>
-												<input
-													id="first_name"
-													disabled={
-														loadingProfile ||
-														profileChangeSubmitting
-													}
-													value={firstName}
-													onChange={(e) => {
-														setFirstName(
-															e.target.value
-														);
-														setProfileChangeError(
-															""
-														);
-													}}
-													className={
-														"mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 " +
-														(loadingProfile ||
-														profileChangeSubmitting
-															? "bg-gray-100"
-															: "")
-													}
-												/>
-											</div>
-
-											<div className="col-span-6 sm:col-span-3">
-												<label
-													htmlFor="last_name"
-													className="block text-sm font-medium leading-5 text-gray-700"
-												>
-													Last name
-												</label>
-												<input
-													id="last_name"
-													disabled={
-														loadingProfile ||
-														profileChangeSubmitting
-													}
-													value={lastName}
-													onChange={(e) => {
-														setLastName(
-															e.target.value
-														);
-														setProfileChangeError(
-															""
-														);
-													}}
-													className={
-														"mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 " +
-														(loadingProfile ||
-														profileChangeSubmitting
-															? "bg-gray-100"
-															: "")
-													}
-												/>
-											</div>
-										</div>
-										<div className="col-span-6 sm:col-span-3">
-											<label
-												htmlFor="first_name"
-												className="block text-sm font-medium leading-5 text-gray-700"
-											>
-												Class Of
-											</label>
-											<input
-												id="class_of"
-												disabled
-												value={classOf}
-												className={
-													"mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
-												}
-											/>
-										</div>
-
-										{profileChangeSuccess &&
-											!profileChangeError && (
-												<p className="text-green-600 my-2 mt-5">
-													Your profile has been
-													updated.
-												</p>
-											)}
-										{/* don't show the error if they change it back to the original name */}
-										{profileChangeError &&
-											!profileNotChanged && (
-												<p className="text-red-600 my-2 mt-5">
-													{profileChangeError}
-												</p>
-											)}
-									</div>
-									<div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
-										<button
-											type="submit"
-											disabled={
-												profileNotChanged ||
-												loadingProfile ||
-												profileChangeSubmitting
-											}
-											className={`py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white ${
-												profileNotChanged ||
-												loadingProfile ||
-												profileChangeSubmitting
-													? "bg-indigo-300"
-													: "bg-indigo-600 hover:bg-indigo-500 focus:shadow-outline-blue active:bg-indigo-600"
-											} shadow-sm focus:outline-none transition duration-150 ease-in-out`}
-										>
-											{profileChangeSubmitting
-												? "Loading..."
-												: profileNotChanged ||
-												  loadingProfile
-												? "No Changes to Save"
-												: "Save"}
-										</button>
-									</div>
-								</div>
-							</form>
+							<PersonalInformationDisplay />
 						</div>
 					</div>
 				</div>
@@ -287,8 +60,8 @@ export default function SettingsPage(): React.ReactElement {
 							</div>
 						</div>
 						<div className="mt-5 md:mt-0 md:col-span-2">
-							<div className="shadow overflow-hidden sm:rounded-md">
-								<div className="px-4 py-5 bg-white sm:p-6">
+							<div className="shadow sm:rounded-md">
+								<div className="px-4 py-5 bg-white sm:p-6 rounded-b-md">
 									<div className="grid grid-cols-6 gap-3 sm:gap-6">
 										<div className="col-span-6">
 											<label className="block text-sm font-medium leading-5 text-gray-700">
@@ -526,7 +299,275 @@ export default function SettingsPage(): React.ReactElement {
 		</Layout>
 	);
 }
+function PersonalInformationDisplay() {
+	const { user, loading } = React.useContext(AuthContext);
+	const firebase = useFirebase();
+	const [currentFirstName, setCurrentFirstName] = React.useState("");
+	const [currentLastName, setCurrentLastName] = React.useState("");
 
+	const [firstName, setFirstName] = React.useState("Loading...");
+	const [lastName, setLastName] = React.useState("Loading...");
+	const [currentClassOf, setCurrentClassOf] = React.useState(-1);
+	const [classOf, setClassOf] = React.useState(-1);
+	const [loadingProfile, setLoadingProfile] = React.useState(true);
+	const [profileChangeSuccess, setProfileChangeSuccess] = React.useState(
+		false
+	);
+	const [profileChangeError, setProfileChangeError] = React.useState<
+		React.ReactNode
+	>("");
+	const [
+		profileChangeSubmitting,
+		setProfileChangeSubmitting,
+	] = React.useState(false);
+	const hasUpdates = React.useMemo(
+		() =>
+			firstName !== currentFirstName ||
+			lastName !== currentLastName ||
+			classOf !== currentClassOf,
+		[
+			firstName,
+			lastName,
+			classOf,
+			currentFirstName,
+			currentLastName,
+			currentClassOf,
+		]
+	);
+	React.useEffect(() => {
+		if (!firebase || !user) return;
+		if (currentFirstName != "") return;
+		firebase
+			.firestore()
+			.collection("users")
+			.doc(user?.uid)
+			.get()
+			.then((snapshot) => snapshot.data() as FirebaseStoredUserData)
+			.then((data) => {
+				console.log(data);
+				setCurrentFirstName(data.firstName);
+				setCurrentLastName(data.lastName);
+				setFirstName(data.firstName);
+				setLastName(data.lastName);
+				setClassOf(data.classOf);
+				setCurrentClassOf(data.classOf);
+				setLoadingProfile(false);
+			});
+	}, [firebase, user]);
+	const classOfOptions = React.useMemo(() => {
+		const temp = [];
+		const yearOfNextLastDayOfSchool = moment().isAfter(getLastDayOfSchool())
+			? moment().year() + 1
+			: moment().year();
+		for (
+			let i = yearOfNextLastDayOfSchool;
+			i < yearOfNextLastDayOfSchool + 4;
+			i++
+		) {
+			temp.push({
+				label: `${i} (Grade ${getGrade(i)})`,
+				value: i,
+			});
+		}
+		return temp;
+	}, []);
+
+	return (
+		<form
+			noValidate
+			onSubmit={(e) => {
+				e.preventDefault();
+
+				if (!hasUpdates || loadingProfile || profileChangeSubmitting)
+					return;
+				setProfileChangeError("");
+				setProfileChangeSuccess(false);
+				if (!firebase || !user) return;
+				if (!firstName || !lastName) {
+					setProfileChangeError(
+						"Please enter a first and last name."
+					);
+					return;
+				}
+
+				setProfileChangeSubmitting(true);
+				Promise.all([
+					user.updateProfile({
+						displayName: firstName + " " + lastName,
+					}),
+					firebase
+						.firestore()
+						.collection("users")
+						.doc(user.uid)
+						.update({
+							firstName,
+							lastName,
+							classOf,
+						}),
+				])
+					.then(() => {
+						setProfileChangeSubmitting(false);
+						setProfileChangeSuccess(true);
+						setCurrentFirstName(firstName);
+						setCurrentLastName(lastName);
+						setCurrentClassOf(classOf);
+					})
+					.catch((e) => {
+						setProfileChangeSubmitting(false);
+						setProfileChangeError(
+							<>
+								<p>Error: {e.message}</p>
+								<p>
+									If this was unexpected, please email us at{" "}
+									<a
+										href={
+											"mailto:support@montavistamun.com"
+										}
+										className={
+											"text-blue-500 active:text-blue-700 hover:underline"
+										}
+									>
+										support@montavistamun.com
+									</a>
+									.
+								</p>
+							</>
+						);
+					});
+			}}
+		>
+			<div className="shadow sm:rounded-md">
+				<div className="px-4 py-5 bg-white sm:p-6">
+					<div className="grid grid-cols-6 gap-6">
+						<div className="col-span-6 sm:col-span-3">
+							<label
+								htmlFor="first_name"
+								className="block text-sm font-medium leading-5 text-gray-700"
+							>
+								First name
+							</label>
+							<input
+								id="first_name"
+								disabled={
+									loadingProfile || profileChangeSubmitting
+								}
+								value={firstName}
+								onChange={(e) => {
+									setFirstName(e.target.value);
+									setProfileChangeError("");
+								}}
+								className={
+									"mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 " +
+									(loadingProfile || profileChangeSubmitting
+										? "bg-gray-100"
+										: "")
+								}
+							/>
+						</div>
+
+						<div className="col-span-6 sm:col-span-3">
+							<label
+								htmlFor="last_name"
+								className="block text-sm font-medium leading-5 text-gray-700"
+							>
+								Last name
+							</label>
+							<input
+								id="last_name"
+								disabled={
+									loadingProfile || profileChangeSubmitting
+								}
+								value={lastName}
+								onChange={(e) => {
+									setLastName(e.target.value);
+									setProfileChangeError("");
+								}}
+								className={
+									"mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 " +
+									(loadingProfile || profileChangeSubmitting
+										? "bg-gray-100"
+										: "")
+								}
+							/>
+						</div>
+					</div>
+					<div className="mt-6">
+						<label
+							htmlFor="class_of"
+							className="block text-sm font-medium leading-5 text-gray-700"
+						>
+							Class Of
+						</label>
+						<Select
+							isClearable={classOf !== currentClassOf}
+							isDisabled={
+								loadingProfile || profileChangeSubmitting
+							}
+							options={classOfOptions}
+							value={classOfOptions.find(
+								(opt) => opt.value == classOf
+							)}
+							onChange={(opt) => {
+								setClassOf(
+									Array.isArray(opt)
+										? (() => {
+												throw new Error(
+													"Multiple grades selected"
+												);
+										  })()
+										: opt === null
+										? currentClassOf
+										: // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+										  //@ts-ignore
+										  opt.value
+								);
+							}}
+							className={"mt-1 block w-full text-sm"}
+						/>
+						{/*<span id="class_of">*/}
+						{/*	{classOf} (<a>this is wrong</a>)*/}
+						{/*</span>*/}
+					</div>
+
+					{profileChangeSuccess && !profileChangeError && (
+						<p className="text-green-600 my-2 mt-5">
+							Your profile has been updated.
+						</p>
+					)}
+					{/* don't show the error if they change it back to the original name */}
+					{profileChangeError && hasUpdates && (
+						<p className="text-red-600 my-2 mt-5">
+							{profileChangeError}
+						</p>
+					)}
+				</div>
+				<div className="px-4 py-3 bg-gray-50 text-right sm:px-6 rounded-b-md">
+					<button
+						type="submit"
+						disabled={
+							!hasUpdates ||
+							loadingProfile ||
+							profileChangeSubmitting
+						}
+						className={`py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white ${
+							!hasUpdates ||
+							loadingProfile ||
+							profileChangeSubmitting
+								? "bg-indigo-300"
+								: "bg-indigo-600 hover:bg-indigo-500 focus:shadow-outline-blue active:bg-indigo-600"
+						} shadow-sm focus:outline-none`}
+					>
+						{profileChangeSubmitting
+							? "Loading..."
+							: !hasUpdates || loadingProfile
+							? "No Changes to Save"
+							: "Save"}
+					</button>
+				</div>
+			</div>
+		</form>
+	);
+}
 function ChangePasswordModal({
 	isOpen,
 	onClose,

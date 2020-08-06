@@ -51,9 +51,9 @@ export default function AboutPage({
 				title={"Secretariat"}
 				backgroundImage={"/images/headers/secretariat.jpg"}
 			>
-				Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui
-				lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat
-				fugiat aliqua.
+				Who exactly do you contact when you need help? Who is behind
+				those emails to you? That would be us, the secretariat! Get to
+				know us, we’re always looking for new friends!
 			</Header>
 			<Main>
 				{secretariatData.map(

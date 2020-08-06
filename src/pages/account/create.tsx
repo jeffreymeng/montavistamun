@@ -12,7 +12,12 @@ import {
 	getIsSummer,
 	getLastDayOfSchool,
 } from "../../utils/schoolYearUtils";
-export default function CreatePage(): React.ReactElement {
+import { LoginPageProps } from "./login";
+export default function CreatePage({
+	location: { state },
+}: {
+	location: { state: LoginPageProps };
+}): React.ReactElement {
 	const [name, setName] = React.useState("");
 	const [grade, setGrade] = React.useState("");
 	const [email, setEmail] = React.useState("");
@@ -84,12 +89,14 @@ export default function CreatePage(): React.ReactElement {
 										another tab.
 									</h4>
 									<Link
-										to="/account/"
+										to={state?.continueURL || "/account/"}
 										className={classNames(
 											"mt-4 w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white transition duration-150 ease-in-out bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700"
 										)}
 									>
-										Continue to Account Overview
+										{state?.continueURL
+											? "Continue"
+											: "Continue to Account Overview"}
 									</Link>
 								</div>
 							)}
@@ -164,6 +171,9 @@ export default function CreatePage(): React.ReactElement {
 								<p className="mt-2 text-sm leading-5 text-gray-600 max-w">
 									<Link
 										to="/account/login"
+										state={{
+											continueURL: state?.continueURL,
+										}}
 										className="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150"
 									>
 										Already have an account?

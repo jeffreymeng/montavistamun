@@ -3,7 +3,12 @@ import { Link } from "gatsby";
 import React from "react";
 import useFirebase from "../../auth/useFirebase";
 import { AuthLayout } from "../../components/layout";
-export default function LoginPage(): React.ReactElement {
+import { LoginPageProps } from "./login";
+export default function ForgotPasswordPage({
+	location: { state },
+}: {
+	location: { state: LoginPageProps };
+}): React.ReactElement {
 	const [email, setEmail] = React.useState("");
 	const [emailSent, setEmailSent] = React.useState(false);
 	const [error, setError] = React.useState<React.ReactNode | null>(null);
@@ -21,6 +26,9 @@ export default function LoginPage(): React.ReactElement {
 							Or{" "}
 							<Link
 								to="/account/login"
+								state={{
+									continueURL: state?.continueURL,
+								}}
 								className="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150"
 							>
 								log in instead
@@ -42,7 +50,14 @@ export default function LoginPage(): React.ReactElement {
 									setSubmitting(true);
 									firebase
 										.auth()
-										.sendPasswordResetEmail(email)
+										.sendPasswordResetEmail(
+											email,
+											state?.continueURL
+												? {
+														url: state?.continueURL,
+												  }
+												: undefined
+										)
 										.then(() => {
 											setSubmitting(false);
 											setEmailSent(true);

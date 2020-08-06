@@ -1,9 +1,12 @@
 import React from "react";
+import useRequireLogin from "../../components/accounts/useRequireLogin";
 import { Layout, Main } from "../../components/layout";
 import AuthContext from "../../context/AuthContext";
 
 export default function AboutPage(): React.ReactElement {
 	const { user, loading, verified } = React.useContext(AuthContext);
+	useRequireLogin();
+
 	return (
 		<Layout title={"Member Dashboard"}>
 			<Main>
