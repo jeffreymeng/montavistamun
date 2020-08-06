@@ -10,7 +10,6 @@ const LoadableCalendar = loadable(
 );
 
 export default function AboutPage(): React.ReactElement {
-	console.log(LoadableCalendar);
 	return (
 		<Layout
 			title={"Calendar"}
