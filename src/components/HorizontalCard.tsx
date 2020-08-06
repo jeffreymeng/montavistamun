@@ -32,7 +32,7 @@ export default function HorizontalCard({
 		<div className="max-w-sm w-full md:max-w-full md:flex my-10 mx-auto">
 			<div
 				className={
-					"h-64 w-full md:w-64 md:h-auto flex-none bg-cover rounded-t md:rounded-t-none md:rounded-l text-center overflow-hidden " +
+					"h-72 w-full md:w-64 md:h-auto flex-none bg-cover rounded-t md:rounded-t-none md:rounded-l text-center overflow-hidden " +
 					(large ? "md:w-1/2" : "")
 				}
 			>
