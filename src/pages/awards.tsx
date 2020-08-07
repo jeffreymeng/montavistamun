@@ -16,7 +16,7 @@ export default function AboutPage({
 	};
 }): React.ReactElement {
 	return (
-		<Layout title={"Awards"}>
+		<Layout title={"Awards"} className={"bg-gray-50"}>
 			<Header
 				title={"Awards"}
 				backgroundImage={
@@ -28,6 +28,17 @@ export default function AboutPage({
 				fugiat aliqua.
 			</Header>
 			<Main wide>
+				<h1 className={"text-3xl leading-9 font-extrabold"}>
+					A special note about online conferences
+				</h1>
+				<p className="text-lg mt-3">
+					As the world adapts to life amid a global pandemic, we’re
+					adapting as well. That’s why we’re overhauling our approach
+					to teaching Model UN as many conferences transition to an
+					online format, and why we’re working hard to organize our
+					own online mock conferences while ensuring you receive the
+					most complete MUN experience possible.
+				</p>
 				<HorizontalCard
 					imageURL={
 						"https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80"
@@ -95,13 +106,6 @@ function ConferenceAwardCard({
 }: ConferenceAwardData) {
 	return (
 		<div className="flex flex-col rounded-lg shadow-lg overflow-hidden">
-			<div className="flex-shrink-0">
-				<img
-					className="h-48 w-full object-cover"
-					src={imageURL}
-					alt=""
-				/>
-			</div>
 			<div className="flex-1 bg-white p-6 flex flex-col justify-between">
 				<div className="flex-1">
 					<p className="text-sm leading-5 font-medium text-indigo-600">

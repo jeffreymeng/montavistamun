@@ -7,6 +7,7 @@ export default function HorizontalCard({
 	children,
 	buttonText,
 	large,
+	noImage,
 	...props
 }: {
 	title: React.ReactNode; // (can be string)
@@ -16,6 +17,7 @@ export default function HorizontalCard({
 	large?: boolean;
 } & (
 	| {
+			noImage?: boolean;
 			imageURL?: undefined;
 			image: {
 				childImageSharp: {
@@ -24,30 +26,33 @@ export default function HorizontalCard({
 			};
 	  }
 	| {
+			noImage?: boolean;
 			image?: undefined;
 			imageURL: string;
 	  }
 )): React.ReactElement {
 	return (
 		<div className="max-w-sm w-full md:max-w-full md:flex my-10 mx-auto">
-			<div
-				className={
-					"h-72 w-full md:w-64 md:h-auto flex-none bg-cover rounded-t md:rounded-t-none md:rounded-l text-center overflow-hidden " +
-					(large ? "md:w-1/2" : "")
-				}
-			>
-				{props.image ? (
-					<Img
-						className={"w-full h-full"}
-						imgStyle={{
-							objectPosition: "top",
-						}}
-						fluid={props.image.childImageSharp.fluid}
-					/>
-				) : (
-					<img className={"w-full h-full"} src={props.imageURL} />
-				)}
-			</div>
+			{!noImage && (
+				<div
+					className={
+						"h-72 w-full md:w-64 md:h-auto flex-none bg-cover rounded-t md:rounded-t-none md:rounded-l text-center overflow-hidden " +
+						(large ? "md:w-1/2" : "")
+					}
+				>
+					{props.image ? (
+						<Img
+							className={"w-full h-full"}
+							imgStyle={{
+								objectPosition: "top",
+							}}
+							fluid={props.image.childImageSharp.fluid}
+						/>
+					) : (
+						<img className={"w-full h-full"} src={props.imageURL} />
+					)}
+				</div>
+			)}
 			<div className="border-r border-b border-l border-gray-300 md:border-l-0 md:border-t md:border-gray-300 bg-white rounded-b md:rounded-b-none md:rounded-r p-4 flex flex-col justify-between leading-normal w-full">
 				<div className={`mb-${buttonText ? "2" : "4"}`}>
 					<p
