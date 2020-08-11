@@ -21,7 +21,7 @@ export default function ResourcesPage(): React.ReactElement {
 
 	return (
 		<Layout title={"404 Error"}>
-			<Main>
+			<Main className={"h-ca"}>
 				<h1
 					className={
 						"text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10"
@@ -29,7 +29,7 @@ export default function ResourcesPage(): React.ReactElement {
 				>
 					Member Resources
 				</h1>
-				<p className={"mt-4 mb-20"}>
+				<p className={"mt-4 mb-4"}>
 					Please do not share these resources outside of MVMUN.
 				</p>
 
@@ -38,6 +38,8 @@ export default function ResourcesPage(): React.ReactElement {
 						<a
 							className={"link"}
 							href={`https://drive.google.com/drive/folders/${id}`}
+							target={"_blank"}
+							rel={"noopener noreferrer"}
 						>
 							Open in google drive
 						</a>
