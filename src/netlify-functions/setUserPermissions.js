@@ -62,7 +62,14 @@ export async function handler(event, context) {
 			...existingClaims,
 			...modifiedClaims,
 		};
-		await admin.auth().setCustomUserClaims(targetUID, finalClaims);
+		await Promise.all([
+			admin.auth().setCustomUserClaims(targetUID, finalClaims),
+			admin
+				.firestore()
+				.collection("users")
+				.doc(targetUID)
+				.update(finalClaims),
+		]);
 
 		return {
 			statusCode: 200,
