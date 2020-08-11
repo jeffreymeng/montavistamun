@@ -1,17 +1,35 @@
 import { useLocation } from "@reach/router";
 import { navigate } from "gatsby";
 import React from "react";
+import useFirebase from "../../auth/useFirebase";
 import AuthContext from "../../context/AuthContext";
 
 export default function useRequireLogin(): void {
 	const { user, loading } = React.useContext(AuthContext);
+	const firebase = useFirebase();
 	const location = useLocation();
+	const redirectToLogin = () => {
+		navigate("/account/login", {
+			replace: true,
+			state: {
+				continueURL: location.pathname,
+			},
+		});
+	};
 	React.useEffect(() => {
+		let unsubscribe = () => {
+			/* noop */
+		};
 		if (!user && !loading) {
-			navigate("/account/login", {
-				replace: true,
-				state: { continueURL: location.pathname },
+			redirectToLogin();
+		}
+		if (firebase) {
+			unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+				if (!user) {
+					redirectToLogin();
+				}
 			});
 		}
-	}, [user, loading]);
+		return () => unsubscribe();
+	}, [user, loading, firebase]);
 }
