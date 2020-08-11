@@ -328,14 +328,7 @@ export default [
 		name: "Conner Yin",
 		position: "Training",
 		bio:
-			"Hi everyone, I'm Conner Yin and I'm super excited to be one of your training officers this year! I'm a " +
-			"senior that joined MUN in my junior year (it's never too late to try something new!) and I absolutely " +
-			"love the adrenaline that pumps through you when you're everybody is watching you give a speech or duking " +
-			"it out with Russia and China as the U.S. The MVMUN community is super welcoming, and I hope you'll all " +
-			"find the friendships and joy that I've found with this amazing club :]. Outside of MUN, I love to play " +
-			"games like Settlers of Catan and Secret Hitler with my friends, as well as post music covers and original " +
-			"songs to my youtube channel (it's just my name, sub if you want hehe). You're always free to message me " +
-			"if you want to talk about anything mun-related or non-mun related!",
+			"Hi everyone, I'm Conner Yin and I'm super excited to be one of your training officers this year! I'm a senior that joined MUN in my junior year (it's never too late to try something new!) and I absolutely love the adrenaline that pumps through you when everybody is watching you give a speech or duking it out with Russia and China as the U.S. The MVMUN community is super welcoming, and I hope you'll all find the friendships and joy that I've found with this amazing club :]. Outside of MUN, I love to play all kinds of video and board games with my friends, as well as post covers and original songs to my YouTube channel (it's just my name, sub if you want hehe). You're always free to message me if you want to talk about anything MUN or non-MUN related!",
 		memeBioNickname: "Frat Boy",
 		memeBio:
 			"What does Mr. Yin do with his free time? It is entirely unclear, but we hypothesize that Conner secretly " +
