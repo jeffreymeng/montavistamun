@@ -5,7 +5,7 @@ export async function handler(event, context) {
 	if (event.httpMethod !== "POST") {
 		return { statusCode: 405, body: "Method Not Allowed" };
 	}
-	if (!event.body) return { statusCode: 405, body: "Invalid parameters." };
+	if (!event.body) return { statusCode: 400, body: "Invalid parameters." };
 	const params = JSON.parse(event.body);
 
 	const { firstName, lastName, email, grade } = params;
@@ -20,7 +20,7 @@ export async function handler(event, context) {
 		!["9th", "10th", "11th", "12th"].includes(grade)
 	) {
 		return {
-			statusCode: 405,
+			statusCode: 400,
 			body: `{"success":false, "code":"invalid_parameters", "message":"One or more POST parameters were missing or malformed."}`,
 		};
 	}
