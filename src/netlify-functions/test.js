@@ -19,7 +19,7 @@ export async function handler(event, context) {
 		},
 		FB_SERVICE_ACCOUNT.private_key,
 		{
-			alg: "RS256",
+			algorithm: "RS256",
 			keyid: FB_SERVICE_ACCOUNT.private_key_id,
 			expiresIn: "1h",
 		}
@@ -38,11 +38,6 @@ export async function handler(event, context) {
 		}
 	);
 
-	await admin
-		.firestore()
-		.collection("hello")
-		.doc("world")
-		.set({ hi: true, id });
 	return {
 		statusCode: 200,
 		body: `{"success":true,"message":"done with id ${id}", "response":${JSON.stringify(
