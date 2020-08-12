@@ -6,9 +6,16 @@ admin.initializeApp({
 });
 export async function handler(event, context) {
 	if (event.httpMethod !== "POST") {
-		return { statusCode: 405, body: "Method Not Allowed" };
+		return {
+			statusCode: 405,
+			body: `{"success":false, "code":"method_not_allowed","message":"only POST is allowed"}`,
+		};
 	}
-	if (!event.body) return { statusCode: 400, body: "Invalid parameters." };
+	if (!event.body)
+		return {
+			statusCode: 400,
+			body: `{"success":false, "code":"no_body","message":"No request body was found."}`,
+		};
 	const params = JSON.parse(event.body);
 	const { token, targetUID, newPermissions } = params;
 	if (!token || !targetUID || !newPermissions) {
@@ -75,7 +82,7 @@ export async function handler(event, context) {
 			statusCode: 200,
 			body: `{"success":true, "finalClaims":${JSON.stringify(
 				finalClaims
-			)}`,
+			)}}`,
 		};
 	} catch (error) {
 		console.log(error);
