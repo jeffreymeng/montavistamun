@@ -70,10 +70,16 @@ export default function AboutPage(): React.ReactElement {
 						} else if (verified !== "same") {
 							alert("verified is invalid");
 						}
+
 						try {
 							const token = await firebase
 								.auth()
 								.currentUser?.getIdToken(true);
+							console.log({
+								newPermissions,
+								targetUID: uid,
+								token,
+							});
 							const data = await axios.post(
 								"/.netlify/functions/set-user-permissions",
 								{
