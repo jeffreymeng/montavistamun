@@ -1,6 +1,8 @@
 let { FB_SERVICE_ACCOUNT } = process.env;
 FB_SERVICE_ACCOUNT = JSON.parse(FB_SERVICE_ACCOUNT);
-const admin = require("firebase-admin");
+
+const axios = require("axios").default;
+
 const jwt = require("jsonwebtoken");
 admin.initializeApp({
 	credential: admin.credential.cert(FB_SERVICE_ACCOUNT),
