@@ -13,8 +13,6 @@ export async function handler(event, context) {
 	// generate a jwt
 	const token = jwt.sign(
 		{
-			exp: Math.floor(Date.now() / 1000) + 60 * 60,
-
 			iss: FB_SERVICE_ACCOUNT.client_email,
 			sub: FB_SERVICE_ACCOUNT.client_email,
 			aud: "https://firestore.googleapis.com/",
