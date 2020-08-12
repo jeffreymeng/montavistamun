@@ -1,11 +1,44 @@
-const { FB_SERVICE_ACCOUNT } = process.env;
+let { FB_SERVICE_ACCOUNT } = process.env;
+FB_SERVICE_ACCOUNT = JSON.parse(FB_SERVICE_ACCOUNT);
 const admin = require("firebase-admin");
+const jwt = require("jsonwebtoken");
 admin.initializeApp({
-	credential: admin.credential.cert(JSON.parse(FB_SERVICE_ACCOUNT)),
+	credential: admin.credential.cert(FB_SERVICE_ACCOUNT),
 	databaseURL: "https://montavistamodelun.firebaseio.com",
 });
+
 export async function handler(event, context) {
 	const id = Math.floor(Math.random() * 10000000 + 1);
+
+	// generate a jwt
+	const token = jwt.sign(
+		{
+			exp: Math.floor(Date.now() / 1000) + 60 * 60,
+
+			iss: FB_SERVICE_ACCOUNT.client_email,
+			sub: FB_SERVICE_ACCOUNT.client_email,
+			aud: "https://firestore.googleapis.com/",
+		},
+		FB_SERVICE_ACCOUNT.private_key,
+		{
+			alg: "RS256",
+			keyid: FB_SERVICE_ACCOUNT.private_key_id,
+			expiresIn: "1h",
+		}
+	);
+
+	const response = await Axios.patch(
+		`https://firestore.googleapis.com/v1beta1/projects/montavistamodelun/databases/(default)/documents/hello/world?updateMask.fieldPaths=hello&updateMask.fieldPaths=id`,
+		{
+			hello: true,
+			id,
+		},
+		{
+			headers: {
+				Authorization: `Bearer ${token}`,
+			},
+		}
+	);
 
 	await admin
 		.firestore()
@@ -14,6 +47,8 @@ export async function handler(event, context) {
 		.set({ hi: true, id });
 	return {
 		statusCode: 200,
-		body: `done with id ${id}`,
+		body: `{"success":true,"message":"done with id ${id}", "response":${JSON.stringify(
+			response
+		)}`,
 	};
 }
