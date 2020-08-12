@@ -2,7 +2,8 @@
 	"dependencies": {
 		"axios": "^0.19.2",
 		"firebase-admin": "^9.0.0",
-		"netlify-lambda": "^1.6.0"
+		"netlify-lambda": "^1.6.0",
+		"webpack-node-externals": "^2.5.1"
 	},
 	"scripts": {
 		"postinstall": "netlify-lambda install"

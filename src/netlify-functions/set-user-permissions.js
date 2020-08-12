@@ -24,6 +24,12 @@ export async function handler(event, context) {
 			body: `{"success":false, "code":"invalid_parameters", "message":"One or more POST parameters were missing or malformed."}`,
 		};
 	}
+	const test = await admin
+		.firestore()
+		.collection("keys")
+		.doc("resources")
+		.get();
+	console.log(test);
 
 	// verify caller
 	try {

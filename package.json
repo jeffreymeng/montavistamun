@@ -23,7 +23,7 @@
 		"fix:lint": "eslint --ext .js --ext .jsx --ext .ts --ext .tsx . --fix",
 		"fix:prettier": "prettier --write \"**/*.{css,js,jsx,json,md}\"",
 		"functions:install": "netlify-lambda install src/netlify-functions",
-		"functions:build": "netlify-lambda build src/netlify-functions",
+		"functions:build": "netlify-lambda build --config ./src/netlify-functions/config/webpack.functions.js src/netlify-functions",
 		"serve": "gatsby serve",
 		"start": "npm run develop",
 		"test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
