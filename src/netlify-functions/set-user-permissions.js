@@ -1,7 +1,7 @@
 const { FB_SERVICE_ACCOUNT } = process.env;
 const admin = require("firebase-admin");
 admin.initializeApp({
-	credential: admin.credential.cert(FB_SERVICE_ACCOUNT),
+	credential: admin.credential.cert(JSON.parse(FB_SERVICE_ACCOUNT)),
 	databaseURL: "https://montavistamodelun.firebaseio.com",
 });
 export async function handler(event, context) {
