@@ -50,9 +50,9 @@ export async function handler(event, context) {
 		console.log(error);
 		return {
 			statusCode: 403,
-			body: `{"success":false, "code":"invalid_token", "message":"The provided auth token was unable to be verified.", "internal-error":${JSON.stringify(
+			body: `{"success":false, "code":"invalid_token", "message":"The provided auth token was unable to be verified.", "error":${JSON.stringify(
 				error
-			)}`,
+			)}}`,
 		};
 	}
 
