@@ -1,10 +1,103 @@
+import axios from "axios";
 import React from "react";
+import useFirebase from "../../auth/useFirebase";
 import SidebarLayout from "../../components/layout/SidebarLayout";
-
 export default function AboutPage(): React.ReactElement {
+	const [uid, setUid] = React.useState("");
+	const [admin, setAdmin] = React.useState("same");
+	const [verified, setVerified] = React.useState("same");
+	const firebase = useFirebase();
 	return (
 		<SidebarLayout title={"Members"}>
 			<>
+				<div className="block">
+					<b>UID to modify</b>
+					<input
+						type="text"
+						className="form-input"
+						value={uid}
+						onChange={(e) => setUid(e.target.value)}
+					/>
+				</div>
+				<div className="block">
+					<b>Admin? (yes/no/same)</b>
+					<input
+						type="text"
+						className="form-input"
+						value={admin}
+						onChange={(e) => setAdmin(e.target.value)}
+					/>
+				</div>
+				<div className="block">
+					<b>Verified? (yes/no/same)</b>
+					<input
+						type="text"
+						className="form-input"
+						value={verified}
+						onChange={(e) => setVerified(e.target.value)}
+					/>
+				</div>
+				<div className="block">
+					<b>New Permissions Object:</b>
+					<p>
+						{(() => {
+							const newPermissions: any = {};
+							if (["yes", "no"].includes(admin)) {
+								newPermissions.admin = admin === "yes";
+							} else if (admin !== "same") {
+								return "invalid";
+							}
+							if (["yes", "no"].includes(verified)) {
+								newPermissions.verified = verified === "yes";
+							} else if (verified !== "same") {
+								return "invalid";
+							}
+							return JSON.stringify(newPermissions);
+						})()}
+					</p>
+				</div>
+				<button
+					onClick={async () => {
+						if (!firebase) return;
+						const newPermissions: any = {};
+						if (["yes", "no"].includes(admin)) {
+							newPermissions.admin = admin === "yes";
+						} else if (admin !== "same") {
+							alert("admin is invalid");
+						}
+						if (["yes", "no"].includes(verified)) {
+							newPermissions.verified = verified === "yes";
+						} else if (verified !== "same") {
+							alert("verified is invalid");
+						}
+						try {
+							const token = await firebase
+								.auth()
+								.currentUser?.getIdToken(true);
+							const data = await axios.post(
+								"/.netlify/functions/set-user-permissions",
+								{
+									newPermissions,
+									targetUID: uid,
+									token,
+								}
+							);
+							console.log(data);
+							const newToken = await firebase
+								.auth()
+								.currentUser?.getIdToken(true);
+							console.log(newToken);
+						} catch (error) {
+							console.log(error);
+						}
+					}}
+					className={
+						"p-3 rounded-md bg-blue-300 hover:bg-blue-500 active:bg-blue-700"
+					}
+				>
+					submit
+				</button>
+
 				<nav className="hidden sm:flex items-center text-sm leading-5 font-medium mt-2 mb-4">
 					<a
 						href="/"
