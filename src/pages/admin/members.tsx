@@ -89,6 +89,7 @@ export default function AboutPage(): React.ReactElement {
 							console.log(newToken);
 						} catch (error) {
 							console.log(error);
+							console.log({ ...error });
 							if (error.response) {
 								console.log(error.response.data);
 								console.log(error.response.status);
