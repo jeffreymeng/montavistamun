@@ -1,5 +1,5 @@
 [build]
-  command = "yarn build"
+  command = "yarn functions:install && yarn build"
   functions = "built-netlify-functions"
   publish = "public/"
 [[plugins]]
