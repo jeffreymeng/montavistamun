@@ -1,12 +1,6 @@
 const { MAILCHIMP_API_KEY } = process.env;
 const axios = require("axios").default;
-const mailchimp = require("@mailchimp/mailchimp_marketing");
-var crypto = require("crypto");
-
-mailchimp.setConfig({
-	apiKey: MAILCHIMP_API_KEY,
-	server: "us11",
-});
+const crypto = require("crypto");
 
 export async function handler(event, context) {
 	if (event.httpMethod !== "POST") {
@@ -32,9 +26,14 @@ export async function handler(event, context) {
 		};
 	}
 	try {
-		await mailchimp.lists.setListMember(
-			"3bb1f12a14",
-			crypto.createHash("md5").update(email.toLowerCase()).digest("hex"),
+		const listID = "3bb1f12a14";
+		const emailHash = crypto
+			.createHash("md5")
+			.update(email.toLowerCase())
+			.digest("hex");
+
+		await axios.put(
+			`https://us11.api.mailchimp.com/3.0/lists/${listID}/members/${emailHash}`,
 			{
 				email_address: email,
 				status: "subscribed",
@@ -45,11 +44,17 @@ export async function handler(event, context) {
 					GRADE: grade === "9th" ? "9" : grade.substring(0, 2),
 				},
 				ip_signup: event.headers["client-ip"],
+			},
+			{
+				auth: {
+					username: "nousername",
+					password: MAILCHIMP_API_KE,
+				},
 			}
 		);
-		await mailchimp.lists.updateListMemberTags(
-			"3bb1f12a14",
-			crypto.createHash("md5").update(email.toLowerCase()).digest("hex"),
+
+		await axios.post(
+			`https://us11.api.mailchimp.com/3.0/lists/${listID}/members/${emailHash}/tags`,
 			{
 				tags: [
 					{
@@ -57,6 +62,12 @@ export async function handler(event, context) {
 						"2020-2021 Members": "active",
 					},
 				],
+			},
+			{
+				auth: {
+					username: "nousername",
+					password: MAILCHIMP_API_KEY,
+				},
 			}
 		);
 	} catch (error) {
@@ -70,6 +81,6 @@ export async function handler(event, context) {
 	}
 	return {
 		statusCode: 200,
-		body: `{"success":true, "action":"subscribed"}`,
+		body: `{"success":true}`,
 	};
 }
