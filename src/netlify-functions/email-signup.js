@@ -1,5 +1,12 @@
 const { MAILCHIMP_API_KEY } = process.env;
 const axios = require("axios").default;
+const mailchimp = require("@mailchimp/mailchimp_marketing");
+var crypto = require("crypto");
+
+mailchimp.setConfig({
+	apiKey: MAILCHIMP_API_KEY,
+	server: "us11",
+});
 
 export async function handler(event, context) {
 	if (event.httpMethod !== "POST") {
@@ -25,33 +32,35 @@ export async function handler(event, context) {
 		};
 	}
 	try {
-		await axios.post(
-			"https://us11.api.mailchimp.com/3.0/lists/3bb1f12a14/members",
+		await mailchimp.lists.setListMember(
+			"3bb1f12a14",
+			crypto.createHash("md5").update(email.toLowerCase()).digest("hex"),
 			{
 				email_address: email,
 				status: "subscribed",
+				status_if_new: "subscribed",
 				merge_fields: {
 					FNAME: firstName,
 					LNAME: lastName,
-					GRADE: grade,
+					GRADE: grade === "9th" ? "9" : grade.substring(0, 2),
 				},
-				tags: ["2020-2021 Website Sign-ups"],
-			},
+				ip_signup: event.headers["client-ip"],
+			}
+		);
+		await mailchimp.lists.updateListMemberTags(
+			"3bb1f12a14",
+			crypto.createHash("md5").update(email.toLowerCase()).digest("hex"),
 			{
-				auth: {
-					username: "nousernamerequired",
-					password: MAILCHIMP_API_KEY,
-				},
+				tags: [
+					{
+						"Has Account": "active",
+						"2020-2021 Members": "active",
+					},
+				],
 			}
 		);
 	} catch (error) {
-		console.log(error);
-		if (error.response?.data?.title == "Member Exists") {
-			return {
-				statusCode: 400,
-				body: `{"success":false, "code":"already_subscribed", "message":"A member with this email has already been subscribed."}`,
-			};
-		}
+		console.log("INTERNAL ERROR", error);
 		return {
 			statusCode: 500,
 			body: `{"success":false, "code":"internal_error", "mailchimpErrorData":${JSON.stringify(
@@ -61,6 +70,6 @@ export async function handler(event, context) {
 	}
 	return {
 		statusCode: 200,
-		body: `{"success":true}`,
+		body: `{"success":true, "action":"subscribed"}`,
 	};
 }

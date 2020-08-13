@@ -1,3 +1,4 @@
+import axios from "axios";
 import classNames from "classnames";
 import { Link } from "gatsby";
 import { Eye, EyeOff } from "heroicons-react";
@@ -341,32 +342,27 @@ export default function CreatePage({
 													grade,
 													10
 												);
+												const firstName = name
+													.trim()
+													.split(" ")
+													.slice(0, -1)
+													.join(" ");
+												const lastName =
+													name.trim().indexOf(" ") >
+													-1
+														? name
+																.trim()
+																.split(" ")
+																.slice(-1)[0]
+														: "";
 												await Promise.all([
 													firebase
 														.firestore()
 														.collection("users")
 														.doc(user.uid)
 														.set({
-															firstName: name
-																.trim()
-																.split(" ")
-																.slice(0, -1)
-																.join(" "),
-															lastName:
-																name
-																	.trim()
-																	.indexOf(
-																		" "
-																	) > -1
-																	? name
-																			.trim()
-																			.split(
-																				" "
-																			)
-																			.slice(
-																				-1
-																			)[0]
-																	: "",
+															firstName,
+															lastName,
 															email,
 															grade: {
 																grade: gradeNum,
@@ -380,6 +376,15 @@ export default function CreatePage({
 														displayName: name,
 													}),
 													user.sendEmailVerification(),
+													axios.post(
+														"/.netlify/functions/email-signup",
+														{
+															firstName,
+															lastName,
+															email,
+															grade,
+														}
+													),
 												]);
 												setVerificationEmailSent(true);
 												setDone(true);

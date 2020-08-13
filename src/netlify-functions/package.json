@@ -1,6 +1,8 @@
 {
 	"dependencies": {
+		"@mailchimp/mailchimp_marketing": "^3.0.12",
 		"axios": "^0.19.2",
+		"crypto": "^1.0.1",
 		"firebase-admin": "^9.0.0",
 		"jsonwebtoken": "^8.5.1",
 		"netlify-lambda": "^1.6.0",
