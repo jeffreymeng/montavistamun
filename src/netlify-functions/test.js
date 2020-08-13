@@ -26,7 +26,10 @@ export async function handler(event, context) {
 			expiresIn: "1h",
 		}
 	);
-	const FirebaseServerTimestamp = () => ({ ".sv": "timestamp" });
+	const CurrentTimestamp = () => ({
+		type: "timestamp",
+		time: new Date().toISOString(),
+	});
 	const update = async (path, fields) => {
 		const fieldsToPush = {};
 		for (const key in fields) {
@@ -47,8 +50,8 @@ export async function handler(event, context) {
 						fieldsToPush[key] = { booleanValue: val };
 						break;
 					default:
-						if (val[".sv"] == "timestamp") {
-							fieldsToPush[key] = val;
+						if (val.type == "timestamp") {
+							fieldsToPush[key] = { timestampValue: val.time };
 						}
 				}
 			}
