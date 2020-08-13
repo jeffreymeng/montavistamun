@@ -119,8 +119,14 @@ export default function RecoverEmailPage({
 						Your account email has been reverted to {email}
 					</h2>
 					<p className="text-xl font-bold">
-						If your account has been hacked, you should also change
-						your password.
+						If your account has been hacked, you should also{" "}
+						<Link
+							to={"/account/settings"}
+							className="link font-bold"
+						>
+							change your password
+						</Link>
+						.
 					</p>
 					<Link
 						to={"/account/login"}
