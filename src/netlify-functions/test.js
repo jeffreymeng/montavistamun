@@ -4,10 +4,6 @@ FB_SERVICE_ACCOUNT = JSON.parse(FB_SERVICE_ACCOUNT);
 const axios = require("axios").default;
 
 const jwt = require("jsonwebtoken");
-admin.initializeApp({
-	credential: admin.credential.cert(FB_SERVICE_ACCOUNT),
-	databaseURL: "https://montavistamodelun.firebaseio.com",
-});
 
 export async function handler(event, context) {
 	const id = Math.floor(Math.random() * 10000000 + 1);
@@ -27,7 +23,7 @@ export async function handler(event, context) {
 		}
 	);
 
-	const response = await Axios.patch(
+	const response = await axios.patch(
 		`https://firestore.googleapis.com/v1beta1/projects/montavistamodelun/databases/(default)/documents/hello/world?updateMask.fieldPaths=hello&updateMask.fieldPaths=id`,
 		{
 			hello: true,
