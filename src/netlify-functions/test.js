@@ -26,7 +26,7 @@ export async function handler(event, context) {
 			expiresIn: "1h",
 		}
 	);
-	const CurrentTimestamp = () => ({
+	const currentTimestamp = () => ({
 		type: "timestamp",
 		time: new Date().toISOString(),
 	});
@@ -88,7 +88,7 @@ export async function handler(event, context) {
 	const response = await update("/hello/world", {
 		hello: true,
 		id: id,
-		time: FirebaseServerTimestamp(),
+		time: currentTimestamp(),
 	});
 	const getResponse = await get("/hello/world");
 	return {
