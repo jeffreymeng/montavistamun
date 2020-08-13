@@ -69,8 +69,6 @@ export async function handler(event, context) {
 				headers: {
 					Authorization: `Bearer ${token}`,
 				},
-				responseType: "text",
-				transformResponse: (data) => data,
 			}
 		);
 	};
@@ -94,7 +92,7 @@ export async function handler(event, context) {
 	return {
 		statusCode: 200,
 		body: `{"success":true,"message":"done with id ${id}", "response":"${JSON.stringify(
-			response
-		)}", "getTest":${getResponse}`,
+			response.data
+		)}", "getTest":${JSON.stringify(getResponse.data)}}`,
 	};
 }
