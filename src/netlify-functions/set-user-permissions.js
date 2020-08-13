@@ -1,7 +1,9 @@
 const { FB_SERVICE_ACCOUNT } = process.env;
+
+const database = import("./fbUtils.js");
 const admin = require("firebase-admin");
 admin.initializeApp({
-	credential: admin.credential.cert(JSON.parse(FB_SERVICE_ACCOUNT)),
+	credential: admin.credential.cert(FB_SERVICE_ACCOUNT),
 	databaseURL: "https://montavistamodelun.firebaseio.com",
 });
 export async function handler(event, context) {
@@ -33,13 +35,11 @@ export async function handler(event, context) {
 		// they must either have the admin claim or be an admin according to the database
 		if (!decodedToken.admin) {
 			// check database
-			const callerSnapshot = await admin
-				.firestore()
-				.collection("users")
-				.doc(callerUid)
-				.get();
+			const callerData = await database.get(`/users/${callerUid}`);
 
-			if (!callerSnapshot.data().admin) {
+			console.log(JSON.stringify(callerData));
+
+			if (!callerData.admin) {
 				return {
 					statusCode: 403,
 					body: `{"success":false, "code":"invalid_token", "message":"The provided auth token was not that of an administrator."}`,
@@ -73,11 +73,7 @@ export async function handler(event, context) {
 		};
 		await Promise.all([
 			admin.auth().setCustomUserClaims(targetUID, finalClaims),
-			admin
-				.firestore()
-				.collection("users")
-				.doc(targetUID)
-				.update(finalClaims),
+			database.update(`/users/${targetUID}`, finalClaims),
 		]);
 
 		return {
