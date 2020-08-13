@@ -53,33 +53,45 @@ export async function handler(event, context) {
 				}
 			}
 		}
+		return axios.patch(
+			`https://firestore.googleapis.com/v1/projects/montavistamodelun/databases/(default)/documents${path}?${Object.keys(
+				fields
+			)
+				.map((name) => `updateMask.fieldPaths=${name}`)
+				.join("&")}`,
+			{
+				fields: fieldsToPush,
+			},
+			{
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+				responseType: "text",
+				transformResponse: (data) => data,
+			}
+		);
 	};
-	const response = await axios.patch(
-		`https://firestore.googleapis.com/v1/projects/montavistamodelun/databases/(default)/documents${path}?${Object.keys(
-			fields
-		)
-			.map((name) => `updateMask.fieldPaths=${name}`)
-			.join("&")}`,
-		{
-			fields: {
-				hello: { booleanValue: true },
-				id: { integerValue: id },
-				time: { ".sv": "timestamp" },
-			},
-		},
-		{
-			headers: {
-				Authorization: `Bearer ${token}`,
-			},
-			responseType: "text",
-			transformResponse: (data) => data,
-		}
-	);
+	const get = async (path) => {
+		return axios.get(
+			`https://firestore.googleapis.com/v1/projects/montavistamodelun/databases/(default)/documents${path}`,
+			{
+				headers: {
+					Authorization: `Bearer ${token}`,
+				},
+			}
+		);
+	};
 
+	const response = await update("/hello/world", {
+		hello: true,
+		id: id,
+		time: FirebaseServerTimestamp(),
+	});
+	const getResponse = await get("/hello/world");
 	return {
 		statusCode: 200,
 		body: `{"success":true,"message":"done with id ${id}", "response":"${JSON.stringify(
 			response
-		)}"`,
+		)}", "getTest":${getResponse}`,
 	};
 }
