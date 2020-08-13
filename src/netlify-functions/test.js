@@ -24,10 +24,12 @@ export async function handler(event, context) {
 	);
 
 	const response = await axios.patch(
-		`https://firestore.googleapis.com/v1beta1/projects/montavistamodelun/databases/(default)/documents/hello/world?updateMask.fieldPaths=hello&updateMask.fieldPaths=id`,
+		`https://firestore.googleapis.com/v1/projects/montavistamodelun/databases/(default)/documents/hello/world?updateMask.fieldPaths=hello&updateMask.fieldPaths=id`,
 		{
-			hello: true,
-			id,
+			fields: {
+				hello: { booleanValue: true },
+				id: { integerValue: id },
+			},
 		},
 		{
 			headers: {
