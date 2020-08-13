@@ -2,6 +2,7 @@ import axios from "axios";
 import classNames from "classnames";
 import { Link } from "gatsby";
 import { Eye, EyeOff } from "heroicons-react";
+import Mailcheck from "mailcheck";
 import moment from "moment";
 import React from "react";
 import FirebaseStoredUserData from "../../auth/FirebaseStoredUserData";
@@ -24,6 +25,10 @@ export default function CreatePage({
 	const [name, setName] = React.useState(user?.displayName || "");
 	const [grade, setGrade] = React.useState("");
 	const [email, setEmail] = React.useState(user?.email || "");
+	const [emailSuggestion, setEmailSuggestion] = React.useState<
+		string | undefined
+	>("");
+
 	const [password, setPassword] = React.useState("");
 	const [discordClicked, setDiscordClicked] = React.useState(false);
 	const [showPassword, setShowPassword] = React.useState(false);
@@ -32,6 +37,7 @@ export default function CreatePage({
 	const [done, setDone] = React.useState(!!user);
 	const [resendTimeLeft, setResendTimeLeft] = React.useState(60);
 	const [timesResent, setTimesResent] = React.useState(0);
+
 	const [verificationComplete, setVerificationComplete] = React.useState(
 		!!user?.emailVerified
 	);
@@ -544,13 +550,63 @@ export default function CreatePage({
 													type="email"
 													required
 													value={email}
-													onChange={(e) =>
-														setEmail(e.target.value)
-													}
+													onChange={(e) => {
+														setEmail(
+															e.target.value
+														);
+
+														// if a suggestion is already being displayed, update it so it doesn't become outdated
+														// but otherwise don't check it until the user unfocuses the input
+														if (emailSuggestion) {
+															const result = Mailcheck.run(
+																{
+																	email:
+																		e.target
+																			.value,
+																}
+															);
+															setEmailSuggestion(
+																result?.full
+															);
+														}
+													}}
+													onBlur={() => {
+														const result = Mailcheck.run(
+															{
+																email: email,
+															}
+														);
+														setEmailSuggestion(
+															result?.full
+														);
+													}}
 													disabled={submitting}
 													className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
 												/>
 											</div>
+											{emailSuggestion && (
+												<p
+													className="mt-2 text-sm text-gray-500"
+													id="email-description"
+												>
+													Did you mean{" "}
+													<button
+														type={"button"}
+														onClick={() => {
+															setEmail(
+																emailSuggestion
+															);
+															setEmailSuggestion(
+																undefined
+															);
+														}}
+														className="link"
+													>
+														{emailSuggestion}
+													</button>
+													?
+												</p>
+											)}
 										</div>
 
 										<div className="mt-6">
