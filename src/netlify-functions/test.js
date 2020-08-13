@@ -32,7 +32,7 @@ export async function handler(event, context) {
 		for (const key in fields) {
 			if (fields.hasOwnProperty(key)) {
 				const val = fields[key];
-				switch (typeof key) {
+				switch (typeof val) {
 					case "string":
 						fieldsToPush[key] = { stringValue: val };
 						break;
