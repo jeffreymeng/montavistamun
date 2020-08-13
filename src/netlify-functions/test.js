@@ -35,13 +35,13 @@ export async function handler(event, context) {
 			headers: {
 				Authorization: `Bearer ${token}`,
 			},
+			responseType: "text",
+			transformResponse: (data) => data,
 		}
 	);
 
 	return {
 		statusCode: 200,
-		body: `{"success":true,"message":"done with id ${id}", "response":${JSON.stringify(
-			response
-		)}`,
+		body: `{"success":true,"message":"done with id ${id}", "response":"${response}"`,
 	};
 }
