@@ -1,5 +1,4 @@
-const { FB_SERVICE_ACCOUNT } = process.env;
-
+const FB_SERVICE_ACCOUNT = JSON.parse(process.env.FB_SERVICE_ACCOUNT);
 const axios = require("axios").default;
 const jwt = require("jsonwebtoken");
 

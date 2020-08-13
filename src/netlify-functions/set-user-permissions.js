@@ -1,4 +1,4 @@
-const { FB_SERVICE_ACCOUNT } = process.env;
+const FB_SERVICE_ACCOUNT = JSON.parse(process.env.FB_SERVICE_ACCOUNT);
 
 const database = require("./utils/fbUtils");
 const admin = require("firebase-admin");
