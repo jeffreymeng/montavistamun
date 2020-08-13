@@ -1,6 +1,10 @@
 let { FB_SERVICE_ACCOUNT } = process.env;
 FB_SERVICE_ACCOUNT = JSON.parse(FB_SERVICE_ACCOUNT);
-
+const admin = require("firebase-admin");
+admin.initializeApp({
+	credential: admin.credential.cert(JSON.parse(FB_SERVICE_ACCOUNT)),
+	databaseURL: "https://montavistamodelun.firebaseio.com",
+});
 const axios = require("axios").default;
 
 const jwt = require("jsonwebtoken");
@@ -24,11 +28,16 @@ export async function handler(event, context) {
 	);
 
 	const response = await axios.patch(
-		`https://firestore.googleapis.com/v1/projects/montavistamodelun/databases/(default)/documents/hello/world?updateMask.fieldPaths=hello&updateMask.fieldPaths=id`,
+		`https://firestore.googleapis.com/v1/projects/montavistamodelun/databases/(default)/documents${path}?${Object.keys(
+			fields
+		)
+			.map((name) => `updateMask.fieldPaths=${name}`)
+			.join("&")}`,
 		{
 			fields: {
 				hello: { booleanValue: true },
 				id: { integerValue: id },
+				time: { ".sv": "timestamp" },
 			},
 		},
 		{
@@ -42,6 +51,8 @@ export async function handler(event, context) {
 
 	return {
 		statusCode: 200,
-		body: `{"success":true,"message":"done with id ${id}", "response":"${response}"`,
+		body: `{"success":true,"message":"done with id ${id}", "response":"${JSON.stringify(
+			response
+		)}"`,
 	};
 }
