@@ -6,6 +6,7 @@ import React from "react";
 import FirebaseStoredUserData from "../../auth/FirebaseStoredUserData";
 import useFirebase from "../../auth/useFirebase";
 import { Layout } from "../../components/layout";
+import AuthContext from "../../context/AuthContext";
 import {
 	getClassOf,
 	getFirstDayOfSchool,
@@ -22,6 +23,7 @@ export default function CreatePage({
 	const [grade, setGrade] = React.useState("");
 	const [email, setEmail] = React.useState("");
 	const [password, setPassword] = React.useState("");
+	const [discordClicked, setDiscordClicked] = React.useState(false);
 	const [showPassword, setShowPassword] = React.useState(false);
 	const [error, setError] = React.useState<React.ReactNode | null>(null);
 	const [submitting, setSubmitting] = React.useState(false);
@@ -31,6 +33,15 @@ export default function CreatePage({
 	const [verificationComplete, setVerificationComplete] = React.useState(
 		false
 	);
+	const { user, loading } = React.useContext(AuthContext);
+	React.useEffect(() => {
+		if (user) {
+			setDone(true);
+			setName(user.displayName || "new member");
+			setEmail(user.email || "your email");
+			setVerificationComplete(user.emailVerified);
+		}
+	}, [user, loading]);
 	const [sysend, setSysend] = React.useState<
 		Record<string, any> | undefined
 	>();
@@ -82,12 +93,52 @@ export default function CreatePage({
 									United Nations!
 								</h3>
 							</div>
+							<h5 className={"text-xl font-extrabold mt-5"}>
+								Next steps:
+								<br />
+								{verificationComplete && "✓ "}
+								<span
+									className={
+										verificationComplete
+											? "line-through"
+											: ""
+									}
+								>
+									Verify Your Email
+								</span>
+								<br />
+								{discordClicked && "✓ "}
+								<a
+									onClick={(e) => {
+										e.preventDefault();
+										setDiscordClicked(true);
+										window.open(
+											"https://discord.gg/5sN9WXa",
+											"_blank"
+										);
+									}}
+									className={
+										"link font-extrabold" +
+										(discordClicked ? " line-through" : "")
+									}
+								>
+									Join Our Discord
+								</a>
+								<br />
+								Attend your first member meeting
+								{/*	TODO: add time */}
+							</h5>
+							<p
+								className={
+									"mt-3 text-xl tracking-tight font-bold"
+								}
+							>
+								This information will also be included in a
+								welcome email that we have sent to you.
+							</p>
+
 							{verificationComplete && (
-								<div className="mt-8">
-									<h4 className="text-xl font-bold">
-										Hooray! You've verified your email in
-										another tab.
-									</h4>
+								<div className="mt-8 md:mt-20">
 									<Link
 										to={state?.continueURL || "/account/"}
 										className={classNames(
@@ -105,14 +156,10 @@ export default function CreatePage({
 									<h4 className="text-lg">
 										We've sent a verification email to{" "}
 										<b>{email}</b>. <br />
-										In order to fully use your account,
-										you'll need to click the link in that
-										email.
+										Once you verify your email, we'll send
+										you weekly member updates.
 									</h4>
-									<p className="text-md italic mt-4">
-										Once you've verified your email, you can
-										close this tab.
-									</p>
+
 									<span className="block w-full rounded-md shadow-sm mt-5">
 										<button
 											type="submit"
@@ -456,7 +503,8 @@ export default function CreatePage({
 													Email
 												</label>
 												<span className="text-sm leading-5 text-gray-500">
-													Choose one you check often
+													We'll send you weekly
+													updates
 												</span>
 											</div>
 											<div className="mt-1 rounded-md shadow-sm">

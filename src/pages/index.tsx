@@ -7,14 +7,13 @@ import { Layout } from "../components/layout";
 
 function IndexPage(): React.ReactElement {
 	const aboutRef = React.useRef(null);
-	const joinRef = React.useRef(null);
 
 	return (
-		<Layout lightFooter title={"Home"} navbarShadow="always">
-			<Hero aboutRef={aboutRef} joinRef={joinRef} />
+		<Layout title={"Home"} navbarShadow="always">
+			<Hero aboutRef={aboutRef} />
 			<About aboutRef={aboutRef} />
 			<Stats />
-			<CTA joinRef={joinRef} />
+			<CTA />
 		</Layout>
 	);
 }

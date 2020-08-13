@@ -1,12 +1,10 @@
-import { graphql, useStaticQuery } from "gatsby";
+import { graphql, Link, useStaticQuery } from "gatsby";
 import Img from "gatsby-image";
 import React from "react";
 export default function Hero({
 	aboutRef,
-	joinRef,
 }: {
 	aboutRef: React.Ref<HTMLDivElement>; // ref to the about element for scrolling
-	joinRef: React.Ref<HTMLDivElement>;
 }): React.ReactElement {
 	const data = useStaticQuery(graphql`
 		query {
@@ -50,19 +48,12 @@ export default function Hero({
 							</p>
 							<div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
 								<div className="rounded-md shadow">
-									<button
+									<Link
 										className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition duration-150 ease-in-out md:py-4 md:text-lg md:px-10"
-										onClick={() =>
-											joinRef &&
-											// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-											// @ts-ignore
-											joinRef.current.scrollIntoView({
-												behavior: "smooth",
-											})
-										}
+										to={"/account/create"}
 									>
 										Join Us
-									</button>
+									</Link>
 								</div>
 								<div className="mt-3 sm:mt-0 sm:ml-3 ">
 									<button
