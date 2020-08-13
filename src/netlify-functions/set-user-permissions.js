@@ -1,6 +1,6 @@
 const { FB_SERVICE_ACCOUNT } = process.env;
 
-const database = import("./fbUtils.js");
+const database = require("./utils/fbUtils");
 const admin = require("firebase-admin");
 admin.initializeApp({
 	credential: admin.credential.cert(FB_SERVICE_ACCOUNT),
