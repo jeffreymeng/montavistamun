@@ -16,8 +16,10 @@ const convert = (data) => {
 						// create a fake data object with only one field to convert, then retrieve the value of the converted field
 						return convert({ fields: { data: field } }).data;
 					});
+					return;
 				case "mapValue":
 					data.fields[key] = convert(val);
+					return;
 				default:
 					// other values are already parsed
 					data.fields[key] = val[Object.keys(val)[0]];
