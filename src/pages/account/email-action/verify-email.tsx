@@ -133,7 +133,8 @@ export default function HandleEmailActionPage({
 						Your email has been successfully verified.
 					</h2>
 					<p className="text-xl font-bold">
-						You may now safely close this page.
+						You may now close this page or continue to the{" "}
+						<Link to={"/account"}>member dashboard</Link>.
 					</p>
 				</>
 			)}

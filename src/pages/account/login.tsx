@@ -71,12 +71,29 @@ export default function LoginPage({
 												email,
 												password
 											)
-											.then(() =>
-												navigate(
-													state?.continueURL ||
-														"/account/"
-												)
-											)
+											.then((userCred) => {
+												if (
+													userCred.user &&
+													!userCred.user.emailVerified
+												) {
+													navigate(
+														"/account/create",
+														{
+															replace: true,
+															state: {
+																continueURL:
+																	state?.continueURL,
+															},
+														}
+													);
+												} else {
+													navigate(
+														state?.continueURL ||
+															"/account/",
+														{ replace: true }
+													);
+												}
+											})
 											.catch((error) => {
 												setSubmitting(false);
 												console.log(error);

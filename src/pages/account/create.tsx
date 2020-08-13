@@ -19,29 +19,36 @@ export default function CreatePage({
 }: {
 	location: { state: LoginPageProps };
 }): React.ReactElement {
-	const [name, setName] = React.useState("");
+	const { user, loading } = React.useContext(AuthContext);
+	const [name, setName] = React.useState(user?.displayName || "");
 	const [grade, setGrade] = React.useState("");
-	const [email, setEmail] = React.useState("");
+	const [email, setEmail] = React.useState(user?.email || "");
 	const [password, setPassword] = React.useState("");
 	const [discordClicked, setDiscordClicked] = React.useState(false);
 	const [showPassword, setShowPassword] = React.useState(false);
 	const [error, setError] = React.useState<React.ReactNode | null>(null);
 	const [submitting, setSubmitting] = React.useState(false);
-	const [done, setDone] = React.useState(false);
-	const [resendTimeLeft, setResendTimeLeft] = React.useState(120);
+	const [done, setDone] = React.useState(!!user);
+	const [resendTimeLeft, setResendTimeLeft] = React.useState(60);
 	const [timesResent, setTimesResent] = React.useState(0);
 	const [verificationComplete, setVerificationComplete] = React.useState(
+		!!user?.emailVerified
+	);
+	const [verificationEmailSent, setVerificationEmailSent] = React.useState(
 		false
 	);
-	const { user, loading } = React.useContext(AuthContext);
+
 	React.useEffect(() => {
 		if (user) {
 			setDone(true);
-			setName(user.displayName || "new member");
-			setEmail(user.email || "your email");
+
+			setName((currentValue) => user.displayName || currentValue);
+			setEmail(
+				(currentValue) => user.email || currentValue || "your email"
+			);
 			setVerificationComplete(user.emailVerified);
 		}
-	}, [user, loading]);
+	}, [user]);
 	const [sysend, setSysend] = React.useState<
 		Record<string, any> | undefined
 	>();
@@ -85,8 +92,17 @@ export default function CreatePage({
 						<div className="mx-auto w-full max-w-sm">
 							<div>
 								<h2 className="mt-6 text-3xl leading-9 font-extrabold text-gray-900">
-									Welcome,{" "}
-									{name.split(" ").slice(0, -1).join(" ")}!
+									Welcome
+									{name && (
+										<>
+											{", "}
+											{name
+												.split(" ")
+												.slice(0, -1)
+												.join(" ")}
+										</>
+									)}
+									!
 								</h2>
 								<h3 className="mt-3 text-xl font-bold text-gray-700">
 									You're now a member of Monta Vista Model
@@ -97,15 +113,32 @@ export default function CreatePage({
 								Next steps:
 								<br />
 								{verificationComplete && "✓ "}
-								<span
-									className={
-										verificationComplete
-											? "line-through"
-											: ""
-									}
-								>
-									Verify Your Email
-								</span>
+								{verificationEmailSent ||
+								verificationComplete ? (
+									<span
+										className={
+											verificationComplete
+												? "line-through"
+												: ""
+										}
+									>
+										Verify Your Email (required)
+									</span>
+								) : (
+									<a
+										className={"link"}
+										onClick={(e) => {
+											e.preventDefault();
+											user?.sendEmailVerification().catch(
+												(error) => console.log(error)
+											);
+											setResendTimeLeft(60);
+											setVerificationEmailSent(true);
+										}}
+									>
+										Verify Your Email (required)
+									</a>
+								)}
 								<br />
 								{discordClicked && "✓ "}
 								<a
@@ -128,17 +161,9 @@ export default function CreatePage({
 								Attend your first member meeting
 								{/*	TODO: add time */}
 							</h5>
-							<p
-								className={
-									"mt-3 text-xl tracking-tight font-bold"
-								}
-							>
-								This information will also be included in a
-								welcome email that we have sent to you.
-							</p>
 
 							{verificationComplete && (
-								<div className="mt-8 md:mt-20">
+								<div className="mt-8 md:mt-20 lg:mt-40">
 									<Link
 										to={state?.continueURL || "/account/"}
 										className={classNames(
@@ -147,11 +172,11 @@ export default function CreatePage({
 									>
 										{state?.continueURL
 											? "Continue"
-											: "Continue to Account Overview"}
+											: "Continue to Member Dashboard"}
 									</Link>
 								</div>
 							)}
-							{!verificationComplete && (
+							{!verificationComplete && verificationEmailSent && (
 								<div className="mt-8">
 									<h4 className="text-lg">
 										We've sent a verification email to{" "}
@@ -167,12 +192,12 @@ export default function CreatePage({
 											className={classNames(
 												"w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white transition duration-150 ease-in-out",
 												resendTimeLeft > 0
-													? "bg-indigo-400 cursor-not-allowed"
+													? "bg-indigo-400"
 													: "bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700"
 											)}
 											onClick={() => {
 												if (resendTimeLeft > 0) return;
-												setResendTimeLeft(120);
+												setResendTimeLeft(60);
 												setTimesResent(
 													(old) => old + 1
 												);
@@ -194,7 +219,7 @@ export default function CreatePage({
 												emails?
 											</b>
 											<br />
-											Remeber to check your spam folder.
+											Remember to check your spam folder.
 											If you still don't see it, send us
 											an email at{" "}
 											<a
@@ -356,6 +381,7 @@ export default function CreatePage({
 													}),
 													user.sendEmailVerification(),
 												]);
+												setVerificationEmailSent(true);
 												setDone(true);
 												setResendTimeLeft(59);
 											} catch (error) {
