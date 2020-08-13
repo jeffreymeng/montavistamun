@@ -2,7 +2,7 @@ let { FB_SERVICE_ACCOUNT } = process.env;
 FB_SERVICE_ACCOUNT = JSON.parse(FB_SERVICE_ACCOUNT);
 const admin = require("firebase-admin");
 admin.initializeApp({
-	credential: admin.credential.cert(JSON.parse(FB_SERVICE_ACCOUNT)),
+	credential: admin.credential.cert(FB_SERVICE_ACCOUNT),
 	databaseURL: "https://montavistamodelun.firebaseio.com",
 });
 const axios = require("axios").default;
@@ -26,7 +26,34 @@ export async function handler(event, context) {
 			expiresIn: "1h",
 		}
 	);
-
+	const FirebaseServerTimestamp = () => ({ ".sv": "timestamp" });
+	const update = async (path, fields) => {
+		const fieldsToPush = {};
+		for (const key in fields) {
+			if (fields.hasOwnProperty(key)) {
+				const val = fields[key];
+				switch (typeof key) {
+					case "string":
+						fieldsToPush[key] = { stringValue: val };
+						break;
+					case "number":
+						if (Math.floor(val) === val) {
+							fieldsToPush[key] = { integerValue: val };
+						} else {
+							fieldsToPush[key] = { doubleValue: val };
+						}
+						break;
+					case "boolean":
+						fieldsToPush[key] = { booleanValue: val };
+						break;
+					default:
+						if (val[".sv"] == "timestamp") {
+							fieldsToPush[key] = val;
+						}
+				}
+			}
+		}
+	};
 	const response = await axios.patch(
 		`https://firestore.googleapis.com/v1/projects/montavistamodelun/databases/(default)/documents${path}?${Object.keys(
 			fields
