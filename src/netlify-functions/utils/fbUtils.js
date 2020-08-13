@@ -88,7 +88,7 @@ module.exports = {
 				},
 			}
 		);
-		return convert(result.data);
+		return convert(result.data.fields);
 	},
 	get: async (path) => {
 		const result = await axios.get(
@@ -100,6 +100,6 @@ module.exports = {
 			}
 		);
 
-		return convert(result.data);
+		return convert(result.data.fields);
 	},
 };
