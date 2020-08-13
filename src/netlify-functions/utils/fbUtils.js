@@ -7,17 +7,24 @@ const convert = (data) => {
 	for (const key in data.fields) {
 		if (data.fields.hasOwnProperty(key)) {
 			const val = data.fields[key];
-			switch (Object.keys(data)[0]) {
+			switch (Object.keys(val)[0]) {
 				case "timestampValue":
-					data.fields[key] = new Date(val);
+					data.fields[key] = new Date(val.timestampValue);
 					return;
+				case "arrayValue":
+					data.fields[key] = val.values.map((field) => {
+						// create a fake data object with only one field to convert, then retrieve the value of the converted field
+						return convert({ fields: { data: field } }).data;
+					});
+				case "mapValue":
+					data.fields[key] = convert(val);
 				default:
-					// other values are already parsed (no support for maps/arrays)
-					data.fields[key] = data.fields[Object.keys(data)[0]];
+					// other values are already parsed
+					data.fields[key] = val[Object.keys(val)[0]];
 			}
 		}
 	}
-	return data;
+	return data.fields;
 };
 
 const getToken = () => {
@@ -43,6 +50,7 @@ module.exports = {
 		time: new Date().toISOString(),
 	}),
 
+	// this doesn't support arrays or maps as field values
 	update: async (path, fields) => {
 		const fieldsToPush = {};
 		for (const key in fields) {
@@ -88,7 +96,7 @@ module.exports = {
 				},
 			}
 		);
-		return convert(result.data.fields);
+		return convert(result.data);
 	},
 	get: async (path) => {
 		const result = await axios.get(
@@ -100,6 +108,6 @@ module.exports = {
 			}
 		);
 
-		return convert(result.data.fields);
+		return convert(result.data);
 	},
 };
