@@ -2,14 +2,25 @@ import axios from "axios";
 import React from "react";
 import useFirebase from "../../auth/useFirebase";
 import SidebarLayout from "../../components/layout/SidebarLayout";
+import AuthContext from "../../context/AuthContext";
 export default function AboutPage(): React.ReactElement {
 	const [uid, setUid] = React.useState("");
 	const [admin, setAdmin] = React.useState("same");
 	const [verified, setVerified] = React.useState("same");
 	const firebase = useFirebase();
+	const {
+		user,
+		loading,
+		verified: userVerified,
+		admin: userAdmin,
+	} = React.useContext(AuthContext);
 	return (
 		<SidebarLayout title={"Members"}>
 			<>
+				<p>
+					Your details: verified: {userVerified + ""} admin:{" "}
+					{userAdmin + ""}
+				</p>
 				<div className="block">
 					<b>UID to modify</b>
 					<input
@@ -109,7 +120,34 @@ export default function AboutPage(): React.ReactElement {
 				>
 					submit
 				</button>
-
+				<button
+					onClick={async () => {
+						if (!firebase) return;
+						const token = await firebase
+							.auth()
+							.currentUser?.getIdTokenResult();
+						console.log(token);
+					}}
+					className={
+						"p-3 rounded-md bg-blue-300 hover:bg-blue-500 active:bg-blue-700"
+					}
+				>
+					print claims
+				</button>
+				<button
+					onClick={async () => {
+						if (!firebase) return;
+						const token = await firebase
+							.auth()
+							.currentUser?.getIdTokenResult(true);
+						console.log(token);
+					}}
+					className={
+						"p-3 rounded-md bg-blue-300 hover:bg-blue-500 active:bg-blue-700"
+					}
+				>
+					print claims after refresh
+				</button>
 				<nav className="hidden sm:flex items-center text-sm leading-5 font-medium mt-2 mb-4">
 					<a
 						href="/"

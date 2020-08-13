@@ -31,7 +31,7 @@ const AuthProvider = ({ children }: { children: ReactNode }): ReactElement => {
 			await Promise.all([
 				import("firebase/auth"),
 				import("firebase/firestore"),
-				import("firebase/functions"),
+				// import("firebase/functions"),
 			]);
 			// lazy load firebase in an async IIFE
 			if (firebaseApp.apps.length === 0) {
