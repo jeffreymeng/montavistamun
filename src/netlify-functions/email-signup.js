@@ -18,7 +18,7 @@ export async function handler(event, context) {
 		!email ||
 		email.indexOf("@") === -1 ||
 		!grade ||
-		!["9th", "10th", "11th", "12th"].includes(grade)
+		!["9", "10", "11", "12"].includes(grade + "")
 	) {
 		return {
 			statusCode: 400,
@@ -41,7 +41,7 @@ export async function handler(event, context) {
 				merge_fields: {
 					FNAME: firstName,
 					LNAME: lastName,
-					GRADE: grade === "9th" ? "9" : grade.substring(0, 2),
+					GRADE: grade,
 				},
 				ip_signup: event.headers["client-ip"],
 			},

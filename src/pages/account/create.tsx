@@ -388,7 +388,7 @@ export default function CreatePage({
 															firstName,
 															lastName,
 															email,
-															grade,
+															grade: gradeNum,
 														}
 													),
 												]).then(console.log);
