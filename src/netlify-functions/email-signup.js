@@ -58,8 +58,12 @@ export async function handler(event, context) {
 			{
 				tags: [
 					{
-						"Has Account": "active",
-						"2020-2021 Members": "active",
+						name: "Has Account",
+						status: "active",
+					},
+					{
+						name: "2020-2021 Members",
+						status: "active",
 					},
 				],
 			},
@@ -75,7 +79,7 @@ export async function handler(event, context) {
 		return {
 			statusCode: 500,
 			body: `{"success":false, "code":"internal_error", "mailchimpErrorData":${JSON.stringify(
-				error
+				{ ...error }
 			)}}`,
 		};
 	}
