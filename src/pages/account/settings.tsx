@@ -1,3 +1,4 @@
+import axios from "axios";
 import firebaseType from "firebase";
 import { Check, InformationCircle } from "heroicons-react";
 import moment from "moment";
@@ -405,7 +406,16 @@ function PersonalInformationDisplay() {
 							classOf,
 						}),
 				])
-					.then(() => {
+					.then(async () => {
+						await axios.post(
+							"/.netlify/functions/update-email-list",
+							{
+								email: user.email,
+								firstName,
+								lastName,
+								grade: getGrade(classOf),
+							}
+						);
 						setProfileChangeSubmitting(false);
 						setProfileChangeSuccess(true);
 						setCurrentFirstName(firstName);

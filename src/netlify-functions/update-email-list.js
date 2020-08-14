@@ -10,16 +10,7 @@ export async function handler(event, context) {
 	const params = JSON.parse(event.body);
 
 	const { firstName, lastName, email, grade } = params;
-	if (
-		!firstName ||
-		!firstName.trim() ||
-		!lastName ||
-		!lastName.trim() ||
-		!email ||
-		email.indexOf("@") === -1 ||
-		!grade ||
-		!["9", "10", "11", "12"].includes(grade + "")
-	) {
+	if (!email || email.indexOf("@") === -1) {
 		return {
 			statusCode: 400,
 			body: `{"success":false, "code":"invalid_parameters", "message":"One or more POST parameters were missing or malformed."}`,
@@ -32,19 +23,28 @@ export async function handler(event, context) {
 			.update(email.toLowerCase())
 			.digest("hex");
 
+		const data = {
+			email_address: email,
+			status: "subscribed",
+			status_if_new: "subscribed",
+			ip_signup: event.headers["client-ip"],
+		};
+		if (firstName || lastName || grade) {
+			data.merge_fields = {};
+			if (firstName) {
+				data.merge_fields.FNAME = firstName;
+			}
+			if (lastName) {
+				data.merge_fields.LNAME = lastName;
+			}
+			if (grade) {
+				data.merge_fields.GRADE = grade;
+			}
+		}
+
 		await axios.put(
 			`https://us11.api.mailchimp.com/3.0/lists/${listID}/members/${emailHash}`,
-			{
-				email_address: email,
-				status: "subscribed",
-				status_if_new: "subscribed",
-				merge_fields: {
-					FNAME: firstName,
-					LNAME: lastName,
-					GRADE: grade,
-				},
-				ip_signup: event.headers["client-ip"],
-			},
+			data,
 			{
 				auth: {
 					username: "nousername",

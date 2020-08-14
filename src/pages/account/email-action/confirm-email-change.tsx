@@ -1,3 +1,4 @@
+import axios from "axios";
 import classNames from "classnames";
 import { Link } from "gatsby";
 import React from "react";
@@ -158,6 +159,12 @@ export default function HandleEmailActionPage({
 										.doc(firebase.auth().currentUser?.uid)
 										.update({ email: newEmail }),
 								]);
+								await axios.post(
+									"/.netlify/functions/update-email-list",
+									{
+										email: newEmail,
+									}
+								);
 								await firebase.auth().signOut();
 								setSuccess(true);
 							} catch (error) {

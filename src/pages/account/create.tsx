@@ -129,7 +129,8 @@ export default function CreatePage({
 												: ""
 										}
 									>
-										Verify Your Email (required)
+										Verify Your Email
+										{!verificationComplete && " required"}
 									</span>
 								) : (
 									<a
@@ -383,7 +384,7 @@ export default function CreatePage({
 													}),
 													user.sendEmailVerification(),
 													axios.post(
-														"/.netlify/functions/email-signup",
+														"/.netlify/functions/update-email-list",
 														{
 															firstName,
 															lastName,
