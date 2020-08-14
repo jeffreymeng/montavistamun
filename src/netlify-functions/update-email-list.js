@@ -18,7 +18,7 @@ export async function handler(event, context) {
 	}
 	try {
 		const listID = "3bb1f12a14";
-		const emailHash = crypto
+		let emailHash = crypto
 			.createHash("md5")
 			.update(email.toLowerCase())
 			.digest("hex");
@@ -33,12 +33,12 @@ export async function handler(event, context) {
 					},
 				}
 			)
-			.catch(() =>
+			.catch((e) => {
+				console.log("Mailchimp Existing Fields GET Error", e);
 				// the user probably doesn't exist
 				// so just assume there is no previous data
-				Promise.resolve({})
-			);
-		console.log("Existing Merge Fields", existingFields.merge_fields);
+				return Promise.resolve({});
+			});
 		const data = {
 			email_address: newEmail || email,
 			status: "subscribed",
@@ -64,7 +64,7 @@ export async function handler(event, context) {
 			}
 		}
 		data.merge_fields = {
-			...existingFields.merge_fields,
+			...(existingFields?.merge_fields || {}),
 			...newData,
 		};
 		await axios.put(
@@ -77,7 +77,12 @@ export async function handler(event, context) {
 				},
 			}
 		);
-
+		if (newEmail) {
+			emailHash = crypto
+				.createHash("md5")
+				.update(newEmail.toLowerCase())
+				.digest("hex");
+		}
 		await axios.post(
 			`https://us11.api.mailchimp.com/3.0/lists/${listID}/members/${emailHash}/tags`,
 			{
