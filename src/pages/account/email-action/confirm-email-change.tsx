@@ -162,7 +162,8 @@ export default function HandleEmailActionPage({
 								await axios.post(
 									"/.netlify/functions/update-email-list",
 									{
-										email: newEmail,
+										email: oldEmail,
+										newEmail,
 									}
 								);
 								await firebase.auth().signOut();

@@ -27,7 +27,8 @@ export default function RecoverEmailPage({
 				setEmail(codeInfo.data?.email as string);
 				await firebase.auth().applyActionCode(code);
 				await axios.post("/.netlify/functions/update-email-list", {
-					email: codeInfo.data?.email,
+					email: codeInfo.data?.previousEmail,
+					newEmail: codeInfo.data?.email,
 				});
 				setSuccess(true);
 			} catch (error) {
