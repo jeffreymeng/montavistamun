@@ -37,6 +37,9 @@ export async function handler(event, context) {
 			if (lastName) {
 				data.merge_fields.LNAME = lastName;
 			}
+			if (firstName && lastName) {
+				data.merge_fields.FULLNAME = `${firstName} ${lastName}`;
+			}
 			if (grade) {
 				data.merge_fields.GRADE = grade;
 			}
