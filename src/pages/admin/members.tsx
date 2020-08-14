@@ -4,7 +4,7 @@ import useFirebase from "../../auth/useFirebase";
 import SidebarLayout from "../../components/layout/SidebarLayout";
 import AuthContext from "../../context/AuthContext";
 export default function AboutPage(): React.ReactElement {
-	const [uid, setUid] = React.useState("");
+	const [target, setTarget] = React.useState("");
 	const [admin, setAdmin] = React.useState("same");
 	const [verified, setVerified] = React.useState("same");
 	const firebase = useFirebase();
@@ -22,12 +22,12 @@ export default function AboutPage(): React.ReactElement {
 					{userAdmin + ""}
 				</p>
 				<div className="block">
-					<b>UID to modify</b>
+					<b>UID or email to modify</b>
 					<input
 						type="text"
 						className="form-input"
-						value={uid}
-						onChange={(e) => setUid(e.target.value)}
+						value={target}
+						onChange={(e) => setTarget(e.target.value)}
 					/>
 				</div>
 				<div className="block">
@@ -88,14 +88,14 @@ export default function AboutPage(): React.ReactElement {
 								.currentUser?.getIdToken(true);
 							console.log({
 								newPermissions,
-								targetUID: uid,
+								target,
 								token,
 							});
 							const data = await axios.post(
 								"/.netlify/functions/set-user-permissions",
 								{
 									newPermissions,
-									targetUID: uid,
+									target,
 									token,
 								}
 							);

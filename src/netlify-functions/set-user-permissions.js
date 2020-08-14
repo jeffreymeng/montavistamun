@@ -19,8 +19,8 @@ export async function handler(event, context) {
 			body: `{"success":false, "code":"no_body","message":"No request body was found."}`,
 		};
 	const params = JSON.parse(event.body);
-	const { token, targetUID, newPermissions } = params;
-	if (!token || !targetUID || !newPermissions) {
+	const { token, target, newPermissions } = params;
+	if (!token || !target || !newPermissions) {
 		return {
 			statusCode: 400,
 			body: `{"success":false, "code":"invalid_parameters", "message":"One or more POST parameters were missing or malformed."}`,
@@ -64,8 +64,17 @@ export async function handler(event, context) {
 			modifiedClaims.verified = newPermissions.verified;
 		if (typeof newPermissions.admin === "boolean")
 			modifiedClaims.admin = newPermissions.admin;
+		let targetUID = target;
+		let targetUserRecord;
+		if (target.indexOf("@") > -1) {
+			// target is email
+			targetUserRecord = await admin.auth().getUserByEmail(target);
+			targetUID = targetUserRecord.email;
+		} else {
+			targetUID = target;
+			targetUserRecord = await admin.auth().getUser(target);
+		}
 
-		const targetUserRecord = await admin.auth().getUser(targetUID);
 		const existingClaims = targetUserRecord.customClaims;
 		const finalClaims = {
 			...existingClaims,

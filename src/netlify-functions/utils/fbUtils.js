@@ -7,19 +7,20 @@ const convert = (data) => {
 	for (const key in data.fields) {
 		if (data.fields.hasOwnProperty(key)) {
 			const val = data.fields[key];
+			if (val === null || val === undefined) continue;
 			switch (Object.keys(val)[0]) {
 				case "timestampValue":
 					data.fields[key] = new Date(val.timestampValue);
-					return;
+					break;
 				case "arrayValue":
 					data.fields[key] = val.values.map((field) => {
 						// create a fake data object with only one field to convert, then retrieve the value of the converted field
 						return convert({ fields: { data: field } }).data;
 					});
-					return;
+					break;
 				case "mapValue":
 					data.fields[key] = convert(val);
-					return;
+					break;
 				default:
 					// other values are already parsed
 					data.fields[key] = val[Object.keys(val)[0]];
