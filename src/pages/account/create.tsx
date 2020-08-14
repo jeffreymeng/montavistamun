@@ -130,7 +130,7 @@ export default function CreatePage({
 										}
 									>
 										Verify Your Email
-										{!verificationComplete && " required"}
+										{!verificationComplete && " (required)"}
 									</span>
 								) : (
 									<a
@@ -150,6 +150,7 @@ export default function CreatePage({
 								<br />
 								{discordClicked && "✓ "}
 								<a
+									href={"https://discord.gg/5sN9WXa"}
 									onClick={(e) => {
 										e.preventDefault();
 										setDiscordClicked(true);

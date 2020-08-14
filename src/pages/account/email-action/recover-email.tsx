@@ -1,3 +1,4 @@
+import axios from "axios";
 import { Link } from "gatsby";
 import React from "react";
 import useFirebase from "../../../auth/useFirebase";
@@ -25,7 +26,9 @@ export default function RecoverEmailPage({
 				const codeInfo = await firebase.auth().checkActionCode(code);
 				setEmail(codeInfo.data?.email as string);
 				await firebase.auth().applyActionCode(code);
-
+				await axios.post("/.netlify/functions/update-email-list", {
+					email: codeInfo.data?.email,
+				});
 				setSuccess(true);
 			} catch (error) {
 				switch (error.code) {

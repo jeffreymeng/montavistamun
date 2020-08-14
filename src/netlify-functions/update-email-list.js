@@ -9,11 +9,11 @@ export async function handler(event, context) {
 	if (!event.body) return { statusCode: 400, body: "Invalid parameters." };
 	const params = JSON.parse(event.body);
 
-	const { firstName, lastName, email, grade } = params;
+	const { firstName, lastName, email, grade, newEmail } = params;
 	if (!email || email.indexOf("@") === -1) {
 		return {
 			statusCode: 400,
-			body: `{"success":false, "code":"invalid_parameters", "message":"One or more POST parameters were missing or malformed."}`,
+			body: `{"success":false, "code":"invalid_parameters", "message":"Missing a valid email parameter."}`,
 		};
 	}
 	try {
@@ -24,12 +24,12 @@ export async function handler(event, context) {
 			.digest("hex");
 
 		const data = {
-			email_address: email,
+			email_address: newEmail || email,
 			status: "subscribed",
 			status_if_new: "subscribed",
 			ip_signup: event.headers["client-ip"],
 		};
-		if (firstName || lastName || grade) {
+		if (firstName || lastName || grade || newEmail) {
 			data.merge_fields = {};
 			if (firstName) {
 				data.merge_fields.FNAME = firstName;
@@ -42,6 +42,9 @@ export async function handler(event, context) {
 			}
 			if (grade) {
 				data.merge_fields.GRADE = grade;
+			}
+			if (newEmail) {
+				data.merge_fields.EMAIL = newEmail;
 			}
 		}
 
