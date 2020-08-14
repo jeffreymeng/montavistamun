@@ -26,6 +26,10 @@ export default function SettingsPage(): React.ReactElement {
 				<h2 className="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:leading-9 sm:truncate">
 					Account Settings
 				</h2>
+				<p className="text-lg font-semibold mt-5 leading-6 text-gray-900 sm:text-xl sm:leading:7">
+					These settings affect both your account and the member
+					update emails we send you.
+				</p>
 
 				<div className="mt-15 sm:mt-10">
 					<div className="md:grid md:grid-cols-3 md:gap-6">
@@ -52,11 +56,12 @@ export default function SettingsPage(): React.ReactElement {
 						<div className="md:col-span-1">
 							<div className="px-4 sm:px-0">
 								<h3 className="text-lg font-medium leading-6 text-gray-900">
-									Sign In and Security
+									Email and Password
 								</h3>
 								<p className="mt-1 text-sm leading-5 text-gray-600">
 									This information allows you to log in to
-									your account.
+									your account. This also controls where we
+									send member update emails.
 								</p>
 							</div>
 						</div>
@@ -1090,6 +1095,15 @@ function ChangeEmailModal({
 									>
 										Change Your Email
 									</h3>
+									<p
+										className={
+											"text-sm leading-2 mt-4 mb-3 font-bold"
+										}
+									>
+										This will change the email address you
+										use to sign in, and also the email
+										address where we send member updates.
+									</p>
 									<div className="mt-2">
 										<div className={"text-left"}>
 											<div className="">
