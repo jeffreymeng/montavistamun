@@ -396,7 +396,7 @@ export default function CreatePage({
 												setDone(true);
 												setResendTimeLeft(59);
 											} catch (error) {
-												console.log(error);
+												console.log({ ...error });
 												switch (error.code) {
 													case "auth/email-already-in-use":
 														setError(
