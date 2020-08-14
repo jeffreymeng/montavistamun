@@ -22,32 +22,51 @@ export async function handler(event, context) {
 			.createHash("md5")
 			.update(email.toLowerCase())
 			.digest("hex");
-
+		const existingFields = await axios
+			.get(
+				`https://us11.api.mailchimp.com/3.0/lists/${listID}/members/${emailHash}`,
+				{},
+				{
+					auth: {
+						username: "nousername",
+						password: MAILCHIMP_API_KEY,
+					},
+				}
+			)
+			.catch(() =>
+				// the user probably doesn't exist
+				// so just assume there is no previous data
+				Promise.resolve({})
+			);
+		console.log("Existing Merge Fields", existingFields.merge_fields);
 		const data = {
 			email_address: newEmail || email,
 			status: "subscribed",
 			status_if_new: "subscribed",
 			ip_signup: event.headers["client-ip"],
 		};
+		let newData = {};
 		if (firstName || lastName || grade || newEmail) {
-			data.merge_fields = {};
 			if (firstName) {
-				data.merge_fields.FNAME = firstName;
+				newData.FNAME = firstName;
 			}
 			if (lastName) {
-				data.merge_fields.LNAME = lastName;
+				newData.LNAME = lastName;
 			}
 			if (firstName && lastName) {
-				data.merge_fields.FULLNAME = `${firstName} ${lastName}`;
+				newData.FULLNAME = `${firstName} ${lastName}`;
 			}
 			if (grade) {
-				data.merge_fields.GRADE = grade;
+				newData.GRADE = grade;
 			}
 			if (newEmail) {
-				data.merge_fields.EMAIL = newEmail;
+				newData.EMAIL = newEmail;
 			}
 		}
-
+		data.merge_fields = {
+			...existingFields.merge_fields,
+			...newData,
+		};
 		await axios.put(
 			`https://us11.api.mailchimp.com/3.0/lists/${listID}/members/${emailHash}`,
 			data,
