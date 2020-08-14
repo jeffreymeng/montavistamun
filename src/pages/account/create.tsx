@@ -391,7 +391,7 @@ export default function CreatePage({
 															grade,
 														}
 													),
-												]);
+												]).then(console.log);
 												setVerificationEmailSent(true);
 												setDone(true);
 												setResendTimeLeft(59);

@@ -48,7 +48,7 @@ export async function handler(event, context) {
 			{
 				auth: {
 					username: "nousername",
-					password: MAILCHIMP_API_KE,
+					password: MAILCHIMP_API_KEY,
 				},
 			}
 		);
