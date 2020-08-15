@@ -164,6 +164,15 @@ export default function HandleEmailActionPage({
 									{
 										email: oldEmail,
 										newEmail,
+									},
+									{
+										headers: {
+											Authorization: `Bearer ${firebase
+												.auth()
+												.currentUser?.getIdToken(
+													true
+												)}`,
+										},
 									}
 								);
 								await firebase.auth().signOut();

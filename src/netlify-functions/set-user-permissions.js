@@ -64,12 +64,12 @@ export async function handler(event, context) {
 			modifiedClaims.verified = newPermissions.verified;
 		if (typeof newPermissions.admin === "boolean")
 			modifiedClaims.admin = newPermissions.admin;
-		let targetUID = target;
+		let targetUID;
 		let targetUserRecord;
 		if (target.indexOf("@") > -1) {
 			// target is email
 			targetUserRecord = await admin.auth().getUserByEmail(target);
-			targetUID = targetUserRecord.email;
+			targetUID = targetUserRecord.uid;
 		} else {
 			targetUID = target;
 			targetUserRecord = await admin.auth().getUser(target);

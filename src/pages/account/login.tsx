@@ -89,7 +89,7 @@ export default function LoginPage({
 												} else {
 													navigate(
 														state?.continueURL ||
-															"/account/",
+															"/dashboard/",
 														{ replace: true }
 													);
 												}

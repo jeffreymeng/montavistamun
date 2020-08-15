@@ -1,6 +1,11 @@
 const { MAILCHIMP_API_KEY } = process.env;
 const axios = require("axios").default;
 const crypto = require("crypto");
+const admin = require("firebase-admin");
+admin.initializeApp({
+	credential: admin.credential.cert(FB_SERVICE_ACCOUNT),
+	databaseURL: "https://montavistamodelun.firebaseio.com",
+});
 
 export async function handler(event, context) {
 	if (event.httpMethod !== "POST") {
@@ -8,12 +13,34 @@ export async function handler(event, context) {
 	}
 	if (!event.body) return { statusCode: 400, body: "Invalid parameters." };
 	const params = JSON.parse(event.body);
-
 	const { firstName, lastName, email, grade, newEmail } = params;
 	if (!email || email.indexOf("@") === -1) {
 		return {
 			statusCode: 400,
 			body: `{"success":false, "code":"invalid_parameters", "message":"Missing a valid email parameter."}`,
+		};
+	}
+
+	try {
+		const token = event.headers?.Authorization?.replace("Bearer ", "");
+		if (!token) {
+			return {
+				statusCode: 403,
+				body: `{"success":false, "code":"unauthorized", "message":"Missing an auth token."}`,
+			};
+		}
+		const tokenData = await admin.auth().verifyIdToken(token);
+		if (tokenData.email !== email && !tokenData.admin) {
+			return {
+				statusCode: 403,
+				body: `{"success":false, "code":"unauthorized", "message":"A user may only change their own details, unless they are an admin."}`,
+			};
+		}
+	} catch (error) {
+		console.log(error);
+		return {
+			statusCode: 403,
+			body: `{"success":false, "code":"unauthorized", "message":"Unable to verify the auth token."}`,
 		};
 	}
 	try {

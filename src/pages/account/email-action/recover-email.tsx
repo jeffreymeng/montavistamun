@@ -27,10 +27,20 @@ export default function RecoverEmailPage({
 				setEmail(codeInfo.data?.email as string);
 				await firebase.auth().applyActionCode(code);
 				await Promise.all([
-					axios.post("/.netlify/functions/update-email-list", {
-						email: codeInfo.data?.previousEmail,
-						newEmail: codeInfo.data?.email,
-					}),
+					axios.post(
+						"/.netlify/functions/update-email-list",
+						{
+							email: codeInfo.data?.previousEmail,
+							newEmail: codeInfo.data?.email,
+						},
+						{
+							headers: {
+								Authorization: `Bearer ${firebase
+									.auth()
+									.currentUser?.getIdToken(true)}`,
+							},
+						}
+					),
 					firebase
 						.firestore()
 						.collection("users")

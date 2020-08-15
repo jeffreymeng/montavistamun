@@ -134,7 +134,7 @@ export default function HandleEmailActionPage({
 					</h2>
 					<p className="text-xl font-bold">
 						You may now close this page or{" "}
-						<Link to={"/account"} className={"link"}>
+						<Link to={"/dashboard"} className={"link"}>
 							continue to the member dashboard
 						</Link>
 						.

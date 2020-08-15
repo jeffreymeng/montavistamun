@@ -174,7 +174,7 @@ export default function CreatePage({
 							{verificationComplete && (
 								<div className="mt-8 md:mt-20 lg:mt-40">
 									<Link
-										to={state?.continueURL || "/account/"}
+										to={state?.continueURL || "/dashboard/"}
 										className={classNames(
 											"mt-4 w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white transition duration-150 ease-in-out bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700"
 										)}
@@ -391,6 +391,13 @@ export default function CreatePage({
 															lastName,
 															email,
 															grade: gradeNum,
+														},
+														{
+															headers: {
+																Authorization: `Bearer ${firebase
+																	.auth()
+																	.currentUser?.getIdToken()}`,
+															},
 														}
 													),
 												]).then(console.log);
