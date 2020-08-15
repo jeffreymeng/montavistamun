@@ -1,9 +1,9 @@
-const { MAILCHIMP_API_KEY } = process.env;
+const { MAILCHIMP_API_KEY, FB_SERVICE_ACCOUNT } = process.env;
 const axios = require("axios").default;
 const crypto = require("crypto");
 const admin = require("firebase-admin");
 admin.initializeApp({
-	credential: admin.credential.cert(FB_SERVICE_ACCOUNT),
+	credential: admin.credential.cert(JSON.parse(FB_SERVICE_ACCOUNT)),
 	databaseURL: "https://montavistamodelun.firebaseio.com",
 });
 
@@ -22,7 +22,7 @@ export async function handler(event, context) {
 	}
 
 	try {
-		const token = event.headers?.Authorization?.replace("Bearer ", "");
+		const token = event.headers?.authorization?.replace("Bearer ", "");
 		if (!token) {
 			return {
 				statusCode: 403,

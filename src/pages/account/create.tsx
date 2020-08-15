@@ -394,7 +394,7 @@ export default function CreatePage({
 														},
 														{
 															headers: {
-																Authorization: `Bearer ${firebase
+																authorization: `Bearer ${firebase
 																	.auth()
 																	.currentUser?.getIdToken()}`,
 															},

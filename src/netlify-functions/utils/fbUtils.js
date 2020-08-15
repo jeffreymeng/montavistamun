@@ -95,7 +95,7 @@ module.exports = {
 			},
 			{
 				headers: {
-					Authorization: `Bearer ${getToken()}`,
+					authorization: `Bearer ${getToken()}`,
 				},
 			}
 		);
@@ -106,7 +106,7 @@ module.exports = {
 			`https://firestore.googleapis.com/v1/projects/montavistamodelun/databases/(default)/documents${path}`,
 			{
 				headers: {
-					Authorization: `Bearer ${getToken()}`,
+					authorization: `Bearer ${getToken()}`,
 				},
 			}
 		);

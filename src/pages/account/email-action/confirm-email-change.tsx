@@ -159,22 +159,23 @@ export default function HandleEmailActionPage({
 										.doc(firebase.auth().currentUser?.uid)
 										.update({ email: newEmail }),
 								]);
-								await axios.post(
-									"/.netlify/functions/update-email-list",
-									{
-										email: oldEmail,
-										newEmail,
-									},
-									{
-										headers: {
-											Authorization: `Bearer ${firebase
-												.auth()
-												.currentUser?.getIdToken(
-													true
-												)}`,
-										},
-									}
-								);
+								await firebase
+									.auth()
+									.currentUser?.getIdToken(true)
+									.then((token) => {
+										return axios.post(
+											"/.netlify/functions/update-email-list",
+											{
+												email: oldEmail,
+												newEmail,
+											},
+											{
+												headers: {
+													authorization: `Bearer ${token}`,
+												},
+											}
+										);
+									});
 								await firebase.auth().signOut();
 								setSuccess(true);
 							} catch (error) {

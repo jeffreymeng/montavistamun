@@ -412,15 +412,23 @@ function PersonalInformationDisplay() {
 						}),
 				])
 					.then(async () => {
-						await axios.post(
-							"/.netlify/functions/update-email-list",
-							{
-								email: user.email,
-								firstName,
-								lastName,
-								grade: getGrade(classOf),
-							}
-						);
+						await user.getIdToken().then((token) => {
+							return axios.post(
+								"/.netlify/functions/update-email-list",
+								{
+									email: user.email,
+									firstName,
+									lastName,
+									grade: getGrade(classOf),
+								},
+								{
+									headers: {
+										authorization: `Bearer ${token}`,
+									},
+								}
+							);
+						});
+
 						setProfileChangeSubmitting(false);
 						setProfileChangeSuccess(true);
 						setCurrentFirstName(firstName);

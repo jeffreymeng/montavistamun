@@ -2,7 +2,6 @@ import { navigate } from "gatsby";
 import React from "react";
 import { Layout, Main } from "../../components/layout";
 export default function AboutPage(): React.ReactElement {
-	navigate("/dashboard", { replace: true });
 	React.useEffect(() => {
 		navigate("/dashboard", { replace: true });
 	}, []);
