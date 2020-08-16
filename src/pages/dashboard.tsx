@@ -1,4 +1,6 @@
 import axios from "axios";
+import { Link } from "gatsby";
+import * as Icons from "heroicons-react";
 import moment from "moment";
 import React from "react";
 import useRequireLogin from "../components/accounts/useRequireLogin";
@@ -25,14 +27,12 @@ export default function AboutPage(): React.ReactElement {
 										<div className="flex items-center">
 											<div>
 												<div className="flex items-center">
-													<img
-														className="h-15 w-15 rounded-full sm:hidden"
-														src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.6&w=256&h=256&q=80"
-														alt=""
-													/>
 													<h1 className="ml-3 text-2xl font-bold leading-7 text-cool-gray-900 sm:leading-9 sm:truncate">
 														{new Date().getHours() <
-														12
+														6
+															? "Hello"
+															: new Date().getHours() <
+															  12
 															? "Good Morning"
 															: new Date().getHours() <
 															  18
@@ -48,7 +48,7 @@ export default function AboutPage(): React.ReactElement {
 															<dt className="sr-only">
 																Account status
 															</dt>
-															<dd className="mt-3 flex items-center text-sm leading-5 text-cool-gray-500 font-medium sm:mr-6 sm:mt-0 capitalize">
+															<dd className="mt-3 flex items-center text-sm leading-5 text-cool-gray-500 font-medium sm:mr-6 sm:mt-0">
 																<svg
 																	className="flex-shrink-0 mr-1.5 h-5 w-5 text-green-400"
 																	viewBox="0 0 20 20"
@@ -60,7 +60,15 @@ export default function AboutPage(): React.ReactElement {
 																		clipRule="evenodd"
 																	/>
 																</svg>
-																Verified Member
+																You're a
+																verified member.
+																<Link
+																	to="/resources"
+																	className="link ml-2"
+																>
+																	View member
+																	resources
+																</Link>
 															</dd>
 														</>
 													)}
@@ -69,22 +77,24 @@ export default function AboutPage(): React.ReactElement {
 										</div>
 									</div>
 									<div className="mt-6 flex space-x-3 md:mt-0 md:ml-4">
-										<span className="shadow-sm rounded-md">
-											<button
-												type="button"
-												className="inline-flex items-center px-4 py-2 border border-cool-gray-300 text-sm leading-5 font-medium rounded-md text-cool-gray-700 bg-white hover:text-cool-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:text-cool-gray-800 active:bg-cool-gray-50 transition duration-150 ease-in-out"
-											>
-												Add money
-											</button>
-										</span>
-										<span className="shadow-sm rounded-md">
-											<button
-												type="button"
-												className="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-teal-600 hover:bg-teal-500 focus:outline-none focus:shadow-outline-teal focus:border-teal-700 active:bg-teal-700 transition duration-150 ease-in-out"
-											>
-												Send money
-											</button>
-										</span>
+										{/*<span className="shadow-sm rounded-md">*/}
+										{/*	<button*/}
+										{/*		type="button"*/}
+										{/*		className="inline-flex items-center px-4 py-2 border border-cool-gray-300 text-sm leading-5 font-medium rounded-md text-cool-gray-700 bg-white hover:text-cool-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:text-cool-gray-800 active:bg-cool-gray-50 transition duration-150 ease-in-out"*/}
+										{/*	>*/}
+										{/*		Add money*/}
+										{/*	</button>*/}
+										{/*</span>*/}
+										{user && !user.emailVerified && (
+											<span className="shadow-sm rounded-md">
+												<Link
+													to="/account/create"
+													className="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-teal-600 hover:bg-teal-500 focus:outline-none focus:shadow-outline-teal focus:border-teal-700 active:bg-teal-700 transition duration-150 ease-in-out"
+												>
+													Verify Your Email
+												</Link>
+											</span>
+										)}
 									</div>
 								</div>
 							</div>
@@ -92,38 +102,24 @@ export default function AboutPage(): React.ReactElement {
 
 						<div className="mt-8">
 							<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-								<h2 className="text-lg leading-6 font-medium text-cool-gray-900">
-									Overview
-								</h2>
 								<div className="mt-2 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
 									{/* Card */}
 
-									<div className="bg-white overflow-hidden shadow rounded-lg">
+									<div className="bg-white overflow-hidden shadow rounded-lg flex flex-col justify-between">
 										<div className="p-5">
 											<div className="flex items-center">
 												<div className="flex-shrink-0">
-													<svg
-														className="h-6 w-6 text-cool-gray-400"
-														fill="none"
-														viewBox="0 0 24 24"
-														stroke="currentColor"
-													>
-														<path
-															strokeLinecap="round"
-															strokeLinejoin="round"
-															strokeWidth="2"
-															d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"
-														/>
-													</svg>
+													<Icons.UserGroup className="h-6 w-6 text-cool-gray-400" />
 												</div>
 												<div className="ml-5 w-0 flex-1">
 													<dl>
 														<dt className="text-sm leading-5 font-medium text-cool-gray-500 truncate">
-															Account balance
+															Next Member Meeting
 														</dt>
 														<dd>
 															<div className="text-lg leading-7 font-medium text-cool-gray-900">
-																$30,659.45
+																August 18, 3:30
+																PM
 															</div>
 														</dd>
 													</dl>
@@ -131,17 +127,102 @@ export default function AboutPage(): React.ReactElement {
 											</div>
 										</div>
 										<div className="bg-cool-gray-50 px-5 py-3">
-											<div className="text-sm leading-5">
+											<div className="text-sm leading-5 flex justify-between">
 												<a
 													href="/"
 													className="font-medium text-teal-600 hover:text-teal-900 transition ease-in-out duration-150"
 												>
-													View all
+													Join via Zoom
 												</a>
+												<Link
+													to="/calendar"
+													className="font-medium text-gray-500 hover:text-gray-900 transition ease-in-out duration-150"
+												>
+													View All Meetings
+												</Link>
 											</div>
 										</div>
 									</div>
-
+									<div className="bg-white overflow-hidden shadow rounded-lg flex flex-col justify-between">
+										<div className="p-5">
+											<div className="flex items-center">
+												<div className="flex-shrink-0">
+													<Icons.Calendar className="h-6 w-6 text-cool-gray-400" />
+												</div>
+												<div className="ml-5 w-0 flex-1">
+													<dl>
+														<dt className="text-sm leading-5 font-medium text-cool-gray-500 truncate">
+															Upcoming Conference
+														</dt>
+														<dd>
+															<div className="text-lg leading-7 font-medium text-cool-gray-900">
+																Berkeley Model
+																United Nations
+																Conference
+																(BMUN)
+															</div>
+														</dd>
+													</dl>
+												</div>
+											</div>
+										</div>
+										<div className="bg-cool-gray-50 px-5 py-3">
+											<div className="text-sm leading-5 flex justify-between">
+												<a
+													href="/"
+													className="font-medium text-teal-600 hover:text-teal-900 transition ease-in-out duration-150"
+												>
+													Update Registration
+												</a>
+												<Link
+													to="#"
+													className="font-medium text-gray-500 hover:text-gray-900 transition ease-in-out duration-150"
+												>
+													Learn More
+												</Link>
+											</div>
+										</div>
+									</div>
+									<div className="bg-white overflow-hidden shadow rounded-lg flex flex-col justify-between">
+										<div className="p-5">
+											<div className="flex items-center">
+												<div className="flex-shrink-0">
+													<Icons.Calendar className="h-6 w-6 text-cool-gray-400" />
+												</div>
+												<div className="ml-5 w-0 flex-1">
+													<dl>
+														<dt className="text-sm leading-5 font-medium text-cool-gray-500 truncate">
+															Upcoming Conference
+														</dt>
+														<dd>
+															<div className="text-lg leading-7 font-medium text-cool-gray-900">
+																Santa Clara
+																Valley Model
+																United Nations
+																(SCVMUN)
+															</div>
+														</dd>
+													</dl>
+												</div>
+											</div>
+										</div>
+										<div className="bg-cool-gray-50 px-5 py-3">
+											<div className="text-sm leading-5 flex justify-between">
+												<a
+													href="/"
+													className="font-medium text-teal-600 hover:text-teal-900 transition ease-in-out duration-150"
+												>
+													Update Registration
+												</a>
+												<Link
+													to="#"
+													className="font-medium text-gray-500 hover:text-gray-900 transition ease-in-out duration-150"
+												>
+													Learn More
+												</Link>
+											</div>
+										</div>
+									</div>
 									{/* More cards... */}
 								</div>
 							</div>
@@ -187,14 +268,24 @@ function UpdatesTable() {
 					}
 				)
 				.then((response) => {
-					console.log(response.data);
+					setLoadingData(false);
+
+					if (
+						!response?.data ||
+						Object.keys(response.data).length == 0
+					) {
+						return;
+					}
+
 					setData(response.data.campaigns);
 					setNumResults(response.data.total_items);
 					setMailchimpID(response.data.mailchimpEmailID);
 					setNumPages(Math.ceil(response.data.total_items / 10));
-					setLoadingData(false);
 				})
-				.catch((e) => console.log({ ...e }));
+				.catch((e) => {
+					console.log({ ...e });
+					setLoadingData(false);
+				});
 		});
 	}, [user, user?.email]);
 
@@ -217,75 +308,77 @@ function UpdatesTable() {
 							</div>
 						</li>
 					)}
-					{data
-						.slice(
-							page * 10 - 9 - 1,
-							page == numPages ? undefined : page * 10
-						)
-						.map(
-							(email: {
-								settings: {
-									subject_line: string;
-									preview_text: string;
-									title: string;
-								};
-								send_time: string;
-								id: string;
-								long_archive_url: string;
-							}) => (
-								<li key={email.id}>
-									<a
-										href={
-											email.long_archive_url +
-											"?e=" +
-											mailchimpID
-										}
-										target={"_blank"}
-										rel={"noopener noreferrer"}
-										className="block px-4 py-4 bg-white hover:bg-cool-gray-50"
-									>
-										<div className="flex items-center space-x-4">
-											<div className="flex-1 flex space-x-2 truncate">
-												<div className="text-cool-gray-900 text-md truncate">
-													<p className="truncate">
-														{
-															email.settings
-																.subject_line
-														}
-													</p>
-													<p className="text-cool-gray-500 font-medium text-sm truncate">
-														{
-															email.settings
-																.preview_text
-														}
-													</p>{" "}
-													<p>
-														{moment(
-															email.send_time
-														).format(
-															"MMMM D, YYYY h:mm A"
-														)}
-													</p>
+					{data &&
+						data.length > 0 &&
+						data
+							.slice(
+								page * 10 - 9 - 1,
+								page == numPages ? undefined : page * 10
+							)
+							.map(
+								(email: {
+									settings: {
+										subject_line: string;
+										preview_text: string;
+										title: string;
+									};
+									send_time: string;
+									id: string;
+									long_archive_url: string;
+								}) => (
+									<li key={email.id}>
+										<a
+											href={
+												email.long_archive_url +
+												"?e=" +
+												mailchimpID
+											}
+											target={"_blank"}
+											rel={"noopener noreferrer"}
+											className="block px-4 py-4 bg-white hover:bg-cool-gray-50"
+										>
+											<div className="flex items-center space-x-4">
+												<div className="flex-1 flex space-x-2 truncate">
+													<div className="text-cool-gray-900 text-md truncate">
+														<p className="truncate">
+															{
+																email.settings
+																	.subject_line
+															}
+														</p>
+														<p className="text-cool-gray-500 font-medium text-sm truncate">
+															{
+																email.settings
+																	.preview_text
+															}
+														</p>{" "}
+														<p>
+															{moment(
+																email.send_time
+															).format(
+																"MMMM D, YYYY h:mm A"
+															)}
+														</p>
+													</div>
+												</div>
+												<div>
+													<svg
+														className="flex-shrink-0 h-5 w-5 text-cool-gray-400"
+														viewBox="0 0 20 20"
+														fill="currentColor"
+													>
+														<path
+															fillRule="evenodd"
+															d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+															clipRule="evenodd"
+														/>
+													</svg>
 												</div>
 											</div>
-											<div>
-												<svg
-													className="flex-shrink-0 h-5 w-5 text-cool-gray-400"
-													viewBox="0 0 20 20"
-													fill="currentColor"
-												>
-													<path
-														fillRule="evenodd"
-														d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-														clipRule="evenodd"
-													/>
-												</svg>
-											</div>
-										</div>
-									</a>
-								</li>
-							)
-						)}
+										</a>
+									</li>
+								)
+							)}
 				</ul>
 				<nav className="bg-white px-4 py-3 flex items-center justify-between border-t border-cool-gray-200">
 					<div className="flex-1 flex justify-between">
@@ -303,9 +396,9 @@ function UpdatesTable() {
 						</button>
 						<button
 							onClick={() => setPage((current) => current + 1)}
-							disabled={page == numPages}
+							disabled={page >= numPages}
 							className={
-								(page == numPages
+								(page >= numPages
 									? "bg-gray-50"
 									: "hover:text-cool-gray-500 ") +
 								" ml-3 relative inline-flex items-center px-4 py-2 border border-cool-gray-300 text-sm leading-5 font-medium rounded-md text-cool-gray-700 bg-white focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-cool-gray-100 active:text-cool-gray-700 transition ease-in-out duration-150"
@@ -341,91 +434,97 @@ function UpdatesTable() {
 														: "We haven't sent you any member update emails yet."}
 												</p>
 											</td>
-
-											<td className="px-6 py-4 text-right whitespace-no-wrap text-sm leading-5 text-cool-gray-500 hover:text-cool-gray-900"></td>
+											{/* Spacer so the column header fits (text is hidden) */}
+											<td className="px-6 py-4 text-right whitespace-no-wrap text-sm leading-5">
+												<span className={"invisible"}>
+													Not Applicable
+												</span>
+											</td>
 										</tr>
 									)}
-									{data
-										.slice(
-											page * 10 - 9 - 1,
-											page == numPages
-												? undefined
-												: page * 10
-										)
-										.map(
-											(email: {
-												settings: {
-													subject_line: string;
-													preview_text: string;
-													title: string;
-												};
-												send_time: string;
-												id: string;
-												long_archive_url: string;
-											}) => (
-												<tr
-													key={email.id}
-													className="bg-white hover:bg-gray-100 cursor-pointer"
-													onClick={() =>
-														window.open(
-															email.long_archive_url +
-																"?e=" +
-																mailchimpID,
-															"_blank"
-														)
-													}
-												>
-													<td className="max-w-0 w-full px-6 py-4 whitespace-no-wrap text-sm leading-5 text-cool-gray-900">
-														{/*fake link to show preview*/}
-														<a
-															href={
-																email.long_archive_url +
-																"?e=" +
-																mailchimpID
-															}
-															onClick={(e) =>
-																e.preventDefault()
-															}
-														>
-															<p className="text-cool-gray-500 truncate group-hover:text-cool-gray-900 text-base transition ease-in-out duration-150">
-																{
-																	email
-																		.settings
-																		.subject_line
-																}
-															</p>
-															<p className="text-cool-gray-400 truncate group-hover:text-cool-gray-700 text-sm transition ease-in-out duration-150">
-																{
-																	email
-																		.settings
-																		.preview_text
-																}
-															</p>
-														</a>
-													</td>
-
-													<td className="px-6 py-4 text-right whitespace-no-wrap text-sm leading-5 text-cool-gray-500 hover:text-cool-gray-900 ">
-														{/*fake link to show preview*/}
-														<a
-															href={
-																email.long_archive_url +
-																"?e=" +
-																mailchimpID
-															}
-															onClick={(e) =>
-																e.preventDefault()
-															}
-														>
-															{moment(
-																email.send_time
-															).format(
-																"MMMM D, YYYY h:mm A"
-															)}
-														</a>
-													</td>
-												</tr>
+									{data &&
+										data.length > 0 &&
+										data
+											.slice(
+												page * 10 - 9 - 1,
+												page == numPages
+													? undefined
+													: page * 10
 											)
-										)}
+											.map(
+												(email: {
+													settings: {
+														subject_line: string;
+														preview_text: string;
+														title: string;
+													};
+													send_time: string;
+													id: string;
+													long_archive_url: string;
+												}) => (
+													<tr
+														key={email.id}
+														className="bg-white hover:bg-gray-100 cursor-pointer"
+														onClick={() =>
+															window.open(
+																email.long_archive_url +
+																	"?e=" +
+																	mailchimpID,
+																"_blank"
+															)
+														}
+													>
+														<td className="max-w-0 w-full px-6 py-4 whitespace-no-wrap text-sm leading-5 text-cool-gray-900">
+															{/*fake link to show preview*/}
+															<a
+																href={
+																	email.long_archive_url +
+																	"?e=" +
+																	mailchimpID
+																}
+																onClick={(e) =>
+																	e.preventDefault()
+																}
+															>
+																<p className="text-cool-gray-500 truncate group-hover:text-cool-gray-900 text-base transition ease-in-out duration-150">
+																	{
+																		email
+																			.settings
+																			.subject_line
+																	}
+																</p>
+																<p className="text-cool-gray-400 truncate group-hover:text-cool-gray-700 text-sm transition ease-in-out duration-150">
+																	{
+																		email
+																			.settings
+																			.preview_text
+																	}
+																</p>
+															</a>
+														</td>
+
+														<td className="px-6 py-4 text-right whitespace-no-wrap text-sm leading-5 text-cool-gray-500 hover:text-cool-gray-900 ">
+															{/*fake link to show preview*/}
+															<a
+																href={
+																	email.long_archive_url +
+																	"?e=" +
+																	mailchimpID
+																}
+																onClick={(e) =>
+																	e.preventDefault()
+																}
+															>
+																{moment(
+																	email.send_time
+																).format(
+																	"MMMM D, YYYY h:mm A"
+																)}
+															</a>
+														</td>
+													</tr>
+												)
+											)}
 								</tbody>
 							</table>
 
@@ -471,9 +570,9 @@ function UpdatesTable() {
 										onClick={() =>
 											setPage((current) => current + 1)
 										}
-										disabled={page == numPages}
+										disabled={page >= numPages}
 										className={
-											(page == numPages
+											(page >= numPages
 												? "bg-gray-100"
 												: "hover:text-cool-gray-500") +
 											" ml-3 relative inline-flex items-center px-4 py-2 border border-cool-gray-300 text-sm leading-5 font-medium rounded-md text-cool-gray-700 bg-white focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-cool-gray-100 active:text-cool-gray-700 transition ease-in-out duration-150"

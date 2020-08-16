@@ -5,7 +5,7 @@ import * as Icon from "heroicons-react";
 import React, { ReactElement, useState } from "react";
 import AuthContext from "../../context/AuthContext";
 import Transition from "../Transition";
-import navLinks from "./navLinks";
+import defaultNavLinks from "./navLinks";
 
 function Navbar({
 	unscrolledClassName,
@@ -28,6 +28,10 @@ function Navbar({
 	const [isExpanded, setIsExpanded] = useState(false);
 	const auth = React.useContext(AuthContext);
 	const toggleExpansion = () => setIsExpanded((old) => !old);
+	let navLinks = defaultNavLinks;
+	if (auth.verified) {
+		navLinks = [...navLinks, "Resources"];
+	}
 
 	// only show a box shadow when the user has scrolled a little bit
 	const [showShadow, setShowShadow] = React.useState(shadow === "always");
@@ -121,8 +125,14 @@ function Navbar({
 							{auth.loading || !auth.user ? (
 								<div className="flex-shrink-0">
 									<Link
-										to={"/account/login"}
+										to={"/account/create"}
 										className="relative inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 shadow-sm hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150"
+									>
+										<span>Join Today</span>
+									</Link>
+									<Link
+										to={"/account/login"}
+										className="hidden md:inline-block ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-900 bg-white hover:text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150"
 									>
 										<span>Login</span>
 									</Link>
@@ -158,20 +168,36 @@ function Navbar({
 								</Link>
 							))}
 							{!auth.user && (
-								<Link
-									to={"/account/login"}
-									className={
-										"block pl-3 pr-4 py-2 border-l-4 text-base font-medium focus:outline-none transition duration-150 ease-in-out sm:pl-5 sm:pr-6 " +
-										(location.pathname
-											.toLowerCase()
-											.replace(/\//g, "") ==
-										"/account/login"
-											? /*     ACTIVE: */ "border-indigo-500 text-indigo-700 bg-indigo-50 focus:text-indigo-800 focus:bg-indigo-100 focus:border-indigo-700"
-											: /* NOT ACTIVE: */ "border-transparent text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300")
-									}
-								>
-									Login
-								</Link>
+								<>
+									<Link
+										to={"/account/create"}
+										className={
+											"block pl-3 pr-4 py-2 border-l-4 text-base font-medium focus:outline-none transition duration-150 ease-in-out sm:pl-5 sm:pr-6 " +
+											(location.pathname
+												.toLowerCase()
+												.replace(/\//g, "") ==
+											"/account/create"
+												? /*     ACTIVE: */ "border-indigo-500 text-indigo-700 bg-indigo-50 focus:text-indigo-800 focus:bg-indigo-100 focus:border-indigo-700"
+												: /* NOT ACTIVE: */ "border-transparent text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300")
+										}
+									>
+										Join Today
+									</Link>
+									<Link
+										to={"/account/login"}
+										className={
+											"block pl-3 pr-4 py-2 border-l-4 text-base font-medium focus:outline-none transition duration-150 ease-in-out sm:pl-5 sm:pr-6 " +
+											(location.pathname
+												.toLowerCase()
+												.replace(/\//g, "") ==
+											"/account/login"
+												? /*     ACTIVE: */ "border-indigo-500 text-indigo-700 bg-indigo-50 focus:text-indigo-800 focus:bg-indigo-100 focus:border-indigo-700"
+												: /* NOT ACTIVE: */ "border-transparent text-gray-600 hover:text-gray-800 hover:bg-gray-50 hover:border-gray-300 focus:text-gray-800 focus:bg-gray-50 focus:border-gray-300")
+										}
+									>
+										Login
+									</Link>
+								</>
 							)}
 						</div>
 						{auth.user && (
@@ -193,6 +219,14 @@ function Navbar({
 									>
 										Member Dashboard
 									</Link>
+									{auth.admin && (
+										<Link
+											to="/admin"
+											className="block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100 focus:outline-none focus:text-gray-800 focus:bg-gray-100 transition duration-150 ease-in-out sm:px-6"
+										>
+											Admin Dashboard
+										</Link>
+									)}
 									<Link
 										to="/account/settings"
 										className="mt-1 block px-4 py-2 text-base font-medium text-gray-500 hover:text-gray-800 hover:bg-gray-100 focus:outline-none focus:text-gray-800 focus:bg-gray-100 transition duration-150 ease-in-out sm:px-6"
@@ -219,6 +253,7 @@ function Navbar({
 	);
 }
 function ProfileDropdown(): ReactElement {
+	const auth = React.useContext(AuthContext);
 	const [expanded, setExpanded] = React.useState(false);
 	const { user, loading } = React.useContext(AuthContext);
 	const toggleExpanded = () => {
@@ -286,6 +321,16 @@ function ProfileDropdown(): ReactElement {
 						>
 							Member Dashboard
 						</Link>
+						{auth.admin && (
+							<Link
+								to="/admin"
+								className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
+								role="menuitem"
+							>
+								Admin Dashboard
+							</Link>
+						)}
+
 						<Link
 							to="/account/settings"
 							className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
@@ -293,6 +338,7 @@ function ProfileDropdown(): ReactElement {
 						>
 							Settings
 						</Link>
+
 						<Link
 							to="/account/logout"
 							state={{

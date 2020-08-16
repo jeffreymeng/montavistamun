@@ -90,6 +90,7 @@ export async function handler(event, context) {
 	} catch (error) {
 		console.log(error);
 		console.log("Mailchimp Error", { ...error });
+
 		return {
 			statusCode: 500,
 			body: `{"success":false, "code":"internal_error", "mailchimpError":"${JSON.stringify(

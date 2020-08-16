@@ -24,11 +24,13 @@ export default function useRequireLogin(): void {
 			redirectToLogin();
 		}
 		if (firebase) {
-			unsubscribe = firebase.auth().onAuthStateChanged((user) => {
-				if (!user) {
-					redirectToLogin();
-				}
-			});
+			unsubscribe = firebase
+				.auth()
+				.onAuthStateChanged((authStateUser) => {
+					if (!authStateUser && !loading) {
+						redirectToLogin();
+					}
+				});
 		}
 		return () => unsubscribe();
 	}, [user, loading, firebase]);

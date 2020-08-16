@@ -2439,6 +2439,18 @@ declare namespace GatsbyTypes {
 	type Unnamed_2_QueryVariables = Exact<{ [key: string]: never }>;
 
 	type Unnamed_2_Query = {
+		readonly logo: Maybe<{
+			readonly childImageSharp: Maybe<{
+				readonly fixed: Maybe<
+					GatsbyImageSharpFixed_withWebp_noBase64Fragment
+				>;
+			}>;
+		}>;
+	};
+
+	type Unnamed_3_QueryVariables = Exact<{ [key: string]: never }>;
+
+	type Unnamed_3_Query = {
 		readonly site: Maybe<{
 			readonly siteMetadata: Maybe<
 				Pick<SiteSiteMetadata, "title" | "description" | "author">
@@ -2446,10 +2458,20 @@ declare namespace GatsbyTypes {
 		}>;
 	};
 
-	type Unnamed_3_QueryVariables = Exact<{ [key: string]: never }>;
+	type ConferencesPageQueryQueryVariables = Exact<{ [key: string]: never }>;
 
-	type Unnamed_3_Query = {
-		readonly hero: Maybe<{
+	type ConferencesPageQueryQuery = {
+		readonly gmunc: Maybe<{
+			readonly childImageSharp: Maybe<{
+				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
+			}>;
+		}>;
+		readonly smunc: Maybe<{
+			readonly childImageSharp: Maybe<{
+				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
+			}>;
+		}>;
+		readonly dmunc: Maybe<{
 			readonly childImageSharp: Maybe<{
 				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
 			}>;
@@ -2459,11 +2481,9 @@ declare namespace GatsbyTypes {
 	type Unnamed_4_QueryVariables = Exact<{ [key: string]: never }>;
 
 	type Unnamed_4_Query = {
-		readonly logo: Maybe<{
+		readonly hero: Maybe<{
 			readonly childImageSharp: Maybe<{
-				readonly fixed: Maybe<
-					GatsbyImageSharpFixed_withWebp_noBase64Fragment
-				>;
+				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
 			}>;
 		}>;
 	};
@@ -2665,25 +2685,5 @@ declare namespace GatsbyTypes {
 				};
 			}>;
 		};
-	};
-
-	type ConferencesPageQueryQueryVariables = Exact<{ [key: string]: never }>;
-
-	type ConferencesPageQueryQuery = {
-		readonly gmunc: Maybe<{
-			readonly childImageSharp: Maybe<{
-				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
-			}>;
-		}>;
-		readonly smunc: Maybe<{
-			readonly childImageSharp: Maybe<{
-				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
-			}>;
-		}>;
-		readonly dmunc: Maybe<{
-			readonly childImageSharp: Maybe<{
-				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
-			}>;
-		}>;
 	};
 }

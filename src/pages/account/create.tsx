@@ -627,7 +627,7 @@ export default function CreatePage({
 													Password
 												</label>
 												<span className="text-sm leading-5 text-gray-500">
-													8+ characters
+													For Your Member Account
 												</span>
 											</div>
 											<div className="mt-1 relative rounded-md shadow-sm">
