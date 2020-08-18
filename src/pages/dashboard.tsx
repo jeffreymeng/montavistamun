@@ -517,7 +517,11 @@ function UpdatesTable() {
 															<a
 																href={
 																	email.long_archive_url +
-																	"?e=" +
+																	(email.long_archive_url.indexOf(
+																		"?"
+																	) > -1
+																		? "&e="
+																		: "?e=") +
 																	mailchimpID
 																}
 																onClick={(e) =>
