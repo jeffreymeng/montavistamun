@@ -105,125 +105,134 @@ export default function AboutPage(): React.ReactElement {
 								<div className="mt-2 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
 									{/* Card */}
 
-									<div className="bg-white overflow-hidden shadow rounded-lg flex flex-col justify-between">
-										<div className="p-5">
-											<div className="flex items-center">
-												<div className="flex-shrink-0">
-													<Icons.UserGroup className="h-6 w-6 text-cool-gray-400" />
+									{[
+										{
+											subtitle: "Next Member Meeting",
+											title: "August 18, 3:30 PM",
+											primaryAction: {
+												title: "Join via Zoom",
+												link: "https://google.com",
+											},
+											secondaryAction: {
+												title: "View All Events",
+												link: "/calendar",
+											},
+											icon: "UserGroup",
+										},
+										{
+											subtitle: "Registration Now Open",
+											title:
+												"Berkeley Model United Nations Conference (BMUN)",
+											primaryAction: {
+												title: "Register Now",
+												link:
+													"/conferences/bmun/register",
+											},
+											secondaryAction: {
+												title: "Learn More",
+												link: "/conferences/bmun",
+											},
+											icon: "Calendar",
+										},
+										{
+											subtitle:
+												"Conference You're Attending",
+											title:
+												"Santa Clara Valley Model United Nations (SCVMUN)",
+											primaryAction: {
+												title: "Update Registration",
+												link:
+													"/conferences/scvmun/register",
+											},
+											secondaryAction: {
+												title: "Learn More",
+												link: "/conferences/scvmun",
+											},
+											icon: "Calendar",
+										},
+									].map((card) => (
+										<div
+											key={card.title + card.subtitle}
+											className="bg-white overflow-hidden shadow rounded-lg flex flex-col justify-between"
+										>
+											<div className="p-5">
+												<div className="flex items-top">
+													<div className="flex-shrink-0 mt-3">
+														{React.createElement(
+															// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+															// @ts-ignore
+															Icons[card.icon],
+															{
+																className:
+																	"h-6 w-6 text-cool-gray-400",
+															},
+															null
+														)}
+													</div>
+													<div className="ml-5 w-0 flex-1">
+														<dl>
+															<dt className="text-sm leading-5 font-medium text-cool-gray-500 truncate">
+																{card.subtitle}
+															</dt>
+															<dd>
+																<div className="text-lg leading-7 font-medium text-cool-gray-900">
+																	{card.title}
+																</div>
+															</dd>
+														</dl>
+													</div>
 												</div>
-												<div className="ml-5 w-0 flex-1">
-													<dl>
-														<dt className="text-sm leading-5 font-medium text-cool-gray-500 truncate">
-															Next Member Meeting
-														</dt>
-														<dd>
-															<div className="text-lg leading-7 font-medium text-cool-gray-900">
-																August 18, 3:30
-																PM
-															</div>
-														</dd>
-													</dl>
+											</div>
+											<div className="bg-cool-gray-50 px-5 py-3">
+												<div className="text-sm leading-5 flex justify-between">
+													{card.primaryAction && (
+														<a
+															href={
+																card
+																	.primaryAction
+																	.link
+															}
+															target={"_blank"}
+															rel={
+																"noopener noreferrer"
+															}
+															className={
+																"font-medium text-teal-600 hover:text-teal-900 transition ease-in-out duration-150"
+															}
+														>
+															{
+																card
+																	.primaryAction
+																	.title
+															}
+														</a>
+													)}
+													{card.secondaryAction && (
+														<a
+															href={
+																card
+																	.secondaryAction
+																	.link
+															}
+															target={"_blank"}
+															rel={
+																"noopener noreferrer"
+															}
+															className={
+																"font-medium text-gray-500 hover:text-gray-900 transition ease-in-out duration-150"
+															}
+														>
+															{
+																card
+																	.secondaryAction
+																	.title
+															}
+														</a>
+													)}
 												</div>
 											</div>
 										</div>
-										<div className="bg-cool-gray-50 px-5 py-3">
-											<div className="text-sm leading-5 flex justify-between">
-												<a
-													href="/"
-													className="font-medium text-teal-600 hover:text-teal-900 transition ease-in-out duration-150"
-												>
-													Join via Zoom
-												</a>
-												<Link
-													to="/calendar"
-													className="font-medium text-gray-500 hover:text-gray-900 transition ease-in-out duration-150"
-												>
-													View All Meetings
-												</Link>
-											</div>
-										</div>
-									</div>
-									<div className="bg-white overflow-hidden shadow rounded-lg flex flex-col justify-between">
-										<div className="p-5">
-											<div className="flex items-center">
-												<div className="flex-shrink-0">
-													<Icons.Calendar className="h-6 w-6 text-cool-gray-400" />
-												</div>
-												<div className="ml-5 w-0 flex-1">
-													<dl>
-														<dt className="text-sm leading-5 font-medium text-cool-gray-500 truncate">
-															Upcoming Conference
-														</dt>
-														<dd>
-															<div className="text-lg leading-7 font-medium text-cool-gray-900">
-																Berkeley Model
-																United Nations
-																Conference
-																(BMUN)
-															</div>
-														</dd>
-													</dl>
-												</div>
-											</div>
-										</div>
-										<div className="bg-cool-gray-50 px-5 py-3">
-											<div className="text-sm leading-5 flex justify-between">
-												<a
-													href="/"
-													className="font-medium text-teal-600 hover:text-teal-900 transition ease-in-out duration-150"
-												>
-													Update Registration
-												</a>
-												<Link
-													to="#"
-													className="font-medium text-gray-500 hover:text-gray-900 transition ease-in-out duration-150"
-												>
-													Learn More
-												</Link>
-											</div>
-										</div>
-									</div>
-									<div className="bg-white overflow-hidden shadow rounded-lg flex flex-col justify-between">
-										<div className="p-5">
-											<div className="flex items-center">
-												<div className="flex-shrink-0">
-													<Icons.Calendar className="h-6 w-6 text-cool-gray-400" />
-												</div>
-												<div className="ml-5 w-0 flex-1">
-													<dl>
-														<dt className="text-sm leading-5 font-medium text-cool-gray-500 truncate">
-															Upcoming Conference
-														</dt>
-														<dd>
-															<div className="text-lg leading-7 font-medium text-cool-gray-900">
-																Santa Clara
-																Valley Model
-																United Nations
-																(SCVMUN)
-															</div>
-														</dd>
-													</dl>
-												</div>
-											</div>
-										</div>
-										<div className="bg-cool-gray-50 px-5 py-3">
-											<div className="text-sm leading-5 flex justify-between">
-												<a
-													href="/"
-													className="font-medium text-teal-600 hover:text-teal-900 transition ease-in-out duration-150"
-												>
-													Update Registration
-												</a>
-												<Link
-													to="#"
-													className="font-medium text-gray-500 hover:text-gray-900 transition ease-in-out duration-150"
-												>
-													Learn More
-												</Link>
-											</div>
-										</div>
-									</div>
-									{/* More cards... */}
+									))}
 								</div>
 							</div>
 
@@ -269,10 +278,10 @@ function UpdatesTable() {
 				)
 				.then((response) => {
 					setLoadingData(false);
-
 					if (
 						!response?.data ||
-						Object.keys(response.data).length == 0
+						Object.keys(response.data).length == 0 ||
+						response.data.total_items <= 0
 					) {
 						return;
 					}
@@ -561,10 +570,10 @@ function UpdatesTable() {
 											(page == 1
 												? "bg-gray-100"
 												: "hover:text-cool-gray-500") +
-											" relative inline-flex items-center px-4 py-2 border border-cool-gray-300 text-sm leading-5 font-medium rounded-md text-cool-gray-700 bg-white focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-cool-gray-100 active:text-cool-gray-700 transition ease-in-out duration-150"
+											" relative inline-flex items-center p-2 border border-cool-gray-300 text-sm leading-5 font-medium rounded-md text-cool-gray-700 bg-white focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-cool-gray-100 active:text-cool-gray-700 transition ease-in-out duration-150"
 										}
 									>
-										Previous
+										<Icons.ChevronLeft />
 									</button>
 									<button
 										onClick={() =>
@@ -575,10 +584,10 @@ function UpdatesTable() {
 											(page >= numPages
 												? "bg-gray-100"
 												: "hover:text-cool-gray-500") +
-											" ml-3 relative inline-flex items-center px-4 py-2 border border-cool-gray-300 text-sm leading-5 font-medium rounded-md text-cool-gray-700 bg-white focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-cool-gray-100 active:text-cool-gray-700 transition ease-in-out duration-150"
+											" ml-3 relative inline-flex items-center p-2 border border-cool-gray-300 text-sm leading-5 font-medium rounded-md text-cool-gray-700 bg-white focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-cool-gray-100 active:text-cool-gray-700 transition ease-in-out duration-150"
 										}
 									>
-										Next
+										<Icons.ChevronRight />
 									</button>
 								</div>
 							</nav>

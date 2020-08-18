@@ -17,9 +17,7 @@ export default function ConferencesPage({
 	return (
 		<Layout title={"Conferences"}>
 			<Header
-				backgroundImage={
-					"https://previews.123rf.com/images/annagolant/annagolant1612/annagolant161200049/70849730-orange-stripes-on-white-background-striped-diagonal-pattern-blue-diagonal-lines-background-winter-or.jpg"
-				}
+				backgroundImage={"/images/headers/conferences.jpg"}
 				title={"Conferences"}
 			>
 				Where the fun takes place. Anim aute id magna aliqua ad ad non

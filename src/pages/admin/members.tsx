@@ -1,7 +1,7 @@
 import axios from "axios";
 import React from "react";
 import useFirebase from "../../auth/useFirebase";
-import SidebarLayout from "../../components/layout/SidebarLayout";
+import AdminLayout from "../../components/layout/AdminLayout";
 import AuthContext from "../../context/AuthContext";
 export default function AboutPage(): React.ReactElement {
 	const [target, setTarget] = React.useState("");
@@ -15,7 +15,7 @@ export default function AboutPage(): React.ReactElement {
 		admin: userAdmin,
 	} = React.useContext(AuthContext);
 	return (
-		<SidebarLayout title={"Members"}>
+		<AdminLayout title={"Members"}>
 			<>
 				<p>
 					Your details: verified: {userVerified + ""} admin:{" "}
@@ -505,6 +505,6 @@ export default function AboutPage(): React.ReactElement {
 					</div>
 				</div>
 			</>
-		</SidebarLayout>
+		</AdminLayout>
 	);
 }

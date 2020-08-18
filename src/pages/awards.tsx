@@ -19,9 +19,7 @@ export default function AboutPage({
 		<Layout title={"Awards"} className={"bg-gray-50"}>
 			<Header
 				title={"Awards"}
-				backgroundImage={
-					"https://previews.123rf.com/images/annagolant/annagolant1612/annagolant161200049/70849730-orange-stripes-on-white-background-striped-diagonal-pattern-blue-diagonal-lines-background-winter-or.jpg"
-				}
+				backgroundImage={"/images/headers/awards.jpg"}
 			>
 				Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui
 				lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat
