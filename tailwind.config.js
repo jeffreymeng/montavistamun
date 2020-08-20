@@ -22,7 +22,8 @@ module.exports = {
 				ca: "calc(100vh - 64px)",
 			},
 			minHeight: {
-				ca: "calc(100vh - 64px)",
+				// screen minus header minus footer
+				ca: "calc(100vh - 64px - 120px)",
 			},
 		},
 	},
