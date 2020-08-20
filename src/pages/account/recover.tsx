@@ -15,7 +15,7 @@ export default function ForgotPasswordPage({
 	const [submitting, setSubmitting] = React.useState(false);
 	const firebase = useFirebase();
 	return (
-		<AuthLayout title={"Login"}>
+		<AuthLayout title={"Reset Password"}>
 			{!emailSent && (
 				<div className="mx-auto w-full max-w-sm">
 					<div>
@@ -218,7 +218,7 @@ export default function ForgotPasswordPage({
 					</div>
 
 					<p className="text-md font-bold mt-5">
-						You should recieve the email within 5 minutes. If you
+						You should receive the email within 5 minutes. If you
 						still don't see it then, you can try{" "}
 						<a
 							className="link"

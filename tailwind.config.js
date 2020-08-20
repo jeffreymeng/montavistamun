@@ -18,12 +18,13 @@ module.exports = {
 				"8xl": "88rem",
 			},
 			height: {
-				// ca = content-area (i.e. screen minus navbar)
-				ca: "calc(100vh - 64px)",
+				// ca = content-area (i.e. screen minus navbar minus footer)
+				ca: "calc(100vh - 64px - 120px)",
+				"ca-no-footer": "calc(100vh - 64px)",
 			},
 			minHeight: {
-				// screen minus header minus footer
 				ca: "calc(100vh - 64px - 120px)",
+				"ca-no-footer": "calc(100vh - 64px)",
 			},
 		},
 		customForms: (theme) => ({

@@ -1,3 +1,4 @@
+import { graphql } from "gatsby";
 import React from "react";
 import awardsData, {
 	ConferenceAwardData,
@@ -11,16 +12,14 @@ export default function AboutPage({
 	data,
 }: {
 	data: {
-		smunc: FluidImage;
-		gmunc: FluidImage;
+		headerImage: FluidImage;
 	};
 }): React.ReactElement {
 	return (
 		<Layout title={"Awards"} className={"bg-gray-50"}>
-			<Header
-				title={"Awards"}
-				backgroundImage={"/images/headers/awards.jpg"}
-			></Header>
+			<Header title={"Awards"} backgroundImage={data.headerImage}>
+				{""}
+			</Header>
 			<Main wide>
 				<HorizontalCard
 					imageURL={
@@ -153,3 +152,15 @@ function ConferenceAwardCard({
 		</div>
 	);
 }
+
+export const query = graphql`
+	query AwardsPageQuery {
+		headerImage: file(relativePath: { eq: "headers/awards.jpg" }) {
+			childImageSharp {
+				fluid(maxWidth: 1200, quality: 90) {
+					...GatsbyImageSharpFluid_withWebp
+				}
+			}
+		}
+	}
+`;

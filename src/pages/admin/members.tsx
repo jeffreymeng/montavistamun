@@ -319,7 +319,8 @@ function SelectAllCheckbox({
 										}}
 										className="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-indigo-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition ease-in-out duration-150 sm:text-sm sm:leading-5"
 									>
-										Select {parsedEmails.length} Users
+										Select {parsedEmails.length} User
+										{parsedEmails.length !== 1 && "s"}
 									</button>
 								</span>
 								<span className="mt-3 flex w-full rounded-md shadow-sm sm:mt-0 sm:col-start-1">
@@ -590,7 +591,7 @@ export default function AboutPage(): React.ReactElement {
 	};
 	if (!loading && !userVerified) {
 		return (
-			<Layout title={"Permission Dnied"}>
+			<Layout title={"Permission Denied"}>
 				<Main>
 					<h1
 						className={

@@ -30,7 +30,7 @@ export default function ResourcesPage(): React.ReactElement {
 	);
 
 	return (
-		<Layout title={"404 Error"}>
+		<Layout title={"Member Resources"}>
 			<Main className={"min-h-ca flex flex-col"} wide>
 				<div className="flex-initial">
 					<h1

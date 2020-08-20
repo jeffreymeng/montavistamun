@@ -46,10 +46,7 @@ export default function SecretariatPage({
 
 	return (
 		<Layout title={"Secretariat"}>
-			<Header
-				title={"Secretariat"}
-				backgroundImage={"/images/headers/secretariat.jpg"}
-			>
+			<Header title={"Secretariat"} backgroundImage={data.headerImage}>
 				Who exactly do you contact when you need help? Who is behind
 				those emails to you? That would be us, the secretariat! Get to
 				know us, we’re always looking for new friends!
@@ -148,14 +145,14 @@ export const query = graphql`
 		headerImage: file(relativePath: { eq: "headers/secretariat.jpg" }) {
 			childImageSharp {
 				fluid(maxWidth: 1200, quality: 90) {
-					...GatsbyImageSharpFluid
+					...GatsbyImageSharpFluid_withWebp
 				}
 			}
 		}
 		placeholder: file(relativePath: { eq: "secretariat/placeholder.png" }) {
 			childImageSharp {
-				fluid(maxWidth: 960, quality: 100) {
-					...GatsbyImageSharpFluid
+				fluid(maxWidth: 960, quality: 90) {
+					...GatsbyImageSharpFluid_withWebp
 				}
 			}
 		}
@@ -168,7 +165,7 @@ export const query = graphql`
 				node {
 					name
 					image: childImageSharp {
-						fluid(maxWidth: 1920, quality: 90) {
+						fluid(maxWidth: 800, quality: 75) {
 							...GatsbyImageSharpFluid_withWebp
 						}
 					}

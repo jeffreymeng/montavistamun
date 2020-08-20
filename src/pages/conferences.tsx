@@ -1,16 +1,17 @@
 import { graphql } from "gatsby";
 import { FluidObject } from "gatsby-image/index";
 import React from "react";
+import CTA from "../components/CTA";
 import FluidImage from "../components/FluidImage";
 import Header from "../components/Header";
 import HorizontalCard from "../components/HorizontalCard";
-import CTA from "../components/index/CTA";
 import { Layout, Main } from "../components/layout";
 
 export default function ConferencesPage({
 	data,
 }: {
 	data: {
+		headerImage: FluidImage;
 		images: {
 			edges: {
 				node: {
@@ -29,10 +30,7 @@ export default function ConferencesPage({
 	]);
 	return (
 		<Layout title={"Conferences"}>
-			<Header
-				backgroundImage={"/images/headers/conferences.jpg"}
-				title={"Conferences"}
-			>
+			<Header backgroundImage={data.headerImage} title={"Conferences"}>
 				Our conferences offer excellent opportunities to hone your
 				skills with your peers — all while having a blast!
 			</Header>
@@ -92,7 +90,7 @@ export default function ConferencesPage({
 					{
 						name: "South Bay Model United Nations",
 						date: "Date TBA", // TODO when available
-						location: "Homestead High School",
+						location: "Monta Vista High School",
 						acronym: "sbmun",
 						text:
 							"South Bay Model United Nations Conference is our sixth conference of the year, and the one where students can continue practicing MUN skills with other delegates from the Bay Area. MUN conferences are rare in the spring season, so this is a great way for you to keep honing on your MUN abilities. ",
@@ -136,6 +134,13 @@ export default function ConferencesPage({
 }
 export const query = graphql`
 	query ConferencesPageQuery {
+		headerImage: file(relativePath: { eq: "headers/conferences.jpg" }) {
+			childImageSharp {
+				fluid(maxWidth: 1200, quality: 90) {
+					...GatsbyImageSharpFluid_withWebp
+				}
+			}
+		}
 		images: allFile(
 			filter: {
 				relativePath: { glob: "conferences/*.{jpg,jpeg,png,gif}" }
@@ -145,7 +150,7 @@ export const query = graphql`
 				node {
 					name
 					image: childImageSharp {
-						fluid(maxWidth: 1920, quality: 90) {
+						fluid(maxWidth: 800, quality: 75) {
 							...GatsbyImageSharpFluid_withWebp
 						}
 					}

@@ -1,20 +1,22 @@
+import BackgroundImage from "gatsby-background-image";
 import React from "react";
-
+import FluidImage from "./FluidImage";
 export default function Header({
 	backgroundImage,
 	title,
 	children,
 }: {
-	backgroundImage?: string;
+	backgroundImage: FluidImage;
 	title: React.ReactNode;
 	children: React.ReactNode;
 }): React.ReactElement {
 	return (
-		<header
+		<BackgroundImage
 			className="relative overflow-hidden bg-no-repeat bg-center bg-cover"
-			style={{
-				backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('${backgroundImage}')`,
-			}}
+			fluid={[
+				"linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5))",
+				backgroundImage.childImageSharp.fluid,
+			]}
 		>
 			<div className="relative pt-6 pb-12 sm:pb-16 md:pb-20 lg:pb-28 xl:pb-32">
 				<div className="mt-10 mx-auto max-w-screen-xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 xl:mt-28">
@@ -28,6 +30,6 @@ export default function Header({
 					</div>
 				</div>
 			</div>
-		</header>
+		</BackgroundImage>
 	);
 }
