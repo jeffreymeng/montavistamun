@@ -13,12 +13,12 @@ const AdminLinks: TypedPageOrDropdown[] = [
 		path: "/admin/members",
 		icon: <Icons.UsersOutline />,
 	},
-	{
-		type: "page",
-		name: "Edit Member Dashboard",
-		path: "/admin/edit-member-dashboard",
-		icon: <Icons.PencilOutline />,
-	},
+	// {
+	// 	type: "page",
+	// 	name: "Edit Member Dashboard",
+	// 	path: "/admin/edit-member-dashboard",
+	// 	icon: <Icons.PencilOutline />,
+	// },
 ];
 export default function AdminLayout({
 	title,
@@ -117,9 +117,11 @@ export default function AdminLayout({
 																pages={
 																	page.pages
 																}
+																key={page.name}
 															/>
 														) : (
 															<PageLink
+																key={page.name}
 																name={page.name}
 																path={page.path}
 																icon={page.icon}
@@ -175,11 +177,13 @@ export default function AdminLayout({
 										(page: TypedPageOrDropdown) =>
 											page.type == "dropdown" ? (
 												<SidebarDropdown
+													key={page.name}
 													name={page.name}
 													pages={page.pages}
 												/>
 											) : (
 												<PageLink
+													key={page.name}
 													name={page.name}
 													path={page.path}
 													icon={page.icon}
@@ -212,7 +216,7 @@ export default function AdminLayout({
 										.split("/")
 										.filter((el) => el !== "") // get rid of leading slash, if it exists
 										.map((name, i, arr) => (
-											<>
+											<React.Fragment key={name}>
 												<Link
 													to={
 														"/" +
@@ -241,7 +245,7 @@ export default function AdminLayout({
 												{i !== arr.length - 1 && (
 													<Icons.ChevronRight className="flex-shrink-0 mx-2 h-5 w-5 text-gray-400" />
 												)}
-											</>
+											</React.Fragment>
 										))}
 								</nav>
 								{children}

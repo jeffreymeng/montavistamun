@@ -1,3 +1,4 @@
+import { Link } from "gatsby";
 import React from "react";
 import useFirebase from "../../auth/useFirebase";
 import AdminLayout from "../../components/layout/AdminLayout";
@@ -22,6 +23,9 @@ export default function AboutPage(): React.ReactElement {
 			>
 				Admin Dashboard
 			</h1>
+			<Link to={"/admin/members"} className={"link"}>
+				Manage Members
+			</Link>
 		</AdminLayout>
 	);
 }

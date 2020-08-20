@@ -20,23 +20,8 @@ export default function AboutPage({
 			<Header
 				title={"Awards"}
 				backgroundImage={"/images/headers/awards.jpg"}
-			>
-				Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui
-				lorem cupidatat commodo. Elit sunt amet fugiat veniam occaecat
-				fugiat aliqua.
-			</Header>
+			></Header>
 			<Main wide>
-				<h1 className={"text-3xl leading-9 font-extrabold"}>
-					A special note about online conferences
-				</h1>
-				<p className="text-lg mt-3">
-					As the world adapts to life amid a global pandemic, we’re
-					adapting as well. That’s why we’re overhauling our approach
-					to teaching Model UN as many conferences transition to an
-					online format, and why we’re working hard to organize our
-					own online mock conferences while ensuring you receive the
-					most complete MUN experience possible.
-				</p>
 				<HorizontalCard
 					imageURL={
 						"https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80"

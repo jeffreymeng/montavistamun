@@ -1,510 +1,1096 @@
 import axios from "axios";
+import firebaseType from "firebase";
+import * as Icons from "heroicons-react";
 import React from "react";
 import useFirebase from "../../auth/useFirebase";
+import useRequireLogin from "../../components/accounts/useRequireLogin";
+import { Layout, Main } from "../../components/layout";
 import AdminLayout from "../../components/layout/AdminLayout";
+import Transition from "../../components/Transition";
 import AuthContext from "../../context/AuthContext";
+import { getGrade } from "../../utils/schoolYearUtils";
+interface UserData {
+	classOf: number;
+	email: string;
+	firstName: string;
+	lastName: string;
+	grade: {
+		grade: number;
+		asOf: firebaseType.firestore.Timestamp;
+	};
+
+	admin?: boolean;
+	verified?: boolean;
+}
+function SelectAllCheckbox({
+	selectedUsers,
+	setSelectedUsers,
+	setLastActionID,
+	users,
+	setUsers,
+}: {
+	selectedUsers: Set<string>;
+	setSelectedUsers: React.Dispatch<Set<string>>;
+	setLastActionID: React.Dispatch<string>;
+	users: {
+		id: string;
+		data: UserData;
+	}[];
+	setUsers: React.Dispatch<
+		{
+			id: string;
+			data: UserData;
+		}[]
+	>;
+}) {
+	const [selectAllDropdownOpen, setSelectAllDropdownOpen] = React.useState(
+		false
+	);
+	const [emails, setEmails] = React.useState("");
+	const [errors, setErrors] = React.useState<[string, string][]>([]);
+	const parsedEmails = emails
+		.split(",")
+		.flatMap((e) => e.split("\n"))
+		.map((e) => e.trim())
+		.filter((e) => e);
+	const [listModalOpen, setListModalOpen] = React.useState(false);
+	const selectDropdownRef = React.useRef(null);
+
+	React.useEffect(() => {
+		// https://stackoverflow.com/a/42234988, https://stackoverflow.com/a/43851475
+		const handleClickOutside = (e: Event) => {
+			if (
+				selectDropdownRef.current &&
+				// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+				// @ts-ignore
+				!selectDropdownRef.current?.contains(e.target as Node)
+			) {
+				setSelectAllDropdownOpen(false);
+			}
+		};
+		document.addEventListener("mousedown", handleClickOutside);
+		return () =>
+			document.removeEventListener("mousedown", handleClickOutside);
+	}, [selectDropdownRef]);
+
+	const allUsers = users.map((u) => u.id);
+
+	return (
+		<span className="z-0 inline-flex shadow-sm rounded-md">
+			<button
+				type="button"
+				className="inline-flex items-center px-2 py-1 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"
+				onClick={() =>
+					selectedUsers.size > 0
+						? setSelectedUsers(new Set())
+						: setSelectedUsers(new Set(allUsers))
+				}
+			>
+				<input
+					type="checkbox"
+					className={
+						"form-checkbox h-6 w-6 " +
+						(selectedUsers.size > 0 &&
+						selectedUsers.size < users.length
+							? "indeterminate"
+							: "")
+					}
+					checked={selectedUsers.size > 0}
+					onChange={() => {
+						if (selectedUsers.size > 0) {
+							setSelectedUsers(new Set());
+						} else {
+							setSelectedUsers(new Set(allUsers));
+						}
+						setLastActionID("");
+					}}
+				/>
+			</button>
+			<span className="-ml-px block" ref={selectDropdownRef}>
+				<button
+					type="button"
+					className="inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150 h-full"
+					aria-label="Expand"
+					onClick={() => setSelectAllDropdownOpen((old) => !old)}
+				>
+					<Icons.ChevronDown className="h-5 w-5" />
+				</button>
+				<Transition
+					show={selectAllDropdownOpen}
+					enter="transition ease-out duration-100"
+					enterFrom="transform opacity-0 scale-95"
+					enterTo="transform opacity-100 scale-100"
+					leave="transition ease-in duration-75"
+					leaveFrom="transform opacity-100 scale-100"
+					leaveTo="transform opacity-0 scale-95"
+				>
+					<div className="origin-top-right absolute left-0 mt-2 -mr-1 w-56 rounded-md shadow-lg normal-case tracking-normal">
+						<div className="rounded-md bg-white shadow-xs">
+							<div className="px-4 pt-3 pb-1">
+								<p className="text-xs leading-5">
+									Select users that are
+								</p>
+							</div>
+							<div className="py-1">
+								{[
+									{
+										name: "Admin",
+										onClick: () =>
+											setSelectedUsers(
+												new Set(
+													users
+														.map((user) =>
+															user.data.admin
+																? user.id
+																: ""
+														)
+														.filter((user) => user)
+												)
+											),
+									},
+									{
+										name: "Verified",
+										onClick: () =>
+											setSelectedUsers(
+												new Set(
+													users
+														.map((user) =>
+															user.data.verified
+																? user.id
+																: ""
+														)
+														.filter((user) => user)
+												)
+											),
+									},
+									{
+										name: "In a List",
+										onClick: () => setListModalOpen(true),
+									},
+								].map((btn) => (
+									<button
+										key={btn.name}
+										className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 hover:text-gray-900 focus:outline-none focus:bg-gray-100 focus:text-gray-900 w-full text-left"
+										onClick={btn.onClick}
+									>
+										{btn.name}
+									</button>
+								))}
+							</div>
+						</div>
+					</div>
+				</Transition>
+			</span>
+			<Transition show={listModalOpen}>
+				<div className="fixed bottom-0 inset-x-0 px-4 pb-6 sm:inset-0 sm:p-0 sm:flex sm:items-center sm:justify-center normal-case tracking-normal">
+					<Transition
+						enter="ease-out duration-300"
+						enterFrom="opacity-0"
+						enterTo="opacity-100"
+						leave="ease-in duration-200"
+						leaveFrom="opacity-100"
+						leaveTo="opacity-0"
+					>
+						<div className="fixed inset-0 transition-opacity">
+							<div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+						</div>
+					</Transition>
+
+					<Transition
+						enter="ease-out duration-300"
+						enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+						enterTo="opacity-100 translate-y-0 sm:scale-100"
+						leave="ease-in duration-200"
+						leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+						leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+					>
+						<div
+							className="bg-white rounded-lg px-4 pt-5 pb-4 overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full sm:p-6"
+							role="dialog"
+							aria-modal="true"
+							aria-labelledby="modal-headline"
+						>
+							<div>
+								<div className="mt-3 text-center sm:mt-5">
+									<h3
+										className="text-lg leading-6 font-medium text-gray-900"
+										id="modal-headline"
+									>
+										Select All In a List
+									</h3>
+									<div className="mt-2">
+										<p className="text-sm leading-5 text-gray-500">
+											Enter a list of emails delimited by
+											commas and/or line breaks.
+										</p>
+									</div>
+									<div className="mt-2">
+										<textarea
+											value={emails}
+											onChange={(e) =>
+												setEmails(e.target.value)
+											}
+											placeholder={
+												"Type or paste some emails here..."
+											}
+											className={
+												"form-textarea w-full resize-none h-64"
+											}
+										/>
+									</div>
+									{errors.length > 0 && (
+										<div className="mt-4">
+											<p className="text-sm leading-5 text-red-500 font-bold">
+												No users were selected because
+												of the following error
+												{errors.length != 1 && "s"}:
+											</p>
+											<ul
+												className={
+													"list-disc mx-9 text-base text-left my-2"
+												}
+											>
+												{errors.map(
+													([email, reason]) => (
+														<li key={email}>
+															<b>{email}</b>
+															{reason == "invalid"
+																? " is not a valid email address."
+																: " is not the email address of a user."}
+														</li>
+													)
+												)}
+											</ul>
+										</div>
+									)}
+								</div>
+							</div>
+							<div className="mt-5 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense">
+								<span className="flex w-full rounded-md shadow-sm sm:col-start-2">
+									<button
+										type="button"
+										onClick={() => {
+											const newErrors: [
+												string,
+												string
+											][] = [];
+
+											for (
+												let i = 0;
+												i < parsedEmails.length;
+												i++
+											) {
+												const email = parsedEmails[i];
+												if (email.indexOf("@") == -1) {
+													newErrors.push([
+														email,
+														"invalid",
+													]);
+												} else if (
+													!users.find(
+														(u) =>
+															u.data.email ==
+															email
+													)
+												) {
+													newErrors.push([
+														email,
+														"not_a_user",
+													]);
+												}
+											}
+											setErrors(newErrors);
+											if (newErrors.length == 0) {
+												setSelectedUsers(
+													new Set(
+														parsedEmails.map(
+															(email) =>
+																users.find(
+																	(u) =>
+																		u.data
+																			.email ==
+																		email
+																)?.id || ""
+														)
+													)
+												);
+												setListModalOpen(false);
+											}
+										}}
+										className="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-indigo-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition ease-in-out duration-150 sm:text-sm sm:leading-5"
+									>
+										Select {parsedEmails.length} Users
+									</button>
+								</span>
+								<span className="mt-3 flex w-full rounded-md shadow-sm sm:mt-0 sm:col-start-1">
+									<button
+										onClick={() => setListModalOpen(false)}
+										type="button"
+										className="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-base leading-6 font-medium text-gray-700 shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5"
+									>
+										Cancel
+									</button>
+								</span>
+							</div>
+						</div>
+					</Transition>
+				</div>
+			</Transition>
+		</span>
+	);
+}
 export default function AboutPage(): React.ReactElement {
-	const [target, setTarget] = React.useState("");
-	const [admin, setAdmin] = React.useState("same");
-	const [verified, setVerified] = React.useState("same");
+	const [lastActionID, setLastActionID] = React.useState("");
+
+	const [selectedUsers, setSelectedUsers] = React.useState<Set<string>>(
+		() => new Set()
+	);
+
 	const firebase = useFirebase();
+	useRequireLogin();
 	const {
 		user,
 		loading,
 		verified: userVerified,
 		admin: userAdmin,
 	} = React.useContext(AuthContext);
-	return (
-		<AdminLayout title={"Members"}>
-			<>
-				<p>
-					Your details: verified: {userVerified + ""} admin:{" "}
-					{userAdmin + ""}
-				</p>
-				<div className="block">
-					<b>UID or email to modify</b>
-					<input
-						type="text"
-						className="form-input"
-						value={target}
-						onChange={(e) => setTarget(e.target.value)}
-					/>
-				</div>
-				<div className="block">
-					<b>Admin? (yes/no/same)</b>
-					<input
-						type="text"
-						className="form-input"
-						value={admin}
-						onChange={(e) => setAdmin(e.target.value)}
-					/>
-				</div>
-				<div className="block">
-					<b>Verified? (yes/no/same)</b>
-					<input
-						type="text"
-						className="form-input"
-						value={verified}
-						onChange={(e) => setVerified(e.target.value)}
-					/>
-				</div>
-				<div className="block">
-					<b>New Permissions Object:</b>
-					<p>
-						{(() => {
-							const newPermissions: any = {};
-							if (["yes", "no"].includes(admin)) {
-								newPermissions.admin = admin === "yes";
-							} else if (admin !== "same") {
-								return "invalid";
-							}
-							if (["yes", "no"].includes(verified)) {
-								newPermissions.verified = verified === "yes";
-							} else if (verified !== "same") {
-								return "invalid";
-							}
-							return JSON.stringify(newPermissions);
-						})()}
-					</p>
-				</div>
-				<button
-					onClick={async () => {
-						if (!firebase) return;
-						const newPermissions: any = {};
-						if (["yes", "no"].includes(admin)) {
-							newPermissions.admin = admin === "yes";
-						} else if (admin !== "same") {
-							alert("admin is invalid");
-						}
-						if (["yes", "no"].includes(verified)) {
-							newPermissions.verified = verified === "yes";
-						} else if (verified !== "same") {
-							alert("verified is invalid");
-						}
+	const [users, setUsers] = React.useState<
+		{
+			id: string;
+			data: UserData;
+		}[]
+	>([]);
+	const [dataRequiresUpdate, setDataRequiresUpdate] = React.useState(true);
+	const scheduleDataUpdate = () => {
+		console.log("DU scheduled");
+		setDataRequiresUpdate(true);
+	};
+	React.useEffect(() => {
+		if (!setDataRequiresUpdate) {
+			return;
+		}
+		setDataRequiresUpdate(false);
+		if (!firebase || !user) {
+			return;
+		}
+		if (!userVerified) {
+			return;
+		}
+		(async () => {
+			const snapshot = (await firebase
+				.firestore()
+				.collection("users")
+				.get()) as firebaseType.firestore.QuerySnapshot<UserData>;
+			const newUsers: {
+				id: string;
+				data: UserData;
+			}[] = [];
+			snapshot.forEach((doc) => {
+				newUsers.push({
+					id: doc.id,
+					data: doc.data(),
+				});
+			});
+			console.log(newUsers);
+			setUsers(newUsers);
+		})();
+	}, [firebase, dataRequiresUpdate, user, userVerified]);
 
-						try {
-							const token = await firebase
-								.auth()
-								.currentUser?.getIdToken(true);
-							console.log({
-								newPermissions,
-								target,
-								token,
-							});
-							const data = await axios.post(
+	const allUsers = users.map((u) => u.id);
+	const updateCheckbox = (
+		id: string,
+		checked: boolean,
+		shiftKey: boolean
+	) => {
+		setSelectedUsers((set) => {
+			const clone = new Set(set);
+			if (shiftKey && lastActionID) {
+				let startIndex = allUsers.indexOf(lastActionID);
+				let endIndex = allUsers.indexOf(id);
+				if (startIndex === -1 || endIndex === -1) {
+					if (checked || startIndex == endIndex) {
+						clone.add(id);
+					} else {
+						clone.delete(id);
+					}
+					return clone;
+				}
+				if (startIndex > endIndex) {
+					const temp = startIndex;
+					startIndex = endIndex;
+					endIndex = temp;
+				}
+				for (let i = startIndex; i <= endIndex; i++) {
+					if (checked) {
+						clone.add(allUsers[i]);
+					} else {
+						clone.delete(allUsers[i]);
+					}
+				}
+			} else {
+				if (checked) {
+					clone.add(id);
+				} else {
+					clone.delete(id);
+				}
+			}
+			return clone;
+		});
+		setLastActionID(id);
+	};
+	const [showConfirmModal, setShowConfirmModal] = React.useState(false);
+	const [confirmModal, setConfirmModal] = React.useState<{
+		title: string;
+		text: string;
+		users: {
+			name: string;
+			email: string;
+		}[];
+		onConfirm: () => void;
+		buttonText: string;
+		error?: string;
+	}>();
+	// const Checkbox = ({
+	// 	indeterminate,
+	// 	checked,
+	// 	onChange,
+	// }: {
+	// 	indeterminate: boolean;
+	// 	checked: boolean;
+	// 	onChange: ChangeEventHandler;
+	// }) => {
+	// 	const ref = React.useRef(null);
+	// 	React.useEffect(() => {
+	// 		if (ref.current) {
+	// 			ref.current.indeterminate = indeterminate;
+	// 		}
+	// 	}, [indeterminate, checked]);
+	// 	return (
+	// 		<input
+	// 			type="checkbox"
+	// 			className="form-checkbox h-6 w-6"
+	// 			checked={checked}
+	// 			onChange={onChange}
+	// 			ref={ref}
+	// 		/>
+	// 	);
+	// };
+	const updatePermissions = (
+		mode: "verify" | "unverify" | "make_admin" | "remove_admin"
+	) => {
+		const isBulkAction = selectedUsers.size > 1;
+		// firstUser is only needed if its not a bulk action
+		const firstUser = isBulkAction
+			? null
+			: users.find(
+					(user) => user.id === selectedUsers.values().next().value
+			  );
+		const mappedUsers = Array.from(selectedUsers).map((id) => {
+			const user = users.find((user) => user.id === id);
+			if (!user) {
+				return {
+					name: "Unknown",
+					email: "Unknown",
+				};
+			}
+			return {
+				name: user.data.firstName + " " + user.data.lastName,
+				email: user.data.email,
+				id: user.id,
+			};
+		});
+		const actionWord =
+			mode == "verify" || mode == "unverify"
+				? mode
+				: mode == "make_admin"
+				? "Promote"
+				: "Demote";
+		const actionWordUpper =
+			actionWord.charAt(0).toUpperCase() + actionWord.substring(1);
+		setConfirmModal({
+			title: isBulkAction
+				? `${actionWordUpper} ${selectedUsers.size} members?`
+				: `${actionWordUpper} member?`,
+			text: isBulkAction
+				? `Are you sure you would like to ${actionWord} these members${
+						mode == "make_admin"
+							? " to administrator"
+							: mode == "remove_admin"
+							? " from administrator"
+							: ""
+				  }?`
+				: `Are you should you would like to ${actionWord} ${
+						firstUser?.data.firstName
+				  } ${firstUser?.data.lastName} (${firstUser?.data.email})${
+						mode == "make_admin"
+							? " to administrator"
+							: mode == "remove_admin"
+							? " from administrator"
+							: ""
+				  }?`,
+			buttonText: isBulkAction
+				? `${actionWordUpper} ${selectedUsers?.size} Members`
+				: `${actionWordUpper} Member`,
+			users: mappedUsers,
+			onConfirm: async () => {
+				const users = mappedUsers;
+
+				try {
+					const token = await user?.getIdToken(true);
+					const start = new Date().getTime();
+					await Promise.all(
+						users.map((targetUser) =>
+							axios.post(
 								"/.netlify/functions/set-user-permissions",
 								{
-									newPermissions,
-									target,
-									token,
+									newPermissions:
+										mode == "verify" || mode == "unverify"
+											? { verified: mode == "verify" }
+											: { admin: mode == "make_admin" },
+									target: targetUser.id,
+								},
+								{
+									headers: {
+										authorization: `Bearer ${token}`,
+									},
 								}
-							);
-							console.log(data);
-							const newToken = await firebase
-								.auth()
-								.currentUser?.getIdToken(true);
-							console.log(newToken);
-						} catch (error) {
-							console.log(error);
-							console.log({ ...error });
-							if (error.response) {
-								console.log(error.response.data);
-								console.log(error.response.status);
-								console.log(error.response.headers);
-							}
+							)
+						)
+					).then(() =>
+						console.log(
+							users.length +
+								" Requests Took " +
+								(new Date().getTime() - start) / 1000 +
+								" seconds"
+						)
+					);
+					scheduleDataUpdate();
+					setShowConfirmModal(false);
+				} catch (error) {
+					setConfirmModal((current) =>
+						current
+							? {
+									...current,
+									error:
+										"An error occurred. Please try again later.",
+							  }
+							: undefined
+					);
+					console.log(error);
+					console.log({ ...error });
+					if (error.response) {
+						console.log(error.response.data);
+						console.log(error.response.status);
+						console.log(error.response.headers);
+					}
+				}
+			},
+		});
+		setShowConfirmModal(true);
+	};
+	if (!loading && !userVerified) {
+		return (
+			<Layout title={"Permission Dnied"}>
+				<Main>
+					<h1
+						className={
+							"text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10"
 						}
-					}}
-					className={
-						"p-3 rounded-md bg-blue-300 hover:bg-blue-500 active:bg-blue-700"
-					}
-				>
-					submit
-				</button>
-				<button
-					onClick={async () => {
-						if (!firebase) return;
-						const token = await firebase
-							.auth()
-							.currentUser?.getIdTokenResult();
-						console.log(token);
-					}}
-					className={
-						"p-3 rounded-md bg-blue-300 hover:bg-blue-500 active:bg-blue-700"
-					}
-				>
-					print claims
-				</button>
-				<button
-					onClick={async () => {
-						if (!firebase) return;
-						const token = await firebase
-							.auth()
-							.currentUser?.getIdTokenResult(true);
-						console.log(token);
-					}}
-					className={
-						"p-3 rounded-md bg-blue-300 hover:bg-blue-500 active:bg-blue-700"
-					}
-				>
-					print claims after refresh
-				</button>
-				<nav className="hidden sm:flex items-center text-sm leading-5 font-medium mt-2 mb-4">
-					<a
-						href="/"
-						className="text-gray-500 hover:text-gray-700 transition duration-150 ease-in-out"
 					>
-						Jobs
-					</a>
-					<svg
-						className="flex-shrink-0 mx-2 h-5 w-5 text-gray-400"
-						viewBox="0 0 20 20"
-						fill="currentColor"
+						Permission Denied
+					</h1>
+					<p className={"mt-4 mb-20"}>
+						Sorry, but you don't have permission to view this page.
+					</p>
+				</Main>
+			</Layout>
+		);
+	}
+	return (
+		<AdminLayout title={"Members"}>
+			<h1
+				className={
+					"text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10 mb-6"
+				}
+			>
+				Members
+			</h1>
+			{/*<div className="rounded-md bg-blue-100 p-4">*/}
+			{/*	<div className="flex">*/}
+			{/*		<div className="flex-shrink-0">*/}
+			{/*			<svg*/}
+			{/*				className="animate-spin h-5 w-5 text-blue-600"*/}
+			{/*				xmlns="http://www.w3.org/2000/svg"*/}
+			{/*				fill="none"*/}
+			{/*				viewBox="0 0 24 24"*/}
+			{/*			>*/}
+			{/*				<circle*/}
+			{/*					className="opacity-25"*/}
+			{/*					cx="12"*/}
+			{/*					cy="12"*/}
+			{/*					r="10"*/}
+			{/*					stroke="currentColor"*/}
+			{/*					strokeWidth="4"*/}
+			{/*				></circle>*/}
+			{/*				<path*/}
+			{/*					className="opacity-75"*/}
+			{/*					fill="currentColor"*/}
+			{/*					d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"*/}
+			{/*				></path>*/}
+			{/*			</svg>*/}
+			{/*		</div>*/}
+			{/*		<div className="ml-3">*/}
+			{/*			<p className="text-sm leading-5 font-medium text-blue-800">*/}
+			{/*				Setting 5 users (show) to <b>verified</b>.*/}
+			{/*			</p>*/}
+			{/*		</div>*/}
+			{/*		<div className="ml-auto pl-3">*/}
+			{/*			<div className="-mx-1.5 -my-1.5">*/}
+			{/*				<button*/}
+			{/*					className="inline-flex rounded-md p-1.5 text-green-500 hover:bg-green-100 focus:outline-none focus:bg-green-100 transition ease-in-out duration-150"*/}
+			{/*					aria-label="Dismiss"*/}
+			{/*				>*/}
+			{/*					<svg*/}
+			{/*						className="h-5 w-5"*/}
+			{/*						viewBox="0 0 20 20"*/}
+			{/*						fill="currentColor"*/}
+			{/*					>*/}
+			{/*						<path*/}
+			{/*							fillRule="evenodd"*/}
+			{/*							d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"*/}
+			{/*							clipRule="evenodd"*/}
+			{/*						/>*/}
+			{/*					</svg>*/}
+			{/*				</button>*/}
+			{/*			</div>*/}
+			{/*		</div>*/}
+			{/*	</div>*/}
+			{/*</div>*/}
+
+			<div className={"my-4"}>
+				<span className="relative z-0 inline-flex shadow-sm rounded-md mr-4">
+					<button
+						type="button"
+						onClick={() => updatePermissions("verify")}
+						disabled={selectedUsers.size === 0}
+						className={
+							(selectedUsers.size === 0
+								? "bg-gray-200"
+								: "bg-white hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 ") +
+							" " +
+							"relative inline-flex items-center px-4 py-2 rounded-l-md border border-gray-300 text-sm leading-5 font-medium text-gray-700 transition ease-in-out duration-150"
+						}
 					>
-						<path
-							fillRule="evenodd"
-							d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-							clipRule="evenodd"
-						/>
-					</svg>
-					<a
-						href="/"
-						className="text-gray-500 hover:text-gray-700 transition duration-150 ease-in-out"
+						<Icons.CheckCircleOutline
+							className={"h-5 w-5 text-gray-600 mr-3"}
+						/>{" "}
+						Verify
+					</button>
+					<button
+						type="button"
+						disabled={selectedUsers.size === 0}
+						className={
+							(selectedUsers.size === 0
+								? "bg-gray-200"
+								: "bg-white hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 ") +
+							" " +
+							"-ml-px relative inline-flex items-center px-4 py-2 rounded-r-md border border-gray-300 text-sm leading-5 font-medium text-gray-700 transition ease-in-out duration-150"
+						}
+						onClick={() => updatePermissions("unverify")}
 					>
-						Engineering
-					</a>
-					<svg
-						className="flex-shrink-0 mx-2 h-5 w-5 text-gray-400"
-						viewBox="0 0 20 20"
-						fill="currentColor"
+						Unverify
+					</button>
+				</span>
+				<span className="relative z-0 inline-flex shadow-sm rounded-md mx-4">
+					<button
+						type="button"
+						disabled={selectedUsers.size === 0}
+						className={
+							(selectedUsers.size === 0
+								? "bg-gray-200"
+								: "bg-white hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 ") +
+							" " +
+							"relative inline-flex items-center px-4 py-2 rounded-l-md border border-gray-300 text-sm leading-5 font-medium text-gray-700 transition ease-in-out duration-150"
+						}
+						onClick={() => updatePermissions("make_admin")}
 					>
-						<path
-							fillRule="evenodd"
-							d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-							clipRule="evenodd"
-						/>
-					</svg>
-					<a
-						href="/"
-						className="text-gray-500 hover:text-gray-700 transition duration-150 ease-in-out"
+						<Icons.ShieldCheckOutline
+							className={"h-5 w-5 text-gray-600 mr-3"}
+						/>{" "}
+						Promote to Admin
+					</button>
+					<button
+						type="button"
+						disabled={
+							selectedUsers.size === 0 ||
+							selectedUsers.has(user?.uid || "")
+						}
+						className={
+							(selectedUsers.size === 0 ||
+							selectedUsers.has(user?.uid || "")
+								? "bg-gray-200"
+								: "bg-white hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 ") +
+							" " +
+							"-ml-px relative inline-flex items-center px-4 py-2 rounded-r-md border border-gray-300 text-sm leading-5 font-medium text-gray-700 transition ease-in-out duration-150"
+						}
+						onClick={() => updatePermissions("remove_admin")}
 					>
-						Back End Developer
-					</a>
-				</nav>
-				<h1
-					className={
-						"text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10 mb-6"
-					}
-				>
-					Members
-				</h1>
-				<div className="flex flex-col">
-					<div className="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
-						<div className="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200">
-							<table className="min-w-full">
-								<thead>
-									<tr>
-										<th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-											Name
-										</th>
-										<th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-											BMUN
-										</th>
-										<th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-											Status
-										</th>
-										<th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-											Role
-										</th>
-										<th className="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>
-									</tr>
-								</thead>
-								<tbody className="bg-white">
-									<tr>
+						Demote from Admin
+					</button>
+				</span>
+			</div>
+			<Transition show={showConfirmModal}>
+				<div className="fixed bottom-0 inset-x-0 px-4 pb-6 sm:inset-0 sm:p-0 sm:flex sm:items-center sm:justify-center normal-case tracking-normal">
+					<Transition
+						enter="ease-out duration-300"
+						enterFrom="opacity-0"
+						enterTo="opacity-100"
+						leave="ease-in duration-200"
+						leaveFrom="opacity-100"
+						leaveTo="opacity-0"
+					>
+						<div className="fixed inset-0 transition-opacity">
+							<div className="absolute inset-0 bg-gray-500 opacity-75"></div>
+						</div>
+					</Transition>
+
+					<Transition
+						enter="ease-out duration-300"
+						enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+						enterTo="opacity-100 translate-y-0 sm:scale-100"
+						leave="ease-in duration-200"
+						leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+						leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+					>
+						<div
+							className="bg-white rounded-lg px-4 pt-5 pb-4 overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full sm:p-6"
+							role="dialog"
+							aria-modal="true"
+							aria-labelledby="modal-headline"
+						>
+							<div>
+								<div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100">
+									<Icons.Exclamation className="h-6 w-6 text-red-600" />
+								</div>
+								<div className="mt-3 text-center sm:mt-5">
+									<h3
+										className="text-lg leading-6 font-medium text-gray-900"
+										id="modal-headline"
+									>
+										{confirmModal?.title}
+									</h3>
+									<div className="mt-2">
+										<p className="text-sm leading-5 text-gray-500">
+											{confirmModal?.text}
+										</p>
+										{
+											<ul
+												className={
+													"list-disc mx-9 text-base text-left my-2 overflow-auto px-12 py-6"
+												}
+												style={{
+													maxHeight: "40vh",
+												}}
+											>
+												{confirmModal &&
+													confirmModal?.users.length >
+														1 &&
+													confirmModal?.users.map(
+														(user) => (
+															<li
+																key={
+																	user.email +
+																	"" +
+																	user.name
+																}
+															>
+																<b>
+																	{user.name}
+																</b>
+																, {user.email}
+															</li>
+														)
+													)}
+											</ul>
+										}
+									</div>
+									{confirmModal?.error && (
+										<div className="mt-4">
+											<p className="text-sm leading-5 text-red-500 font-bold">
+												{confirmModal.error}
+											</p>
+										</div>
+									)}
+								</div>
+							</div>
+							<div className="mt-5 sm:mt-6 sm:grid sm:grid-cols-2 sm:gap-3 sm:grid-flow-row-dense">
+								<span className="flex w-full rounded-md shadow-sm sm:col-start-2">
+									<button
+										type="button"
+										onClick={() =>
+											confirmModal?.onConfirm()
+										}
+										className="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-indigo-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition ease-in-out duration-150 sm:text-sm sm:leading-5"
+									>
+										{confirmModal?.buttonText}
+									</button>
+								</span>
+								<span className="mt-3 flex w-full rounded-md shadow-sm sm:mt-0 sm:col-start-1">
+									<button
+										onClick={() =>
+											setShowConfirmModal(false)
+										}
+										type="button"
+										className="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-base leading-6 font-medium text-gray-700 shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5"
+									>
+										Cancel
+									</button>
+								</span>
+							</div>
+						</div>
+					</Transition>
+				</div>
+			</Transition>
+			<div className="flex flex-col">
+				<div className="-my-2 py-2 overflow-x-auto sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
+					<div className="align-middle inline-block min-w-full shadow overflow-hidden sm:rounded-lg border-b border-gray-200">
+						<table className="min-w-full">
+							<thead>
+								<tr>
+									<th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+										<SelectAllCheckbox
+											selectedUsers={selectedUsers}
+											setSelectedUsers={setSelectedUsers}
+											setLastActionID={setLastActionID}
+											users={users}
+											setUsers={setUsers}
+										/>
+									</th>
+									<th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+										Basic Information
+									</th>
+									{/*<th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">*/}
+									{/*	BMUN*/}
+									{/*</th>*/}
+									<th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+										Permissions
+									</th>
+									{/*<th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">*/}
+									{/*	Role*/}
+									{/*</th>*/}
+									{/*<th className="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>*/}
+								</tr>
+							</thead>
+							<tbody className="bg-white">
+								{users.map(({ id: id, data: data }) => (
+									<tr key={id}>
+										<td
+											className="pl-9 pr-0 py-4 border-b border-gray-200"
+											onMouseDown={() =>
+												window
+													.getSelection()
+													?.removeAllRanges()
+											}
+											onClick={(e) =>
+												updateCheckbox(
+													id,
+													!selectedUsers.has(id),
+													e.shiftKey
+												)
+											}
+										>
+											<input
+												type="checkbox"
+												className="form-checkbox h-6 w-6"
+												checked={selectedUsers.has(id)}
+												onChange={() => null}
+												onClick={(e) => {
+													updateCheckbox(
+														id,
+														!selectedUsers.has(id),
+														e.shiftKey
+													);
+												}}
+											/>
+											{/*<button*/}
+											{/*	className={*/}
+											{/*		"rounded-md bg-blue-200 m-0 px-4 py-2 align-middle"*/}
+											{/*	}*/}
+											{/*>*/}
+											{/*	<Icons.Check />*/}
+											{/*</button>*/}
+										</td>
 										<td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
 											<div>
 												<div className="text-sm leading-5 font-medium text-gray-900">
-													Bernard Lane, 10th Grade
+													{`${data.firstName} ${
+														data.lastName
+													}, ${getGrade(
+														data.classOf
+													)}th Grade`}
 												</div>
 												<div className="text-sm leading-5 text-gray-500">
-													bernardlane@example.com
+													{data.email}
 												</div>
 											</div>
 										</td>
+										{/*<td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">*/}
+										{/*	<div className="text-sm leading-5 text-yellow-800">*/}
+										{/*		Registered, Not Paid*/}
+										{/*	</div>*/}
+										{/*	<div className="text-sm leading-5 text-gray-500">*/}
+										{/*		ECOSOC (partner: John Doe)*/}
+										{/*	</div>*/}
+										{/*</td>*/}
 										<td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-											<div className="text-sm leading-5 text-yellow-800">
-												Registered, Not Paid
-											</div>
-											<div className="text-sm leading-5 text-gray-500">
-												ECOSOC w/ Partner Name
-											</div>
-										</td>
-										<td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-											<span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-												Active
-											</span>
-										</td>
-										<td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
-											Owner
-										</td>
-										<td className="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
-											<a
-												href="/"
-												className="text-indigo-600 hover:text-indigo-900"
+											<div
+												className={
+													"flex flex-row space-x-4"
+												}
 											>
-												More
-											</a>
+												<span
+													className={
+														"inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium leading-4 " +
+														(data.verified
+															? "bg-green-100 text-green-800"
+															: "bg-yellow-100 text-yellow-800")
+													}
+												>
+													{!data.verified && "Not "}
+													Verified
+												</span>
+
+												{data.admin && (
+													<span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium leading-4 bg-green-100 text-green-800">
+														Admin
+													</span>
+												)}
+											</div>
 										</td>
+										{/*<td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">*/}
+										{/*	Owner*/}
+										{/*</td>*/}
+										{/*<td className="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">*/}
+										{/*	<Link*/}
+										{/*		to="#"*/}
+										{/*		className="text-indigo-600 hover:text-indigo-900"*/}
+										{/*	>*/}
+										{/*		Manage*/}
+										{/*	</Link>*/}
+										{/*</td>*/}
 									</tr>
-									<tr>
-										<td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-											<div className="flex items-center">
-												<div className="flex-shrink-0 h-10 w-10">
-													<img
-														className="h-10 w-10 rounded-full"
-														src="https://images.unsplash.com/photo-1532910404247-7ee9488d7292?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-														alt=""
-													/>
-												</div>
-												<div className="ml-4">
-													<div className="text-sm leading-5 font-medium text-gray-900">
-														Not Registered
-													</div>
-													<div className="text-sm leading-5 text-gray-500">
-														bernardlane@example.com
-													</div>
-												</div>
-											</div>
-										</td>
-										<td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-											<div className="text-sm leading-5 text-gray-900">
-												Not Registered
-											</div>
-										</td>
-										<td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-											<span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
-												Active
-											</span>
-										</td>
-										<td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
-											Owner
-										</td>
-										<td className="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
-											<a
-												href="/"
-												className="text-indigo-600 hover:text-indigo-900"
-											>
-												Edit
-											</a>
-										</td>
-									</tr>
-									<tr>
-										<td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-											<div className="flex items-center">
-												<div className="flex-shrink-0 h-10 w-10">
-													<img
-														className="h-10 w-10 rounded-full"
-														src="https://images.unsplash.com/photo-1505503693641-1926193e8d57?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-														alt=""
-													/>
-												</div>
-												<div className="ml-4">
-													<div className="text-sm leading-5 font-medium text-gray-900">
-														Bernard Lane
-													</div>
-													<div className="text-sm leading-5 text-gray-500">
-														bernardlane@example.com
-													</div>
-												</div>
-											</div>
-										</td>
-										<td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-											<div className="text-sm leading-5 text-gray-900">
-												Director
-											</div>
-											<div className="text-sm leading-5 text-gray-500">
-												Human Resources
-											</div>
-										</td>
-										<td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-											<span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
-												Inactive
-											</span>
-										</td>
-										<td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">
-											Owner
-										</td>
-										<td className="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">
-											<a
-												href="/"
-												className="text-indigo-600 hover:text-indigo-900"
-											>
-												Edit
-											</a>
-										</td>
-									</tr>
-									<tr>
-										<td className="px-6 py-4 whitespace-no-wrap">
-											<div className="flex items-center">
-												<div className="flex-shrink-0 h-10 w-10">
-													<img
-														className="h-10 w-10 rounded-full"
-														src="https://images.unsplash.com/photo-1463453091185-61582044d556?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-														alt=""
-													/>
-												</div>
-												<div className="ml-4">
-													<div className="text-sm leading-5 font-medium text-gray-900">
-														Bernard Lane
-													</div>
-													<div className="text-sm leading-5 text-gray-500">
-														bernardlane@example.com
-													</div>
-												</div>
-											</div>
-										</td>
-										<td className="px-6 py-4 whitespace-no-wrap">
-											<div className="text-sm leading-5 text-gray-900">
-												Director
-											</div>
-											<div className="text-sm leading-5 text-gray-500">
-												Human Resources
-											</div>
-										</td>
-										<td className="px-6 py-4 whitespace-no-wrap">
-											<span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
-												Inactive
-											</span>
-										</td>
-										<td className="px-6 py-4 whitespace-no-wrap text-sm leading-5 text-gray-500">
-											Owner
-										</td>
-										<td className="px-6 py-4 whitespace-no-wrap text-right text-sm leading-5 font-medium">
-											<a
-												href="/"
-												className="text-indigo-600 hover:text-indigo-900"
-											>
-												Edit
-											</a>
-										</td>
-									</tr>
-								</tbody>
-							</table>
-							<div className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
-								<div className="flex-1 flex justify-between sm:hidden">
-									<a
-										href="/"
-										className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"
-									>
-										Previous
-									</a>
-									<a
-										href="/"
-										className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"
-									>
-										Next
-									</a>
+								))}
+							</tbody>
+						</table>
+						<div className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
+							<div className="flex-1 flex justify-between sm:hidden">
+								<a
+									href="/"
+									className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"
+								>
+									Previous
+								</a>
+								<a
+									href="/"
+									className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"
+								>
+									Next
+								</a>
+							</div>
+							<div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+								<div>
+									<p className="text-sm leading-5 text-gray-700">
+										Showing{" "}
+										<span className="font-medium">1</span>{" "}
+										to{" "}
+										<span className="font-medium">10</span>{" "}
+										of{" "}
+										<span className="font-medium">97</span>{" "}
+										results
+									</p>
 								</div>
-								<div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
-									<div>
-										<p className="text-sm leading-5 text-gray-700">
-											Showing{" "}
-											<span className="font-medium">
-												1
-											</span>{" "}
-											to{" "}
-											<span className="font-medium">
-												10
-											</span>{" "}
-											of{" "}
-											<span className="font-medium">
-												97
-											</span>{" "}
-											results
-										</p>
-									</div>
-									<div>
-										<nav className="relative z-0 inline-flex shadow-sm">
-											<a
-												href="/"
-												className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150"
-												aria-label="Previous"
-											>
-												<svg
-													className="h-5 w-5"
-													viewBox="0 0 20 20"
-													fill="currentColor"
-												>
-													<path
-														fillRule="evenodd"
-														d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"
-														clipRule="evenodd"
-													/>
-												</svg>
-											</a>
-											<a
-												href="/"
-												className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"
-											>
-												1
-											</a>
-											<a
-												href="/"
-												className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"
-											>
-												2
-											</a>
-											<a
-												href="/"
-												className="hidden md:inline-flex -ml-px relative items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"
-											>
-												3
-											</a>
-											<span className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700">
-												...
-											</span>
-											<a
-												href="/"
-												className="hidden md:inline-flex -ml-px relative items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"
-											>
-												8
-											</a>
-											<a
-												href="/"
-												className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"
-											>
-												9
-											</a>
-											<a
-												href="/"
-												className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"
-											>
-												10
-											</a>
-											<a
-												href="/"
-												className="-ml-px relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150"
-												aria-label="Next"
-											>
-												<svg
-													className="h-5 w-5"
-													viewBox="0 0 20 20"
-													fill="currentColor"
-												>
-													<path
-														fillRule="evenodd"
-														d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-														clipRule="evenodd"
-													/>
-												</svg>
-											</a>
-										</nav>
-									</div>
+								<div>
+									{/*<nav className="relative z-0 inline-flex shadow-sm">*/}
+									{/*	<a*/}
+									{/*		href="/"*/}
+									{/*		className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150"*/}
+									{/*		aria-label="Previous"*/}
+									{/*	>*/}
+									{/*		<svg*/}
+									{/*			className="h-5 w-5"*/}
+									{/*			viewBox="0 0 20 20"*/}
+									{/*			fill="currentColor"*/}
+									{/*		>*/}
+									{/*			<path*/}
+									{/*				fillRule="evenodd"*/}
+									{/*				d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"*/}
+									{/*				clipRule="evenodd"*/}
+									{/*			/>*/}
+									{/*		</svg>*/}
+									{/*	</a>*/}
+									{/*	<a*/}
+									{/*		href="/"*/}
+									{/*		className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"*/}
+									{/*	>*/}
+									{/*		1*/}
+									{/*	</a>*/}
+									{/*	<a*/}
+									{/*		href="/"*/}
+									{/*		className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"*/}
+									{/*	>*/}
+									{/*		2*/}
+									{/*	</a>*/}
+									{/*	<a*/}
+									{/*		href="/"*/}
+									{/*		className="hidden md:inline-flex -ml-px relative items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"*/}
+									{/*	>*/}
+									{/*		3*/}
+									{/*	</a>*/}
+									{/*	<span className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700">*/}
+									{/*		...*/}
+									{/*	</span>*/}
+									{/*	<a*/}
+									{/*		href="/"*/}
+									{/*		className="hidden md:inline-flex -ml-px relative items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"*/}
+									{/*	>*/}
+									{/*		8*/}
+									{/*	</a>*/}
+									{/*	<a*/}
+									{/*		href="/"*/}
+									{/*		className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"*/}
+									{/*	>*/}
+									{/*		9*/}
+									{/*	</a>*/}
+									{/*	<a*/}
+									{/*		href="/"*/}
+									{/*		className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"*/}
+									{/*	>*/}
+									{/*		10*/}
+									{/*	</a>*/}
+									{/*	<a*/}
+									{/*		href="/"*/}
+									{/*		className="-ml-px relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150"*/}
+									{/*		aria-label="Next"*/}
+									{/*	>*/}
+									{/*		<svg*/}
+									{/*			className="h-5 w-5"*/}
+									{/*			viewBox="0 0 20 20"*/}
+									{/*			fill="currentColor"*/}
+									{/*		>*/}
+									{/*			<path*/}
+									{/*				fillRule="evenodd"*/}
+									{/*				d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"*/}
+									{/*				clipRule="evenodd"*/}
+									{/*			/>*/}
+									{/*		</svg>*/}
+									{/*	</a>*/}
+									{/*</nav>*/}
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</>
+			</div>
 		</AdminLayout>
 	);
 }

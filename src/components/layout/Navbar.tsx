@@ -233,6 +233,7 @@ function Navbar({
 									>
 										Settings
 									</Link>
+									<div className="border-t border-gray-100"></div>
 									<Link
 										to="/account/logout"
 										state={{
@@ -338,7 +339,7 @@ function ProfileDropdown(): ReactElement {
 						>
 							Settings
 						</Link>
-
+						<div className="border-t border-gray-200"></div>
 						<Link
 							to="/account/logout"
 							state={{

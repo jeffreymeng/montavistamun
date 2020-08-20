@@ -2429,9 +2429,9 @@ declare namespace GatsbyTypes {
 	type Unnamed_1_QueryVariables = Exact<{ [key: string]: never }>;
 
 	type Unnamed_1_Query = {
-		readonly socialsImage: Maybe<{
+		readonly hero: Maybe<{
 			readonly childImageSharp: Maybe<{
-				readonly fixed: Maybe<GatsbyImageSharpFixedFragment>;
+				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
 			}>;
 		}>;
 	};
@@ -2439,6 +2439,42 @@ declare namespace GatsbyTypes {
 	type Unnamed_2_QueryVariables = Exact<{ [key: string]: never }>;
 
 	type Unnamed_2_Query = {
+		readonly socialsImage: Maybe<{
+			readonly childImageSharp: Maybe<{
+				readonly fixed: Maybe<GatsbyImageSharpFixedFragment>;
+			}>;
+		}>;
+	};
+
+	type SecretariatPageQueryQueryVariables = Exact<{ [key: string]: never }>;
+
+	type SecretariatPageQueryQuery = {
+		readonly headerImage: Maybe<{
+			readonly childImageSharp: Maybe<{
+				readonly fluid: Maybe<GatsbyImageSharpFluidFragment>;
+			}>;
+		}>;
+		readonly placeholder: Maybe<{
+			readonly childImageSharp: Maybe<{
+				readonly fluid: Maybe<GatsbyImageSharpFluidFragment>;
+			}>;
+		}>;
+		readonly images: {
+			readonly edges: ReadonlyArray<{
+				readonly node: Pick<File, "name"> & {
+					readonly image: Maybe<{
+						readonly fluid: Maybe<
+							GatsbyImageSharpFluid_withWebpFragment
+						>;
+					}>;
+				};
+			}>;
+		};
+	};
+
+	type Unnamed_3_QueryVariables = Exact<{ [key: string]: never }>;
+
+	type Unnamed_3_Query = {
 		readonly logo: Maybe<{
 			readonly childImageSharp: Maybe<{
 				readonly fixed: Maybe<
@@ -2448,44 +2484,20 @@ declare namespace GatsbyTypes {
 		}>;
 	};
 
-	type Unnamed_3_QueryVariables = Exact<{ [key: string]: never }>;
-
-	type Unnamed_3_Query = {
-		readonly site: Maybe<{
-			readonly siteMetadata: Maybe<
-				Pick<SiteSiteMetadata, "title" | "description" | "author">
-			>;
-		}>;
-	};
-
 	type ConferencesPageQueryQueryVariables = Exact<{ [key: string]: never }>;
 
 	type ConferencesPageQueryQuery = {
-		readonly gmunc: Maybe<{
-			readonly childImageSharp: Maybe<{
-				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
+		readonly images: {
+			readonly edges: ReadonlyArray<{
+				readonly node: Pick<File, "name"> & {
+					readonly image: Maybe<{
+						readonly fluid: Maybe<
+							GatsbyImageSharpFluid_withWebpFragment
+						>;
+					}>;
+				};
 			}>;
-		}>;
-		readonly smunc: Maybe<{
-			readonly childImageSharp: Maybe<{
-				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
-			}>;
-		}>;
-		readonly dmunc: Maybe<{
-			readonly childImageSharp: Maybe<{
-				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
-			}>;
-		}>;
-	};
-
-	type Unnamed_4_QueryVariables = Exact<{ [key: string]: never }>;
-
-	type Unnamed_4_Query = {
-		readonly hero: Maybe<{
-			readonly childImageSharp: Maybe<{
-				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
-			}>;
-		}>;
+		};
 	};
 
 	type GatsbyImageSharpFixedFragment = Pick<
@@ -2661,29 +2673,13 @@ declare namespace GatsbyTypes {
 		"aspectRatio" | "src" | "srcSet" | "srcWebp" | "srcSetWebp" | "sizes"
 	>;
 
-	type SecretariatPageQueryQueryVariables = Exact<{ [key: string]: never }>;
+	type Unnamed_4_QueryVariables = Exact<{ [key: string]: never }>;
 
-	type SecretariatPageQueryQuery = {
-		readonly headerImage: Maybe<{
-			readonly childImageSharp: Maybe<{
-				readonly fluid: Maybe<GatsbyImageSharpFluidFragment>;
-			}>;
+	type Unnamed_4_Query = {
+		readonly site: Maybe<{
+			readonly siteMetadata: Maybe<
+				Pick<SiteSiteMetadata, "title" | "description" | "author">
+			>;
 		}>;
-		readonly placeholder: Maybe<{
-			readonly childImageSharp: Maybe<{
-				readonly fluid: Maybe<GatsbyImageSharpFluidFragment>;
-			}>;
-		}>;
-		readonly images: {
-			readonly edges: ReadonlyArray<{
-				readonly node: Pick<File, "name"> & {
-					readonly image: Maybe<{
-						readonly fluid: Maybe<
-							GatsbyImageSharpFluid_withWebpFragment
-						>;
-					}>;
-				};
-			}>;
-		};
 	};
 }

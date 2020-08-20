@@ -18,9 +18,20 @@ export async function handler(event, context) {
 			statusCode: 400,
 			body: `{"success":false, "code":"no_body","message":"No request body was found."}`,
 		};
+	const token = event.headers?.authorization?.replace("Bearer ", "");
+	if (!token) {
+		return {
+			statusCode: 403,
+			body: JSON.stringify({
+				success: false,
+				code: "unauthorized",
+				message: "Missing an auth token.",
+			}),
+		};
+	}
 	const params = JSON.parse(event.body);
-	const { token, target, newPermissions } = params;
-	if (!token || !target || !newPermissions) {
+	const { target, newPermissions } = params;
+	if (!target || !newPermissions) {
 		return {
 			statusCode: 400,
 			body: `{"success":false, "code":"invalid_parameters", "message":"One or more POST parameters were missing or malformed."}`,
@@ -93,6 +104,12 @@ export async function handler(event, context) {
 		};
 	} catch (error) {
 		console.log(error);
+		if (error.code && error.message) {
+			return {
+				statusCode: 400,
+				body: `{"success":false, "code":"firebase/${error.code}", "message":${error.message}`,
+			};
+		}
 		return {
 			statusCode: 500,
 			body: `{"success":false, "code":"internal_error", "message":"The server encountered an internal error while modifying the claims."}`,

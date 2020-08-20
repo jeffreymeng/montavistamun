@@ -77,7 +77,7 @@ export default function RecoverAccountPage(): React.ReactElement {
 // 								},
 // 								{
 // 									headers: {
-// 										Authorization: `Bearer ${token}`,
+// 										authorization: `Bearer ${token}`,
 // 									},
 // 								}
 // 							);

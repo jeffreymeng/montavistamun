@@ -4,6 +4,7 @@ import React from "react";
 import FluidImage from "../components/FluidImage";
 import Header from "../components/Header";
 import HorizontalCard from "../components/HorizontalCard";
+import CTA from "../components/index/CTA";
 import { Layout, Main } from "../components/layout";
 
 export default function ConferencesPage({
@@ -36,6 +37,17 @@ export default function ConferencesPage({
 				skills with your peers — all while having a blast!
 			</Header>
 			<Main>
+				<h1 className={"text-3xl leading-9 font-extrabold"}>
+					A special note about online conferences
+				</h1>
+				<p className="text-lg mt-3">
+					As the world adapts to life amid a global pandemic, we’re
+					adapting as well. That’s why we’re overhauling our approach
+					to teaching Model UN as many conferences transition to an
+					online format, and why we’re working hard to organize our
+					own online mock conferences while ensuring you receive the
+					most complete MUN experience possible.
+				</p>
 				{[
 					{
 						name: "Gunn Model UN Conference",
@@ -117,6 +129,7 @@ export default function ConferencesPage({
 						</HorizontalCard>
 					);
 				})}
+				<CTA />
 			</Main>
 		</Layout>
 	);

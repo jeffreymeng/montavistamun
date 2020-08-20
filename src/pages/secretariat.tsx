@@ -8,7 +8,7 @@ import HorizontalCard from "../components/HorizontalCard";
 import { Layout, Main } from "../components/layout";
 import secretariatData from "../components/secretariat/secretariatData";
 
-export default function AboutPage({
+export default function SecretariatPage({
 	data,
 }: {
 	data: {
@@ -26,12 +26,11 @@ export default function AboutPage({
 		};
 	};
 }): React.ReactElement {
-	console.log(data);
-
 	const images: [string, FluidImage][] = data.images.edges.map((edge) => [
 		edge.node.name,
 		{ childImageSharp: edge.node.image },
 	]);
+
 	const memeMode =
 		typeof window === "undefined"
 			? false
@@ -72,11 +71,12 @@ export default function AboutPage({
 							}
 							key={name}
 							image={
-								(images.find(
-									(img) =>
+								(images.find((img) => {
+									return (
 										img[0].toLowerCase() ==
 										name.toLowerCase().replace(/\s/g, "_")
-								) || [null, data.placeholder])[1]
+									);
+								}) || [null, data.placeholder])[1]
 							}
 						>
 							{memeMode ? memeBio : bio}
