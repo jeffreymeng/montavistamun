@@ -69,7 +69,7 @@ export default function AdminLayout({
 				]}
 				title={title}
 			/>
-			<div className="h-ca flex overflow-hidden bg-gray-100">
+			<div className="h-ca-no-footer flex overflow-hidden bg-gray-100">
 				{/* Off-canvas menu for mobile */}
 
 				<div className="md:hidden">

@@ -241,7 +241,7 @@ function SelectAllCheckbox({
 											<p className="text-sm leading-5 text-red-500 font-bold">
 												No users were selected because
 												of the following error
-												{errors.length != 1 && "s"}:
+												{errors.length != 1 && "s"}
 											</p>
 											<ul
 												className={
@@ -259,6 +259,72 @@ function SelectAllCheckbox({
 													)
 												)}
 											</ul>
+											Either fix their emails or{" "}
+											<button
+												className="link"
+												onClick={() => {
+													setEmails((current) => {
+														const parsed = current
+															.split(",")
+															.flatMap((e) =>
+																e.split("\n")
+															)
+															.map((e) =>
+																e.trim()
+															)
+															.filter((e) => e);
+														setErrors([]);
+														return parsed
+															.filter(
+																(email) =>
+																	!errors.some(
+																		(e) =>
+																			e[0] ==
+																			email
+																	)
+															)
+															.join("\n");
+													});
+												}}
+											>
+												{errors.length == 1
+													? `remove the ${
+															errors[0][1] ==
+															"invalid"
+																? "invalid email"
+																: "email of the nonexistent user"
+													  }`
+													: `remove all ${
+															errors.length
+													  }${
+															errors.some(
+																(e) =>
+																	e[1] ==
+																	"invalid"
+															)
+																? " invalid emails"
+																: ""
+													  }${
+															errors.some(
+																(e) =>
+																	e[1] ==
+																	"not_a_user"
+															)
+																? `${
+																		errors.some(
+																			(
+																				e
+																			) =>
+																				e[1] ==
+																				"invalid"
+																		)
+																			? " and"
+																			: ""
+																  } emails of nonexistent users`
+																: ""
+													  }`}
+												.
+											</button>
 										</div>
 									)}
 								</div>
@@ -368,7 +434,7 @@ export default function MembersPage(): React.ReactElement {
 		if (!dataRequiresUpdate) {
 			return;
 		}
-		setDataRequiresUpdate(false);
+
 		if (!firebase || !user) {
 			return;
 		}
@@ -393,6 +459,7 @@ export default function MembersPage(): React.ReactElement {
 			console.log(newUsers);
 			setUsers(newUsers);
 			setLoadingUsers(false);
+			setDataRequiresUpdate(false);
 		})();
 	}, [firebase, dataRequiresUpdate, user, userAdmin]);
 
@@ -588,6 +655,7 @@ export default function MembersPage(): React.ReactElement {
 		});
 		setShowConfirmModal(true);
 	};
+	const tableHeaders = ["Basic Information", "Permissions"];
 
 	return (
 		<AdminLayout title={"Members"}>
@@ -598,57 +666,6 @@ export default function MembersPage(): React.ReactElement {
 			>
 				Members
 			</h1>
-			{/*<div className="rounded-md bg-blue-100 p-4">*/}
-			{/*	<div className="flex">*/}
-			{/*		<div className="flex-shrink-0">*/}
-			{/*			<svg*/}
-			{/*				className="animate-spin h-5 w-5 text-blue-600"*/}
-			{/*				xmlns="http://www.w3.org/2000/svg"*/}
-			{/*				fill="none"*/}
-			{/*				viewBox="0 0 24 24"*/}
-			{/*			>*/}
-			{/*				<circle*/}
-			{/*					className="opacity-25"*/}
-			{/*					cx="12"*/}
-			{/*					cy="12"*/}
-			{/*					r="10"*/}
-			{/*					stroke="currentColor"*/}
-			{/*					strokeWidth="4"*/}
-			{/*				></circle>*/}
-			{/*				<path*/}
-			{/*					className="opacity-75"*/}
-			{/*					fill="currentColor"*/}
-			{/*					d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"*/}
-			{/*				></path>*/}
-			{/*			</svg>*/}
-			{/*		</div>*/}
-			{/*		<div className="ml-3">*/}
-			{/*			<p className="text-sm leading-5 font-medium text-blue-800">*/}
-			{/*				Setting 5 users (show) to <b>verified</b>.*/}
-			{/*			</p>*/}
-			{/*		</div>*/}
-			{/*		<div className="ml-auto pl-3">*/}
-			{/*			<div className="-mx-1.5 -my-1.5">*/}
-			{/*				<button*/}
-			{/*					className="inline-flex rounded-md p-1.5 text-green-500 hover:bg-green-100 focus:outline-none focus:bg-green-100 transition ease-in-out duration-150"*/}
-			{/*					aria-label="Dismiss"*/}
-			{/*				>*/}
-			{/*					<svg*/}
-			{/*						className="h-5 w-5"*/}
-			{/*						viewBox="0 0 20 20"*/}
-			{/*						fill="currentColor"*/}
-			{/*					>*/}
-			{/*						<path*/}
-			{/*							fillRule="evenodd"*/}
-			{/*							d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"*/}
-			{/*							clipRule="evenodd"*/}
-			{/*						/>*/}
-			{/*					</svg>*/}
-			{/*				</button>*/}
-			{/*			</div>*/}
-			{/*		</div>*/}
-			{/*	</div>*/}
-			{/*</div>*/}
 
 			<div className={"my-4"}>
 				<span className="relative z-0 inline-flex shadow-sm rounded-md mr-4">
@@ -849,25 +866,23 @@ export default function MembersPage(): React.ReactElement {
 											setUsers={setUsers}
 										/>
 									</th>
-									<th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-										Basic Information
-									</th>
-									{/*<th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">*/}
-									{/*	BMUN*/}
-									{/*</th>*/}
-									<th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
-										Permissions
-									</th>
-									{/*<th className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">*/}
-									{/*	Role*/}
-									{/*</th>*/}
-									{/*<th className="px-6 py-3 border-b border-gray-200 bg-gray-50"></th>*/}
+									{tableHeaders.map((name) => (
+										<th
+											key={name}
+											className="px-6 py-3 border-b border-gray-200 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider"
+										>
+											{name}
+										</th>
+									))}
 								</tr>
 							</thead>
 							<tbody className="bg-white">
 								{loadingUsers && (
 									<tr>
-										<td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 w-full">
+										<td
+											className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 w-full"
+											colSpan={tableHeaders.length + 1}
+										>
 											<div className="text-sm leading-5 font-medium text-gray-900">
 												Loading...
 											</div>
@@ -876,7 +891,10 @@ export default function MembersPage(): React.ReactElement {
 								)}
 								{!loadingUsers && users.length === 0 && (
 									<tr>
-										<td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 w-full">
+										<td
+											className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 w-full"
+											colSpan={tableHeaders.length + 1}
+										>
 											<div className="text-sm leading-5 font-medium text-gray-900">
 												Error: unable to load users
 											</div>
@@ -1001,13 +1019,11 @@ export default function MembersPage(): React.ReactElement {
 							<div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
 								<div>
 									<p className="text-sm leading-5 text-gray-700">
-										Showing{" "}
-										<span className="font-medium">1</span>{" "}
-										to{" "}
-										<span className="font-medium">10</span>{" "}
-										of{" "}
-										<span className="font-medium">97</span>{" "}
-										results
+										Showing All{" "}
+										<span className="font-medium">
+											{users.length}
+										</span>
+										Users
 									</p>
 								</div>
 								<div>

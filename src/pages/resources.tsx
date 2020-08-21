@@ -7,16 +7,21 @@ import AuthContext from "../context/AuthContext";
 export default function ResourcesPage(): React.ReactElement {
 	const firebase = useFirebase();
 	useRequireLogin();
-	const { verified, loading } = React.useContext(AuthContext);
+	const { user, verified, loading } = React.useContext(AuthContext);
 	const [hasPermission, setHasPermission] = React.useState(true);
 	const [id, setId] = React.useState("");
 	React.useEffect(() => {
 		if (!firebase) return;
-		if (!verified && !loading) {
-			setHasPermission(false);
-			return;
-		}
+
 		(async () => {
+			if (!verified && !loading) {
+				// so the user doesnt have to log out and back in to see this page
+				const upToDateClaims = await user?.getIdTokenResult(true);
+				if (!upToDateClaims?.claims?.verified) {
+					setHasPermission(false);
+					return;
+				}
+			}
 			const snapshot = await firebase
 				.firestore()
 				.collection("keys")
