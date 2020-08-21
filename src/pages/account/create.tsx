@@ -85,13 +85,25 @@ export default function CreatePage({
 	React.useEffect(() => {
 		if (!sysend) return;
 
-		const handler = (email: string) => {
-			console.log("EMAIL_VERIFIED", email);
+		const handler = (verifiedEmail: string) => {
+			if (email == verifiedEmail) {
+				console.log(
+					"VERIFICATION EMAIL MISMATCH. Expected " +
+						email +
+						" but got " +
+						verifiedEmail +
+						"."
+				);
+				return;
+			}
+			if (firebase) {
+				firebase.auth().currentUser?.reload();
+			}
 			setVerificationComplete(true);
 		};
 		sysend.on("email-verified", handler);
 		return () => sysend.off("email-verified", handler);
-	}, [sysend]);
+	}, [sysend, firebase]);
 	return (
 		<AuthLayout title={"Join MVMUN"}>
 			{done ? (

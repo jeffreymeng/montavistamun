@@ -1,6 +1,6 @@
 import { navigate, PageProps } from "gatsby";
 import React from "react";
-import { Layout, Main } from "../../../components/layout";
+import { AuthLayout } from "../../../components/layout";
 
 export default function HandleEmailActionPage({ location }: PageProps) {
 	const [error, setError] = React.useState(false);
@@ -40,29 +40,27 @@ export default function HandleEmailActionPage({ location }: PageProps) {
 	}, []);
 
 	return (
-		<Layout title="Loading...">
-			<Main className="h-ca">
-				{!error && <h1 className="text-3xl font-bold">Loading...</h1>}
-				{error && (
-					<>
-						<h1 className="text-3xl font-bold">
-							You found a broken link!
-						</h1>
-						<p>
-							This page can only be accessed via special links
-							that we send you. If you followed a link to get to
-							this page, please email{" "}
-							<a
-								href="mailto:support@montavistamun.com"
-								className="link"
-							>
-								support@montavistamun.com
-							</a>{" "}
-							and let us know how you got to this page.
-						</p>
-					</>
-				)}
-			</Main>
-		</Layout>
+		<AuthLayout title="Loading...">
+			{!error && <h1 className="text-3xl font-bold">Loading...</h1>}
+			{error && (
+				<>
+					<h1 className="text-3xl font-bold">
+						You found a broken link!
+					</h1>
+					<p>
+						This page can only be accessed via special links that we
+						send you. If you followed a link to get to this page,
+						please email{" "}
+						<a
+							href="mailto:support@montavistamun.com"
+							className="link"
+						>
+							support@montavistamun.com
+						</a>{" "}
+						and let us know how you got to this page.
+					</p>
+				</>
+			)}
+		</AuthLayout>
 	);
 }
