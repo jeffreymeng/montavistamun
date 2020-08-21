@@ -3,8 +3,6 @@ import firebaseType from "firebase";
 import * as Icons from "heroicons-react";
 import React from "react";
 import useFirebase from "../../auth/useFirebase";
-import useRequireLogin from "../../components/accounts/useRequireLogin";
-import { Layout, Main } from "../../components/layout";
 import AdminLayout from "../../components/layout/AdminLayout";
 import Transition from "../../components/Transition";
 import AuthContext from "../../context/AuthContext";
@@ -340,15 +338,15 @@ function SelectAllCheckbox({
 		</span>
 	);
 }
-export default function AboutPage(): React.ReactElement {
+export default function MembersPage(): React.ReactElement {
 	const [lastActionID, setLastActionID] = React.useState("");
 
 	const [selectedUsers, setSelectedUsers] = React.useState<Set<string>>(
 		() => new Set()
 	);
+	const [loadingUsers, setLoadingUsers] = React.useState(true);
 
 	const firebase = useFirebase();
-	useRequireLogin();
 	const {
 		user,
 		loading,
@@ -367,14 +365,14 @@ export default function AboutPage(): React.ReactElement {
 		setDataRequiresUpdate(true);
 	};
 	React.useEffect(() => {
-		if (!setDataRequiresUpdate) {
+		if (!dataRequiresUpdate) {
 			return;
 		}
 		setDataRequiresUpdate(false);
 		if (!firebase || !user) {
 			return;
 		}
-		if (!userVerified) {
+		if (!userAdmin) {
 			return;
 		}
 		(async () => {
@@ -394,8 +392,9 @@ export default function AboutPage(): React.ReactElement {
 			});
 			console.log(newUsers);
 			setUsers(newUsers);
+			setLoadingUsers(false);
 		})();
-	}, [firebase, dataRequiresUpdate, user, userVerified]);
+	}, [firebase, dataRequiresUpdate, user, userAdmin]);
 
 	const allUsers = users.map((u) => u.id);
 	const updateCheckbox = (
@@ -589,24 +588,7 @@ export default function AboutPage(): React.ReactElement {
 		});
 		setShowConfirmModal(true);
 	};
-	if (!loading && !userVerified) {
-		return (
-			<Layout title={"Permission Denied"}>
-				<Main>
-					<h1
-						className={
-							"text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10"
-						}
-					>
-						Permission Denied
-					</h1>
-					<p className={"mt-4 mb-20"}>
-						Sorry, but you don't have permission to view this page.
-					</p>
-				</Main>
-			</Layout>
-		);
-	}
+
 	return (
 		<AdminLayout title={"Members"}>
 			<h1
@@ -883,6 +865,24 @@ export default function AboutPage(): React.ReactElement {
 								</tr>
 							</thead>
 							<tbody className="bg-white">
+								{loadingUsers && (
+									<tr>
+										<td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 w-full">
+											<div className="text-sm leading-5 font-medium text-gray-900">
+												Loading...
+											</div>
+										</td>
+									</tr>
+								)}
+								{!loadingUsers && users.length === 0 && (
+									<tr>
+										<td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 w-full">
+											<div className="text-sm leading-5 font-medium text-gray-900">
+												Error: unable to load users
+											</div>
+										</td>
+									</tr>
+								)}
 								{users.map(({ id: id, data: data }) => (
 									<tr key={id}>
 										<td

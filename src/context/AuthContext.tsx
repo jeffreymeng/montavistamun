@@ -22,7 +22,7 @@ const AuthProvider = ({ children }: { children: ReactNode }): ReactElement => {
 	const [error, setError] = useState(null);
 	const [admin, setAdmin] = useState<boolean | null>(null);
 	const [auth, setAuth] = useState<firebaseType.auth.Auth | null>(null);
-	const [verified, setVerified] = useState(null);
+	const [verified, setVerified] = useState<boolean | null>(null);
 	React.useEffect(() => {
 		(async (): Promise<void> => {
 			// import firebase app
@@ -51,8 +51,8 @@ const AuthProvider = ({ children }: { children: ReactNode }): ReactElement => {
 					user.getIdTokenResult()
 						.then(({ claims }) => {
 							// console.log("CLAIMS", claims);
-							setAdmin(claims.admin);
-							setVerified(claims.verified);
+							setAdmin(!!claims.admin);
+							setVerified(!!claims.verified);
 							setLoading(false);
 						})
 						.catch((error) => {

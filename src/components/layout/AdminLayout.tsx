@@ -2,7 +2,10 @@ import { useLocation } from "@reach/router";
 import { Link } from "gatsby";
 import * as Icons from "heroicons-react";
 import React from "react";
+import AuthContext from "../../context/AuthContext";
+import useRequireLogin from "../accounts/useRequireLogin";
 import Transition from "../Transition";
+import { Layout, Main } from "./index";
 import Navbar from "./Navbar";
 import SEO from "./SEO";
 
@@ -30,7 +33,28 @@ export default function AdminLayout({
 	const [mobileSidebarExpanded, setMobileSidebarExpanded] = React.useState(
 		false
 	);
+	useRequireLogin();
+	const { loading, admin } = React.useContext(AuthContext);
 	const location = useLocation();
+
+	if (!loading && !admin) {
+		return (
+			<Layout title={"Permission Denied"}>
+				<Main>
+					<h1
+						className={
+							"text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10"
+						}
+					>
+						Permission Denied
+					</h1>
+					<p className={"mt-4 mb-20"}>
+						Sorry, but you don't have permission to view this page.
+					</p>
+				</Main>
+			</Layout>
+		);
+	}
 	return (
 		<div className={"flex flex-col min-h-screen font-sans text-gray-900 "}>
 			<Navbar shadow={"always"} noMaxWidth />

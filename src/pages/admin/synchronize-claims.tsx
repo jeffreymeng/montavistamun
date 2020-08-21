@@ -7,12 +7,12 @@ import AuthContext from "../../context/AuthContext";
 
 export default function AboutPage(): React.ReactElement {
 	const [eligible, setEligible] = React.useState(false);
-	const [loading, setLoading] = React.useState(false);
+	const [loading, setLoading] = React.useState(true);
 	const [token, setToken] = React.useState("");
 	const [success, setSuccess] = React.useState(false);
 	const [submitting, setSubmitting] = React.useState(false);
 	useRequireLogin();
-	const { user, loading: userLoading } = React.useContext(AuthContext);
+	const { user, loading: userLoading, admin } = React.useContext(AuthContext);
 	const firebase = useFirebase();
 	React.useEffect(() => {
 		if (!firebase || !user) return;
@@ -22,13 +22,13 @@ export default function AboutPage(): React.ReactElement {
 				.collection("users")
 				.doc(user.uid)
 				.get()
-				.then((snapshot) => snapshot.data())
-				.then((data) => {
-					setEligible(data?.admin);
-					setLoading(false);
-				}),
+				.then((snapshot) => snapshot.data()),
 			user.getIdToken().then((token) => setToken(token)),
-		]);
+		]).then((data) => {
+			setEligible(data[0]?.admin);
+
+			setLoading(false);
+		});
 	}, [firebase, user]);
 
 	return (
@@ -45,10 +45,15 @@ export default function AboutPage(): React.ReactElement {
 					Click the button below to update your firebase custom
 					administrator claim based on the firestore database. If you
 					are an admin in the firestore database, this utility will
-					make you an admin according to the custom claims. This is
+					update your custom claims to an administrator too. This is
 					useful for giving the first administrator the admin claim.
 				</p>
-				{success ? (
+				{admin ? (
+					<p>
+						You are already an administrator according to your
+						custom claims.
+					</p>
+				) : success ? (
 					<p>Your custom claim has been updated.</p>
 				) : loading || !token || !user ? (
 					<p>Checking eligibility...</p>
