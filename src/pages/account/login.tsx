@@ -153,6 +153,18 @@ export default function LoginPage({
 											password
 										)
 										.then((userCred) => {
+											if (userCred.user?.uid) {
+												heap.identify(
+													"fbuser-" +
+														userCred.user.uid
+												);
+												heap.addUserProperties({
+													hasAccount: true,
+													emailVerified:
+														userCred.user
+															.emailVerified,
+												});
+											}
 											setJustLoggedIn(true);
 											if (
 												userCred.user &&

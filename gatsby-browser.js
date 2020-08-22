@@ -7,7 +7,8 @@ import React from "react";
  * @param element ReactElement
  * @returns ReactElement
  */
-// eslint-disable-next-line react/prop-types
+// eslint-disable-next-line
+// @ts-ignore
 export const wrapRootElement = ({ element }) => (
 	<AuthProvider>{element}</AuthProvider>
 );

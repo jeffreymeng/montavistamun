@@ -1,7 +1,27 @@
 import React from "react";
+import AuthContext from "../../context/AuthContext";
 import Footer from "./Footer";
 import Navbar from "./Navbar";
 import SEO from "./SEO";
+
+function useHeapAnalytics() {
+	const { user, loading, verified, admin } = React.useContext(AuthContext);
+	if (user) {
+		heap.identify("fbuser-" + user.uid);
+		heap.addUserProperties({
+			name: user.displayName,
+			email: user.email,
+			hasAccount: true,
+			emailVerified: user.emailVerified,
+			verifiedMember: verified,
+			admin,
+		});
+	} else {
+		heap.addUserProperties({
+			hasAccount: false,
+		});
+	}
+}
 
 export default function Layout({
 	children,
@@ -51,6 +71,7 @@ export default function Layout({
 	 */
 	navbarShadow?: "always" | "scroll" | "never";
 }): React.ReactElement {
+	useHeapAnalytics();
 	return (
 		<div
 			className={

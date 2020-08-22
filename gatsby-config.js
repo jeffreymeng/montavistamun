@@ -54,6 +54,28 @@ module.exports = {
 				outputPath: `src/__generated__/gatsby-types.d.ts`,
 			},
 		},
+		{
+			resolve: `@sentry/gatsby`,
+			options: {
+				dsn:
+					"https://2dd450cde46547e1b78dba0f1c091eb3@o437743.ingest.sentry.io/5400669",
+				environment: process.env.NODE_ENV,
+				enabled: (() =>
+					["production", "stage"].indexOf(process.env.NODE_ENV) !==
+					-1)(),
+			},
+		},
+		{
+			resolve: "gatsby-plugin-heap",
+			options: {
+				appId:
+					["production", "stage"].indexOf(process.env.NODE_ENV) !== -1
+						? "1872368537"
+						: "802409435",
+
+				enableOnDevMode: true, // if 'false', heap will be fired on NODE_ENV=production only
+			},
+		},
 		`gatsby-plugin-sass`,
 		// `gatsby-plugin-offline`,
 	],
