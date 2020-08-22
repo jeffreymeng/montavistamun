@@ -11,17 +11,21 @@ export default function ResourcesPage(): React.ReactElement {
 	const [hasPermission, setHasPermission] = React.useState(true);
 	const [id, setId] = React.useState("");
 	React.useEffect(() => {
-		if (!firebase) return;
+		if (!firebase || loading) return;
 
 		(async () => {
 			if (!verified && !loading) {
 				// so the user doesnt have to log out and back in to see this page
 				const upToDateClaims = await user?.getIdTokenResult(true);
+				console.log(upToDateClaims);
+				console.log(!upToDateClaims?.claims?.verified);
 				if (!upToDateClaims?.claims?.verified) {
+					console.log("returned");
 					setHasPermission(false);
 					return;
 				}
 			}
+			console.log("called");
 			const snapshot = await firebase
 				.firestore()
 				.collection("keys")

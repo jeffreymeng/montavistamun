@@ -1022,7 +1022,7 @@ export default function MembersPage(): React.ReactElement {
 										Showing All{" "}
 										<span className="font-medium">
 											{users.length}
-										</span>
+										</span>{" "}
 										Users
 									</p>
 								</div>

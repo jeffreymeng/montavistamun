@@ -13,6 +13,7 @@ export default function AboutPage({
 }: {
 	data: {
 		headerImage: FluidImage;
+		smunc: FluidImage;
 	};
 }): React.ReactElement {
 	return (
@@ -22,9 +23,7 @@ export default function AboutPage({
 			</Header>
 			<Main wide>
 				<HorizontalCard
-					imageURL={
-						"https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80"
-					}
+					image={data.smunc}
 					large
 					title={awardsData[0].name}
 					subtitle={awardsData[0].time}
@@ -156,6 +155,13 @@ function ConferenceAwardCard({
 export const query = graphql`
 	query AwardsPageQuery {
 		headerImage: file(relativePath: { eq: "headers/awards.jpg" }) {
+			childImageSharp {
+				fluid(maxWidth: 1200, quality: 90) {
+					...GatsbyImageSharpFluid_withWebp
+				}
+			}
+		}
+		smunc: file(relativePath: { eq: "conferences/smunc.jpeg" }) {
 			childImageSharp {
 				fluid(maxWidth: 1200, quality: 90) {
 					...GatsbyImageSharpFluid_withWebp

@@ -107,49 +107,61 @@ export default function AboutPage(): React.ReactElement {
 
 									{[
 										{
-											subtitle: "Next Member Meeting",
-											title: "August 18, 3:30 PM",
+											subtitle: "First Member Meeting",
+											title: "Details Coming Soon",
 											primaryAction: {
-												title: "Join via Zoom",
-												link: "https://google.com",
+												title: "Zoom Link Coming Soon",
+												// link: "https://zoom.us",
 											},
 											secondaryAction: {
 												title: "View All Events",
 												link: "/calendar",
 											},
 											icon: "UserGroup",
-										},
-										{
-											subtitle: "Registration Now Open",
-											title:
-												"Berkeley Model United Nations Conference (BMUN)",
+										} as {
+											subtitle: string;
+											title: string;
 											primaryAction: {
-												title: "Register Now",
-												link:
-													"/conferences/bmun/register",
-											},
+												title: string;
+												link: string;
+											};
 											secondaryAction: {
-												title: "Learn More",
-												link: "/conferences/bmun",
-											},
-											icon: "Calendar",
+												title: string;
+												link: string;
+											};
+											icon: string;
 										},
-										{
-											subtitle:
-												"Conference You're Attending",
-											title:
-												"Santa Clara Valley Model United Nations (SCVMUN)",
-											primaryAction: {
-												title: "Update Registration",
-												link:
-													"/conferences/scvmun/register",
-											},
-											secondaryAction: {
-												title: "Learn More",
-												link: "/conferences/scvmun",
-											},
-											icon: "Calendar",
-										},
+										// {
+										// 	subtitle: "Registration Now Open",
+										// 	title:
+										// 		"Berkeley Model United Nations Conference (BMUN)",
+										// 	primaryAction: {
+										// 		title: "Register Now",
+										// 		link:
+										// 			"/conferences/bmun/register",
+										// 	},
+										// 	secondaryAction: {
+										// 		title: "Learn More",
+										// 		link: "/conferences/bmun",
+										// 	},
+										// 	icon: "Calendar",
+										// },
+										// {
+										// 	subtitle:
+										// 		"Conference You're Attending",
+										// 	title:
+										// 		"Santa Clara Valley Model United Nations (SCVMUN)",
+										// 	primaryAction: {
+										// 		title: "Update Registration",
+										// 		link:
+										// 			"/conferences/scvmun/register",
+										// 	},
+										// 	secondaryAction: {
+										// 		title: "Learn More",
+										// 		link: "/conferences/scvmun",
+										// 	},
+										// 	icon: "Calendar",
+										// },
 									].map((card) => (
 										<div
 											key={card.title + card.subtitle}

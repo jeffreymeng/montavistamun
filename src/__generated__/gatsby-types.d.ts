@@ -2434,14 +2434,6 @@ declare namespace GatsbyTypes {
 		readonly glob: Maybe<Scalars["String"]>;
 	};
 
-	type PagesQueryQueryVariables = Exact<{ [key: string]: never }>;
-
-	type PagesQueryQuery = {
-		readonly allSitePage: {
-			readonly nodes: ReadonlyArray<Pick<SitePage, "path">>;
-		};
-	};
-
 	type GatsbyImageSharpFluid_withWebpFragment = Pick<
 		ImageSharpFluid,
 		| "base64"
@@ -2457,6 +2449,11 @@ declare namespace GatsbyTypes {
 
 	type AwardsPageQueryQuery = {
 		readonly headerImage: Maybe<{
+			readonly childImageSharp: Maybe<{
+				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
+			}>;
+		}>;
+		readonly smunc: Maybe<{
 			readonly childImageSharp: Maybe<{
 				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
 			}>;
@@ -2507,6 +2504,14 @@ declare namespace GatsbyTypes {
 					}>;
 				};
 			}>;
+		};
+	};
+
+	type PagesQueryQueryVariables = Exact<{ [key: string]: never }>;
+
+	type PagesQueryQuery = {
+		readonly allSitePage: {
+			readonly nodes: ReadonlyArray<Pick<SitePage, "path">>;
 		};
 	};
 }
