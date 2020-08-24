@@ -70,8 +70,8 @@ module.exports = {
 			options: {
 				appId:
 					["production", "stage"].indexOf(process.env.NODE_ENV) !== -1
-						? "1872368537"
-						: "802409435",
+						? "802409435"
+						: "1872368537",
 
 				enableOnDevMode: true, // if 'false', heap will be fired on NODE_ENV=production only
 			},
