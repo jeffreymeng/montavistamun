@@ -58,6 +58,7 @@ const AuthProvider = ({ children }: { children: ReactNode }): ReactElement => {
 						.catch((error) => {
 							console.log(error);
 							setAdmin(false);
+							setVerified(false);
 							setLoading(false);
 						});
 				} else {

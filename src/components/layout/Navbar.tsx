@@ -5,7 +5,7 @@ import * as Icon from "heroicons-react";
 import React, { ReactElement, useState } from "react";
 import AuthContext from "../../context/AuthContext";
 import Transition from "../Transition";
-import defaultNavLinks from "./navLinks";
+import navLinks from "./navLinks";
 
 function Navbar({
 	unscrolledClassName,
@@ -28,10 +28,6 @@ function Navbar({
 	const [isExpanded, setIsExpanded] = useState(false);
 	const auth = React.useContext(AuthContext);
 	const toggleExpansion = () => setIsExpanded((old) => !old);
-	let navLinks = defaultNavLinks;
-	if (auth.verified) {
-		navLinks = [...navLinks, "Resources"];
-	}
 
 	// only show a box shadow when the user has scrolled a little bit
 	const [showShadow, setShowShadow] = React.useState(shadow === "always");
@@ -102,7 +98,10 @@ function Navbar({
 								</Link>
 							</div>
 							<div className="hidden md:ml-6 md:flex">
-								{navLinks.map((page) => (
+								{[
+									...navLinks,
+									...(auth.verified ? ["Resources"] : []),
+								].map((page) => (
 									<Link
 										to={`/${page.toLowerCase()}`}
 										key={page}
@@ -254,9 +253,8 @@ function Navbar({
 	);
 }
 function ProfileDropdown(): ReactElement {
-	const auth = React.useContext(AuthContext);
 	const [expanded, setExpanded] = React.useState(false);
-	const { user, loading } = React.useContext(AuthContext);
+	const { user, loading, admin } = React.useContext(AuthContext);
 	const toggleExpanded = () => {
 		setExpanded((old) => !old);
 	};
@@ -322,7 +320,7 @@ function ProfileDropdown(): ReactElement {
 						>
 							Member Dashboard
 						</Link>
-						{auth.admin && (
+						{admin && (
 							<Link
 								to="/admin"
 								className="block px-4 py-2 text-sm leading-5 text-gray-700 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 transition duration-150 ease-in-out"
