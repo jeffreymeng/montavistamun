@@ -6,12 +6,7 @@ import useFirebase from "../../auth/useFirebase";
 import AdminLayout from "../../components/layout/AdminLayout";
 import Transition from "../../components/Transition";
 import AuthContext from "../../context/AuthContext";
-import {
-	getFirstDayOfSchool,
-	getGrade,
-	getIsSummer,
-	getLastDayOfSchool,
-} from "../../utils/schoolYearUtils";
+import { getGrade } from "../../utils/schoolYearUtils";
 interface UserData {
 	classOf: number;
 	email: string;
@@ -661,7 +656,6 @@ export default function MembersPage(): React.ReactElement {
 		setShowConfirmModal(true);
 	};
 	const tableHeaders = ["Basic Information", "Permissions"];
-	console.log(getFirstDayOfSchool(), getLastDayOfSchool(), getIsSummer());
 	return (
 		<AdminLayout title={"Members"}>
 			<h1

@@ -15,6 +15,20 @@ type ConferenceAwardData = {
 };
 const data: ConferenceAwardData[] = [
 	{
+		name: "BMUN 2020",
+		time: "February 2019",
+		delegationAward: null,
+		delegateAwards: [
+			{
+				type: "Honorable",
+				awards: [
+					"Arthur Ji (Financial Security Board)",
+					"Howard Peng (Joint Crisis Committee -- New)",
+				],
+			},
+		],
+	},
+	{
 		name: "SCVMUN 2020",
 		time: "January 2019",
 		delegationAward: null,
