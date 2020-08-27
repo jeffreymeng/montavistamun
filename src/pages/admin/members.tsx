@@ -6,7 +6,12 @@ import useFirebase from "../../auth/useFirebase";
 import AdminLayout from "../../components/layout/AdminLayout";
 import Transition from "../../components/Transition";
 import AuthContext from "../../context/AuthContext";
-import { getGrade } from "../../utils/schoolYearUtils";
+import {
+	getFirstDayOfSchool,
+	getGrade,
+	getIsSummer,
+	getLastDayOfSchool,
+} from "../../utils/schoolYearUtils";
 interface UserData {
 	classOf: number;
 	email: string;
@@ -656,7 +661,7 @@ export default function MembersPage(): React.ReactElement {
 		setShowConfirmModal(true);
 	};
 	const tableHeaders = ["Basic Information", "Permissions"];
-
+	console.log(getFirstDayOfSchool(), getLastDayOfSchool(), getIsSummer());
 	return (
 		<AdminLayout title={"Members"}>
 			<h1
@@ -738,6 +743,31 @@ export default function MembersPage(): React.ReactElement {
 						Demote from Admin
 					</button>
 				</span>
+				{/* Disabled because it's not that often that an update is necessary, and adding it may cause more unnecessary updates which are expensive.
+				 Instead, users must reload to update the data, which takes more time and encourages them not to update unnecessarily. */}
+				{/*<span className="relative z-0 inline-flex shadow-sm rounded-md mx-4">*/}
+				{/*	<button*/}
+				{/*		type="button"*/}
+				{/*		disabled={dataRequiresUpdate || loadingUsers}*/}
+				{/*		className={*/}
+				{/*			(dataRequiresUpdate || loadingUsers*/}
+				{/*				? "bg-gray-200"*/}
+				{/*				: "bg-white hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 ") +*/}
+				{/*			" " +*/}
+				{/*			"relative inline-flex items-center px-4 py-2 rounded-md border border-gray-300 text-sm leading-5 font-medium text-gray-700 transition ease-in-out duration-150"*/}
+				{/*		}*/}
+				{/*		onClick={() => scheduleDataUpdate()}*/}
+				{/*	>*/}
+				{/*		<Icons.Refresh*/}
+				{/*			className={*/}
+				{/*				"h-5 w-5 text-gray-600" +*/}
+				{/*				(dataRequiresUpdate || loadingUsers*/}
+				{/*					? " animate-spin"*/}
+				{/*					: "")*/}
+				{/*			}*/}
+				{/*		/>*/}
+				{/*	</button>*/}
+				{/*</span>*/}
 			</div>
 			<Transition show={showConfirmModal}>
 				<div className="fixed bottom-0 inset-x-0 px-4 pb-6 sm:inset-0 sm:p-0 sm:flex sm:items-center sm:justify-center normal-case tracking-normal">

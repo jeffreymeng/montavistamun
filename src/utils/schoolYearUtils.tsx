@@ -8,7 +8,7 @@ export const getLastDayOfSchool = (year?: number): moment.Moment => {
 	year = year || moment().year();
 
 	// the cutoff for the grade (for this website) is the first thursday of June, at noon.
-	const startOfMonth = moment().year(year).month("June");
+	const startOfMonth = moment().year(year).month("June").startOf("month");
 	let daysUntilThursday = 4 - startOfMonth.day(); // thursday = 4
 	if (daysUntilThursday == 0) return startOfMonth.startOf("day").hours(12); // already first thursday
 	if (daysUntilThursday < 0) daysUntilThursday += 7;
@@ -59,7 +59,7 @@ export const getGrade = (classOf: number): number => {
  * returns whether or not it is summer
  */
 export const getIsSummer = (): boolean => {
-	// don't calculate the first and last days of school unless necessrary
+	// don't calculate the first and last days of school unless necessary
 	const month = moment().month();
 	if (month == 5 || month == 7)
 		// 5 == june, 7 == august

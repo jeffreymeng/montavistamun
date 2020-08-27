@@ -1426,14 +1426,14 @@ declare namespace GatsbyTypes {
 		internalComponentName: Maybe<StringQueryOperatorInput>;
 		componentChunkName: Maybe<StringQueryOperatorInput>;
 		matchPath: Maybe<StringQueryOperatorInput>;
-		isCreatedByStatefulCreatePages: Maybe<BooleanQueryOperatorInput>;
-		pluginCreator: Maybe<SitePluginFilterInput>;
-		pluginCreatorId: Maybe<StringQueryOperatorInput>;
-		componentPath: Maybe<StringQueryOperatorInput>;
 		id: Maybe<StringQueryOperatorInput>;
 		parent: Maybe<NodeFilterInput>;
 		children: Maybe<NodeFilterListInput>;
 		internal: Maybe<InternalFilterInput>;
+		isCreatedByStatefulCreatePages: Maybe<BooleanQueryOperatorInput>;
+		pluginCreator: Maybe<SitePluginFilterInput>;
+		pluginCreatorId: Maybe<StringQueryOperatorInput>;
+		componentPath: Maybe<StringQueryOperatorInput>;
 	};
 
 	type Query_allSitePageArgs = {
@@ -1448,6 +1448,8 @@ declare namespace GatsbyTypes {
 		siteMetadata: Maybe<SiteSiteMetadataFilterInput>;
 		port: Maybe<IntQueryOperatorInput>;
 		host: Maybe<StringQueryOperatorInput>;
+		polyfill: Maybe<BooleanQueryOperatorInput>;
+		pathPrefix: Maybe<StringQueryOperatorInput>;
 		id: Maybe<StringQueryOperatorInput>;
 		parent: Maybe<NodeFilterInput>;
 		children: Maybe<NodeFilterListInput>;
@@ -1524,6 +1526,8 @@ declare namespace GatsbyTypes {
 		readonly siteMetadata: Maybe<SiteSiteMetadata>;
 		readonly port: Maybe<Scalars["Int"]>;
 		readonly host: Maybe<Scalars["String"]>;
+		readonly polyfill: Maybe<Scalars["Boolean"]>;
+		readonly pathPrefix: Maybe<Scalars["String"]>;
 		readonly id: Scalars["ID"];
 		readonly parent: Maybe<Node>;
 		readonly children: ReadonlyArray<Node>;
@@ -1723,6 +1727,8 @@ declare namespace GatsbyTypes {
 		siteMetadata___author = "siteMetadata.author",
 		port = "port",
 		host = "host",
+		polyfill = "polyfill",
+		pathPrefix = "pathPrefix",
 		id = "id",
 		parent___id = "parent.id",
 		parent___parent___id = "parent.parent.id",
@@ -1816,6 +1822,8 @@ declare namespace GatsbyTypes {
 		readonly siteMetadata: Maybe<SiteSiteMetadataFilterInput>;
 		readonly port: Maybe<IntQueryOperatorInput>;
 		readonly host: Maybe<StringQueryOperatorInput>;
+		readonly polyfill: Maybe<BooleanQueryOperatorInput>;
+		readonly pathPrefix: Maybe<StringQueryOperatorInput>;
 		readonly id: Maybe<StringQueryOperatorInput>;
 		readonly parent: Maybe<NodeFilterInput>;
 		readonly children: Maybe<NodeFilterListInput>;
@@ -1837,14 +1845,14 @@ declare namespace GatsbyTypes {
 		readonly internalComponentName: Scalars["String"];
 		readonly componentChunkName: Scalars["String"];
 		readonly matchPath: Maybe<Scalars["String"]>;
-		readonly isCreatedByStatefulCreatePages: Maybe<Scalars["Boolean"]>;
-		readonly pluginCreator: Maybe<SitePlugin>;
-		readonly pluginCreatorId: Maybe<Scalars["String"]>;
-		readonly componentPath: Maybe<Scalars["String"]>;
 		readonly id: Scalars["ID"];
 		readonly parent: Maybe<Node>;
 		readonly children: ReadonlyArray<Node>;
 		readonly internal: Internal;
+		readonly isCreatedByStatefulCreatePages: Maybe<Scalars["Boolean"]>;
+		readonly pluginCreator: Maybe<SitePlugin>;
+		readonly pluginCreatorId: Maybe<Scalars["String"]>;
+		readonly componentPath: Maybe<Scalars["String"]>;
 	};
 
 	type SitePageConnection = {
@@ -1878,90 +1886,6 @@ declare namespace GatsbyTypes {
 		internalComponentName = "internalComponentName",
 		componentChunkName = "componentChunkName",
 		matchPath = "matchPath",
-		isCreatedByStatefulCreatePages = "isCreatedByStatefulCreatePages",
-		pluginCreator___id = "pluginCreator.id",
-		pluginCreator___parent___id = "pluginCreator.parent.id",
-		pluginCreator___parent___parent___id = "pluginCreator.parent.parent.id",
-		pluginCreator___parent___parent___children = "pluginCreator.parent.parent.children",
-		pluginCreator___parent___children = "pluginCreator.parent.children",
-		pluginCreator___parent___children___id = "pluginCreator.parent.children.id",
-		pluginCreator___parent___children___children = "pluginCreator.parent.children.children",
-		pluginCreator___parent___internal___content = "pluginCreator.parent.internal.content",
-		pluginCreator___parent___internal___contentDigest = "pluginCreator.parent.internal.contentDigest",
-		pluginCreator___parent___internal___description = "pluginCreator.parent.internal.description",
-		pluginCreator___parent___internal___fieldOwners = "pluginCreator.parent.internal.fieldOwners",
-		pluginCreator___parent___internal___ignoreType = "pluginCreator.parent.internal.ignoreType",
-		pluginCreator___parent___internal___mediaType = "pluginCreator.parent.internal.mediaType",
-		pluginCreator___parent___internal___owner = "pluginCreator.parent.internal.owner",
-		pluginCreator___parent___internal___type = "pluginCreator.parent.internal.type",
-		pluginCreator___children = "pluginCreator.children",
-		pluginCreator___children___id = "pluginCreator.children.id",
-		pluginCreator___children___parent___id = "pluginCreator.children.parent.id",
-		pluginCreator___children___parent___children = "pluginCreator.children.parent.children",
-		pluginCreator___children___children = "pluginCreator.children.children",
-		pluginCreator___children___children___id = "pluginCreator.children.children.id",
-		pluginCreator___children___children___children = "pluginCreator.children.children.children",
-		pluginCreator___children___internal___content = "pluginCreator.children.internal.content",
-		pluginCreator___children___internal___contentDigest = "pluginCreator.children.internal.contentDigest",
-		pluginCreator___children___internal___description = "pluginCreator.children.internal.description",
-		pluginCreator___children___internal___fieldOwners = "pluginCreator.children.internal.fieldOwners",
-		pluginCreator___children___internal___ignoreType = "pluginCreator.children.internal.ignoreType",
-		pluginCreator___children___internal___mediaType = "pluginCreator.children.internal.mediaType",
-		pluginCreator___children___internal___owner = "pluginCreator.children.internal.owner",
-		pluginCreator___children___internal___type = "pluginCreator.children.internal.type",
-		pluginCreator___internal___content = "pluginCreator.internal.content",
-		pluginCreator___internal___contentDigest = "pluginCreator.internal.contentDigest",
-		pluginCreator___internal___description = "pluginCreator.internal.description",
-		pluginCreator___internal___fieldOwners = "pluginCreator.internal.fieldOwners",
-		pluginCreator___internal___ignoreType = "pluginCreator.internal.ignoreType",
-		pluginCreator___internal___mediaType = "pluginCreator.internal.mediaType",
-		pluginCreator___internal___owner = "pluginCreator.internal.owner",
-		pluginCreator___internal___type = "pluginCreator.internal.type",
-		pluginCreator___resolve = "pluginCreator.resolve",
-		pluginCreator___name = "pluginCreator.name",
-		pluginCreator___version = "pluginCreator.version",
-		pluginCreator___pluginOptions___name = "pluginCreator.pluginOptions.name",
-		pluginCreator___pluginOptions___path = "pluginCreator.pluginOptions.path",
-		pluginCreator___pluginOptions___ignore = "pluginCreator.pluginOptions.ignore",
-		pluginCreator___pluginOptions___short_name = "pluginCreator.pluginOptions.short_name",
-		pluginCreator___pluginOptions___start_url = "pluginCreator.pluginOptions.start_url",
-		pluginCreator___pluginOptions___background_color = "pluginCreator.pluginOptions.background_color",
-		pluginCreator___pluginOptions___theme_color = "pluginCreator.pluginOptions.theme_color",
-		pluginCreator___pluginOptions___display = "pluginCreator.pluginOptions.display",
-		pluginCreator___pluginOptions___icon = "pluginCreator.pluginOptions.icon",
-		pluginCreator___pluginOptions___cache_busting_mode = "pluginCreator.pluginOptions.cache_busting_mode",
-		pluginCreator___pluginOptions___include_favicon = "pluginCreator.pluginOptions.include_favicon",
-		pluginCreator___pluginOptions___legacy = "pluginCreator.pluginOptions.legacy",
-		pluginCreator___pluginOptions___theme_color_in_head = "pluginCreator.pluginOptions.theme_color_in_head",
-		pluginCreator___pluginOptions___cacheDigest = "pluginCreator.pluginOptions.cacheDigest",
-		pluginCreator___pluginOptions___outputPath = "pluginCreator.pluginOptions.outputPath",
-		pluginCreator___pluginOptions___dsn = "pluginCreator.pluginOptions.dsn",
-		pluginCreator___pluginOptions___environment = "pluginCreator.pluginOptions.environment",
-		pluginCreator___pluginOptions___enabled = "pluginCreator.pluginOptions.enabled",
-		pluginCreator___pluginOptions___appId = "pluginCreator.pluginOptions.appId",
-		pluginCreator___pluginOptions___enableOnDevMode = "pluginCreator.pluginOptions.enableOnDevMode",
-		pluginCreator___pluginOptions___pathCheck = "pluginCreator.pluginOptions.pathCheck",
-		pluginCreator___nodeAPIs = "pluginCreator.nodeAPIs",
-		pluginCreator___browserAPIs = "pluginCreator.browserAPIs",
-		pluginCreator___ssrAPIs = "pluginCreator.ssrAPIs",
-		pluginCreator___pluginFilepath = "pluginCreator.pluginFilepath",
-		pluginCreator___packageJson___name = "pluginCreator.packageJson.name",
-		pluginCreator___packageJson___description = "pluginCreator.packageJson.description",
-		pluginCreator___packageJson___version = "pluginCreator.packageJson.version",
-		pluginCreator___packageJson___main = "pluginCreator.packageJson.main",
-		pluginCreator___packageJson___license = "pluginCreator.packageJson.license",
-		pluginCreator___packageJson___dependencies = "pluginCreator.packageJson.dependencies",
-		pluginCreator___packageJson___dependencies___name = "pluginCreator.packageJson.dependencies.name",
-		pluginCreator___packageJson___dependencies___version = "pluginCreator.packageJson.dependencies.version",
-		pluginCreator___packageJson___devDependencies = "pluginCreator.packageJson.devDependencies",
-		pluginCreator___packageJson___devDependencies___name = "pluginCreator.packageJson.devDependencies.name",
-		pluginCreator___packageJson___devDependencies___version = "pluginCreator.packageJson.devDependencies.version",
-		pluginCreator___packageJson___peerDependencies = "pluginCreator.packageJson.peerDependencies",
-		pluginCreator___packageJson___peerDependencies___name = "pluginCreator.packageJson.peerDependencies.name",
-		pluginCreator___packageJson___peerDependencies___version = "pluginCreator.packageJson.peerDependencies.version",
-		pluginCreator___packageJson___keywords = "pluginCreator.packageJson.keywords",
-		pluginCreatorId = "pluginCreatorId",
-		componentPath = "componentPath",
 		id = "id",
 		parent___id = "parent.id",
 		parent___parent___id = "parent.parent.id",
@@ -2048,6 +1972,90 @@ declare namespace GatsbyTypes {
 		internal___mediaType = "internal.mediaType",
 		internal___owner = "internal.owner",
 		internal___type = "internal.type",
+		isCreatedByStatefulCreatePages = "isCreatedByStatefulCreatePages",
+		pluginCreator___id = "pluginCreator.id",
+		pluginCreator___parent___id = "pluginCreator.parent.id",
+		pluginCreator___parent___parent___id = "pluginCreator.parent.parent.id",
+		pluginCreator___parent___parent___children = "pluginCreator.parent.parent.children",
+		pluginCreator___parent___children = "pluginCreator.parent.children",
+		pluginCreator___parent___children___id = "pluginCreator.parent.children.id",
+		pluginCreator___parent___children___children = "pluginCreator.parent.children.children",
+		pluginCreator___parent___internal___content = "pluginCreator.parent.internal.content",
+		pluginCreator___parent___internal___contentDigest = "pluginCreator.parent.internal.contentDigest",
+		pluginCreator___parent___internal___description = "pluginCreator.parent.internal.description",
+		pluginCreator___parent___internal___fieldOwners = "pluginCreator.parent.internal.fieldOwners",
+		pluginCreator___parent___internal___ignoreType = "pluginCreator.parent.internal.ignoreType",
+		pluginCreator___parent___internal___mediaType = "pluginCreator.parent.internal.mediaType",
+		pluginCreator___parent___internal___owner = "pluginCreator.parent.internal.owner",
+		pluginCreator___parent___internal___type = "pluginCreator.parent.internal.type",
+		pluginCreator___children = "pluginCreator.children",
+		pluginCreator___children___id = "pluginCreator.children.id",
+		pluginCreator___children___parent___id = "pluginCreator.children.parent.id",
+		pluginCreator___children___parent___children = "pluginCreator.children.parent.children",
+		pluginCreator___children___children = "pluginCreator.children.children",
+		pluginCreator___children___children___id = "pluginCreator.children.children.id",
+		pluginCreator___children___children___children = "pluginCreator.children.children.children",
+		pluginCreator___children___internal___content = "pluginCreator.children.internal.content",
+		pluginCreator___children___internal___contentDigest = "pluginCreator.children.internal.contentDigest",
+		pluginCreator___children___internal___description = "pluginCreator.children.internal.description",
+		pluginCreator___children___internal___fieldOwners = "pluginCreator.children.internal.fieldOwners",
+		pluginCreator___children___internal___ignoreType = "pluginCreator.children.internal.ignoreType",
+		pluginCreator___children___internal___mediaType = "pluginCreator.children.internal.mediaType",
+		pluginCreator___children___internal___owner = "pluginCreator.children.internal.owner",
+		pluginCreator___children___internal___type = "pluginCreator.children.internal.type",
+		pluginCreator___internal___content = "pluginCreator.internal.content",
+		pluginCreator___internal___contentDigest = "pluginCreator.internal.contentDigest",
+		pluginCreator___internal___description = "pluginCreator.internal.description",
+		pluginCreator___internal___fieldOwners = "pluginCreator.internal.fieldOwners",
+		pluginCreator___internal___ignoreType = "pluginCreator.internal.ignoreType",
+		pluginCreator___internal___mediaType = "pluginCreator.internal.mediaType",
+		pluginCreator___internal___owner = "pluginCreator.internal.owner",
+		pluginCreator___internal___type = "pluginCreator.internal.type",
+		pluginCreator___resolve = "pluginCreator.resolve",
+		pluginCreator___name = "pluginCreator.name",
+		pluginCreator___version = "pluginCreator.version",
+		pluginCreator___pluginOptions___name = "pluginCreator.pluginOptions.name",
+		pluginCreator___pluginOptions___path = "pluginCreator.pluginOptions.path",
+		pluginCreator___pluginOptions___ignore = "pluginCreator.pluginOptions.ignore",
+		pluginCreator___pluginOptions___short_name = "pluginCreator.pluginOptions.short_name",
+		pluginCreator___pluginOptions___start_url = "pluginCreator.pluginOptions.start_url",
+		pluginCreator___pluginOptions___background_color = "pluginCreator.pluginOptions.background_color",
+		pluginCreator___pluginOptions___theme_color = "pluginCreator.pluginOptions.theme_color",
+		pluginCreator___pluginOptions___display = "pluginCreator.pluginOptions.display",
+		pluginCreator___pluginOptions___icon = "pluginCreator.pluginOptions.icon",
+		pluginCreator___pluginOptions___cache_busting_mode = "pluginCreator.pluginOptions.cache_busting_mode",
+		pluginCreator___pluginOptions___include_favicon = "pluginCreator.pluginOptions.include_favicon",
+		pluginCreator___pluginOptions___legacy = "pluginCreator.pluginOptions.legacy",
+		pluginCreator___pluginOptions___theme_color_in_head = "pluginCreator.pluginOptions.theme_color_in_head",
+		pluginCreator___pluginOptions___cacheDigest = "pluginCreator.pluginOptions.cacheDigest",
+		pluginCreator___pluginOptions___outputPath = "pluginCreator.pluginOptions.outputPath",
+		pluginCreator___pluginOptions___pathCheck = "pluginCreator.pluginOptions.pathCheck",
+		pluginCreator___pluginOptions___dsn = "pluginCreator.pluginOptions.dsn",
+		pluginCreator___pluginOptions___environment = "pluginCreator.pluginOptions.environment",
+		pluginCreator___pluginOptions___enabled = "pluginCreator.pluginOptions.enabled",
+		pluginCreator___pluginOptions___appId = "pluginCreator.pluginOptions.appId",
+		pluginCreator___pluginOptions___enableOnDevMode = "pluginCreator.pluginOptions.enableOnDevMode",
+		pluginCreator___nodeAPIs = "pluginCreator.nodeAPIs",
+		pluginCreator___browserAPIs = "pluginCreator.browserAPIs",
+		pluginCreator___ssrAPIs = "pluginCreator.ssrAPIs",
+		pluginCreator___pluginFilepath = "pluginCreator.pluginFilepath",
+		pluginCreator___packageJson___name = "pluginCreator.packageJson.name",
+		pluginCreator___packageJson___description = "pluginCreator.packageJson.description",
+		pluginCreator___packageJson___version = "pluginCreator.packageJson.version",
+		pluginCreator___packageJson___main = "pluginCreator.packageJson.main",
+		pluginCreator___packageJson___license = "pluginCreator.packageJson.license",
+		pluginCreator___packageJson___dependencies = "pluginCreator.packageJson.dependencies",
+		pluginCreator___packageJson___dependencies___name = "pluginCreator.packageJson.dependencies.name",
+		pluginCreator___packageJson___dependencies___version = "pluginCreator.packageJson.dependencies.version",
+		pluginCreator___packageJson___devDependencies = "pluginCreator.packageJson.devDependencies",
+		pluginCreator___packageJson___devDependencies___name = "pluginCreator.packageJson.devDependencies.name",
+		pluginCreator___packageJson___devDependencies___version = "pluginCreator.packageJson.devDependencies.version",
+		pluginCreator___packageJson___peerDependencies = "pluginCreator.packageJson.peerDependencies",
+		pluginCreator___packageJson___peerDependencies___name = "pluginCreator.packageJson.peerDependencies.name",
+		pluginCreator___packageJson___peerDependencies___version = "pluginCreator.packageJson.peerDependencies.version",
+		pluginCreator___packageJson___keywords = "pluginCreator.packageJson.keywords",
+		pluginCreatorId = "pluginCreatorId",
+		componentPath = "componentPath",
 	}
 
 	type SitePageFilterInput = {
@@ -2056,16 +2064,16 @@ declare namespace GatsbyTypes {
 		readonly internalComponentName: Maybe<StringQueryOperatorInput>;
 		readonly componentChunkName: Maybe<StringQueryOperatorInput>;
 		readonly matchPath: Maybe<StringQueryOperatorInput>;
+		readonly id: Maybe<StringQueryOperatorInput>;
+		readonly parent: Maybe<NodeFilterInput>;
+		readonly children: Maybe<NodeFilterListInput>;
+		readonly internal: Maybe<InternalFilterInput>;
 		readonly isCreatedByStatefulCreatePages: Maybe<
 			BooleanQueryOperatorInput
 		>;
 		readonly pluginCreator: Maybe<SitePluginFilterInput>;
 		readonly pluginCreatorId: Maybe<StringQueryOperatorInput>;
 		readonly componentPath: Maybe<StringQueryOperatorInput>;
-		readonly id: Maybe<StringQueryOperatorInput>;
-		readonly parent: Maybe<NodeFilterInput>;
-		readonly children: Maybe<NodeFilterListInput>;
-		readonly internal: Maybe<InternalFilterInput>;
 	};
 
 	type SitePageGroupConnection = {
@@ -2228,12 +2236,12 @@ declare namespace GatsbyTypes {
 		pluginOptions___theme_color_in_head = "pluginOptions.theme_color_in_head",
 		pluginOptions___cacheDigest = "pluginOptions.cacheDigest",
 		pluginOptions___outputPath = "pluginOptions.outputPath",
+		pluginOptions___pathCheck = "pluginOptions.pathCheck",
 		pluginOptions___dsn = "pluginOptions.dsn",
 		pluginOptions___environment = "pluginOptions.environment",
 		pluginOptions___enabled = "pluginOptions.enabled",
 		pluginOptions___appId = "pluginOptions.appId",
 		pluginOptions___enableOnDevMode = "pluginOptions.enableOnDevMode",
-		pluginOptions___pathCheck = "pluginOptions.pathCheck",
 		nodeAPIs = "nodeAPIs",
 		browserAPIs = "browserAPIs",
 		ssrAPIs = "ssrAPIs",
@@ -2378,12 +2386,12 @@ declare namespace GatsbyTypes {
 		readonly theme_color_in_head: Maybe<Scalars["Boolean"]>;
 		readonly cacheDigest: Maybe<Scalars["String"]>;
 		readonly outputPath: Maybe<Scalars["String"]>;
+		readonly pathCheck: Maybe<Scalars["Boolean"]>;
 		readonly dsn: Maybe<Scalars["String"]>;
 		readonly environment: Maybe<Scalars["String"]>;
 		readonly enabled: Maybe<Scalars["Boolean"]>;
 		readonly appId: Maybe<Scalars["String"]>;
 		readonly enableOnDevMode: Maybe<Scalars["Boolean"]>;
-		readonly pathCheck: Maybe<Scalars["Boolean"]>;
 	};
 
 	type SitePluginPluginOptionsFilterInput = {
@@ -2402,12 +2410,12 @@ declare namespace GatsbyTypes {
 		readonly theme_color_in_head: Maybe<BooleanQueryOperatorInput>;
 		readonly cacheDigest: Maybe<StringQueryOperatorInput>;
 		readonly outputPath: Maybe<StringQueryOperatorInput>;
+		readonly pathCheck: Maybe<BooleanQueryOperatorInput>;
 		readonly dsn: Maybe<StringQueryOperatorInput>;
 		readonly environment: Maybe<StringQueryOperatorInput>;
 		readonly enabled: Maybe<BooleanQueryOperatorInput>;
 		readonly appId: Maybe<StringQueryOperatorInput>;
 		readonly enableOnDevMode: Maybe<BooleanQueryOperatorInput>;
-		readonly pathCheck: Maybe<BooleanQueryOperatorInput>;
 	};
 
 	type SitePluginSortInput = {
@@ -2444,14 +2452,6 @@ declare namespace GatsbyTypes {
 		readonly nin: Maybe<ReadonlyArray<Maybe<Scalars["String"]>>>;
 		readonly regex: Maybe<Scalars["String"]>;
 		readonly glob: Maybe<Scalars["String"]>;
-	};
-
-	type PagesQueryQueryVariables = Exact<{ [key: string]: never }>;
-
-	type PagesQueryQuery = {
-		readonly allSitePage: {
-			readonly nodes: ReadonlyArray<Pick<SitePage, "path">>;
-		};
 	};
 
 	type GatsbyImageSharpFluid_withWebpFragment = Pick<
@@ -2527,73 +2527,11 @@ declare namespace GatsbyTypes {
 		};
 	};
 
-	type GatsbyImageSharpFixedFragment = Pick<
-		ImageSharpFixed,
-		"base64" | "width" | "height" | "src" | "srcSet"
-	>;
+	type PagesQueryQueryVariables = Exact<{ [key: string]: never }>;
 
-	type usersjmengDocumentscodemontavistamunsrccomponentsindexAboutTsx1042497523QueryVariables = Exact<{
-		[key: string]: never;
-	}>;
-
-	type usersjmengDocumentscodemontavistamunsrccomponentsindexAboutTsx1042497523Query = {
-		readonly socialsImage: Maybe<{
-			readonly childImageSharp: Maybe<{
-				readonly fixed: Maybe<GatsbyImageSharpFixedFragment>;
-			}>;
-		}>;
-	};
-
-	type usersjmengDocumentscodemontavistamunsrccomponentsindexHeroTsx3097427686QueryVariables = Exact<{
-		[key: string]: never;
-	}>;
-
-	type usersjmengDocumentscodemontavistamunsrccomponentsindexHeroTsx3097427686Query = {
-		readonly hero: Maybe<{
-			readonly childImageSharp: Maybe<{
-				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
-			}>;
-		}>;
-	};
-
-	type AuthLayoutQueryQueryVariables = Exact<{ [key: string]: never }>;
-
-	type AuthLayoutQueryQuery = {
-		readonly headerImage: Maybe<{
-			readonly childImageSharp: Maybe<{
-				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
-			}>;
-		}>;
-	};
-
-	type GatsbyImageSharpFixed_withWebp_noBase64Fragment = Pick<
-		ImageSharpFixed,
-		"width" | "height" | "src" | "srcSet" | "srcWebp" | "srcSetWebp"
-	>;
-
-	type usersjmengDocumentscodemontavistamunsrccomponentslayoutNavbarTsx608876523QueryVariables = Exact<{
-		[key: string]: never;
-	}>;
-
-	type usersjmengDocumentscodemontavistamunsrccomponentslayoutNavbarTsx608876523Query = {
-		readonly logo: Maybe<{
-			readonly childImageSharp: Maybe<{
-				readonly fixed: Maybe<
-					GatsbyImageSharpFixed_withWebp_noBase64Fragment
-				>;
-			}>;
-		}>;
-	};
-
-	type usersjmengDocumentscodemontavistamunsrccomponentslayoutSeoTsx63159454QueryVariables = Exact<{
-		[key: string]: never;
-	}>;
-
-	type usersjmengDocumentscodemontavistamunsrccomponentslayoutSeoTsx63159454Query = {
-		readonly site: Maybe<{
-			readonly siteMetadata: Maybe<
-				Pick<SiteSiteMetadata, "title" | "description" | "author">
-			>;
-		}>;
+	type PagesQueryQuery = {
+		readonly allSitePage: {
+			readonly nodes: ReadonlyArray<Pick<SitePage, "path">>;
+		};
 	};
 }
