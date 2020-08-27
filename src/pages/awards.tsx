@@ -8,7 +8,7 @@ import Header from "../components/Header";
 import HorizontalCard from "../components/HorizontalCard";
 import { Layout, Main } from "../components/layout";
 
-export default function AboutPage({
+export default function AwardsPage({
 	data,
 }: {
 	data: {
@@ -16,6 +16,135 @@ export default function AboutPage({
 		smunc: FluidImage;
 	};
 }): React.ReactElement {
+	/**
+	 * Convert award data of the format
+	 * ```
+	 UNESCO:
+	 Netherlands- Best (Eric Lee, Madeline Choi)
+
+	 SOCHUM:
+	 Russia- Honorable (Dylan Yang, Sylvia Li)
+	``` into the standard json format
+	 * @param awards - a string containing all the awards for one or more committees from the same conference.
+	 */
+	window.convertAwardsByCommittee = (
+		unparsedAwards: string
+	): Partial<ConferenceAwardData> => {
+		const awards: {
+			type:
+				| "Best Delegate"
+				| "Outstanding"
+				| "Honorable"
+				| "Verbal"
+				| "Research";
+			awards: string[];
+		}[] = [];
+
+		// parse committees
+		const committees = unparsedAwards.matchAll(
+			/([\w ]+):?\n((?:(?:\w+ ?- ?)?(?:\w+) \((?:[ \w]+)(?:, ?(?:[\w ]+))?\)\n?)+)/g
+		);
+
+		for (const committeeMatch of committees) {
+			console.log(committeeMatch);
+			const committee = committeeMatch[1];
+			committeeMatch[2]
+				.split("\n")
+				.filter((str) => str /* remove empty string */)
+				.forEach((delegation) => {
+					const match = /(\w+ ?- ?)?(\w+) \(([ \w]+)(?:, ?([\w ]+))?\)/.exec(
+						delegation
+					);
+					if (!match) {
+						console.log(match, committeeMatch, delegation);
+						throw new Error(
+							"Unable to parse line data for committee: " +
+								committeeMatch[0]
+						);
+					}
+
+					const award = match[2];
+					const delegateOne = match[3];
+					const delegateTwo = match[4];
+					if (!award || !delegateOne) {
+						throw new Error(
+							"Convert Awards By Committee: Unable to parse match (missing some data): " +
+								match[0]
+						);
+					}
+					const parsedAwardType:
+						| "Best Delegate"
+						| "Outstanding"
+						| "Honorable"
+						| "Verbal"
+						| "Research"
+						| undefined = [
+						"Best Delegate",
+						"Outstanding",
+						"Honorable",
+						"Verbal",
+						"Research",
+					].find((name) => {
+						if (name.toLowerCase() === award.toLowerCase()) {
+							return name;
+						}
+						if (
+							name.charAt(0).toLowerCase() ===
+							award.charAt(0).toLowerCase()
+						) {
+							console.warn(
+								"Convert Awards By Committee: Assuming " +
+									award +
+									" means " +
+									name +
+									" because the first letter is identical."
+							);
+							return name;
+						}
+					}) as
+						| "Best Delegate"
+						| "Outstanding"
+						| "Honorable"
+						| "Verbal"
+						| "Research"
+						| undefined;
+					if (!parsedAwardType) {
+						throw new Error(
+							"Convert Awards By Committee: Unable to parse award " +
+								award +
+								" into a recognized award category."
+						);
+					}
+					const existingAwardsOfTypeIndex = awards.findIndex(
+						(a) => a.type == parsedAwardType
+					);
+					if (existingAwardsOfTypeIndex == -1) {
+						awards.push({
+							type: parsedAwardType,
+							awards: [
+								`${delegateOne}${
+									delegateTwo ? " & " + delegateTwo : ""
+								} (${committee})`,
+							],
+						});
+					} else {
+						awards[existingAwardsOfTypeIndex] = {
+							type: parsedAwardType,
+							awards: [
+								...awards[existingAwardsOfTypeIndex].awards,
+								`${delegateOne}${
+									delegateTwo ? " & " + delegateTwo : ""
+								} (${committee})`,
+							],
+						};
+					}
+				});
+		}
+		return {
+			delegateAwards: awards,
+		};
+	};
+
 	return (
 		<Layout title={"Awards"} className={"bg-gray-50"}>
 			<Header title={"Awards"} backgroundImage={data.headerImage}>
