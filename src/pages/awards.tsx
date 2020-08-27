@@ -17,6 +17,7 @@ export default function AwardsPage({
 	};
 }): React.ReactElement {
 	/**
+	 * Utility function (TODO: move to admin dashboard)
 	 * Convert award data of the format
 	 * ```
 	 UNESCO:
@@ -27,7 +28,7 @@ export default function AwardsPage({
 	``` into the standard json format
 	 * @param awards - a string containing all the awards for one or more committees from the same conference.
 	 */
-	window.convertAwardsByCommittee = (
+	const convertAwardsByCommittee = (
 		unparsedAwards: string
 	): Partial<ConferenceAwardData> => {
 		const awards: {

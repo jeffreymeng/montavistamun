@@ -6,21 +6,23 @@ import SEO from "./SEO";
 
 function useHeapAnalytics() {
 	const { user, loading, verified, admin } = React.useContext(AuthContext);
-	if (user) {
-		heap.identify("fbuser-" + user.uid);
-		heap.addUserProperties({
-			name: user.displayName,
-			email: user.email,
-			hasAccount: true,
-			emailVerified: user.emailVerified,
-			verifiedMember: verified,
-			admin,
-		});
-	} else {
-		heap.addUserProperties({
-			hasAccount: false,
-		});
-	}
+	React.useEffect(() => {
+		if (user) {
+			heap.identify("fbuser-" + user.uid);
+			heap.addUserProperties({
+				name: user.displayName,
+				email: user.email,
+				hasAccount: true,
+				emailVerified: user.emailVerified,
+				verifiedMember: verified,
+				admin,
+			});
+		} else {
+			heap.addUserProperties({
+				hasAccount: false,
+			});
+		}
+	}, []);
 }
 
 export default function Layout({
