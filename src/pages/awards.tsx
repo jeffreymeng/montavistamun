@@ -145,7 +145,11 @@ export default function AwardsPage({
 			delegateAwards: awards,
 		};
 	};
-
+	const highlightTitle = "SMUNC 2019";
+	let highlightIndex = 0;
+	if (highlightTitle) {
+		highlightIndex = awardsData.findIndex((p) => p.name == highlightTitle);
+	}
 	return (
 		<Layout title={"Awards"} className={"bg-gray-50"}>
 			<Header title={"Awards"} backgroundImage={data.headerImage}>
@@ -167,7 +171,7 @@ export default function AwardsPage({
 							{awardsData[0].delegationAward}
 						</p>
 					)}
-					{awardsData[0].delegateAwards.map((group) => (
+					{awardsData[highlightIndex].delegateAwards.map((group) => (
 						<div key={group.type}>
 							<h3
 								className={
@@ -188,20 +192,22 @@ export default function AwardsPage({
 					))}
 				</HorizontalCard>
 				<div className="mt-12 grid gap-5 max-w-lg mx-auto lg:grid-cols-3 lg:max-w-none">
-					{awardsData.slice(1).map((conf) => {
-						const { imageURL, name, ...props } = conf;
-						return (
-							<ConferenceAwardCard
-								key={name}
-								name={name}
-								imageURL={
-									imageURL ||
-									"https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80"
-								}
-								{...props}
-							/>
-						);
-					})}
+					{awardsData
+						.filter((e, i) => i !== highlightIndex)
+						.map((conf) => {
+							const { imageURL, name, ...props } = conf;
+							return (
+								<ConferenceAwardCard
+									key={name}
+									name={name}
+									imageURL={
+										imageURL ||
+										"https://images.unsplash.com/photo-1496128858413-b36217c2ce36?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1679&q=80"
+									}
+									{...props}
+								/>
+							);
+						})}
 				</div>
 			</Main>
 		</Layout>

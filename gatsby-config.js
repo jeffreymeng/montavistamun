@@ -76,7 +76,16 @@ module.exports = {
 				enableOnDevMode: true, // if 'false', heap will be fired on NODE_ENV=production only
 			},
 		},
-		`gatsby-plugin-sass`,
+		{
+			resolve: `gatsby-plugin-sass`,
+			options: {
+				postCssPlugins: [
+					require("postcss-import"),
+					require(`tailwindcss`)(tailwindConfig),
+					require(`autoprefixer`),
+				],
+			},
+		},
 		// `gatsby-plugin-offline`,
 	],
 };

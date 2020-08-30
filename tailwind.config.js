@@ -26,6 +26,10 @@ module.exports = {
 				ca: "calc(100vh - 64px - 120px)",
 				"ca-no-footer": "calc(100vh - 64px)",
 			},
+			cursor: {
+				"resize-x": "col-resize",
+				"resize-y": "row-resize",
+			},
 		},
 		customForms: (theme) => ({
 			default: {
