@@ -159,16 +159,16 @@ export default function AwardsPage({
 				<HorizontalCard
 					image={data.smunc}
 					large
-					title={awardsData[0].name}
-					subtitle={awardsData[0].time}
+					title={awardsData[highlightIndex].name}
+					subtitle={awardsData[highlightIndex].time}
 				>
-					{awardsData[0].delegationAward && (
+					{awardsData[highlightIndex].delegationAward && (
 						<p
 							className={
 								"text-lg md:text-xl lg:text-2xl text-indigo-600 font-bold italic pb-3"
 							}
 						>
-							{awardsData[0].delegationAward}
+							{awardsData[highlightIndex].delegationAward}
 						</p>
 					)}
 					{awardsData[highlightIndex].delegateAwards.map((group) => (
