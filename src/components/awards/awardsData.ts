@@ -16,7 +16,7 @@ type ConferenceAwardData = {
 const data: ConferenceAwardData[] = [
 	{
 		name: "BMUN 2020",
-		time: "February 2019",
+		time: "March 2020",
 		delegationAward: null,
 		delegateAwards: [
 			{
@@ -30,7 +30,7 @@ const data: ConferenceAwardData[] = [
 	},
 	{
 		name: "SCVMUN 2020",
-		time: "January 2019",
+		time: "January 2020",
 		delegationAward: null,
 		delegateAwards: [
 			{
