@@ -12,7 +12,8 @@ export default function Stats(): React.ReactElement {
 				<dl className="mt-10 text-center sm:max-w-3xl sm:mx-auto sm:grid sm:grid-cols-3 sm:gap-8">
 					<div className="flex flex-col">
 						<dt className="order-2 mt-2 text-lg leading-6 font-medium text-indigo-200">
-							International Delegation (Best Delegate Rankings)
+							International Delegation
+							{/*(Best Delegate Rankings)*/}
 						</dt>
 						<dd className="order-1 text-5xl leading-none font-extrabold text-white tracking-tight">
 							Top 50
@@ -23,8 +24,7 @@ export default function Stats(): React.ReactElement {
 							Members
 						</dt>
 						<dd className="order-1 text-5xl leading-none font-extrabold text-white">
-							{/* todo actually get a legit number */}
-							50+
+							100+
 						</dd>
 					</div>
 					<div className="flex flex-col mt-10 sm:mt-0">
