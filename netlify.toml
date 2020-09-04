@@ -4,3 +4,8 @@
   publish = "public/"
 [[plugins]]
   package = "netlify-plugin-gatsby-cache"
+[[redirects]]
+  from = "/zoom"
+  to = "https://fuhsd-org.zoom.us/j/98614836312?pwd=Q3B4bkovSHk5ZlB4MGFjWTFJcW9RUT09"
+  status = 200
+  force = true # ensure that we always redirect

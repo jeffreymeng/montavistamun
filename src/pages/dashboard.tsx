@@ -108,10 +108,11 @@ export default function AboutPage(): React.ReactElement {
 									{[
 										{
 											subtitle: "First Member Meeting",
-											title: "Details Coming Soon",
+											title:
+												"Wednesday, September 23, 12PM",
 											primaryAction: {
-												title: "Zoom Link Coming Soon",
-												// link: "https://zoom.us",
+												title: "Join Meeting",
+												link: "/zoom",
 											},
 											secondaryAction: {
 												title: "View All Events",
