@@ -17,7 +17,9 @@ export default function AwardsPage(): React.ReactElement {
 					}
 				}
 			}
-			awardsData: allFirestoreData(sort: { fields: time, order: DESC }) {
+			awardsData: allConferenceAwardsData(
+				sort: { fields: time, order: DESC }
+			) {
 				nodes {
 					delegateAwards {
 						awards

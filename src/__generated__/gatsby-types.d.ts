@@ -21,6 +21,200 @@ declare namespace GatsbyTypes {
 		readonly nin: Maybe<ReadonlyArray<Maybe<Scalars["Boolean"]>>>;
 	};
 
+	type ConferenceAwardsData = Node & {
+		readonly name: Scalars["String"];
+		readonly month: Scalars["String"];
+		readonly year: Scalars["Int"];
+		readonly time: Scalars["Date"];
+		readonly delegationAward: Maybe<Scalars["String"]>;
+		readonly delegateAwards: Maybe<
+			ReadonlyArray<Maybe<ConferenceAwardsData__DelegateAwards>>
+		>;
+		readonly imageURL: Maybe<Scalars["String"]>;
+		readonly id: Scalars["ID"];
+		readonly parent: Maybe<Node>;
+		readonly children: ReadonlyArray<Node>;
+		readonly internal: Internal;
+	};
+
+	type ConferenceAwardsData_timeArgs = {
+		formatString: Maybe<Scalars["String"]>;
+		fromNow: Maybe<Scalars["Boolean"]>;
+		difference: Maybe<Scalars["String"]>;
+		locale: Maybe<Scalars["String"]>;
+	};
+
+	type ConferenceAwardsData__DelegateAwards = {
+		readonly type: Scalars["String"];
+		readonly awards: Maybe<ReadonlyArray<Scalars["String"]>>;
+	};
+
+	type ConferenceAwardsData__DelegateAwardsFilterInput = {
+		readonly type: Maybe<StringQueryOperatorInput>;
+		readonly awards: Maybe<StringQueryOperatorInput>;
+	};
+
+	type ConferenceAwardsData__DelegateAwardsFilterListInput = {
+		readonly elemMatch: Maybe<
+			ConferenceAwardsData__DelegateAwardsFilterInput
+		>;
+	};
+
+	type ConferenceAwardsDataConnection = {
+		readonly totalCount: Scalars["Int"];
+		readonly edges: ReadonlyArray<ConferenceAwardsDataEdge>;
+		readonly nodes: ReadonlyArray<ConferenceAwardsData>;
+		readonly pageInfo: PageInfo;
+		readonly distinct: ReadonlyArray<Scalars["String"]>;
+		readonly group: ReadonlyArray<ConferenceAwardsDataGroupConnection>;
+	};
+
+	type ConferenceAwardsDataConnection_distinctArgs = {
+		field: ConferenceAwardsDataFieldsEnum;
+	};
+
+	type ConferenceAwardsDataConnection_groupArgs = {
+		skip: Maybe<Scalars["Int"]>;
+		limit: Maybe<Scalars["Int"]>;
+		field: ConferenceAwardsDataFieldsEnum;
+	};
+
+	type ConferenceAwardsDataEdge = {
+		readonly next: Maybe<ConferenceAwardsData>;
+		readonly node: ConferenceAwardsData;
+		readonly previous: Maybe<ConferenceAwardsData>;
+	};
+
+	enum ConferenceAwardsDataFieldsEnum {
+		name = "name",
+		month = "month",
+		year = "year",
+		time = "time",
+		delegationAward = "delegationAward",
+		delegateAwards = "delegateAwards",
+		delegateAwards___type = "delegateAwards.type",
+		delegateAwards___awards = "delegateAwards.awards",
+		imageURL = "imageURL",
+		id = "id",
+		parent___id = "parent.id",
+		parent___parent___id = "parent.parent.id",
+		parent___parent___parent___id = "parent.parent.parent.id",
+		parent___parent___parent___children = "parent.parent.parent.children",
+		parent___parent___children = "parent.parent.children",
+		parent___parent___children___id = "parent.parent.children.id",
+		parent___parent___children___children = "parent.parent.children.children",
+		parent___parent___internal___content = "parent.parent.internal.content",
+		parent___parent___internal___contentDigest = "parent.parent.internal.contentDigest",
+		parent___parent___internal___description = "parent.parent.internal.description",
+		parent___parent___internal___fieldOwners = "parent.parent.internal.fieldOwners",
+		parent___parent___internal___ignoreType = "parent.parent.internal.ignoreType",
+		parent___parent___internal___mediaType = "parent.parent.internal.mediaType",
+		parent___parent___internal___owner = "parent.parent.internal.owner",
+		parent___parent___internal___type = "parent.parent.internal.type",
+		parent___children = "parent.children",
+		parent___children___id = "parent.children.id",
+		parent___children___parent___id = "parent.children.parent.id",
+		parent___children___parent___children = "parent.children.parent.children",
+		parent___children___children = "parent.children.children",
+		parent___children___children___id = "parent.children.children.id",
+		parent___children___children___children = "parent.children.children.children",
+		parent___children___internal___content = "parent.children.internal.content",
+		parent___children___internal___contentDigest = "parent.children.internal.contentDigest",
+		parent___children___internal___description = "parent.children.internal.description",
+		parent___children___internal___fieldOwners = "parent.children.internal.fieldOwners",
+		parent___children___internal___ignoreType = "parent.children.internal.ignoreType",
+		parent___children___internal___mediaType = "parent.children.internal.mediaType",
+		parent___children___internal___owner = "parent.children.internal.owner",
+		parent___children___internal___type = "parent.children.internal.type",
+		parent___internal___content = "parent.internal.content",
+		parent___internal___contentDigest = "parent.internal.contentDigest",
+		parent___internal___description = "parent.internal.description",
+		parent___internal___fieldOwners = "parent.internal.fieldOwners",
+		parent___internal___ignoreType = "parent.internal.ignoreType",
+		parent___internal___mediaType = "parent.internal.mediaType",
+		parent___internal___owner = "parent.internal.owner",
+		parent___internal___type = "parent.internal.type",
+		children = "children",
+		children___id = "children.id",
+		children___parent___id = "children.parent.id",
+		children___parent___parent___id = "children.parent.parent.id",
+		children___parent___parent___children = "children.parent.parent.children",
+		children___parent___children = "children.parent.children",
+		children___parent___children___id = "children.parent.children.id",
+		children___parent___children___children = "children.parent.children.children",
+		children___parent___internal___content = "children.parent.internal.content",
+		children___parent___internal___contentDigest = "children.parent.internal.contentDigest",
+		children___parent___internal___description = "children.parent.internal.description",
+		children___parent___internal___fieldOwners = "children.parent.internal.fieldOwners",
+		children___parent___internal___ignoreType = "children.parent.internal.ignoreType",
+		children___parent___internal___mediaType = "children.parent.internal.mediaType",
+		children___parent___internal___owner = "children.parent.internal.owner",
+		children___parent___internal___type = "children.parent.internal.type",
+		children___children = "children.children",
+		children___children___id = "children.children.id",
+		children___children___parent___id = "children.children.parent.id",
+		children___children___parent___children = "children.children.parent.children",
+		children___children___children = "children.children.children",
+		children___children___children___id = "children.children.children.id",
+		children___children___children___children = "children.children.children.children",
+		children___children___internal___content = "children.children.internal.content",
+		children___children___internal___contentDigest = "children.children.internal.contentDigest",
+		children___children___internal___description = "children.children.internal.description",
+		children___children___internal___fieldOwners = "children.children.internal.fieldOwners",
+		children___children___internal___ignoreType = "children.children.internal.ignoreType",
+		children___children___internal___mediaType = "children.children.internal.mediaType",
+		children___children___internal___owner = "children.children.internal.owner",
+		children___children___internal___type = "children.children.internal.type",
+		children___internal___content = "children.internal.content",
+		children___internal___contentDigest = "children.internal.contentDigest",
+		children___internal___description = "children.internal.description",
+		children___internal___fieldOwners = "children.internal.fieldOwners",
+		children___internal___ignoreType = "children.internal.ignoreType",
+		children___internal___mediaType = "children.internal.mediaType",
+		children___internal___owner = "children.internal.owner",
+		children___internal___type = "children.internal.type",
+		internal___content = "internal.content",
+		internal___contentDigest = "internal.contentDigest",
+		internal___description = "internal.description",
+		internal___fieldOwners = "internal.fieldOwners",
+		internal___ignoreType = "internal.ignoreType",
+		internal___mediaType = "internal.mediaType",
+		internal___owner = "internal.owner",
+		internal___type = "internal.type",
+	}
+
+	type ConferenceAwardsDataFilterInput = {
+		readonly name: Maybe<StringQueryOperatorInput>;
+		readonly month: Maybe<StringQueryOperatorInput>;
+		readonly year: Maybe<IntQueryOperatorInput>;
+		readonly time: Maybe<DateQueryOperatorInput>;
+		readonly delegationAward: Maybe<StringQueryOperatorInput>;
+		readonly delegateAwards: Maybe<
+			ConferenceAwardsData__DelegateAwardsFilterListInput
+		>;
+		readonly imageURL: Maybe<StringQueryOperatorInput>;
+		readonly id: Maybe<StringQueryOperatorInput>;
+		readonly parent: Maybe<NodeFilterInput>;
+		readonly children: Maybe<NodeFilterListInput>;
+		readonly internal: Maybe<InternalFilterInput>;
+	};
+
+	type ConferenceAwardsDataGroupConnection = {
+		readonly totalCount: Scalars["Int"];
+		readonly edges: ReadonlyArray<ConferenceAwardsDataEdge>;
+		readonly nodes: ReadonlyArray<ConferenceAwardsData>;
+		readonly pageInfo: PageInfo;
+		readonly field: Scalars["String"];
+		readonly fieldValue: Maybe<Scalars["String"]>;
+	};
+
+	type ConferenceAwardsDataSortInput = {
+		readonly fields: Maybe<
+			ReadonlyArray<Maybe<ConferenceAwardsDataFieldsEnum>>
+		>;
+		readonly order: Maybe<ReadonlyArray<Maybe<SortOrderEnum>>>;
+	};
+
 	type DateQueryOperatorInput = {
 		readonly eq: Maybe<Scalars["Date"]>;
 		readonly ne: Maybe<Scalars["Date"]>;
@@ -719,186 +913,6 @@ declare namespace GatsbyTypes {
 		readonly order: Maybe<ReadonlyArray<Maybe<SortOrderEnum>>>;
 	};
 
-	type FirestoreData = Node & {
-		readonly id: Scalars["ID"];
-		readonly parent: Maybe<Node>;
-		readonly children: ReadonlyArray<Node>;
-		readonly internal: Internal;
-		readonly month: Maybe<Scalars["String"]>;
-		readonly delegateAwards: Maybe<
-			ReadonlyArray<Maybe<FirestoreDataDelegateAwards>>
-		>;
-		readonly year: Maybe<Scalars["Int"]>;
-		readonly name: Maybe<Scalars["String"]>;
-		readonly delegationAward: Maybe<Scalars["String"]>;
-		readonly time: Maybe<Scalars["Float"]>;
-	};
-
-	type FirestoreDataConnection = {
-		readonly totalCount: Scalars["Int"];
-		readonly edges: ReadonlyArray<FirestoreDataEdge>;
-		readonly nodes: ReadonlyArray<FirestoreData>;
-		readonly pageInfo: PageInfo;
-		readonly distinct: ReadonlyArray<Scalars["String"]>;
-		readonly group: ReadonlyArray<FirestoreDataGroupConnection>;
-	};
-
-	type FirestoreDataConnection_distinctArgs = {
-		field: FirestoreDataFieldsEnum;
-	};
-
-	type FirestoreDataConnection_groupArgs = {
-		skip: Maybe<Scalars["Int"]>;
-		limit: Maybe<Scalars["Int"]>;
-		field: FirestoreDataFieldsEnum;
-	};
-
-	type FirestoreDataDelegateAwards = {
-		readonly type: Maybe<Scalars["String"]>;
-		readonly awards: Maybe<ReadonlyArray<Maybe<Scalars["String"]>>>;
-	};
-
-	type FirestoreDataDelegateAwardsFilterInput = {
-		readonly type: Maybe<StringQueryOperatorInput>;
-		readonly awards: Maybe<StringQueryOperatorInput>;
-	};
-
-	type FirestoreDataDelegateAwardsFilterListInput = {
-		readonly elemMatch: Maybe<FirestoreDataDelegateAwardsFilterInput>;
-	};
-
-	type FirestoreDataEdge = {
-		readonly next: Maybe<FirestoreData>;
-		readonly node: FirestoreData;
-		readonly previous: Maybe<FirestoreData>;
-	};
-
-	enum FirestoreDataFieldsEnum {
-		id = "id",
-		parent___id = "parent.id",
-		parent___parent___id = "parent.parent.id",
-		parent___parent___parent___id = "parent.parent.parent.id",
-		parent___parent___parent___children = "parent.parent.parent.children",
-		parent___parent___children = "parent.parent.children",
-		parent___parent___children___id = "parent.parent.children.id",
-		parent___parent___children___children = "parent.parent.children.children",
-		parent___parent___internal___content = "parent.parent.internal.content",
-		parent___parent___internal___contentDigest = "parent.parent.internal.contentDigest",
-		parent___parent___internal___description = "parent.parent.internal.description",
-		parent___parent___internal___fieldOwners = "parent.parent.internal.fieldOwners",
-		parent___parent___internal___ignoreType = "parent.parent.internal.ignoreType",
-		parent___parent___internal___mediaType = "parent.parent.internal.mediaType",
-		parent___parent___internal___owner = "parent.parent.internal.owner",
-		parent___parent___internal___type = "parent.parent.internal.type",
-		parent___children = "parent.children",
-		parent___children___id = "parent.children.id",
-		parent___children___parent___id = "parent.children.parent.id",
-		parent___children___parent___children = "parent.children.parent.children",
-		parent___children___children = "parent.children.children",
-		parent___children___children___id = "parent.children.children.id",
-		parent___children___children___children = "parent.children.children.children",
-		parent___children___internal___content = "parent.children.internal.content",
-		parent___children___internal___contentDigest = "parent.children.internal.contentDigest",
-		parent___children___internal___description = "parent.children.internal.description",
-		parent___children___internal___fieldOwners = "parent.children.internal.fieldOwners",
-		parent___children___internal___ignoreType = "parent.children.internal.ignoreType",
-		parent___children___internal___mediaType = "parent.children.internal.mediaType",
-		parent___children___internal___owner = "parent.children.internal.owner",
-		parent___children___internal___type = "parent.children.internal.type",
-		parent___internal___content = "parent.internal.content",
-		parent___internal___contentDigest = "parent.internal.contentDigest",
-		parent___internal___description = "parent.internal.description",
-		parent___internal___fieldOwners = "parent.internal.fieldOwners",
-		parent___internal___ignoreType = "parent.internal.ignoreType",
-		parent___internal___mediaType = "parent.internal.mediaType",
-		parent___internal___owner = "parent.internal.owner",
-		parent___internal___type = "parent.internal.type",
-		children = "children",
-		children___id = "children.id",
-		children___parent___id = "children.parent.id",
-		children___parent___parent___id = "children.parent.parent.id",
-		children___parent___parent___children = "children.parent.parent.children",
-		children___parent___children = "children.parent.children",
-		children___parent___children___id = "children.parent.children.id",
-		children___parent___children___children = "children.parent.children.children",
-		children___parent___internal___content = "children.parent.internal.content",
-		children___parent___internal___contentDigest = "children.parent.internal.contentDigest",
-		children___parent___internal___description = "children.parent.internal.description",
-		children___parent___internal___fieldOwners = "children.parent.internal.fieldOwners",
-		children___parent___internal___ignoreType = "children.parent.internal.ignoreType",
-		children___parent___internal___mediaType = "children.parent.internal.mediaType",
-		children___parent___internal___owner = "children.parent.internal.owner",
-		children___parent___internal___type = "children.parent.internal.type",
-		children___children = "children.children",
-		children___children___id = "children.children.id",
-		children___children___parent___id = "children.children.parent.id",
-		children___children___parent___children = "children.children.parent.children",
-		children___children___children = "children.children.children",
-		children___children___children___id = "children.children.children.id",
-		children___children___children___children = "children.children.children.children",
-		children___children___internal___content = "children.children.internal.content",
-		children___children___internal___contentDigest = "children.children.internal.contentDigest",
-		children___children___internal___description = "children.children.internal.description",
-		children___children___internal___fieldOwners = "children.children.internal.fieldOwners",
-		children___children___internal___ignoreType = "children.children.internal.ignoreType",
-		children___children___internal___mediaType = "children.children.internal.mediaType",
-		children___children___internal___owner = "children.children.internal.owner",
-		children___children___internal___type = "children.children.internal.type",
-		children___internal___content = "children.internal.content",
-		children___internal___contentDigest = "children.internal.contentDigest",
-		children___internal___description = "children.internal.description",
-		children___internal___fieldOwners = "children.internal.fieldOwners",
-		children___internal___ignoreType = "children.internal.ignoreType",
-		children___internal___mediaType = "children.internal.mediaType",
-		children___internal___owner = "children.internal.owner",
-		children___internal___type = "children.internal.type",
-		internal___content = "internal.content",
-		internal___contentDigest = "internal.contentDigest",
-		internal___description = "internal.description",
-		internal___fieldOwners = "internal.fieldOwners",
-		internal___ignoreType = "internal.ignoreType",
-		internal___mediaType = "internal.mediaType",
-		internal___owner = "internal.owner",
-		internal___type = "internal.type",
-		month = "month",
-		delegateAwards = "delegateAwards",
-		delegateAwards___type = "delegateAwards.type",
-		delegateAwards___awards = "delegateAwards.awards",
-		year = "year",
-		name = "name",
-		delegationAward = "delegationAward",
-		time = "time",
-	}
-
-	type FirestoreDataFilterInput = {
-		readonly id: Maybe<StringQueryOperatorInput>;
-		readonly parent: Maybe<NodeFilterInput>;
-		readonly children: Maybe<NodeFilterListInput>;
-		readonly internal: Maybe<InternalFilterInput>;
-		readonly month: Maybe<StringQueryOperatorInput>;
-		readonly delegateAwards: Maybe<
-			FirestoreDataDelegateAwardsFilterListInput
-		>;
-		readonly year: Maybe<IntQueryOperatorInput>;
-		readonly name: Maybe<StringQueryOperatorInput>;
-		readonly delegationAward: Maybe<StringQueryOperatorInput>;
-		readonly time: Maybe<FloatQueryOperatorInput>;
-	};
-
-	type FirestoreDataGroupConnection = {
-		readonly totalCount: Scalars["Int"];
-		readonly edges: ReadonlyArray<FirestoreDataEdge>;
-		readonly nodes: ReadonlyArray<FirestoreData>;
-		readonly pageInfo: PageInfo;
-		readonly field: Scalars["String"];
-		readonly fieldValue: Maybe<Scalars["String"]>;
-	};
-
-	type FirestoreDataSortInput = {
-		readonly fields: Maybe<ReadonlyArray<Maybe<FirestoreDataFieldsEnum>>>;
-		readonly order: Maybe<ReadonlyArray<Maybe<SortOrderEnum>>>;
-	};
-
 	type FloatQueryOperatorInput = {
 		readonly eq: Maybe<Scalars["Float"]>;
 		readonly ne: Maybe<Scalars["Float"]>;
@@ -1498,8 +1512,8 @@ declare namespace GatsbyTypes {
 		readonly allSite: SiteConnection;
 		readonly imageSharp: Maybe<ImageSharp>;
 		readonly allImageSharp: ImageSharpConnection;
-		readonly firestoreData: Maybe<FirestoreData>;
-		readonly allFirestoreData: FirestoreDataConnection;
+		readonly conferenceAwardsData: Maybe<ConferenceAwardsData>;
+		readonly allConferenceAwardsData: ConferenceAwardsDataConnection;
 		readonly siteBuildMetadata: Maybe<SiteBuildMetadata>;
 		readonly allSiteBuildMetadata: SiteBuildMetadataConnection;
 		readonly sitePlugin: Maybe<SitePlugin>;
@@ -1665,22 +1679,25 @@ declare namespace GatsbyTypes {
 		limit: Maybe<Scalars["Int"]>;
 	};
 
-	type Query_firestoreDataArgs = {
+	type Query_conferenceAwardsDataArgs = {
+		name: Maybe<StringQueryOperatorInput>;
+		month: Maybe<StringQueryOperatorInput>;
+		year: Maybe<IntQueryOperatorInput>;
+		time: Maybe<DateQueryOperatorInput>;
+		delegationAward: Maybe<StringQueryOperatorInput>;
+		delegateAwards: Maybe<
+			ConferenceAwardsData__DelegateAwardsFilterListInput
+		>;
+		imageURL: Maybe<StringQueryOperatorInput>;
 		id: Maybe<StringQueryOperatorInput>;
 		parent: Maybe<NodeFilterInput>;
 		children: Maybe<NodeFilterListInput>;
 		internal: Maybe<InternalFilterInput>;
-		month: Maybe<StringQueryOperatorInput>;
-		delegateAwards: Maybe<FirestoreDataDelegateAwardsFilterListInput>;
-		year: Maybe<IntQueryOperatorInput>;
-		name: Maybe<StringQueryOperatorInput>;
-		delegationAward: Maybe<StringQueryOperatorInput>;
-		time: Maybe<FloatQueryOperatorInput>;
 	};
 
-	type Query_allFirestoreDataArgs = {
-		filter: Maybe<FirestoreDataFilterInput>;
-		sort: Maybe<FirestoreDataSortInput>;
+	type Query_allConferenceAwardsDataArgs = {
+		filter: Maybe<ConferenceAwardsDataFilterInput>;
+		sort: Maybe<ConferenceAwardsDataSortInput>;
 		skip: Maybe<Scalars["Int"]>;
 		limit: Maybe<Scalars["Int"]>;
 	};
