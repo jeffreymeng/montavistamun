@@ -1,6 +1,5 @@
 import { graphql, useStaticQuery } from "gatsby";
 import React from "react";
-import ConferenceAwardData from "../components/awards/awardsData";
 import Header from "../components/Header";
 import HorizontalCard from "../components/HorizontalCard";
 import { Layout, Main } from "../components/layout";
@@ -247,7 +246,23 @@ function ConferenceAwardCard({
 	name,
 	delegationAward,
 	delegateAwards,
-}: ConferenceAwardData) {
+}: {
+	name: string;
+	month: string;
+	year: number;
+	time: firebaseType.firestore.Timestamp;
+	delegationAward: string | null;
+	delegateAwards: {
+		type:
+			| "Best Delegate"
+			| "Outstanding"
+			| "Honorable"
+			| "Verbal"
+			| "Research";
+		awards: string[];
+	}[];
+	imageURL?: string;
+}) {
 	return (
 		<div className="flex flex-col rounded-lg shadow-lg overflow-hidden">
 			<div className="flex-1 bg-white p-6 flex flex-col justify-between">
