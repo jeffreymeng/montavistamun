@@ -1,21 +1,40 @@
-import { graphql } from "gatsby";
+import { graphql, useStaticQuery } from "gatsby";
 import React from "react";
-import awardsData, {
-	ConferenceAwardData,
-} from "../components/awards/awardsData";
-import FluidImage from "../components/FluidImage";
+import ConferenceAwardData from "../components/awards/awardsData";
 import Header from "../components/Header";
 import HorizontalCard from "../components/HorizontalCard";
 import { Layout, Main } from "../components/layout";
 
-export default function AwardsPage({
-	data,
-}: {
-	data: {
-		headerImage: FluidImage;
-		smunc: FluidImage;
-	};
-}): React.ReactElement {
+export default function AwardsPage(): React.ReactElement {
+	const {
+		awardsData: { nodes: awardsData },
+		headerImage,
+	} = useStaticQuery<GatsbyTypes.awardsPageQueryQuery>(graphql`
+		query awardsPageQuery {
+			headerImage: file(relativePath: { eq: "headers/awards.jpg" }) {
+				childImageSharp {
+					fluid(maxWidth: 1200, quality: 90) {
+						...GatsbyImageSharpFluid_withWebp
+					}
+				}
+			}
+			awardsData: allFirestoreData(sort: { fields: time, order: DESC }) {
+				nodes {
+					delegateAwards {
+						awards
+						type
+					}
+					delegationAward
+					id
+					month
+					name
+					time
+					year
+				}
+			}
+		}
+	`);
+	console.log(awardsData);
 	/**
 	 * Utility function (TODO: move to admin dashboard)
 	 * Convert award data of the format
@@ -150,17 +169,24 @@ export default function AwardsPage({
 	if (highlightTitle) {
 		highlightIndex = awardsData.findIndex((p) => p.name == highlightTitle);
 	}
+
 	return (
 		<Layout title={"Awards"} className={"bg-gray-50"}>
-			<Header title={"Awards"} backgroundImage={data.headerImage}>
+			<Header title={"Awards"} backgroundImage={headerImage}>
 				{""}
 			</Header>
 			<Main wide>
 				<HorizontalCard
-					image={data.smunc}
+					imageURL={
+						"https://images.unsplash.com/photo-1561137260-bf428bc5e6a5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=975&h=800&q=80"
+					}
 					large
 					title={awardsData[highlightIndex].name}
-					subtitle={awardsData[highlightIndex].time}
+					subtitle={
+						awardsData[highlightIndex].month +
+						" " +
+						awardsData[highlightIndex].year
+					}
 				>
 					{awardsData[highlightIndex].delegationAward && (
 						<p
@@ -216,7 +242,8 @@ export default function AwardsPage({
 
 function ConferenceAwardCard({
 	imageURL,
-	time,
+	month,
+	year,
 	name,
 	delegationAward,
 	delegateAwards,
@@ -226,7 +253,7 @@ function ConferenceAwardCard({
 			<div className="flex-1 bg-white p-6 flex flex-col justify-between">
 				<div className="flex-1">
 					<p className="text-sm leading-5 font-medium text-indigo-600">
-						{time}
+						{month + " " + year}
 					</p>
 					<h3 className="mt-2 text-xl leading-7 font-semibold text-gray-900">
 						{name}
@@ -261,7 +288,14 @@ function ConferenceAwardCard({
 												Honorable: "Honorable Mention",
 												Verbal: "Verbal Commendation",
 												Research: "Resarch Award",
-											}[group.type]
+											}[
+												group.type as
+													| "Best Delegate"
+													| "Outstanding"
+													| "Honorable"
+													| "Verbal"
+													| "Research"
+											]
 										}
 									</b>
 								</h3>
@@ -287,22 +321,3 @@ function ConferenceAwardCard({
 		</div>
 	);
 }
-
-export const query = graphql`
-	query AwardsPageQuery {
-		headerImage: file(relativePath: { eq: "headers/awards.jpg" }) {
-			childImageSharp {
-				fluid(maxWidth: 1200, quality: 90) {
-					...GatsbyImageSharpFluid_withWebp
-				}
-			}
-		}
-		smunc: file(relativePath: { eq: "conferences/smunc.jpeg" }) {
-			childImageSharp {
-				fluid(maxWidth: 1200, quality: 90) {
-					...GatsbyImageSharpFluid_withWebp
-				}
-			}
-		}
-	}
-`;

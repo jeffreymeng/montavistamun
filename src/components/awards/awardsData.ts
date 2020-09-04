@@ -1,6 +1,11 @@
+import firebaseType from "firebase";
+import moment from "moment";
+
 type ConferenceAwardData = {
 	name: string;
-	time: string;
+	month: string;
+	year: number;
+	time: firebaseType.firestore.Timestamp;
 	delegationAward: string | null;
 	delegateAwards: {
 		type:
@@ -801,5 +806,37 @@ const data: ConferenceAwardData[] = [
 		],
 	},
 ];
-export default data;
-export { ConferenceAwardData };
+const migrateTool = (awardsData) => {
+	if (!firebase) {
+		console.log("nofb");
+		return;
+	}
+	const promises = awardsData.map((award) => {
+		const { time, ...rest } = award;
+		return firebase
+			.firestore()
+			.collection("awards")
+			.add({
+				...rest,
+				month: time.split(" ")[0],
+				year: parseInt(time.split(" ")[1], 10),
+				time: firebase.firestore.Timestamp.fromDate(
+					moment()
+						.year(parseInt(time.split(" ")[1], 10))
+						.month(time.split(" ")[0])
+						.date(1)
+						.hours(0)
+						.minutes(0)
+						.seconds(0)
+						.milliseconds(0)
+						.toDate()
+				),
+			});
+	});
+	Promise.all(promises).then((d) => {
+		console.log(d);
+	});
+	// console.log(promises);
+};
+// export default ConferenceAwardData;
+// export {data};
