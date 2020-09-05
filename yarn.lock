@@ -1692,52 +1692,52 @@
   resolved "https://registry.yarnpkg.com/@firebase/webchannel-wrapper/-/webchannel-wrapper-0.3.0.tgz#d1689566b94c25423d1fb2cb031c5c2ea4c9f939"
   integrity sha512-VniCGPIgSGNEgOkh5phb3iKmSGIzcwrccy3IomMFRWPCMiCk2y98UQNJEoDs1yIHtZMstVjYWKYxnunIGzC5UQ==
 
-"@fullcalendar/common@~5.3.0":
-  version "5.3.0"
-  resolved "https://registry.yarnpkg.com/@fullcalendar/common/-/common-5.3.0.tgz#5d7095078f3876b5ac2290dcccfaf65e31671953"
-  integrity sha512-TYWV2hx9tKNWjRWX8Im3nyikXMekpPBurqxM6jRxEdKzfhzKEHlJEyBi8Buz8Xg4Qyg2KkjuWwq2+ImGg0hcOw==
+"@fullcalendar/common@~5.3.1":
+  version "5.3.1"
+  resolved "https://registry.yarnpkg.com/@fullcalendar/common/-/common-5.3.1.tgz#9193032cf88f12ebcd8337ef6e98b23fbbbf04ca"
+  integrity sha512-2PREEpiFQSDN5MNdoD/OkpJ+d7FPtN2TwTJMsuq3fTjmj3nM+utrxBmUr9a2F6WWW1X+xGU5nHQA52vhqIiQOQ==
   dependencies:
     tslib "^2.0.0"
 
-"@fullcalendar/daygrid@^5.3.0", "@fullcalendar/daygrid@~5.3.0":
-  version "5.3.0"
-  resolved "https://registry.yarnpkg.com/@fullcalendar/daygrid/-/daygrid-5.3.0.tgz#d3107a32c4f9c3e1a4bb7084f5fc310b1f92a2d0"
-  integrity sha512-YDE7Pnxf+jkkQjogYPEgHDn4mahgUl2eNJRSytQOBJDVrsWcR/nAXI0PhsWHKi86BZVviEiEjzuLv+e4jeIVCg==
+"@fullcalendar/daygrid@^5.3.1", "@fullcalendar/daygrid@~5.3.1":
+  version "5.3.1"
+  resolved "https://registry.yarnpkg.com/@fullcalendar/daygrid/-/daygrid-5.3.1.tgz#876dec33fab2fed8468ff0b15609bfd58718a52c"
+  integrity sha512-KRHN/WDwAMJP/GWv3s2ZdDj1pkbCsTm1pdQIC8zsAhuQ5rMNzoCEzDJejL119ztB15Tf1NlVIGoqd8eOeTHS+g==
   dependencies:
-    "@fullcalendar/common" "~5.3.0"
+    "@fullcalendar/common" "~5.3.1"
     tslib "^2.0.0"
 
-"@fullcalendar/google-calendar@^5.3.0":
-  version "5.3.0"
-  resolved "https://registry.yarnpkg.com/@fullcalendar/google-calendar/-/google-calendar-5.3.0.tgz#8dfc187f36e3e80d9b505a9e01db12be01287452"
-  integrity sha512-WNpcyTnwBIa+fB6kxlZsg0OM0kArUDLqSVKRn9kbpvZ+hqTtrbcNmMG7cLJiwfBCRAjycTuskDLDI/yhUKfcGg==
+"@fullcalendar/google-calendar@^5.3.1":
+  version "5.3.1"
+  resolved "https://registry.yarnpkg.com/@fullcalendar/google-calendar/-/google-calendar-5.3.1.tgz#c7c34dd5d80dd1fb650ae46d21a7eea4dd22afdc"
+  integrity sha512-miCLC39yP3IG8JfyqAKOi0xO/5zBHASs/lInnfhBlN6KDzREoZdww1JFaqFY7LaibC5Aqnf3yFI9J+3MTxCiNw==
   dependencies:
-    "@fullcalendar/common" "~5.3.0"
+    "@fullcalendar/common" "~5.3.1"
     tslib "^2.0.0"
 
-"@fullcalendar/list@^5.3.0":
-  version "5.3.0"
-  resolved "https://registry.yarnpkg.com/@fullcalendar/list/-/list-5.3.0.tgz#afd9b96a6e22075eaf9d99d1aa79c4c54b03ed5a"
-  integrity sha512-nU9h5hTyVpoAL5w/ifrbqU4e4F8sc5YZRXQz5X0dHcS334IRVARTBc7He79cKhrwBy7yrTZ4RatY5Nd+NUi8pw==
+"@fullcalendar/list@^5.3.1":
+  version "5.3.1"
+  resolved "https://registry.yarnpkg.com/@fullcalendar/list/-/list-5.3.1.tgz#bab30270138bc20d22ff79d185cf7ccfd588a570"
+  integrity sha512-0wZxRe9xhe61W8I00u7gW+FGxOxew5di+ujIVqoRjQ1JOiXsmClUwyObEtVPc8/5/Z1fFFcnh6tIAJKuVrOP1A==
   dependencies:
-    "@fullcalendar/common" "~5.3.0"
+    "@fullcalendar/common" "~5.3.1"
     tslib "^2.0.0"
 
-"@fullcalendar/react@^5.3.0":
-  version "5.3.0"
-  resolved "https://registry.yarnpkg.com/@fullcalendar/react/-/react-5.3.0.tgz#0d6958b2b0cd5453cb19dd726248d097be36bfa2"
-  integrity sha512-mRvU15dqDH29GGGx+JOFEGV7ZXkj+K+gg9aIiLC78geXPH3878OKw56EmNcr5mDXJDjHb5ma47ZqIfQUyTZqiQ==
+"@fullcalendar/react@^5.3.1":
+  version "5.3.1"
+  resolved "https://registry.yarnpkg.com/@fullcalendar/react/-/react-5.3.1.tgz#b7b86f6b2dc8315b51d4c05663e4e4aef9ff680a"
+  integrity sha512-CuZSaOniy9XmISRMJcN241dGBUDIOMHU5RCCISjahIDZb7+qmQvSC572GYh3P4iYzoiMLMUtNU9flXvxASCUVw==
   dependencies:
-    "@fullcalendar/common" "~5.3.0"
+    "@fullcalendar/common" "~5.3.1"
     tslib "^2.0.0"
 
-"@fullcalendar/timegrid@^5.3.0":
-  version "5.3.0"
-  resolved "https://registry.yarnpkg.com/@fullcalendar/timegrid/-/timegrid-5.3.0.tgz#e3dda74fde9ae429326f41f707b60c5082e1cfee"
-  integrity sha512-bdlqDcN7A+gRhjOqiKyd++TbMclfea2ipGks5pxUyZj5QAiRiQ6XvA5V8ktouN3dBc03UZ5pkIAvXuEgbFmYMw==
+"@fullcalendar/timegrid@^5.3.1":
+  version "5.3.1"
+  resolved "https://registry.yarnpkg.com/@fullcalendar/timegrid/-/timegrid-5.3.1.tgz#c56d3c62b366eea701ef002adbbf999713648d9b"
+  integrity sha512-ahyJC/kybGip5pTLC4cpsEdnhDZb3Hg0F7LTD/VVK4GxzplDiI0ZaWACC4O22zmp1+7a40NUMIV0HLO3D5SV4A==
   dependencies:
-    "@fullcalendar/common" "~5.3.0"
-    "@fullcalendar/daygrid" "~5.3.0"
+    "@fullcalendar/common" "~5.3.1"
+    "@fullcalendar/daygrid" "~5.3.1"
     tslib "^2.0.0"
 
 "@fullhuman/postcss-purgecss@^2.1.2":
@@ -9403,6 +9403,11 @@ html-tag-names@^1.1.5:
   resolved "https://registry.yarnpkg.com/html-tag-names/-/html-tag-names-1.1.5.tgz#f537420c16769511283f8ae1681785fbc89ee0a9"
   integrity sha512-aI5tKwNTBzOZApHIynaAwecLBv8TlZTEy/P4Sj2SzzAhBrGuI8yGZ0UIXVPQzOHGS+to2mjb04iy6VWt/8+d8A==
 
+html-tags@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/html-tags/-/html-tags-3.1.0.tgz#7b5e6f7e665e9fb41f30007ed9e0d41e97fb2140"
+  integrity sha512-1qYz89hW3lFDEazhjW0yVAV87lw8lVkrJocr72XmBkMKsoSVJCQx3W8BXsC7hO2qAt8BoVjYjtAcZ9perqGnNg==
+
 html-void-elements@^1.0.0:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/html-void-elements/-/html-void-elements-1.0.5.tgz#ce9159494e86d95e45795b166c2021c2cfca4483"
@@ -15877,10 +15882,10 @@ table@^5.2.3:
     slice-ansi "^2.1.0"
     string-width "^3.0.0"
 
-tailwindcss@1.7.6:
-  version "1.7.6"
-  resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-1.7.6.tgz#77f294428e399fb570f4bebde2e9bef98456de8a"
-  integrity sha512-focAhU3ciM1/UYBHQVKKzede4zC3y9+IHzU2N/ZF6mbZbhY8S96lOxrO2Y6LMU08+Dbh2xBLmO1bsioLk3Egig==
+tailwindcss@1.8.2:
+  version "1.8.2"
+  resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-1.8.2.tgz#72374608676e7a05e3db5ead74f3ac51df54c73e"
+  integrity sha512-Acz4b2caMlrnv9zCmmwENjcktV7rblaMYGwGUT6woqmwnttLZ9ePj7yynSCln/Aky/4SGyduf7y3yk/QZNw+vw==
   dependencies:
     "@fullhuman/postcss-purgecss" "^2.1.2"
     autoprefixer "^9.4.5"
@@ -15890,6 +15895,7 @@ tailwindcss@1.7.6:
     color "^3.1.2"
     detective "^5.2.0"
     fs-extra "^8.0.0"
+    html-tags "^3.1.0"
     lodash "^4.17.20"
     node-emoji "^1.8.1"
     normalize.css "^8.0.1"

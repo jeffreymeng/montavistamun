@@ -88,7 +88,7 @@ export default function KennedyPage({
 }
 export const query = graphql`
 	query KennedyPageQuery {
-		headerImage: file(relativePath: { eq: "headers/conferences.jpg" }) {
+		headerImage: file(relativePath: { eq: "headers/kennedy.jpg" }) {
 			childImageSharp {
 				fluid(maxWidth: 1200, quality: 90) {
 					...GatsbyImageSharpFluid_withWebp
