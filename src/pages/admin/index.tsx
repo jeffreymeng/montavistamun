@@ -23,12 +23,16 @@ export default function AboutPage(): React.ReactElement {
 			>
 				Admin Dashboard
 			</h1>
-			<Link to={"/admin/members"} className={"link"}>
-				Manage Members
-			</Link>
-			<Link to={"/admin/awards"} className={"link"}>
-				Edit Awards
-			</Link>
+			<p>
+				<Link to={"/admin/members"} className={"link"}>
+					Manage Members
+				</Link>
+			</p>
+			<p>
+				<Link to={"/admin/awards"} className={"link"}>
+					Edit Awards
+				</Link>
+			</p>
 		</AdminLayout>
 	);
 }
