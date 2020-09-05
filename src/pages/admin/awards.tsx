@@ -244,6 +244,7 @@ export default function AboutPage(): React.ReactElement {
 			<SaveModal
 				show={showSaveModal}
 				setShow={setShowSaveModal}
+				setData={setData}
 				conferenceData={conferenceData}
 				edits={edits}
 				selectedConference={selectedConference}

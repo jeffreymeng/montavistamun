@@ -11,9 +11,11 @@ export default function SaveModal({
 	edits,
 	selectedConference,
 	conferenceData,
+	setData,
 }: {
 	show: boolean;
 	setShow: (show: boolean) => void;
+	setData: (data: any[]) => void;
 	edits: string[];
 	selectedConference: string;
 	conferenceData: ConferenceAwardsData | null;
@@ -164,14 +166,16 @@ export default function SaveModal({
 												}
 												setSubmitting(true);
 												let backupData = null;
+												let newConferenceID = "";
 												if (
 													selectedConference ===
 													"(NEW)"
 												) {
-													await firebase
+													const ref = await firebase
 														.firestore()
 														.collection("awards")
 														.add(conferenceData);
+													newConferenceID = ref.id;
 												} else {
 													backupData = (
 														await firebase
@@ -206,7 +210,9 @@ export default function SaveModal({
 																: "update-award",
 														...(selectedConference ===
 														"(NEW)"
-															? {}
+															? {
+																	conferenceId: newConferenceID,
+															  }
 															: {
 																	conferenceId: selectedConference,
 																	previousData: backupData,
@@ -214,6 +220,38 @@ export default function SaveModal({
 															  }),
 														newData: conferenceData,
 													});
+												if (
+													selectedConference ===
+													"(NEW)"
+												) {
+													setData((data) => {
+														const [
+															first,
+															...rest
+														] = data;
+														return [
+															first,
+															{
+																id: newConferenceID,
+																award: conferenceData,
+															},
+															...rest,
+														];
+													});
+												} else {
+													setData((data) =>
+														data.map((c) =>
+															c.id !==
+															selectedConference
+																? c
+																: {
+																		id:
+																			c.id,
+																		award: conferenceData,
+																  }
+														)
+													);
+												}
 												setSubmitting(false);
 												setSuccess(true);
 											}}
