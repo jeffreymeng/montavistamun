@@ -304,7 +304,7 @@ export default function MembersPage(): React.ReactElement {
 						Unverify
 					</button>
 				</span>
-				<span className="relative z-0 inline-flex shadow-sm rounded-md mx-4">
+				<span className="relative z-0 inline-flex shadow-sm rounded-md sm:mx-4">
 					<button
 						type="button"
 						disabled={selectedUsers.size === 0}
@@ -630,21 +630,7 @@ export default function MembersPage(): React.ReactElement {
 							</tbody>
 						</table>
 						<div className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
-							<div className="flex-1 flex justify-between sm:hidden">
-								<a
-									href="/"
-									className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"
-								>
-									Previous
-								</a>
-								<a
-									href="/"
-									className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"
-								>
-									Next
-								</a>
-							</div>
-							<div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+							<div className="flex-1 flex items-center justify-between">
 								<div>
 									<p className="text-sm leading-5 text-gray-700">
 										Showing All{" "}
