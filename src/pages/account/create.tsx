@@ -3,18 +3,12 @@ import classNames from "classnames";
 import { Link } from "gatsby";
 import { Eye, EyeOff } from "heroicons-react";
 import Mailcheck from "mailcheck";
-import moment from "moment";
 import React, { useState } from "react";
 import FirebaseStoredUserData from "../../auth/FirebaseStoredUserData";
 import useFirebase from "../../auth/useFirebase";
 import { AuthLayout } from "../../components/layout";
 import AuthContext from "../../context/AuthContext";
-import {
-	getClassOf,
-	getFirstDayOfSchool,
-	getIsSummer,
-	getLastDayOfSchool,
-} from "../../utils/schoolYearUtils";
+import { getClassOf, getIsSummer } from "../../utils/schoolYearUtils";
 import { LoginPageProps } from "./login";
 
 export default function CreatePage({
@@ -66,17 +60,7 @@ export default function CreatePage({
 		return () => clearInterval(interval);
 	}, [done]);
 	const firebase = useFirebase();
-	React.useEffect(
-		() =>
-			console.log(
-				getFirstDayOfSchool().toString(),
-				getLastDayOfSchool().toString(),
-				getClassOf(11),
-				getIsSummer(),
-				moment().month()
-			),
-		[]
-	);
+
 	React.useEffect(() => {
 		import("sysend").then((module) => setSysend(module));
 	}, []);
@@ -311,7 +295,6 @@ export default function CreatePage({
 									}
 									setSubmitting(true);
 									setShowPassword(false);
-									console.log(name, email, password, grade);
 
 									try {
 										const credential = await firebase
@@ -380,7 +363,7 @@ export default function CreatePage({
 													}
 												)
 											),
-										]).then(console.log);
+										]);
 										setVerificationEmailSent(true);
 										setDone(true);
 										setResendTimeLeft(59);

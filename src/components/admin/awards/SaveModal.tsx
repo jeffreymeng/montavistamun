@@ -15,7 +15,7 @@ export default function SaveModal({
 }: {
 	show: boolean;
 	setShow: (show: boolean) => void;
-	setData: (data: any[]) => void;
+	setData: (data: (data: any) => any) => void;
 	edits: string[];
 	selectedConference: string;
 	conferenceData: ConferenceAwardsData | null;
@@ -148,10 +148,6 @@ export default function SaveModal({
 									<span className="flex w-full rounded-md shadow-sm sm:ml-3 sm:w-auto">
 										<button
 											onClick={async () => {
-												console.log(
-													selectedConference,
-													conferenceData
-												);
 												if (!conferenceData?.name) {
 													alert(
 														"You must include the conference name."

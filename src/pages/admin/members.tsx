@@ -33,7 +33,6 @@ export default function MembersPage(): React.ReactElement {
 	>([]);
 	const [dataRequiresUpdate, setDataRequiresUpdate] = useState(true);
 	const scheduleDataUpdate = () => {
-		console.log("DU scheduled");
 		setDataRequiresUpdate(true);
 	};
 	React.useEffect(() => {
@@ -62,7 +61,6 @@ export default function MembersPage(): React.ReactElement {
 					data: doc.data(),
 				});
 			});
-			console.log(newUsers);
 			setUsers(newUsers);
 			setLoadingUsers(false);
 			setDataRequiresUpdate(false);

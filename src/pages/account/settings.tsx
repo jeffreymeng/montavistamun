@@ -347,7 +347,6 @@ function PersonalInformationDisplay() {
 			.get()
 			.then((snapshot) => snapshot.data() as FirebaseStoredUserData)
 			.then((data) => {
-				console.log(data);
 				setCurrentFirstName(data.firstName);
 				setCurrentLastName(data.lastName);
 				setFirstName(data.firstName);

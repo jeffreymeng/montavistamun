@@ -53,7 +53,6 @@ export default function AwardsPage(): React.ReactElement {
 			}
 		}
 	`);
-	console.log(awardsData);
 	/**
 	 * Utility function (TODO: move to admin dashboard)
 	 * Convert award data of the format

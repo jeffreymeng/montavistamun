@@ -46,7 +46,6 @@ export default function AboutPage(): React.ReactElement {
 			});
 	}, [firebase, loading]);
 	const options = React.useMemo(() => {
-		console.log(data);
 		return [
 			{
 				value: "(NEW)",
