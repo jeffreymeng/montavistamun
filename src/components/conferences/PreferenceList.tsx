@@ -1,5 +1,5 @@
 import arrayMove from "array-move";
-import React from "react";
+import React, { useState } from "react";
 import {
 	SortableContainer as RSHSortableContainer,
 	SortableElement as RSHSortableElement,
@@ -23,7 +23,7 @@ const SortableContainer = RSHSortableContainer(
 );
 
 export default function PreferenceList() {
-	const [items, setItems] = React.useState([
+	const [items, setItems] = useState([
 		"Legal",
 		"ECOSOC",
 		"SOCMOK",

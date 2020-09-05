@@ -1,5 +1,5 @@
 import * as Icons from "heroicons-react";
-import React from "react";
+import React, { useState } from "react";
 import Transition from "../Transition";
 import UserData from "./UserData";
 
@@ -24,17 +24,15 @@ export default function SelectAllCheckbox({
 		}[]
 	>;
 }) {
-	const [selectAllDropdownOpen, setSelectAllDropdownOpen] = React.useState(
-		false
-	);
-	const [emails, setEmails] = React.useState("");
+	const [selectAllDropdownOpen, setSelectAllDropdownOpen] = useState(false);
+	const [emails, setEmails] = useState("");
 	const [errors, setErrors] = React.useState<[string, string][]>([]);
 	const parsedEmails = emails
 		.split(",")
 		.flatMap((e) => e.split("\n"))
 		.map((e) => e.trim())
 		.filter((e) => e);
-	const [listModalOpen, setListModalOpen] = React.useState(false);
+	const [listModalOpen, setListModalOpen] = useState(false);
 	const selectDropdownRef = React.useRef(null);
 
 	React.useEffect(() => {

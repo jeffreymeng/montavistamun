@@ -1,12 +1,12 @@
 import { Link } from "gatsby";
-import React from "react";
+import React, { useState } from "react";
 import useFirebase from "../../auth/useFirebase";
 import AdminLayout from "../../components/layout/AdminLayout";
 import AuthContext from "../../context/AuthContext";
 export default function AboutPage(): React.ReactElement {
-	const [target, setTarget] = React.useState("");
-	const [admin, setAdmin] = React.useState("same");
-	const [verified, setVerified] = React.useState("same");
+	const [target, setTarget] = useState("");
+	const [admin, setAdmin] = useState("same");
+	const [verified, setVerified] = useState("same");
 	const firebase = useFirebase();
 	const {
 		user,
@@ -25,6 +25,9 @@ export default function AboutPage(): React.ReactElement {
 			</h1>
 			<Link to={"/admin/members"} className={"link"}>
 				Manage Members
+			</Link>
+			<Link to={"/admin/awards"} className={"link"}>
+				Edit Awards
 			</Link>
 		</AdminLayout>
 	);

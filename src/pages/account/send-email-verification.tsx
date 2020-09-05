@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import { Link } from "gatsby";
-import React from "react";
+import React, { useState } from "react";
 import useFirebase from "../../auth/useFirebase";
 import useRequireLogin from "../../components/accounts/useRequireLogin";
 import { AuthLayout } from "../../components/layout";
@@ -22,9 +22,9 @@ export default function SendEmailVerificationPage({
 }): React.ReactElement {
 	useRequireLogin();
 	const { user, loading } = React.useContext(AuthContext);
-	const [submitting, setSubmitting] = React.useState(false);
+	const [submitting, setSubmitting] = useState(false);
 	const [error, setError] = React.useState<React.ReactNode>("");
-	const [success, setSuccess] = React.useState(false);
+	const [success, setSuccess] = useState(false);
 	const firebase = useFirebase();
 
 	return (

@@ -1,5 +1,5 @@
 import { Link } from "gatsby";
-import React from "react";
+import React, { useState } from "react";
 import useFirebase from "../../auth/useFirebase";
 import { Layout, Main } from "../../components/layout";
 
@@ -12,7 +12,7 @@ interface LogoutProps {
 export default function LogoutPage({
 	cancelReturnURL,
 }: LogoutProps): React.ReactElement {
-	const [loading, setLoading] = React.useState(true);
+	const [loading, setLoading] = useState(true);
 	const firebase = useFirebase();
 
 	React.useEffect(() => {

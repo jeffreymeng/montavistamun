@@ -1,7 +1,7 @@
 import axios from "axios";
 import firebaseType from "firebase";
 import * as Icons from "heroicons-react";
-import React from "react";
+import React, { useState } from "react";
 import useFirebase from "../../auth/useFirebase";
 import SelectAllCheckbox from "../../components/admin/SelectAllCheckbox";
 import UserData from "../../components/admin/UserData";
@@ -11,12 +11,12 @@ import AuthContext from "../../context/AuthContext";
 import { getGrade } from "../../utils/schoolYearUtils";
 
 export default function MembersPage(): React.ReactElement {
-	const [lastActionID, setLastActionID] = React.useState("");
+	const [lastActionID, setLastActionID] = useState("");
 
 	const [selectedUsers, setSelectedUsers] = React.useState<Set<string>>(
 		() => new Set()
 	);
-	const [loadingUsers, setLoadingUsers] = React.useState(true);
+	const [loadingUsers, setLoadingUsers] = useState(true);
 
 	const firebase = useFirebase();
 	const {
@@ -31,7 +31,7 @@ export default function MembersPage(): React.ReactElement {
 			data: UserData;
 		}[]
 	>([]);
-	const [dataRequiresUpdate, setDataRequiresUpdate] = React.useState(true);
+	const [dataRequiresUpdate, setDataRequiresUpdate] = useState(true);
 	const scheduleDataUpdate = () => {
 		console.log("DU scheduled");
 		setDataRequiresUpdate(true);
@@ -111,7 +111,7 @@ export default function MembersPage(): React.ReactElement {
 		});
 		setLastActionID(id);
 	};
-	const [showConfirmModal, setShowConfirmModal] = React.useState(false);
+	const [showConfirmModal, setShowConfirmModal] = useState(false);
 	const [confirmModal, setConfirmModal] = React.useState<{
 		title: string;
 		text: string;

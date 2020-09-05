@@ -1,7 +1,7 @@
 import axios from "axios";
 import classNames from "classnames";
 import { Link } from "gatsby";
-import React from "react";
+import React, { useState } from "react";
 import useFirebase from "../../../auth/useFirebase";
 import { AuthLayout } from "../../../components/layout";
 
@@ -10,16 +10,16 @@ export default function HandleEmailActionPage({
 }: {
 	location: { state?: { code?: string; continueURL?: string } };
 }): React.ReactElement {
-	const [success, setSuccess] = React.useState(false);
+	const [success, setSuccess] = useState(false);
 	const [error, setError] = React.useState<React.ReactNode>("");
 	const [loginError, setLoginError] = React.useState<React.ReactNode>("");
 	const code = location?.state?.code;
 	const continueURL = location?.state?.continueURL;
-	const [newEmail, setNewEmail] = React.useState("");
-	const [oldEmail, setOldEmail] = React.useState("");
-	const [password, setPassword] = React.useState("");
-	const [loading, setLoading] = React.useState(true);
-	const [submitting, setSubmitting] = React.useState(false);
+	const [newEmail, setNewEmail] = useState("");
+	const [oldEmail, setOldEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [loading, setLoading] = useState(true);
+	const [submitting, setSubmitting] = useState(false);
 	const firebase = useFirebase();
 	React.useEffect(() => {
 		if (!firebase) return;

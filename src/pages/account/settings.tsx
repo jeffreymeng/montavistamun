@@ -2,7 +2,7 @@ import axios from "axios";
 import firebaseType from "firebase";
 import { Check, InformationCircle } from "heroicons-react";
 import moment from "moment";
-import React from "react";
+import React, { useState } from "react";
 import Select from "react-select";
 import FirebaseStoredUserData from "../../auth/FirebaseStoredUserData";
 import useFirebase from "../../auth/useFirebase";
@@ -16,8 +16,8 @@ export default function SettingsPage(): React.ReactElement {
 	const { user, loading } = React.useContext(AuthContext);
 	const firebase = useFirebase();
 
-	const [passwordModalOpen, setPasswordModalOpen] = React.useState(false);
-	const [emailModalOpen, setEmailModalOpen] = React.useState(false);
+	const [passwordModalOpen, setPasswordModalOpen] = useState(false);
+	const [emailModalOpen, setEmailModalOpen] = useState(false);
 	useRequireLogin();
 
 	return (
@@ -308,24 +308,21 @@ export default function SettingsPage(): React.ReactElement {
 function PersonalInformationDisplay() {
 	const { user, loading } = React.useContext(AuthContext);
 	const firebase = useFirebase();
-	const [currentFirstName, setCurrentFirstName] = React.useState("");
-	const [currentLastName, setCurrentLastName] = React.useState("");
+	const [currentFirstName, setCurrentFirstName] = useState("");
+	const [currentLastName, setCurrentLastName] = useState("");
 
-	const [firstName, setFirstName] = React.useState("Loading...");
-	const [lastName, setLastName] = React.useState("Loading...");
-	const [currentClassOf, setCurrentClassOf] = React.useState(-1);
-	const [classOf, setClassOf] = React.useState(-1);
-	const [loadingProfile, setLoadingProfile] = React.useState(true);
-	const [profileChangeSuccess, setProfileChangeSuccess] = React.useState(
-		false
-	);
+	const [firstName, setFirstName] = useState("Loading...");
+	const [lastName, setLastName] = useState("Loading...");
+	const [currentClassOf, setCurrentClassOf] = useState(-1);
+	const [classOf, setClassOf] = useState(-1);
+	const [loadingProfile, setLoadingProfile] = useState(true);
+	const [profileChangeSuccess, setProfileChangeSuccess] = useState(false);
 	const [profileChangeError, setProfileChangeError] = React.useState<
 		React.ReactNode
 	>("");
-	const [
-		profileChangeSubmitting,
-		setProfileChangeSubmitting,
-	] = React.useState(false);
+	const [profileChangeSubmitting, setProfileChangeSubmitting] = useState(
+		false
+	);
 	const hasUpdates = React.useMemo(
 		() =>
 			firstName !== currentFirstName ||
@@ -601,11 +598,11 @@ function ChangePasswordModal({
 	// can be null until the form is submitted
 	user?: firebaseType.User | null;
 }) {
-	const [submitting, setSubmitting] = React.useState(false);
-	const [success, setSuccess] = React.useState(false);
-	const [currentPassword, setCurrentPassword] = React.useState("");
-	const [newPassword, setNewPassword] = React.useState("");
-	const [confirmNewPassword, setConfirmNewPassword] = React.useState("");
+	const [submitting, setSubmitting] = useState(false);
+	const [success, setSuccess] = useState(false);
+	const [currentPassword, setCurrentPassword] = useState("");
+	const [newPassword, setNewPassword] = useState("");
+	const [confirmNewPassword, setConfirmNewPassword] = useState("");
 	const [error, setError] = React.useState<React.ReactNode>("");
 	const resetForm = () => {
 		setCurrentPassword("");
@@ -924,10 +921,10 @@ function ChangeEmailModal({
 	// can be null until the form is submitted
 	user?: firebaseType.User | null;
 }) {
-	const [submitting, setSubmitting] = React.useState(false);
-	const [success, setSuccess] = React.useState(false);
-	const [password, setPassword] = React.useState("");
-	const [newEmail, setNewEmail] = React.useState("");
+	const [submitting, setSubmitting] = useState(false);
+	const [success, setSuccess] = useState(false);
+	const [password, setPassword] = useState("");
+	const [newEmail, setNewEmail] = useState("");
 	const [error, setError] = React.useState<React.ReactNode>("");
 	const resetForm = () => {
 		setPassword("");

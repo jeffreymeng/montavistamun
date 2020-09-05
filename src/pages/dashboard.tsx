@@ -2,7 +2,7 @@ import axios from "axios";
 import { Link } from "gatsby";
 import * as Icons from "heroicons-react";
 import moment from "moment";
-import React from "react";
+import React, { useState } from "react";
 import useRequireLogin from "../components/accounts/useRequireLogin";
 import { Layout } from "../components/layout";
 import AuthContext from "../context/AuthContext";
@@ -269,12 +269,12 @@ export default function AboutPage(): React.ReactElement {
 
 function UpdatesTable() {
 	const { user, loading, verified, admin } = React.useContext(AuthContext);
-	const [loadingData, setLoadingData] = React.useState(true);
-	const [data, setData] = React.useState([]);
-	const [numPages, setNumPages] = React.useState(0);
-	const [numResults, setNumResults] = React.useState(0);
-	const [mailchimpID, setMailchimpID] = React.useState("");
-	const [page, setPage] = React.useState(1);
+	const [loadingData, setLoadingData] = useState(true);
+	const [data, setData] = useState([]);
+	const [numPages, setNumPages] = useState(0);
+	const [numResults, setNumResults] = useState(0);
+	const [mailchimpID, setMailchimpID] = useState("");
+	const [page, setPage] = useState(1);
 	// initial load
 	React.useEffect(() => {
 		if (!user || !user.email) return;

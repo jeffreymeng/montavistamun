@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import { Link, navigate } from "gatsby";
-import React from "react";
+import React, { useState } from "react";
 import useFirebase from "../../auth/useFirebase";
 import { AuthLayout } from "../../components/layout";
 import AuthContext from "../../context/AuthContext";
@@ -16,12 +16,12 @@ export default function LoginPage({
 }: {
 	location: { state: LoginPageProps };
 }): React.ReactElement {
-	const [email, setEmail] = React.useState("");
-	const [password, setPassword] = React.useState("");
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
 	const [error, setError] = React.useState<React.ReactNode | null>(null);
-	const [submitting, setSubmitting] = React.useState(false);
-	const [justLoggedIn, setJustLoggedIn] = React.useState(false);
-	const [alreadyLoggedIn, setAlreadyLoggedIn] = React.useState(false);
+	const [submitting, setSubmitting] = useState(false);
+	const [justLoggedIn, setJustLoggedIn] = useState(false);
+	const [alreadyLoggedIn, setAlreadyLoggedIn] = useState(false);
 	const [
 		alreadyLoggedInTimeLeft,
 		setAlreadyLoggedInTimeLeft,
@@ -29,7 +29,7 @@ export default function LoginPage({
 	const [
 		alreadyLoggedInContinueCancelled,
 		setAlreadyLoggedInContinueCancelled,
-	] = React.useState(false);
+	] = useState(false);
 	const { user, loading } = React.useContext(AuthContext);
 	const firebase = useFirebase();
 	React.useEffect(() => {

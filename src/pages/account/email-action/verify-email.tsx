@@ -1,5 +1,5 @@
 import { Link } from "gatsby";
-import React from "react";
+import React, { useState } from "react";
 import useFirebase from "../../../auth/useFirebase";
 import { AuthLayout } from "../../../components/layout";
 
@@ -8,7 +8,7 @@ export default function HandleEmailActionPage({
 }: {
 	location: { state?: { code?: string; continueURL?: string } };
 }): React.ReactElement {
-	const [success, setSuccess] = React.useState(false);
+	const [success, setSuccess] = useState(false);
 	const [error, setError] = React.useState<React.ReactNode>("");
 	const code = location?.state?.code;
 	const continueURL = location?.state?.continueURL;

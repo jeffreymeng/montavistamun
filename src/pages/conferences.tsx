@@ -85,7 +85,7 @@ export default function ConferencesPage({
 						location: "University of California, Berkeley",
 						acronym: "bmun",
 						text:
-							"Our fifth conference of the year, Berkeley Model United Nations Conference, is meant for veterans and varsity members. BMUN is tough, but we’re sure that you will have such a great time meeting members from all over the world. It’s also a great way to analyze and practice your speech skills in a group of more experienced delegates. BMUN is our second overnight conference, located in nearby Berkeley, California, including a 2-night stay and stay at a hotel in Berkeley.\n",
+							"Our fifth conference of the year, Berkeley Model United Nations Conference, is meant for veterans and varsity members. BMUN is tough, but we’re sure that you will have such a great time meeting members from all over the world. It’s also a great way to analyze and practice your speech skills in a group of more experienced delegates. BMUN is our second overnight conference, located in nearby Berkeley, California, including a 2-night stay at a hotel in Berkeley.",
 					},
 					{
 						name: "South Bay Model United Nations",
@@ -101,7 +101,7 @@ export default function ConferencesPage({
 						location: "University of California, Davis",
 						acronym: "dmunc",
 						text:
-							"Our final conference of the year, Davis Model United Nations Conference, is an excellent way for you to present your accumulated speech skills throughout the school year in one big committee. DMUNC has a variety of both novices and experienced members, and we’re sure that you will do great after practicing for so long! DMUNC is our last overnight conference, including a likely 2-night stay at a hotel near Davis Campus.\n",
+							"Our final conference of the year, Davis Model United Nations Conference, is an excellent way for you to present your accumulated speech skills throughout the school year in one big committee. DMUNC has a variety of both novices and experienced members, and we’re sure that you will do great after practicing for so long! DMUNC is our last overnight conference, including a likely 2-night stay at a hotel near Davis Campus.",
 					},
 				].map(({ name, date, location, acronym, text }, i) => {
 					return (

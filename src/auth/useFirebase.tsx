@@ -3,12 +3,12 @@
 // the below lazy import of firebase is still necessary.
 import * as FirebaseType from "firebase";
 import useIsMounted from "ismounted";
-import React from "react";
+import React, { useState } from "react";
 import firebaseConfig from "../../firebase-config";
 
 export default function useFirebase(): null | typeof FirebaseType {
 	const isMounted = useIsMounted();
-	const [firebase, setFirebase] = React.useState(null);
+	const [firebase, setFirebase] = useState(null);
 	React.useEffect(() => {
 		if (typeof window == "undefined") {
 			return;

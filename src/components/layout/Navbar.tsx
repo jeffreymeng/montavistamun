@@ -30,7 +30,7 @@ function Navbar({
 	const toggleExpansion = () => setIsExpanded((old) => !old);
 
 	// only show a box shadow when the user has scrolled a little bit
-	const [showShadow, setShowShadow] = React.useState(shadow === "always");
+	const [showShadow, setShowShadow] = useState(shadow === "always");
 	React.useEffect(() => {
 		if (shadow !== "scroll") return;
 		const scrollHandler = () => {
@@ -253,7 +253,7 @@ function Navbar({
 	);
 }
 function ProfileDropdown(): ReactElement {
-	const [expanded, setExpanded] = React.useState(false);
+	const [expanded, setExpanded] = useState(false);
 	const { user, loading, admin } = React.useContext(AuthContext);
 	const toggleExpanded = () => {
 		setExpanded((old) => !old);

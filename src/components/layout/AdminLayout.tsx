@@ -1,7 +1,7 @@
 import { useLocation } from "@reach/router";
 import { Link } from "gatsby";
 import * as Icons from "heroicons-react";
-import React from "react";
+import React, { useState } from "react";
 import AuthContext from "../../context/AuthContext";
 import useRequireLogin from "../accounts/useRequireLogin";
 import Transition from "../Transition";
@@ -15,6 +15,12 @@ const AdminLinks: TypedPageOrDropdown[] = [
 		name: "Manage Members",
 		path: "/admin/members",
 		icon: <Icons.UsersOutline />,
+	},
+	{
+		type: "page",
+		name: "Edit Awards",
+		path: "/admin/awards",
+		icon: <Icons.AcademicCapOutline />,
 	},
 	// {
 	// 	type: "page",
@@ -30,9 +36,7 @@ export default function AdminLayout({
 	title: string;
 	children: React.ReactNode | React.ReactNodeArray;
 }) {
-	const [mobileSidebarExpanded, setMobileSidebarExpanded] = React.useState(
-		false
-	);
+	const [mobileSidebarExpanded, setMobileSidebarExpanded] = useState(false);
 	useRequireLogin();
 	const { loading, admin } = React.useContext(AuthContext);
 	const location = useLocation();
@@ -314,7 +318,7 @@ function SidebarDropdown({
 	icon?: React.ReactElement;
 	pages: Page[];
 }) {
-	const [expanded, setExpanded] = React.useState(false);
+	const [expanded, setExpanded] = useState(false);
 
 	return (
 		<div>

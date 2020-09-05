@@ -35,7 +35,7 @@ export default function RecoverAccountPage(): React.ReactElement {
 
 // import axios from "axios";
 // import { Link } from "gatsby";
-// import React from "react";
+// import React, {useState} from "react";
 // import useFirebase from "../../../auth/useFirebase";
 // import { AuthLayout } from "../../../components/layout";
 //
@@ -44,9 +44,9 @@ export default function RecoverAccountPage(): React.ReactElement {
 // }: {
 // 	location: { state?: { code?: string; continueURL?: string } };
 // }): React.ReactElement {
-// 	const [success, setSuccess] = React.useState(false);
+// 	const [success, setSuccess] = useState(false);
 // 	const [error, setError] = React.useState<React.ReactNode>("");
-// 	const [email, setEmail] = React.useState("");
+// 	const [email, setEmail] = useState("");
 // 	const code = location?.state?.code;
 // 	const continueURL = location?.state?.continueURL;
 // 	const firebase = useFirebase();

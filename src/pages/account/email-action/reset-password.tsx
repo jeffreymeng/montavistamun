@@ -1,7 +1,7 @@
 import classNames from "classnames";
 import { Link } from "gatsby";
 import { Eye, EyeOff } from "heroicons-react";
-import React from "react";
+import React, { useState } from "react";
 import useFirebase from "../../../auth/useFirebase";
 import { AuthLayout } from "../../../components/layout";
 export default function HandleEmailActionPage({
@@ -9,12 +9,12 @@ export default function HandleEmailActionPage({
 }: {
 	location: { state?: { code?: string; continueURL?: string } };
 }): React.ReactElement {
-	const [loading, setLoading] = React.useState(false);
-	const [success, setSuccess] = React.useState(false);
-	const [submitting, setSubmitting] = React.useState(false);
-	const [password, setPassword] = React.useState("");
-	const [confirm, setConfirm] = React.useState("");
-	const [showPassword, setShowPassword] = React.useState(false);
+	const [loading, setLoading] = useState(false);
+	const [success, setSuccess] = useState(false);
+	const [submitting, setSubmitting] = useState(false);
+	const [password, setPassword] = useState("");
+	const [confirm, setConfirm] = useState("");
+	const [showPassword, setShowPassword] = useState(false);
 	const [error, setError] = React.useState<React.ReactNode>("");
 	const code = location?.state?.code;
 	const continueURL = location?.state?.continueURL;

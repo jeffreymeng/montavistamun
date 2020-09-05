@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import { Link } from "gatsby";
-import React from "react";
+import React, { useState } from "react";
 import useFirebase from "../../auth/useFirebase";
 import { AuthLayout } from "../../components/layout";
 import { LoginPageProps } from "./login";
@@ -9,10 +9,10 @@ export default function ForgotPasswordPage({
 }: {
 	location: { state: LoginPageProps };
 }): React.ReactElement {
-	const [email, setEmail] = React.useState("");
-	const [emailSent, setEmailSent] = React.useState(false);
+	const [email, setEmail] = useState("");
+	const [emailSent, setEmailSent] = useState(false);
 	const [error, setError] = React.useState<React.ReactNode | null>(null);
-	const [submitting, setSubmitting] = React.useState(false);
+	const [submitting, setSubmitting] = useState(false);
 	const firebase = useFirebase();
 	return (
 		<AuthLayout title={"Reset Password"}>

@@ -1,9 +1,9 @@
 import { navigate, PageProps } from "gatsby";
-import React from "react";
+import React, { useState } from "react";
 import { AuthLayout } from "../../../components/layout";
 
 export default function HandleEmailActionPage({ location }: PageProps) {
-	const [error, setError] = React.useState(false);
+	const [error, setError] = useState(false);
 
 	React.useEffect(() => {
 		const params = new URLSearchParams(location.search);

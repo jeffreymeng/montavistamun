@@ -4,7 +4,7 @@ import { Link } from "gatsby";
 import { Eye, EyeOff } from "heroicons-react";
 import Mailcheck from "mailcheck";
 import moment from "moment";
-import React from "react";
+import React, { useState } from "react";
 import FirebaseStoredUserData from "../../auth/FirebaseStoredUserData";
 import useFirebase from "../../auth/useFirebase";
 import { AuthLayout } from "../../components/layout";
@@ -23,28 +23,26 @@ export default function CreatePage({
 	location: { state: LoginPageProps };
 }): React.ReactElement {
 	const { user, loading } = React.useContext(AuthContext);
-	const [name, setName] = React.useState(user?.displayName || "");
-	const [grade, setGrade] = React.useState("");
-	const [email, setEmail] = React.useState(user?.email || "");
+	const [name, setName] = useState(user?.displayName || "");
+	const [grade, setGrade] = useState("");
+	const [email, setEmail] = useState(user?.email || "");
 	const [emailSuggestion, setEmailSuggestion] = React.useState<
 		string | undefined
 	>("");
 
-	const [password, setPassword] = React.useState("");
-	const [discordClicked, setDiscordClicked] = React.useState(false);
-	const [showPassword, setShowPassword] = React.useState(false);
+	const [password, setPassword] = useState("");
+	const [discordClicked, setDiscordClicked] = useState(false);
+	const [showPassword, setShowPassword] = useState(false);
 	const [error, setError] = React.useState<React.ReactNode | null>(null);
-	const [submitting, setSubmitting] = React.useState(false);
-	const [done, setDone] = React.useState(!!user);
-	const [resendTimeLeft, setResendTimeLeft] = React.useState(60);
-	const [timesResent, setTimesResent] = React.useState(0);
+	const [submitting, setSubmitting] = useState(false);
+	const [done, setDone] = useState(!!user);
+	const [resendTimeLeft, setResendTimeLeft] = useState(60);
+	const [timesResent, setTimesResent] = useState(0);
 
-	const [verificationComplete, setVerificationComplete] = React.useState(
+	const [verificationComplete, setVerificationComplete] = useState(
 		!!user?.emailVerified
 	);
-	const [verificationEmailSent, setVerificationEmailSent] = React.useState(
-		false
-	);
+	const [verificationEmailSent, setVerificationEmailSent] = useState(false);
 
 	React.useEffect(() => {
 		if (user) {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import useFirebase from "../auth/useFirebase";
 import useRequireLogin from "../components/accounts/useRequireLogin";
 import { Layout, Main } from "../components/layout";
@@ -8,8 +8,8 @@ export default function ResourcesPage(): React.ReactElement {
 	const firebase = useFirebase();
 	useRequireLogin();
 	const { user, verified, loading } = React.useContext(AuthContext);
-	const [hasPermission, setHasPermission] = React.useState(true);
-	const [id, setId] = React.useState("");
+	const [hasPermission, setHasPermission] = useState(true);
+	const [id, setId] = useState("");
 	React.useEffect(() => {
 		if (!firebase || loading) return;
 

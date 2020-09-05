@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 function ExpandableBio({
 	pre,
 	post,
@@ -6,7 +6,7 @@ function ExpandableBio({
 	pre: React.ReactNode;
 	post: React.ReactNode;
 }) {
-	const [expanded, setExpanded] = React.useState(false);
+	const [expanded, setExpanded] = useState(false);
 	return (
 		<>
 			{pre}

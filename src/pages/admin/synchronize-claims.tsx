@@ -1,16 +1,16 @@
 import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 import useFirebase from "../../auth/useFirebase";
 import useRequireLogin from "../../components/accounts/useRequireLogin";
 import { Layout, Main } from "../../components/layout";
 import AuthContext from "../../context/AuthContext";
 
 export default function AboutPage(): React.ReactElement {
-	const [eligible, setEligible] = React.useState(false);
-	const [loading, setLoading] = React.useState(true);
-	const [token, setToken] = React.useState("");
-	const [success, setSuccess] = React.useState(false);
-	const [submitting, setSubmitting] = React.useState(false);
+	const [eligible, setEligible] = useState(false);
+	const [loading, setLoading] = useState(true);
+	const [token, setToken] = useState("");
+	const [success, setSuccess] = useState(false);
+	const [submitting, setSubmitting] = useState(false);
 	useRequireLogin();
 	const { user, loading: userLoading, admin } = React.useContext(AuthContext);
 	const firebase = useFirebase();
