@@ -529,104 +529,115 @@ export default function MembersPage(): React.ReactElement {
 										</td>
 									</tr>
 								)}
-								{users.map(({ id: id, data: data }) => (
-									<tr key={id}>
-										<td
-											className="pl-9 pr-0 py-4 border-b border-gray-200"
-											onMouseDown={() =>
-												window
-													.getSelection()
-													?.removeAllRanges()
-											}
-											onClick={(e) =>
-												updateCheckbox(
-													id,
-													!selectedUsers.has(id),
-													e.shiftKey
-												)
-											}
-										>
-											<input
-												type="checkbox"
-												className="form-checkbox h-6 w-6"
-												checked={selectedUsers.has(id)}
-												onChange={() => null}
-												onClick={(e) => {
+								{users
+									.sort((a, b) =>
+										`${a.data.firstName} ${a.data.lastName}`.localeCompare(
+											`${b.data.firstName} ${b.data.lastName}`
+										)
+									)
+									.map(({ id: id, data: data }) => (
+										<tr key={id}>
+											<td
+												className="pl-9 pr-0 py-4 border-b border-gray-200"
+												onMouseDown={() =>
+													window
+														.getSelection()
+														?.removeAllRanges()
+												}
+												onClick={(e) =>
 													updateCheckbox(
 														id,
 														!selectedUsers.has(id),
 														e.shiftKey
-													);
-												}}
-											/>
-											{/*<button*/}
-											{/*	className={*/}
-											{/*		"rounded-md bg-blue-200 m-0 px-4 py-2 align-middle"*/}
-											{/*	}*/}
-											{/*>*/}
-											{/*	<Icons.Check />*/}
-											{/*</button>*/}
-										</td>
-										<td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-											<div>
-												<div className="text-sm leading-5 font-medium text-gray-900">
-													{`${data.firstName} ${
-														data.lastName
-													}, ${getGrade(
-														data.classOf
-													)}th Grade`}
-												</div>
-												<div className="text-sm leading-5 text-gray-500">
-													{data.email}
-												</div>
-											</div>
-										</td>
-										{/*<td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">*/}
-										{/*	<div className="text-sm leading-5 text-yellow-800">*/}
-										{/*		Registered, Not Paid*/}
-										{/*	</div>*/}
-										{/*	<div className="text-sm leading-5 text-gray-500">*/}
-										{/*		ECOSOC (partner: John Doe)*/}
-										{/*	</div>*/}
-										{/*</td>*/}
-										<td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-											<div
-												className={
-													"flex flex-row space-x-4"
+													)
 												}
 											>
-												<span
+												<input
+													type="checkbox"
+													className="form-checkbox h-6 w-6"
+													checked={selectedUsers.has(
+														id
+													)}
+													onChange={() => null}
+													onClick={(e) => {
+														updateCheckbox(
+															id,
+															!selectedUsers.has(
+																id
+															),
+															e.shiftKey
+														);
+													}}
+												/>
+												{/*<button*/}
+												{/*	className={*/}
+												{/*		"rounded-md bg-blue-200 m-0 px-4 py-2 align-middle"*/}
+												{/*	}*/}
+												{/*>*/}
+												{/*	<Icons.Check />*/}
+												{/*</button>*/}
+											</td>
+											<td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+												<div>
+													<div className="text-sm leading-5 font-medium text-gray-900">
+														{`${data.firstName} ${
+															data.lastName
+														}, ${getGrade(
+															data.classOf
+														)}th Grade`}
+													</div>
+													<div className="text-sm leading-5 text-gray-500">
+														{data.email}
+													</div>
+												</div>
+											</td>
+											{/*<td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">*/}
+											{/*	<div className="text-sm leading-5 text-yellow-800">*/}
+											{/*		Registered, Not Paid*/}
+											{/*	</div>*/}
+											{/*	<div className="text-sm leading-5 text-gray-500">*/}
+											{/*		ECOSOC (partner: John Doe)*/}
+											{/*	</div>*/}
+											{/*</td>*/}
+											<td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+												<div
 													className={
-														"inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium leading-4 " +
-														(data.verified
-															? "bg-green-100 text-green-800"
-															: "bg-yellow-100 text-yellow-800")
+														"flex flex-row space-x-4"
 													}
 												>
-													{!data.verified && "Not "}
-													Verified
-												</span>
-
-												{data.admin && (
-													<span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium leading-4 bg-green-100 text-green-800">
-														Admin
+													<span
+														className={
+															"inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium leading-4 " +
+															(data.verified
+																? "bg-green-100 text-green-800"
+																: "bg-yellow-100 text-yellow-800")
+														}
+													>
+														{!data.verified &&
+															"Not "}
+														Verified
 													</span>
-												)}
-											</div>
-										</td>
-										{/*<td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">*/}
-										{/*	Owner*/}
-										{/*</td>*/}
-										{/*<td className="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">*/}
-										{/*	<Link*/}
-										{/*		to="#"*/}
-										{/*		className="text-indigo-600 hover:text-indigo-900"*/}
-										{/*	>*/}
-										{/*		Manage*/}
-										{/*	</Link>*/}
-										{/*</td>*/}
-									</tr>
-								))}
+
+													{data.admin && (
+														<span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium leading-4 bg-green-100 text-green-800">
+															Admin
+														</span>
+													)}
+												</div>
+											</td>
+											{/*<td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">*/}
+											{/*	Owner*/}
+											{/*</td>*/}
+											{/*<td className="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">*/}
+											{/*	<Link*/}
+											{/*		to="#"*/}
+											{/*		className="text-indigo-600 hover:text-indigo-900"*/}
+											{/*	>*/}
+											{/*		Manage*/}
+											{/*	</Link>*/}
+											{/*</td>*/}
+										</tr>
+									))}
 							</tbody>
 						</table>
 						<div className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">

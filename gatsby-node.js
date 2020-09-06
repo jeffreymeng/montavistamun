@@ -40,11 +40,9 @@ exports.sourceNodes = async ({
 			const key = doc.id;
 			const { time, ...rest } = doc.data();
 			awardsData.push({
-				id: key,
-				data: {
-					...rest,
-					time: time.toDate(),
-				},
+				serverId: key,
+				...rest,
+				time: time.toDate(),
 			});
 		});
 	} catch (e) {
@@ -170,13 +168,11 @@ exports.sourceNodes = async ({
 			const key = "dummy-data-" + i;
 			const { time, ...rest } = doc;
 			awardsData.push({
-				id: key,
-				data: {
-					...rest,
-					month: time.split(" ")[0],
-					year: parseInt(time.split(" ")[1]),
-					time: new Date(time),
-				},
+				serverId: key,
+				...rest,
+				month: time.split(" ")[0],
+				year: parseInt(time.split(" ")[1]),
+				time: new Date(time),
 			});
 		});
 	}
@@ -189,10 +185,16 @@ exports.sourceNodes = async ({
 			internal: {
 				type: `ConferenceAwardsData`,
 				mediaType: `application/json`,
-				contentDigest: createContentDigest(data),
+				contentDigest: createContentDigest(awardsData),
 			},
 		};
-		const node = Object.assign({}, data, nodeMeta);
+		const node = Object.assign(
+			{},
+			{
+				data: data,
+			},
+			nodeMeta
+		);
 		createNode(node);
 	});
 };

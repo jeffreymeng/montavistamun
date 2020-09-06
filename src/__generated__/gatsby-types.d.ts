@@ -37,13 +37,6 @@ declare namespace GatsbyTypes {
 		readonly internal: Internal;
 	};
 
-	type ConferenceAwardsData_timeArgs = {
-		formatString: Maybe<Scalars["String"]>;
-		fromNow: Maybe<Scalars["Boolean"]>;
-		difference: Maybe<Scalars["String"]>;
-		locale: Maybe<Scalars["String"]>;
-	};
-
 	type ConferenceAwardsData__DelegateAwards = {
 		readonly type: Scalars["String"];
 		readonly awards: Maybe<ReadonlyArray<Scalars["String"]>>;
