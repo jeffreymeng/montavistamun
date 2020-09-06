@@ -67,7 +67,7 @@ export default function AwardsPage(): React.ReactElement {
 	 */
 	const convertAwardsByCommittee = (
 		unparsedAwards: string
-	): Partial<ConferenceAwardData> => {
+	): Partial<ConferenceAwardsData> => {
 		const awards: {
 			type:
 				| "Best Delegate"
