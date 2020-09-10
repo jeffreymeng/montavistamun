@@ -47,7 +47,9 @@ exports.sourceNodes = async ({
 		});
 	} catch (e) {
 		console.warn(
-			"Unable to fetch firebase data for awards. Using dummy data instead."
+			"Unable to fetch firebase data for awards due to error code " +
+				e.code +
+				". Using dummy data instead."
 		);
 		const data = [
 			{
@@ -177,9 +179,9 @@ exports.sourceNodes = async ({
 		});
 	}
 
-	awardsData.forEach(({ id, data }) => {
+	awardsData.forEach((data) => {
 		const nodeMeta = {
-			id: createNodeId(`firestore-awards-${id}`),
+			id: createNodeId(`firestore-awards-${data.serverId}`),
 			parent: null,
 			children: [],
 			internal: {
@@ -188,13 +190,7 @@ exports.sourceNodes = async ({
 				contentDigest: createContentDigest(awardsData),
 			},
 		};
-		const node = Object.assign(
-			{},
-			{
-				data: data,
-			},
-			nodeMeta
-		);
+		const node = Object.assign({}, data, nodeMeta);
 		createNode(node);
 	});
 };

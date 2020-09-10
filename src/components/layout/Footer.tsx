@@ -65,7 +65,8 @@ export default function Footer({
 				</div>
 				<div className="mt-8 md:mt-0 md:order-1">
 					<p className="text-center text-base leading-6 text-gray-400">
-						&copy; 2020 Monta Vista Model United Nations
+						&copy; 2020 Monta Vista Model United Nations | Designed
+						by Jeffrey Meng.
 					</p>
 				</div>
 			</div>
