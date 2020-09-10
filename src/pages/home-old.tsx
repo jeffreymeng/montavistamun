@@ -1,7 +1,7 @@
 import React from "react";
 import CTA from "../components/CTA";
 import About from "../components/index/About";
-import Hero2 from "../components/index/Hero2";
+import Hero from "../components/index/Hero";
 import Stats from "../components/index/Stats";
 import { Layout } from "../components/layout";
 
@@ -9,9 +9,9 @@ function IndexPage(): React.ReactElement {
 	const aboutRef = React.useRef(null);
 
 	return (
-		<Layout title={"Home"} navbarShadow="scroll">
-			<Hero2 aboutRef={aboutRef} />
-			<About aboutRef={aboutRef} noTopDecorativeDots />
+		<Layout title={"Home"} navbarShadow="always">
+			<Hero aboutRef={aboutRef} />
+			<About aboutRef={aboutRef} />
 			<Stats />
 			<CTA />
 		</Layout>
