@@ -109,7 +109,7 @@ export default function About({
 											Model UN. Our conferences offer a
 											unique opportunity to practice
 											working with others, honing your
-											skills in negotiatin, and leading
+											skills in negotiation, and leading
 											your peers.
 										</p>
 									</div>
