@@ -260,6 +260,7 @@ export default function MembersPage(): React.ReactElement {
 		setShowConfirmModal(true);
 	};
 	const tableHeaders = ["Basic Information", "Permissions"];
+	const [showDisabled, setShowDisabled] = useState(false);
 	return (
 		<AdminLayout title={"Members"}>
 			<h1
@@ -367,6 +368,7 @@ export default function MembersPage(): React.ReactElement {
 				{/*	</button>*/}
 				{/*</span>*/}
 			</div>
+
 			<Transition show={showConfirmModal}>
 				<div className="fixed bottom-0 inset-x-0 px-4 pb-6 sm:inset-0 sm:p-0 sm:flex sm:items-center sm:justify-center normal-case tracking-normal">
 					<Transition
@@ -530,6 +532,10 @@ export default function MembersPage(): React.ReactElement {
 									</tr>
 								)}
 								{users
+									.filter(
+										(user) =>
+											showDisabled || !user.data.disabled
+									)
 									.sort((a, b) =>
 										`${a.data.firstName} ${a.data.lastName}`.localeCompare(
 											`${b.data.firstName} ${b.data.lastName}`
