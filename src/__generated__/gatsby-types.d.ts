@@ -2679,6 +2679,16 @@ declare namespace GatsbyTypes {
 		}>;
 	};
 
+	type AuthLayoutQueryQueryVariables = Exact<{ [key: string]: never }>;
+
+	type AuthLayoutQueryQuery = {
+		readonly headerImage: Maybe<{
+			readonly childImageSharp: Maybe<{
+				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
+			}>;
+		}>;
+	};
+
 	type Unnamed_2_QueryVariables = Exact<{ [key: string]: never }>;
 
 	type Unnamed_2_Query = {
@@ -2702,16 +2712,6 @@ declare namespace GatsbyTypes {
 	type Unnamed_4_QueryVariables = Exact<{ [key: string]: never }>;
 
 	type Unnamed_4_Query = {
-		readonly site: Maybe<{
-			readonly siteMetadata: Maybe<
-				Pick<SiteSiteMetadata, "title" | "description" | "author">
-			>;
-		}>;
-	};
-
-	type Unnamed_5_QueryVariables = Exact<{ [key: string]: never }>;
-
-	type Unnamed_5_Query = {
 		readonly logo: Maybe<{
 			readonly childImageSharp: Maybe<{
 				readonly fixed: Maybe<
@@ -2721,13 +2721,13 @@ declare namespace GatsbyTypes {
 		}>;
 	};
 
-	type AuthLayoutQueryQueryVariables = Exact<{ [key: string]: never }>;
+	type Unnamed_5_QueryVariables = Exact<{ [key: string]: never }>;
 
-	type AuthLayoutQueryQuery = {
-		readonly headerImage: Maybe<{
-			readonly childImageSharp: Maybe<{
-				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
-			}>;
+	type Unnamed_5_Query = {
+		readonly site: Maybe<{
+			readonly siteMetadata: Maybe<
+				Pick<SiteSiteMetadata, "title" | "description" | "author">
+			>;
 		}>;
 	};
 
