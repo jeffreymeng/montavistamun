@@ -2672,17 +2672,7 @@ declare namespace GatsbyTypes {
 	type Unnamed_1_QueryVariables = Exact<{ [key: string]: never }>;
 
 	type Unnamed_1_Query = {
-		readonly socialsImage: Maybe<{
-			readonly childImageSharp: Maybe<{
-				readonly fixed: Maybe<GatsbyImageSharpFixedFragment>;
-			}>;
-		}>;
-	};
-
-	type AuthLayoutQueryQueryVariables = Exact<{ [key: string]: never }>;
-
-	type AuthLayoutQueryQuery = {
-		readonly headerImage: Maybe<{
+		readonly thumbnail: Maybe<{
 			readonly childImageSharp: Maybe<{
 				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
 			}>;
@@ -2702,7 +2692,17 @@ declare namespace GatsbyTypes {
 	type Unnamed_3_QueryVariables = Exact<{ [key: string]: never }>;
 
 	type Unnamed_3_Query = {
-		readonly thumbnail: Maybe<{
+		readonly socialsImage: Maybe<{
+			readonly childImageSharp: Maybe<{
+				readonly fixed: Maybe<GatsbyImageSharpFixedFragment>;
+			}>;
+		}>;
+	};
+
+	type AuthLayoutQueryQueryVariables = Exact<{ [key: string]: never }>;
+
+	type AuthLayoutQueryQuery = {
+		readonly headerImage: Maybe<{
 			readonly childImageSharp: Maybe<{
 				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
 			}>;
@@ -2728,6 +2728,37 @@ declare namespace GatsbyTypes {
 			readonly siteMetadata: Maybe<
 				Pick<SiteSiteMetadata, "title" | "description" | "author">
 			>;
+		}>;
+	};
+
+	type ConferencesPageQueryQueryVariables = Exact<{ [key: string]: never }>;
+
+	type ConferencesPageQueryQuery = {
+		readonly headerImage: Maybe<{
+			readonly childImageSharp: Maybe<{
+				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
+			}>;
+		}>;
+		readonly images: {
+			readonly edges: ReadonlyArray<{
+				readonly node: Pick<File, "name"> & {
+					readonly image: Maybe<{
+						readonly fluid: Maybe<
+							GatsbyImageSharpFluid_withWebpFragment
+						>;
+					}>;
+				};
+			}>;
+		};
+	};
+
+	type KennedyPageQueryQueryVariables = Exact<{ [key: string]: never }>;
+
+	type KennedyPageQueryQuery = {
+		readonly headerImage: Maybe<{
+			readonly childImageSharp: Maybe<{
+				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
+			}>;
 		}>;
 	};
 
@@ -2763,37 +2794,6 @@ declare namespace GatsbyTypes {
 				}
 			>;
 		};
-	};
-
-	type ConferencesPageQueryQueryVariables = Exact<{ [key: string]: never }>;
-
-	type ConferencesPageQueryQuery = {
-		readonly headerImage: Maybe<{
-			readonly childImageSharp: Maybe<{
-				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
-			}>;
-		}>;
-		readonly images: {
-			readonly edges: ReadonlyArray<{
-				readonly node: Pick<File, "name"> & {
-					readonly image: Maybe<{
-						readonly fluid: Maybe<
-							GatsbyImageSharpFluid_withWebpFragment
-						>;
-					}>;
-				};
-			}>;
-		};
-	};
-
-	type KennedyPageQueryQueryVariables = Exact<{ [key: string]: never }>;
-
-	type KennedyPageQueryQuery = {
-		readonly headerImage: Maybe<{
-			readonly childImageSharp: Maybe<{
-				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
-			}>;
-		}>;
 	};
 
 	type SecretariatPageQueryQueryVariables = Exact<{ [key: string]: never }>;
