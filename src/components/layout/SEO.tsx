@@ -4,10 +4,10 @@
  *
  * See: https://www.gatsbyjs.org/docs/use-static-query/
  */
-
+import { useLocation } from "@reach/router";
+import { graphql, useStaticQuery } from "gatsby";
 import React, { ReactElement } from "react";
 import Helmet from "react-helmet";
-import { graphql, useStaticQuery } from "gatsby";
 
 function SEO({
 	description,
@@ -15,18 +15,32 @@ function SEO({
 	meta,
 	keywords,
 	title,
+	formatTitle,
 }: {
 	description?: string;
 	lang?: string;
 	meta?: any[]; // eslint-disable-line @typescript-eslint/no-explicit-any
 	keywords?: string[];
 	title: string;
+	formatTitle?: boolean; // default: true
 }): ReactElement {
 	lang = lang || "en";
-	description = description || "";
+	description =
+		description ||
+		"Monta Vista Model United Nations is a close-knit club and community that strives to provide experiences in teamwork, negotiation, and diplomacy by simulating the United Nations during engaging conferences.";
 	meta = meta || [];
-	keywords = keywords || [];
-
+	keywords = keywords || [
+		"Cupertino",
+		"Model UN",
+		"MUN",
+		"Monta Vista",
+		"Club",
+		"Model United Nations",
+	];
+	if (formatTitle !== false) {
+		title = "MV Model UN | " + title;
+	}
+	const location = useLocation();
 	const { site } = useStaticQuery(
 		graphql`
 			query {
@@ -42,7 +56,7 @@ function SEO({
 	);
 
 	const metaDescription = description || site.siteMetadata.description;
-
+	const imageUrl = `https://montavistamun.com/images/logo-banner.png`;
 	return (
 		// not an actual error
 		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -52,7 +66,6 @@ function SEO({
 				lang,
 			}}
 			title={title}
-			titleTemplate={`%s | ${site.siteMetadata.title}`}
 			meta={[
 				{
 					name: `description`,
@@ -71,6 +84,23 @@ function SEO({
 					content: `website`,
 				},
 				{
+					property: `og:video`,
+					content: `https://www.youtube.com/watch?v=xc1dnpIKIcY`,
+				},
+				{
+					property: `og:image`,
+					content: imageUrl,
+				},
+				{
+					property: `og:image:alt`,
+					content: `MV Model UN logo on top of some cool images of conferences`,
+				},
+				{
+					property: `og:url`,
+					content: `https://montavistamun.com${location.pathname}`,
+				},
+
+				{
 					name: `twitter:card`,
 					content: `summary`,
 				},
@@ -85,6 +115,10 @@ function SEO({
 				{
 					name: `twitter:description`,
 					content: metaDescription,
+				},
+				{
+					name: `twitter:image`,
+					content: imageUrl,
 				},
 			]
 				.concat(

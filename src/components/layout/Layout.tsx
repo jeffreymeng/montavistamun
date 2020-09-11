@@ -35,6 +35,7 @@ export default function Layout({
 	lightFooter,
 	gray,
 	navbarShadow,
+	formatTitle,
 }: {
 	children: React.ReactNode | React.ReactNodeArray | Element[];
 	/**
@@ -72,6 +73,11 @@ export default function Layout({
 	 * Specify the shadow for the navbar.
 	 */
 	navbarShadow?: "always" | "scroll" | "never";
+	/**
+	 * Whether or not to format the title by appending the name of the website to the end.
+	 *
+	 */
+	formatTitle?: boolean;
 }): React.ReactElement {
 	useHeapAnalytics();
 	return (
@@ -88,17 +94,7 @@ export default function Layout({
 				unscrolledClassName={navbarUnscrolledClassName}
 				shadow={navbarShadow}
 			/>
-			<SEO
-				keywords={[
-					"cuptertino",
-					"model un",
-					"mun",
-					"monta vista",
-					"club",
-					"model united nations",
-				]}
-				title={title}
-			/>
+			<SEO title={title} formatTitle={formatTitle} />
 			<div className={wrapperClassName}>{children}</div>
 
 			<Footer dark={!lightFooter} />

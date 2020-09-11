@@ -9,7 +9,11 @@ function IndexPage(): React.ReactElement {
 	const aboutRef = React.useRef(null);
 
 	return (
-		<Layout title={"Home"} navbarShadow="always">
+		<Layout
+			title={"Monta Vista Model United Nations"}
+			navbarShadow="always"
+			formatTitle={false}
+		>
 			<Hero aboutRef={aboutRef} />
 			<About aboutRef={aboutRef} />
 			<Stats />

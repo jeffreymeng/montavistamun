@@ -2244,12 +2244,12 @@ declare namespace GatsbyTypes {
 		pluginCreator___pluginOptions___theme_color_in_head = "pluginCreator.pluginOptions.theme_color_in_head",
 		pluginCreator___pluginOptions___cacheDigest = "pluginCreator.pluginOptions.cacheDigest",
 		pluginCreator___pluginOptions___outputPath = "pluginCreator.pluginOptions.outputPath",
+		pluginCreator___pluginOptions___pathCheck = "pluginCreator.pluginOptions.pathCheck",
 		pluginCreator___pluginOptions___dsn = "pluginCreator.pluginOptions.dsn",
 		pluginCreator___pluginOptions___environment = "pluginCreator.pluginOptions.environment",
 		pluginCreator___pluginOptions___enabled = "pluginCreator.pluginOptions.enabled",
 		pluginCreator___pluginOptions___appId = "pluginCreator.pluginOptions.appId",
 		pluginCreator___pluginOptions___enableOnDevMode = "pluginCreator.pluginOptions.enableOnDevMode",
-		pluginCreator___pluginOptions___pathCheck = "pluginCreator.pluginOptions.pathCheck",
 		pluginCreator___nodeAPIs = "pluginCreator.nodeAPIs",
 		pluginCreator___browserAPIs = "pluginCreator.browserAPIs",
 		pluginCreator___ssrAPIs = "pluginCreator.ssrAPIs",
@@ -2451,12 +2451,12 @@ declare namespace GatsbyTypes {
 		pluginOptions___theme_color_in_head = "pluginOptions.theme_color_in_head",
 		pluginOptions___cacheDigest = "pluginOptions.cacheDigest",
 		pluginOptions___outputPath = "pluginOptions.outputPath",
+		pluginOptions___pathCheck = "pluginOptions.pathCheck",
 		pluginOptions___dsn = "pluginOptions.dsn",
 		pluginOptions___environment = "pluginOptions.environment",
 		pluginOptions___enabled = "pluginOptions.enabled",
 		pluginOptions___appId = "pluginOptions.appId",
 		pluginOptions___enableOnDevMode = "pluginOptions.enableOnDevMode",
-		pluginOptions___pathCheck = "pluginOptions.pathCheck",
 		nodeAPIs = "nodeAPIs",
 		browserAPIs = "browserAPIs",
 		ssrAPIs = "ssrAPIs",
@@ -2601,12 +2601,12 @@ declare namespace GatsbyTypes {
 		readonly theme_color_in_head: Maybe<Scalars["Boolean"]>;
 		readonly cacheDigest: Maybe<Scalars["String"]>;
 		readonly outputPath: Maybe<Scalars["String"]>;
+		readonly pathCheck: Maybe<Scalars["Boolean"]>;
 		readonly dsn: Maybe<Scalars["String"]>;
 		readonly environment: Maybe<Scalars["String"]>;
 		readonly enabled: Maybe<Scalars["Boolean"]>;
 		readonly appId: Maybe<Scalars["String"]>;
 		readonly enableOnDevMode: Maybe<Scalars["Boolean"]>;
-		readonly pathCheck: Maybe<Scalars["Boolean"]>;
 	};
 
 	type SitePluginPluginOptionsFilterInput = {
@@ -2625,12 +2625,12 @@ declare namespace GatsbyTypes {
 		readonly theme_color_in_head: Maybe<BooleanQueryOperatorInput>;
 		readonly cacheDigest: Maybe<StringQueryOperatorInput>;
 		readonly outputPath: Maybe<StringQueryOperatorInput>;
+		readonly pathCheck: Maybe<BooleanQueryOperatorInput>;
 		readonly dsn: Maybe<StringQueryOperatorInput>;
 		readonly environment: Maybe<StringQueryOperatorInput>;
 		readonly enabled: Maybe<BooleanQueryOperatorInput>;
 		readonly appId: Maybe<StringQueryOperatorInput>;
 		readonly enableOnDevMode: Maybe<BooleanQueryOperatorInput>;
-		readonly pathCheck: Maybe<BooleanQueryOperatorInput>;
 	};
 
 	type SitePluginSortInput = {
@@ -2672,9 +2672,9 @@ declare namespace GatsbyTypes {
 	type Unnamed_1_QueryVariables = Exact<{ [key: string]: never }>;
 
 	type Unnamed_1_Query = {
-		readonly hero: Maybe<{
+		readonly socialsImage: Maybe<{
 			readonly childImageSharp: Maybe<{
-				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
+				readonly fixed: Maybe<GatsbyImageSharpFixedFragment>;
 			}>;
 		}>;
 	};
@@ -2682,7 +2682,7 @@ declare namespace GatsbyTypes {
 	type Unnamed_2_QueryVariables = Exact<{ [key: string]: never }>;
 
 	type Unnamed_2_Query = {
-		readonly thumbnail: Maybe<{
+		readonly hero: Maybe<{
 			readonly childImageSharp: Maybe<{
 				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
 			}>;
@@ -2692,17 +2692,7 @@ declare namespace GatsbyTypes {
 	type Unnamed_3_QueryVariables = Exact<{ [key: string]: never }>;
 
 	type Unnamed_3_Query = {
-		readonly socialsImage: Maybe<{
-			readonly childImageSharp: Maybe<{
-				readonly fixed: Maybe<GatsbyImageSharpFixedFragment>;
-			}>;
-		}>;
-	};
-
-	type AuthLayoutQueryQueryVariables = Exact<{ [key: string]: never }>;
-
-	type AuthLayoutQueryQuery = {
-		readonly headerImage: Maybe<{
+		readonly thumbnail: Maybe<{
 			readonly childImageSharp: Maybe<{
 				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
 			}>;
@@ -2731,51 +2721,14 @@ declare namespace GatsbyTypes {
 		}>;
 	};
 
-	type ConferencesPageQueryQueryVariables = Exact<{ [key: string]: never }>;
+	type AuthLayoutQueryQueryVariables = Exact<{ [key: string]: never }>;
 
-	type ConferencesPageQueryQuery = {
+	type AuthLayoutQueryQuery = {
 		readonly headerImage: Maybe<{
 			readonly childImageSharp: Maybe<{
 				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
 			}>;
 		}>;
-		readonly images: {
-			readonly edges: ReadonlyArray<{
-				readonly node: Pick<File, "name"> & {
-					readonly image: Maybe<{
-						readonly fluid: Maybe<
-							GatsbyImageSharpFluid_withWebpFragment
-						>;
-					}>;
-				};
-			}>;
-		};
-	};
-
-	type SecretariatPageQueryQueryVariables = Exact<{ [key: string]: never }>;
-
-	type SecretariatPageQueryQuery = {
-		readonly headerImage: Maybe<{
-			readonly childImageSharp: Maybe<{
-				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
-			}>;
-		}>;
-		readonly placeholder: Maybe<{
-			readonly childImageSharp: Maybe<{
-				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
-			}>;
-		}>;
-		readonly images: {
-			readonly edges: ReadonlyArray<{
-				readonly node: Pick<File, "name"> & {
-					readonly image: Maybe<{
-						readonly fluid: Maybe<
-							GatsbyImageSharpFluid_withWebpFragment
-						>;
-					}>;
-				};
-			}>;
-		};
 	};
 
 	type awardsPageQueryQueryVariables = Exact<{ [key: string]: never }>;
@@ -2812,6 +2765,27 @@ declare namespace GatsbyTypes {
 		};
 	};
 
+	type ConferencesPageQueryQueryVariables = Exact<{ [key: string]: never }>;
+
+	type ConferencesPageQueryQuery = {
+		readonly headerImage: Maybe<{
+			readonly childImageSharp: Maybe<{
+				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
+			}>;
+		}>;
+		readonly images: {
+			readonly edges: ReadonlyArray<{
+				readonly node: Pick<File, "name"> & {
+					readonly image: Maybe<{
+						readonly fluid: Maybe<
+							GatsbyImageSharpFluid_withWebpFragment
+						>;
+					}>;
+				};
+			}>;
+		};
+	};
+
 	type KennedyPageQueryQueryVariables = Exact<{ [key: string]: never }>;
 
 	type KennedyPageQueryQuery = {
@@ -2820,6 +2794,32 @@ declare namespace GatsbyTypes {
 				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
 			}>;
 		}>;
+	};
+
+	type SecretariatPageQueryQueryVariables = Exact<{ [key: string]: never }>;
+
+	type SecretariatPageQueryQuery = {
+		readonly headerImage: Maybe<{
+			readonly childImageSharp: Maybe<{
+				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
+			}>;
+		}>;
+		readonly placeholder: Maybe<{
+			readonly childImageSharp: Maybe<{
+				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
+			}>;
+		}>;
+		readonly images: {
+			readonly edges: ReadonlyArray<{
+				readonly node: Pick<File, "name"> & {
+					readonly image: Maybe<{
+						readonly fluid: Maybe<
+							GatsbyImageSharpFluid_withWebpFragment
+						>;
+					}>;
+				};
+			}>;
+		};
 	};
 
 	type GatsbyImageSharpFixedFragment = Pick<
