@@ -109,8 +109,8 @@ module.exports = {
 		time: new Date().toISOString(),
 	}),
 	add: async (path, fields) => {
-		const fieldsToPush = convertToFirebaseFormat();
-
+		const fieldsToPush = convertToFirebaseFormat(fields);
+		console.log("ADD", fieldsToPush);
 		const result = await axios.post(
 			`https://firestore.googleapis.com/v1/projects/montavistamodelun/databases/(default)/documents${path}`,
 			fieldsToPush,
@@ -120,10 +120,11 @@ module.exports = {
 				},
 			}
 		);
+		console.log("ADD-DATA", result.data);
 		return convertFromFirebaseFormat(result.data);
 	},
 	update: async (path, fields) => {
-		const fieldsToPush = convertToFirebaseFormat();
+		const fieldsToPush = convertToFirebaseFormat(fields);
 
 		const result = await axios.patch(
 			`https://firestore.googleapis.com/v1/projects/montavistamodelun/databases/(default)/documents${path}?${Object.keys(

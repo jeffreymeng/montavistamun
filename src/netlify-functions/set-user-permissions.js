@@ -95,7 +95,7 @@ export async function handler(event, context) {
 		await Promise.all([
 			admin.auth().setCustomUserClaims(targetUID, finalClaims),
 			database.update(`/users/${targetUID}`, finalClaims),
-			database.add(`/admin-log/`, {
+			database.add(`/admin-log`, {
 				action: "update-user-permissions",
 				timestamp: database.currentTimestamp(),
 				user: callerUid,

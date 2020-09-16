@@ -25,7 +25,7 @@ export default function AboutPage(): React.ReactElement {
 			</h1>
 			{/* TODO: figure out if this is a good idea. Are meetings going to be based on a schedule (e.g. every wednesday)?
 			TODO should we just have a list of times for the meetings, and just display the next one? (this seems like a good idea)
-			TODO Should cards be conditionally displayed based on conference registration? (currently it sayd "register now" vs "update registration" */}
+			TODO Should cards be conditionally displayed based on conference registration? (currently it says "register now" vs "update registration" */}
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div className="mt-2 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
 					{/* Card */}
