@@ -2,32 +2,88 @@ const FB_SERVICE_ACCOUNT = JSON.parse(process.env.FB_SERVICE_ACCOUNT);
 const axios = require("axios").default;
 const jwt = require("jsonwebtoken");
 
-// this is a mutating function
-const convert = (data) => {
-	for (const key in data.fields) {
-		if (data.fields.hasOwnProperty(key)) {
-			const val = data.fields[key];
-			if (val === null || val === undefined) continue;
-			switch (Object.keys(val)[0]) {
-				case "timestampValue":
-					data.fields[key] = new Date(val.timestampValue);
+const convertToFirebaseFormat = (fields) => {
+	const result = {};
+	for (const key in fields) {
+		if (fields.hasOwnProperty(key)) {
+			const val = fields[key];
+			switch (typeof val) {
+				case "string":
+					result[key] = { stringValue: val };
 					break;
-				case "arrayValue":
-					data.fields[key] = val.values.map((field) => {
-						// create a fake data object with only one field to convert, then retrieve the value of the converted field
-						return convert({ fields: { data: field } }).data;
-					});
+				case "number":
+					if (Math.floor(val) === val) {
+						result[key] = { integerValue: val };
+					} else {
+						result[key] = { doubleValue: val };
+					}
 					break;
-				case "mapValue":
-					data.fields[key] = convert(val);
+				case "boolean":
+					result[key] = { booleanValue: val };
 					break;
+				case "object":
+					if (val.type === "timestamp") {
+						result[key] = { timestampValue: val.time };
+						break;
+					}
+					if (Array.isArray(val)) {
+						result[key] = {
+							arrayValue: {
+								// create a fake data object with only one field to convert, then retrieve the value of the converted field
+								values: val.map(
+									(item) =>
+										convertToFirebaseFormat({ data: item })
+											.fields.data
+								),
+							},
+						};
+						break;
+					}
+					result[key] = {
+						mapValue: convertToFirebaseFormat(val),
+					};
+					break;
+
 				default:
-					// other values are already parsed
-					data.fields[key] = val[Object.keys(val)[0]];
+					throw new Error("Unexpected field type.");
 			}
 		}
 	}
-	return data.fields;
+	return { fields: result };
+};
+const convertFromFirebaseFormat = (data) => {
+	let result = {
+		...data,
+		fields: Object.assign({}, data.fields),
+	};
+	for (const key in result.fields) {
+		if (result.fields.hasOwnProperty(key)) {
+			const val = result.fields[key];
+			if (val === null || val === undefined) continue;
+			switch (Object.keys(val)[0]) {
+				case "timestampValue":
+					result.fields[key] = new Date(val.timestampValue);
+					break;
+				case "arrayValue":
+					result.fields[key] = val.arrayValue.values.map((field) => {
+						// create a fake data object with only one field to convert, then retrieve the value of the converted field
+						return convertFromFirebaseFormat({
+							fields: { data: field },
+						}).data;
+					});
+					break;
+				case "mapValue":
+					result.fields[key] = convertFromFirebaseFormat(
+						val.mapValue
+					);
+					break;
+				default:
+					// other values are already parsed
+					result.fields[key] = val[Object.keys(val)[0]];
+			}
+		}
+	}
+	return result.fields;
 };
 
 const getToken = () => {
@@ -52,54 +108,37 @@ module.exports = {
 		type: "timestamp",
 		time: new Date().toISOString(),
 	}),
+	add: async (path, fields) => {
+		const fieldsToPush = convertToFirebaseFormat();
 
-	// this doesn't support arrays or maps as field values
-	update: async (path, fields) => {
-		const fieldsToPush = {};
-		for (const key in fields) {
-			if (fields.hasOwnProperty(key)) {
-				const val = fields[key];
-				switch (typeof val) {
-					case "string":
-						fieldsToPush[key] = { stringValue: val };
-						break;
-					case "number":
-						if (Math.floor(val) === val) {
-							fieldsToPush[key] = { integerValue: val };
-						} else {
-							fieldsToPush[key] = { doubleValue: val };
-						}
-						break;
-					case "boolean":
-						fieldsToPush[key] = { booleanValue: val };
-						break;
-					default:
-						if (val.type === "timestamp") {
-							fieldsToPush[key] = { timestampValue: val.time };
-							return;
-						}
-						throw new Error(
-							"Unexpected field type. Arrays and maps are not supported by the update function."
-						);
-				}
-			}
-		}
-		const result = await axios.patch(
-			`https://firestore.googleapis.com/v1/projects/montavistamodelun/databases/(default)/documents${path}?${Object.keys(
-				fields
-			)
-				.map((name) => `updateMask.fieldPaths=${name}`)
-				.join("&")}`,
-			{
-				fields: fieldsToPush,
-			},
+		const result = await axios.post(
+			`https://firestore.googleapis.com/v1/projects/montavistamodelun/databases/(default)/documents${path}`,
+			fieldsToPush,
 			{
 				headers: {
 					authorization: `Bearer ${getToken()}`,
 				},
 			}
 		);
-		return convert(result.data);
+		return convertFromFirebaseFormat(result.data);
+	},
+	update: async (path, fields) => {
+		const fieldsToPush = convertToFirebaseFormat();
+
+		const result = await axios.patch(
+			`https://firestore.googleapis.com/v1/projects/montavistamodelun/databases/(default)/documents${path}?${Object.keys(
+				fields
+			)
+				.map((name) => `updateMask.fieldPaths=${name}`)
+				.join("&")}`,
+			fieldsToPush,
+			{
+				headers: {
+					authorization: `Bearer ${getToken()}`,
+				},
+			}
+		);
+		return convertFromFirebaseFormat(result.data);
 	},
 	get: async (path) => {
 		const result = await axios.get(
@@ -111,6 +150,6 @@ module.exports = {
 			}
 		);
 
-		return convert(result.data);
+		return convertFromFirebaseFormat(result.data);
 	},
 };

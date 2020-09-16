@@ -39,9 +39,10 @@ export async function handler(event, context) {
 	}
 
 	// verify caller
+	let callerUid;
 	try {
 		const decodedToken = await admin.auth().verifyIdToken(token);
-		const callerUid = decodedToken.uid;
+		callerUid = decodedToken.uid;
 
 		// they must either have the admin claim or be an admin according to the database
 		if (!decodedToken.admin) {
@@ -94,6 +95,15 @@ export async function handler(event, context) {
 		await Promise.all([
 			admin.auth().setCustomUserClaims(targetUID, finalClaims),
 			database.update(`/users/${targetUID}`, finalClaims),
+			database.add(`/admin-log/`, {
+				action: "update-user-permissions",
+				timestamp: database.currentTimestamp(),
+				user: callerUid,
+				modifiedFields: modifiedClaims,
+				newData: finalClaims,
+				oldData: existingClaims,
+				target: targetUID,
+			}),
 		]);
 
 		return {
