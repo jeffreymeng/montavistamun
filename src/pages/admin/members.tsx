@@ -31,43 +31,45 @@ export default function MembersPage(): React.ReactElement {
 			data: UserData;
 		}[]
 	>([]);
-	const [dataRequiresUpdate, setDataRequiresUpdate] = useState(true);
-	const scheduleDataUpdate = () => {
-		setDataRequiresUpdate(true);
-	};
-	React.useEffect(() => {
-		if (!dataRequiresUpdate) {
-			return;
-		}
 
+	React.useEffect(() => {
 		if (!firebase || !user) {
 			return;
 		}
 		if (!userAdmin) {
 			return;
 		}
-		(async () => {
-			const snapshot = (await firebase
-				.firestore()
-				.collection("users")
-				.get()) as firebaseType.firestore.QuerySnapshot<UserData>;
-			const newUsers: {
-				id: string;
-				data: UserData;
-			}[] = [];
-			snapshot.forEach((doc) => {
-				newUsers.push({
-					id: doc.id,
-					data: doc.data(),
+		const unsubscribe = firebase
+			.firestore()
+			.collection("users")
+			.onSnapshot((querySnapshot) => {
+				const newUsers: {
+					id: string;
+					data: UserData;
+				}[] = [];
+				(querySnapshot as firebaseType.firestore.QuerySnapshot<
+					UserData
+				>).forEach((doc) => {
+					newUsers.push({
+						id: doc.id,
+						data: doc.data(),
+					});
 				});
+				setUsers(newUsers);
+				setLoadingUsers(false);
 			});
-			setUsers(newUsers);
-			setLoadingUsers(false);
-			setDataRequiresUpdate(false);
-		})();
-	}, [firebase, dataRequiresUpdate, user, userAdmin]);
 
-	const allUsers = users.map((u) => u.id);
+		return () => unsubscribe();
+	}, [firebase, user, userAdmin]);
+
+	const allUsers = users
+		.filter((user) => showDisabled || !user.data.disabled)
+		.sort((a, b) =>
+			`${a.data.firstName} ${a.data.lastName}`.localeCompare(
+				`${b.data.firstName} ${b.data.lastName}`
+			)
+		)
+		.map((u) => u.id);
 	const updateCheckbox = (
 		id: string,
 		checked: boolean,
@@ -235,7 +237,6 @@ export default function MembersPage(): React.ReactElement {
 								" seconds"
 						)
 					);
-					scheduleDataUpdate();
 					setShowConfirmModal(false);
 				} catch (error) {
 					setConfirmModal((current) =>
@@ -305,7 +306,7 @@ export default function MembersPage(): React.ReactElement {
 						Unverify
 					</button>
 				</span>
-				<span className="relative z-0 inline-flex shadow-sm rounded-md sm:mx-4">
+				<span className="relative z-0 inline-flex shadow-sm rounded-md mt-4 lg:mt-0 lg:mx-4">
 					<button
 						type="button"
 						disabled={selectedUsers.size === 0}
