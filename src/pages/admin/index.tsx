@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import useFirebase from "../../auth/useFirebase";
 import AdminLayout from "../../components/layout/AdminLayout";
 import AuthContext from "../../context/AuthContext";
-export default function AboutPage(): React.ReactElement {
+export default function AdminHomePage(): React.ReactElement {
 	const [target, setTarget] = useState("");
 	const [admin, setAdmin] = useState("same");
 	const [verified, setVerified] = useState("same");
