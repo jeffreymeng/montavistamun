@@ -132,6 +132,31 @@ export default function AboutPage(): React.ReactElement {
 											};
 											icon: string;
 										},
+										{
+											subtitle: "Parent Night",
+											title: "Monday, September 28, 6PM",
+											primaryAction: {
+												title: "Join Meeting",
+												link: "/zoom",
+											},
+											secondaryAction: {
+												title: "View All Events",
+												link: "/calendar",
+											},
+											icon: "UserGroup",
+										} as {
+											subtitle: string;
+											title: string;
+											primaryAction: {
+												title: string;
+												link: string;
+											};
+											secondaryAction: {
+												title: string;
+												link: string;
+											};
+											icon: string;
+										},
 										// {
 										// 	subtitle: "Registration Now Open",
 										// 	title:

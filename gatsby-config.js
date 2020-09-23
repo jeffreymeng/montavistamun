@@ -82,7 +82,7 @@ module.exports = {
 				postCssPlugins: [
 					require("postcss-import"),
 					require(`tailwindcss`)(tailwindConfig),
-					require(`autoprefixer`),
+					// require(`autoprefixer`),
 				],
 			},
 		},

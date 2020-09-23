@@ -60,8 +60,8 @@ function Navbar({
 			<nav
 				className={`bg-white fixed w-full z-30 md:transition md:ease-in-out md:duration-200 ${
 					showShadow || isExpanded
-						? "shadow " + scrolledClassName
-						: unscrolledClassName
+						? "shadow " + (scrolledClassName || "")
+						: unscrolledClassName || ""
 				}`}
 			>
 				<div

@@ -272,7 +272,7 @@ export default function MembersPage(): React.ReactElement {
 				Members
 			</h1>
 
-			<div className={"my-4"}>
+			<div className={"py-4 sticky top-0 bg-gray-100"}>
 				<span className="relative z-0 inline-flex shadow-sm rounded-md mr-4">
 					<button
 						type="button"
@@ -343,31 +343,6 @@ export default function MembersPage(): React.ReactElement {
 						Demote from Admin
 					</button>
 				</span>
-				{/* Disabled because it's not that often that an update is necessary, and adding it may cause more unnecessary updates which are expensive.
-				 Instead, users must reload to update the data, which takes more time and encourages them not to update unnecessarily. */}
-				{/*<span className="relative z-0 inline-flex shadow-sm rounded-md mx-4">*/}
-				{/*	<button*/}
-				{/*		type="button"*/}
-				{/*		disabled={dataRequiresUpdate || loadingUsers}*/}
-				{/*		className={*/}
-				{/*			(dataRequiresUpdate || loadingUsers*/}
-				{/*				? "bg-gray-200"*/}
-				{/*				: "bg-white hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 ") +*/}
-				{/*			" " +*/}
-				{/*			"relative inline-flex items-center px-4 py-2 rounded-md border border-gray-300 text-sm leading-5 font-medium text-gray-700 transition ease-in-out duration-150"*/}
-				{/*		}*/}
-				{/*		onClick={() => scheduleDataUpdate()}*/}
-				{/*	>*/}
-				{/*		<Icons.Refresh*/}
-				{/*			className={*/}
-				{/*				"h-5 w-5 text-gray-600" +*/}
-				{/*				(dataRequiresUpdate || loadingUsers*/}
-				{/*					? " animate-spin"*/}
-				{/*					: "")*/}
-				{/*			}*/}
-				{/*		/>*/}
-				{/*	</button>*/}
-				{/*</span>*/}
 			</div>
 
 			<Transition show={showConfirmModal}>
@@ -644,7 +619,7 @@ export default function MembersPage(): React.ReactElement {
 											{/*	</Link>*/}
 											{/*</td>*/}
 										</tr>
-									))}
+									))}{" "}
 							</tbody>
 						</table>
 						<div className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
