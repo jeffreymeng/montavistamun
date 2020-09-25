@@ -129,6 +129,17 @@ export default function KennedyPage({
 										"Santa Clara Valley Model United Nations Conference is our largest conference of the year!  At SCVMUN, over 1,000 delegates across schools on the west coast compete in rigorous policy and debate on a number of pressing and relevant issues.",
 								},
 								{
+									name:
+										"Berkeley Model United Nations Conference",
+									date:
+										"February 26, 2021 - February 28, 2021",
+									location:
+										"University of California, Berkeley",
+									acronym: "bmun",
+									text:
+										"Berkeley Model United Nations Conference is a tough conference mainly targeted towards varsity members. Although it is tough, we’re sure that you will have such a great time meeting members from all over the world. It’s also a great way to analyze and practice your speech skills in a group of more experienced delegates. ",
+								},
+								{
 									name: "South Bay Model United Nations",
 									date: "Date TBA", // TODO when available
 									location: "Monta Vista High School",
