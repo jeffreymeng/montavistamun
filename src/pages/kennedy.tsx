@@ -1,6 +1,6 @@
 import { graphql } from "gatsby";
 import { FluidObject } from "gatsby-image/index";
-import React from "react";
+import React, { useRef } from "react";
 import FluidImage from "../components/FluidImage";
 import Header from "../components/Header";
 import HorizontalCard from "../components/HorizontalCard";
@@ -13,7 +13,17 @@ export default function KennedyPage({
 	data: {
 		headerImage: FluidImage;
 		placeholder: FluidImage;
-		images: {
+		secretariatImages: {
+			edges: {
+				node: {
+					name: string;
+					image: {
+						fluid: FluidObject;
+					};
+				};
+			}[];
+		};
+		conferencesImages: {
 			edges: {
 				node: {
 					name: string;
@@ -25,21 +35,62 @@ export default function KennedyPage({
 		};
 	};
 }): React.ReactElement {
-	const images: [string, FluidImage][] = data.images.edges.map((edge) => [
+	const secretariatImages: [
+		string,
+		FluidImage
+	][] = data.secretariatImages.edges.map((edge) => [
 		edge.node.name,
 		{ childImageSharp: edge.node.image },
 	]);
+	const conferencesImages: [
+		string,
+		FluidImage
+	][] = data.conferencesImages.edges.map((edge) => [
+		edge.node.name,
+		{ childImageSharp: edge.node.image },
+	]);
+	const conferencesRef = useRef(null);
 	return (
 		<Layout title={"Kennedy MUN"}>
 			<div className="min-h-ca">
 				<Header
 					backgroundImage={data.headerImage}
 					title={"Kennedy Model UN"}
+					buttons={
+						<div className="mt-8 flex justify-center">
+							<div className="inline-flex rounded-md shadow">
+								<a
+									href="https://docs.google.com/forms/d/e/1FAIpQLSfvnloHZsjPOq8w7iRCRADJ9U6SDqcfyMylgehKO0bGMu0aIA/viewform"
+									target={"_blank"}
+									rel={"noopener noreferrer"}
+									className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out"
+								>
+									Get started
+								</a>
+							</div>
+							<div className="ml-3 inline-flex">
+								<button
+									onClick={() =>
+										conferencesRef &&
+										// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+										// @ts-ignore
+										conferencesRef.current.scrollIntoView({
+											behavior: "smooth",
+										})
+									}
+									className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-indigo-700 bg-indigo-100 hover:text-indigo-600 hover:bg-indigo-50 focus:outline-none focus:shadow-outline focus:border-indigo-300 transition duration-150 ease-in-out"
+								>
+									Learn more
+								</button>
+							</div>
+						</div>
+					}
 				>
 					MV Model UN has a middle school division for students at
 					Kennedy Middle School! It's the best way to get started with
 					Model UN.
 				</Header>
+				<div ref={conferencesRef} className={"w-full h-16"} />
 				<div className={"w-full max-w-4xl mx-auto py-8 px-4 md:px-8"}>
 					<div>
 						<h2 className="text-2xl leading-8 font-extrabold text-gray-900 sm:text-3xl sm:leading-9">
@@ -48,14 +99,86 @@ export default function KennedyPage({
 						<div className="mt-3">
 							<p className="text-lg leading-7 text-gray-500">
 								The Monta Vista Model UN team brings its middle
-								school division to a variety of conferences such
-								as the Santa Clara Valley Invitational held
-								annually in January. Over 1,000 delegates across
-								schools on the west coast compete in rigorous
+								school division to a variety of conferences
+								which allow its delegates to compete in rigorous
 								policy and debate on a number of pressing and
-								relevant issues. In addition, we attend SBMUN
-								(Monta Vista's very own conference) and SFMUN!
+								relevant issues. It's a fun and exciting way to
+								apply the skills you've learned!
 							</p>
+							{[
+								{
+									name: "San Fransisco Model United Nations",
+									date:
+										"December 12, 2020 - December 13, 2020",
+									location: "Lowell High School",
+									acronym: "sfmun",
+									registrationLink:
+										"https://bit.ly/kmun2021sfreg",
+									text:
+										"SFMUN is our first conference of the year, held in San Fransisco. SFMUN's smaller committee sizes make it a very beginner friendly conference, and serves as the perfect way to hop into MUN.",
+								},
+								{
+									name:
+										"Silicon Valley Model United Nations Conference",
+									date: "January 29, 2021 - January 30, 2021",
+									location: "Santa Teresa High School",
+									acronym: "scvmun",
+									registrationLink:
+										"https://bit.ly/kmun2021scvreg",
+									text:
+										"Santa Clara Valley Model United Nations Conference is our largest conference of the year!  At SCVMUN, over 1,000 delegates across schools on the west coast compete in rigorous policy and debate on a number of pressing and relevant issues.",
+								},
+								{
+									name: "South Bay Model United Nations",
+									date: "Date TBA", // TODO when available
+									location: "Monta Vista High School",
+									acronym: "sbmun",
+									text:
+										"South Bay Model United Nations Conference is Monta Vista's very own conference! It offers delegates the opportunity to continue practicing MUN skills with other delegates from the Bay Area. MUN conferences are rare in the spring season, so this is a great way for you to keep honing on your MUN abilities.",
+								},
+							].map(
+								(
+									{
+										name,
+										date,
+										location,
+										acronym,
+										text,
+										registrationLink,
+									},
+									i
+								) => {
+									return (
+										<HorizontalCard
+											key={i}
+											subtitle={`${date} | ${location}`}
+											title={
+												acronym.toUpperCase() +
+												": " +
+												name
+											}
+											image={
+												(conferencesImages.find(
+													(img) =>
+														img[0].toLowerCase() ==
+														acronym.toLowerCase()
+												) || [
+													null,
+													conferencesImages[0][1],
+												])[1]
+											}
+											buttonText={
+												registrationLink
+													? "Register Now"
+													: undefined
+											}
+											buttonLink={registrationLink}
+										>
+											{text}
+										</HorizontalCard>
+									);
+								}
+							)}
 						</div>
 					</div>
 					<div className="bg-gray-200 rounded mb-6">
@@ -104,7 +227,7 @@ export default function KennedyPage({
 									subtitle={position}
 									title={name}
 									image={
-										(images.find((img) => {
+										(secretariatImages.find((img) => {
 											return (
 												img[0].toLowerCase() ==
 												name
@@ -140,9 +263,25 @@ export const query = graphql`
 				}
 			}
 		}
-		images: allFile(
+		secretariatImages: allFile(
 			filter: {
 				relativePath: { glob: "secretariat/*.{jpg,jpeg,png,gif}" }
+			}
+		) {
+			edges {
+				node {
+					name
+					image: childImageSharp {
+						fluid(maxWidth: 800, quality: 75) {
+							...GatsbyImageSharpFluid_withWebp
+						}
+					}
+				}
+			}
+		}
+		conferencesImages: allFile(
+			filter: {
+				relativePath: { glob: "conferences/*.{jpg,jpeg,png,gif}" }
 			}
 		) {
 			edges {

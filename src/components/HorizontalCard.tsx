@@ -1,5 +1,6 @@
+import { Link } from "gatsby";
 import Img, { FluidObject } from "gatsby-image";
-import React from "react";
+import React, { SyntheticEvent } from "react";
 
 export default function HorizontalCard({
 	subtitle,
@@ -8,13 +9,17 @@ export default function HorizontalCard({
 	buttonText,
 	large,
 	noImage,
+	onButtonClick,
+	buttonLink,
 	...props
 }: {
 	title: React.ReactNode; // (can be string)
 	children: React.ReactNode;
 	subtitle: React.ReactNode;
 	buttonText?: string;
+	buttonLink?: string;
 	large?: boolean;
+	onButtonClick?: (e: SyntheticEvent) => void;
 } & (
 	| {
 			noImage?: boolean;
@@ -92,12 +97,37 @@ export default function HorizontalCard({
 					)}
 					{buttonText && (
 						<div className={"mt-4"}>
-							<button
-								type="button"
-								className="relative inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 shadow-sm hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150"
-							>
-								<span>{buttonText}</span>
-							</button>
+							{onButtonClick && (
+								<button
+									onClick={onButtonClick}
+									type="button"
+									className="relative inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 shadow-sm hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150"
+								>
+									<span>{buttonText}</span>
+								</button>
+							)}
+							{buttonLink &&
+								buttonLink.indexOf("/") !== 0 &&
+								!onButtonClick && (
+									<a
+										href={buttonLink}
+										className="relative inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 shadow-sm hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150"
+										target={"_blank"}
+										rel={"noopener noreferrer"}
+									>
+										<span>{buttonText}</span>
+									</a>
+								)}
+							{buttonLink &&
+								buttonLink.indexOf("/") === 0 &&
+								!onButtonClick && (
+									<Link
+										to={buttonLink}
+										className="relative inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 shadow-sm hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150"
+									>
+										<span>{buttonText}</span>
+									</Link>
+								)}
 						</div>
 					)}
 				</div>

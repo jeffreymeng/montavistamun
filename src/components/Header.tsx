@@ -5,10 +5,12 @@ export default function Header({
 	backgroundImage,
 	title,
 	children,
+	buttons,
 }: {
 	backgroundImage: FluidImage;
 	title: React.ReactNode;
 	children: React.ReactNode;
+	buttons?: React.ReactNode;
 }): React.ReactElement {
 	return (
 		<BackgroundImage
@@ -28,6 +30,7 @@ export default function Header({
 							{children}
 						</p>
 					</div>
+					{buttons}
 				</div>
 			</div>
 		</BackgroundImage>

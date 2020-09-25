@@ -2730,7 +2730,18 @@ declare namespace GatsbyTypes {
 				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
 			}>;
 		}>;
-		readonly images: {
+		readonly secretariatImages: {
+			readonly edges: ReadonlyArray<{
+				readonly node: Pick<File, "name"> & {
+					readonly image: Maybe<{
+						readonly fluid: Maybe<
+							GatsbyImageSharpFluid_withWebpFragment
+						>;
+					}>;
+				};
+			}>;
+		};
+		readonly conferencesImages: {
 			readonly edges: ReadonlyArray<{
 				readonly node: Pick<File, "name"> & {
 					readonly image: Maybe<{
