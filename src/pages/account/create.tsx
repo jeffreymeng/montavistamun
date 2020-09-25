@@ -87,7 +87,12 @@ export default function CreatePage({
 		return () => sysend.off("email-verified", handler);
 	}, [sysend, firebase]);
 	return (
-		<AuthLayout title={"Join MVMUN"}>
+		<AuthLayout
+			title={"Join MVMUN"}
+			description={
+				"Monta Vista Model United Nations is a close-knit club and community that strives to provide experiences in teamwork, negotiation, and diplomacy by simulating the United Nations during engaging conferences. Join MV Model UN today to start your MUN journey!"
+			}
+		>
 			{done ? (
 				<div className="mx-auto w-full max-w-sm">
 					<div>

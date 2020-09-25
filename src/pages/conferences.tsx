@@ -29,7 +29,13 @@ export default function ConferencesPage({
 		{ childImageSharp: edge.node.image },
 	]);
 	return (
-		<Layout title={"Conferences"}>
+		<Layout
+			title={"Conferences"}
+			description={
+				"MV Model UN's conferences offer excellent opportunities to hone your " +
+				"skills with your peers — all while having a blast!"
+			}
+		>
 			<Header backgroundImage={data.headerImage} title={"Conferences"}>
 				Our conferences offer excellent opportunities to hone your
 				skills with your peers — all while having a blast!

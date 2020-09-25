@@ -36,12 +36,17 @@ export default function Layout({
 	gray,
 	navbarShadow,
 	formatTitle,
+	description,
 }: {
 	children: React.ReactNode | React.ReactNodeArray | Element[];
 	/**
 	 * A title for the page, to be displayed in the browser tab
 	 */
 	title: string;
+	/**
+	 * A description for the page, displayed in og cards.
+	 */
+	description?: string;
 	/**
 	 * A list of space delimited classes to be added to the topmost div of the page (parent to the navbar and body).
 	 */
@@ -94,7 +99,11 @@ export default function Layout({
 				unscrolledClassName={navbarUnscrolledClassName}
 				shadow={navbarShadow}
 			/>
-			<SEO title={title} formatTitle={formatTitle} />
+			<SEO
+				title={title}
+				formatTitle={formatTitle}
+				description={description}
+			/>
 			<div className={wrapperClassName}>{children}</div>
 
 			<Footer dark={!lightFooter} />

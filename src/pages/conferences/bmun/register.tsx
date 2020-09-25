@@ -11,7 +11,7 @@ export default function AboutPage(): React.ReactElement {
 						"text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10"
 					}
 				>
-					GMUNC Registration
+					BMUN Registration
 				</h1>
 
 				<form className={"mt-10"}>

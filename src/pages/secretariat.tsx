@@ -43,13 +43,14 @@ export default function SecretariatPage({
 			() => null
 		);
 	}, []);
-
+	const description =
+		"Who exactly do you contact when you need help? Who is behind" +
+		" those emails to you? That would be us, the secretariat! Get to" +
+		" know us, we’re always looking for new friends!";
 	return (
-		<Layout title={"Secretariat"}>
+		<Layout title={"Secretariat"} description={description}>
 			<Header title={"Secretariat"} backgroundImage={data.headerImage}>
-				Who exactly do you contact when you need help? Who is behind
-				those emails to you? That would be us, the secretariat! Get to
-				know us, we’re always looking for new friends!
+				{description}
 			</Header>
 			<Main>
 				{secretariatData.map(

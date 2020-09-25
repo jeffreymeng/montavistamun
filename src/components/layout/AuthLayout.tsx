@@ -5,8 +5,10 @@ import { Layout } from ".";
 export default function AuthLayout({
 	title,
 	children,
+	description,
 }: {
 	title: string;
+	description?: string;
 	children: React.ReactNode;
 }): React.ReactElement {
 	const data = useStaticQuery<GatsbyTypes.AuthLayoutQueryQuery>(graphql`
@@ -21,7 +23,7 @@ export default function AuthLayout({
 		}
 	`);
 	return (
-		<Layout title={title} navbarShadow="always">
+		<Layout title={title} navbarShadow="always" description={description}>
 			<div className="min-h-ca-no-footer bg-gray-50 flex">
 				<div className="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
 					<div className="mx-auto w-full max-w-sm">{children}</div>

@@ -50,8 +50,9 @@ export default function KennedyPage({
 		{ childImageSharp: edge.node.image },
 	]);
 	const conferencesRef = useRef(null);
+	const description = `MV Model UN has a middle school division for students at Kennedy Middle School! It's the best way to get started with Model UN.`;
 	return (
-		<Layout title={"Kennedy MUN"}>
+		<Layout title={"Kennedy MUN"} description={description}>
 			<div className="min-h-ca">
 				<Header
 					backgroundImage={data.headerImage}
@@ -86,9 +87,7 @@ export default function KennedyPage({
 						</div>
 					}
 				>
-					MV Model UN has a middle school division for students at
-					Kennedy Middle School! It's the best way to get started with
-					Model UN.
+					{description}
 				</Header>
 				<div ref={conferencesRef} className={"w-full h-16"} />
 				<div className={"w-full max-w-4xl mx-auto py-8 px-4 md:px-8"}>

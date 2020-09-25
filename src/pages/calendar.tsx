@@ -16,6 +16,9 @@ export default function AboutPage(): React.ReactElement {
 			wrapperClassName={
 				"flex-1 w-full px-4 py-8 md:px-20 mx-auto md:px-8 md:py-16"
 			}
+			description={
+				"View all of MV Model UN's events, past and future. You can even add it to your own calendar!"
+			}
 		>
 			<h1
 				className={
