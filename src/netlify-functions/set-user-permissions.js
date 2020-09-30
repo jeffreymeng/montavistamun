@@ -67,7 +67,6 @@ export async function handler(event, context) {
 			)}}`,
 		};
 	}
-
 	// perform updates
 	try {
 		const modifiedClaims = {};
@@ -99,9 +98,9 @@ export async function handler(event, context) {
 				action: "update-user-permissions",
 				timestamp: database.currentTimestamp(),
 				user: callerUid,
-				modifiedFields: modifiedClaims,
+				modifiedFields: modifiedClaims || null,
 				newData: finalClaims,
-				oldData: existingClaims,
+				oldData: existingClaims || null,
 				target: targetUID,
 			}),
 		]);
@@ -113,7 +112,8 @@ export async function handler(event, context) {
 			)}}`,
 		};
 	} catch (error) {
-		console.log(error);
+		console.log("ERROR");
+		console.log(error, JSON.stringify(error));
 		if (error.code && error.message) {
 			return {
 				statusCode: 400,

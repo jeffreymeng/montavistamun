@@ -22,6 +22,10 @@ const convertToFirebaseFormat = (fields) => {
 					result[key] = { booleanValue: val };
 					break;
 				case "object":
+					if (val === null) {
+						result[key] = { nullValue: null };
+						break;
+					}
 					if (val.type === "timestamp") {
 						result[key] = { timestampValue: val.time };
 						break;
@@ -43,9 +47,18 @@ const convertToFirebaseFormat = (fields) => {
 						mapValue: convertToFirebaseFormat(val),
 					};
 					break;
-
+				case "undefined":
+					throw new Error(
+						"Undefined field type is not supported. Use null instead."
+					);
+				// result[key] = {
+				// 	nullValue:null
+				// }
 				default:
-					throw new Error("Unexpected field type.");
+					// console.log(typeof val, val, fields)
+					throw new Error(
+						`Unexpected field type. '${typeof val}' for value '${val}'`
+					);
 			}
 		}
 	}
