@@ -6,9 +6,49 @@ import React, { useState } from "react";
 import useRequireLogin from "../components/accounts/useRequireLogin";
 import { Layout } from "../components/layout";
 import AuthContext from "../context/AuthContext";
+
 export default function AboutPage(): React.ReactElement {
 	const { user, loading, verified, admin } = React.useContext(AuthContext);
 	useRequireLogin();
+	const [nextMeeting, setNextMeeting] = useState("Loading...");
+	React.useEffect(() => {
+		const calendarId =
+			"g9h6cqiso966e96uqj1cv2ohgc@group.calendar.google.com";
+		const calendarAPIKey = "AIzaSyAWBRPsh5fXjotQ0IT9DZQhygkpzu-SL4w";
+
+		axios
+			.get(
+				`https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(
+					calendarId
+				)}/events`,
+				{
+					params: {
+						key: calendarAPIKey,
+						orderBy: "startTime",
+						singleEvents: true,
+						maxResults: 250,
+						timeMin: moment().format(),
+						timeMax: moment().add(6, "months").format(),
+					},
+				}
+			)
+			.then((resp) => resp.data?.items || [])
+			.then((items) => {
+				const times = (items as {
+					summary: string;
+					start: { dateTime: string };
+				}[])
+					.filter(
+						(i) =>
+							i.summary.toLowerCase().indexOf("member meeting") >
+							-1
+					)
+					.map((i) => moment(i.start.dateTime))
+					.map((m) => m.format("dddd, MMMM Do, YYYY, h:mm A"));
+				console.log(times);
+				setNextMeeting(times[0]);
+			});
+	}, []);
 
 	return (
 		<Layout title={"Member Dashboard"}>
@@ -107,9 +147,8 @@ export default function AboutPage(): React.ReactElement {
 
 									{[
 										{
-											subtitle: "First Member Meeting",
-											title:
-												"Wednesday, September 23, 12PM",
+											subtitle: "Next Member Meeting",
+											title: nextMeeting,
 											primaryAction: {
 												title: "Join Meeting",
 												link: "/zoom",
