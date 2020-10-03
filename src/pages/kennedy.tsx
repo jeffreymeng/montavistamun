@@ -93,6 +93,25 @@ export default function KennedyPage({
 				<div className={"w-full max-w-4xl mx-auto py-8 px-4 md:px-8"}>
 					<div>
 						<h2 className="text-2xl leading-8 font-extrabold text-gray-900 sm:text-3xl sm:leading-9">
+							For Parents
+						</h2>
+						<div className="mt-3">
+							<p className="text-lg leading-7 text-gray-500">
+								Learn about the benefits of having your child
+								join Kennedy Model United Nations by viewing our
+								parent night slideshow{" "}
+								<a
+									href="https://docs.google.com/presentation/d/1wh4F4UCcyLTXC2N9L6UZkoLxfCKx5xlYvsd9fNigEsM/edit#slide=id.g35f391192_00"
+									className="link"
+									target={"_blank"}
+									rel={"noopener noreferrer"}
+								>
+									here
+								</a>
+								.
+							</p>
+						</div>
+						<h2 className="mt-5 text-2xl leading-8 font-extrabold text-gray-900 sm:text-3xl sm:leading-9">
 							Conferences
 						</h2>
 						<div className="mt-3">
@@ -113,6 +132,8 @@ export default function KennedyPage({
 									acronym: "sfmun",
 									registrationLink:
 										"https://bit.ly/kmun2021sfreg",
+									registrationDeadline:
+										"Wednesday, 10/14, 11:59pm",
 									text:
 										"SFMUN is our first conference of the year, held in San Fransisco. SFMUN's smaller committee sizes make it a very beginner friendly conference, and serves as the perfect way to hop into MUN.",
 								},
@@ -124,6 +145,8 @@ export default function KennedyPage({
 									acronym: "scvmun",
 									registrationLink:
 										"https://bit.ly/kmun2021scvreg",
+									registrationDeadline:
+										"Wednesday, 10/28, 11:59pm",
 									text:
 										"Santa Clara Valley Model United Nations Conference is our largest conference of the year!  At SCVMUN, over 1,000 delegates across schools on the west coast compete in rigorous policy and debate on a number of pressing and relevant issues.",
 								},
@@ -155,6 +178,7 @@ export default function KennedyPage({
 										acronym,
 										text,
 										registrationLink,
+										registrationDeadline,
 									},
 									i
 								) => {
@@ -179,7 +203,11 @@ export default function KennedyPage({
 											}
 											buttonText={
 												registrationLink
-													? "Register Now"
+													? `Register Now${
+															registrationDeadline
+																? ` (Deadline: ${registrationDeadline})`
+																: ""
+													  }`
 													: undefined
 											}
 											buttonLink={registrationLink}
