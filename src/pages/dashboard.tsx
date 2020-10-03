@@ -1,53 +1,104 @@
 import axios from "axios";
 import { Link } from "gatsby";
+import { calendar_v3 } from "googleapis";
 import * as Icons from "heroicons-react";
 import moment from "moment";
 import React, { useState } from "react";
 import useRequireLogin from "../components/accounts/useRequireLogin";
 import { Layout } from "../components/layout";
 import AuthContext from "../context/AuthContext";
-
+type CalendarEvent = calendar_v3.Schema$Event;
 export default function AboutPage(): React.ReactElement {
 	const { user, loading, verified, admin } = React.useContext(AuthContext);
 	useRequireLogin();
+	const [eventsCache, setEventsCache] = useState<CalendarEvent[]>([]);
 	const [nextMeeting, setNextMeeting] = useState("Loading...");
+
+	const [nextUpdateTimeoutId, setNextUpdateTimeoutId] = useState<
+		number | null
+	>(null);
 	React.useEffect(() => {
 		const calendarId =
 			"g9h6cqiso966e96uqj1cv2ohgc@group.calendar.google.com";
 		const calendarAPIKey = "AIzaSyAWBRPsh5fXjotQ0IT9DZQhygkpzu-SL4w";
+		const FORMAT = "dddd, MMMM Do, h:mm A";
+		(async () => {
+			const fetchData = async (): Promise<CalendarEvent[]> => {
+				const response = await axios.get(
+					`https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(
+						calendarId
+					)}/events`,
+					{
+						params: {
+							key: calendarAPIKey,
+							orderBy: "startTime",
+							singleEvents: true,
+							maxResults: 250,
+							timeMin: moment().format(),
+							timeMax: moment().add(6, "months").format(),
+						},
+					}
+				);
+				return response.data?.items || [];
+			};
 
-		axios
-			.get(
-				`https://www.googleapis.com/calendar/v3/calendars/${encodeURIComponent(
-					calendarId
-				)}/events`,
-				{
-					params: {
-						key: calendarAPIKey,
-						orderBy: "startTime",
-						singleEvents: true,
-						maxResults: 250,
-						timeMin: moment().format(),
-						timeMax: moment().add(6, "months").format(),
-					},
+			const update = async () => {
+				let events;
+				if (eventsCache.length === 0) {
+					events = await fetchData();
+					setEventsCache(events);
+				} else {
+					events = eventsCache;
 				}
-			)
-			.then((resp) => resp.data?.items || [])
-			.then((items) => {
-				const times = (items as {
-					summary: string;
-					start: { dateTime: string };
-				}[])
+				const times = events
 					.filter(
-						(i) =>
-							i.summary.toLowerCase().indexOf("member meeting") >
-							-1
+						(event) =>
+							event.summary &&
+							event.start &&
+							event.summary
+								.toLowerCase()
+								.indexOf("member meeting") > -1
 					)
-					.map((i) => moment(i.start.dateTime))
-					.map((m) => m.format("dddd, MMMM Do, YYYY, h:mm A"));
-				console.log(times);
-				setNextMeeting(times[0]);
-			});
+					.filter((event) =>
+						moment(event.end?.dateTime).isAfter(moment())
+					)
+					.map((event) => ({
+						name: event.summary,
+						startTime: moment(event.start?.dateTime),
+						endTime: moment(event.end?.dateTime),
+					}))
+					.map((event) => ({
+						...event,
+						formattedStartTime: event.startTime.format(FORMAT),
+						formattedEndTime: event.endTime.format(FORMAT),
+					}));
+
+				setNextMeeting(times[0].formattedStartTime);
+				const secondsUntilNextUpdate = Math.abs(
+					moment().diff(times[0].endTime, "milliseconds")
+				);
+
+				if (nextUpdateTimeoutId !== null) {
+					clearTimeout(nextUpdateTimeoutId);
+				}
+
+				const timeoutId = window.setTimeout(() => {
+					update();
+				}, secondsUntilNextUpdate);
+
+				setNextUpdateTimeoutId(timeoutId);
+
+				if (times.length < 2) {
+					// cache data for next time
+					fetchData().then((events) => setEventsCache(events));
+				}
+			};
+			await update();
+		})();
+
+		return () => {
+			nextUpdateTimeoutId && clearTimeout(nextUpdateTimeoutId);
+		};
 	}, []);
 
 	return (
@@ -196,7 +247,7 @@ export default function AboutPage(): React.ReactElement {
 											};
 											icon: string;
 										},
-										// {
+										// {+
 										// 	subtitle: "Registration Now Open",
 										// 	title:
 										// 		"Berkeley Model United Nations Conference (BMUN)",
@@ -646,9 +697,15 @@ function UpdatesTable() {
 										onClick={() =>
 											setPage((current) => current - 1)
 										}
-										disabled={page == 1}
+										disabled={
+											!data ||
+											data.length == 0 ||
+											page == 1
+										}
 										className={
-											(page == 1
+											(!data ||
+											data.length == 0 ||
+											page == 1
 												? "bg-gray-100"
 												: "hover:text-cool-gray-500") +
 											" relative inline-flex items-center p-2 border border-cool-gray-300 text-sm leading-5 font-medium rounded-md text-cool-gray-700 bg-white focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-cool-gray-100 active:text-cool-gray-700 transition ease-in-out duration-150"
@@ -660,9 +717,15 @@ function UpdatesTable() {
 										onClick={() =>
 											setPage((current) => current + 1)
 										}
-										disabled={page >= numPages}
+										disabled={
+											!data ||
+											data.length == 0 ||
+											page >= numPages
+										}
 										className={
-											(page >= numPages
+											(!data ||
+											data.length == 0 ||
+											page >= numPages
 												? "bg-gray-100"
 												: "hover:text-cool-gray-500") +
 											" ml-3 relative inline-flex items-center p-2 border border-cool-gray-300 text-sm leading-5 font-medium rounded-md text-cool-gray-700 bg-white focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-cool-gray-100 active:text-cool-gray-700 transition ease-in-out duration-150"
