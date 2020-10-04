@@ -69,5 +69,5 @@
 		/* Disallow inconsistently-cased references to the same file. */
 		"jsx": "react"
 	},
-	"exclude": ["./node_modules/*"]
+	"exclude": ["./node_modules/**/*"]
 }
