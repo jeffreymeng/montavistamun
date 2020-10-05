@@ -91,21 +91,24 @@ export default function EmergencyInformationSection({
 					.required(
 						"Please enter the emergency contact's phone number."
 					),
-				contactTwoName: Yup.string()
-					.min(2, "Please enter an emergency contact name")
-					.required("Please enter an emergency contact name"),
-				contactTwoRelationship: Yup.string()
-					.min(
-						2,
-						"Please enter the emergency contact's relationship to the participant"
-					)
-					.required(
-						"Please enter the emergency contact's relationship to the participant"
-					),
+				contactTwoName: Yup.string().min(
+					2,
+					"Please enter an emergency contact name"
+				),
+				// .required("Please enter an emergency contact name"),
+				contactTwoRelationship: Yup.string().min(
+					2,
+					"Please enter the emergency contact's relationship to the participant"
+				),
+				// .required(
+				// 	"Please enter the emergency contact's relationship to the participant"
+				// ),
 				contactTwoPhone: Yup.string().test(
 					"is a phone number",
 					"This phone number doesn't look valid! Try using the format (xxx) xxx-xxxx.",
-					(v) => !!v && /^1?\d{10}$/.test(v.replace(/[^\d\w]/g, ""))
+					(v) =>
+						v === "" ||
+						(!!v && /^1?\d{10}$/.test(v.replace(/[^\d\w]/g, "")))
 				),
 				householdMainLanguage: Yup.string()
 					.min(
