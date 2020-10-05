@@ -30,13 +30,11 @@ export default function VerticalSteps({
 	 */
 	onStepSwitch?: (step: number) => void;
 }) {
-	if (!maxSwitchableStep || maxSwitchableStep < currentStep) {
+	maxSwitchableStep = maxSwitchableStep || currentStep;
+	if (maxSwitchableStep < currentStep) {
 		maxSwitchableStep = currentStep;
 	}
-	if (maxSwitchableStep === undefined) {
-		console.warn("maxswitchablestep should not be undefined");
-		return;
-	}
+
 	return (
 		<nav className={"pt-8"}>
 			<ul className="overflow-hidden">
@@ -88,7 +86,7 @@ export default function VerticalSteps({
 										(i >= currentStep
 											? "bg-white border-2 "
 											: "") +
-										(i <= currentStep
+										(i < maxSwitchableStep
 											? "border-indigo-600 "
 											: "") +
 										(i < currentStep ||
