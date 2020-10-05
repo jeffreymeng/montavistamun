@@ -52,7 +52,7 @@ export default function VerticalSteps({
 							<div
 								className={
 									"-ml-px absolute mt-0.5 top-4 left-4 w-0.5 h-full " +
-									(i < maxSwitchableStep + 1
+									(i < maxSwitchableStep - 1
 										? "bg-indigo-600"
 										: i <
 										  maxSwitchableStep /* because the line is attached to the element before*/
