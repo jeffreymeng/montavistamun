@@ -1,5 +1,5 @@
 import arrayMove from "array-move";
-import React, { useState } from "react";
+import React from "react";
 import {
 	SortableContainer as RSHSortableContainer,
 	SortableElement as RSHSortableElement,
@@ -22,20 +22,17 @@ const SortableContainer = RSHSortableContainer(
 	}
 );
 
-export default function PreferenceList() {
-	const [items, setItems] = useState([
-		"Legal",
-		"ECOSOC",
-		"SOCMOK",
-		"Bla",
-		"Item 5",
-		"Item 6",
-	]);
-
+export default function PreferenceList({
+	items,
+	setItems,
+}: {
+	items: string[];
+	setItems: (items: string[]) => void;
+}) {
 	return (
 		<SortableContainer
 			onSortEnd={({ oldIndex, newIndex }) =>
-				setItems((old) => arrayMove(old, oldIndex, newIndex))
+				setItems(arrayMove(items, oldIndex, newIndex))
 			}
 			helperClass={"SortableHelper cursor-resize-y"}
 		>

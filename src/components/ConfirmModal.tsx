@@ -1,3 +1,4 @@
+import * as Icons from "heroicons-react";
 import React from "react";
 import Transition from "./Transition";
 
@@ -16,7 +17,7 @@ export default function ConfirmationModal({
 	onConfirm: () => void;
 	title: string;
 	children: React.ReactNode;
-	Icon: React.ReactNode;
+	Icon?: React.ReactNode;
 	confirmButtonText: string;
 	disabled?: boolean;
 }) {
@@ -57,7 +58,11 @@ export default function ConfirmationModal({
 								<div className="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
 									{/*
 									//@ts-ignore */}
-									<Icon className="h-6 w-6 text-red-600" />
+									{Icon ? (
+										<Icon className="h-6 w-6 text-red-600" />
+									) : (
+										<Icons.ExclamationOutline className="h-6 w-6 text-red-600" />
+									)}
 								</div>
 								<div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
 									<h3

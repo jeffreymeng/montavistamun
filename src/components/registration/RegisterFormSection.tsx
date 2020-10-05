@@ -5,7 +5,7 @@ import React, { ReactElement, useContext, useState } from "react";
 import * as Yup from "yup";
 import AuthContext from "../../context/AuthContext";
 import useRequireLogin from "../accounts/useRequireLogin";
-
+import ConfirmModal from "../ConfirmModal";
 export default function RegisterFormSection<Fields>({
 	data,
 	onSubmit,
@@ -16,6 +16,7 @@ export default function RegisterFormSection<Fields>({
 	title,
 	subtitle,
 	children,
+	confirmContinue,
 }: {
 	data?: Fields;
 	onSubmit: (data: Fields) => Promise<void>;
@@ -25,12 +26,17 @@ export default function RegisterFormSection<Fields>({
 	loadingValues: Fields;
 	title?: string;
 	subtitle?: string;
+	/**
+	 * If provided, the function will be extecuted to check if a confirm save modal should be shown.
+	 * The modal will be shown if a string is returned, and the help text will be that string.
+	 * @param values
+	 */
+	confirmContinue?: (values: Fields) => false | string;
 	children: (
 		props: FormikProps<Fields> & { canEdit: boolean }
 	) => ReactElement;
 }): ReactElement {
 	useRequireLogin();
-
 	return (
 		<div className="shadow overflow-hidden sm:rounded-md">
 			<Formik
@@ -57,6 +63,7 @@ export default function RegisterFormSection<Fields>({
 						title={title}
 						subtitle={subtitle}
 						fields={children}
+						confirmContinue={confirmContinue}
 					/>
 				)}
 			</Formik>
@@ -66,10 +73,15 @@ export default function RegisterFormSection<Fields>({
 
 /**
  * Given that a and b have the same keys, checks if a and b are equal shallow objects.
+ * If an array is a child, then that array will be compared to other arrays based on shallow value, not reference.
  */
 function compareObjectValues<T>(a: T, b: T) {
-	return Object.keys(a).every(
-		(key) => a[key as keyof T] === b[key as keyof T]
+	return Object.keys(a).every((key) =>
+		Array.isArray(a[key as keyof T])
+			? (a[key as keyof T] as any[]).every(
+					(el, i) => el === (b[key as keyof T] as any[])[i]
+			  )
+			: a[key as keyof T] === b[key as keyof T]
 	);
 }
 function RegisterFormSectionInner<Fields>({
@@ -80,9 +92,12 @@ function RegisterFormSectionInner<Fields>({
 	form,
 	title,
 	subtitle,
+	confirmContinue,
 	fields,
 }: {
 	loading: boolean;
+	confirmContinue?: (values: Fields) => false | string;
+
 	form: FormikProps<Fields>;
 	initialValues?: Fields;
 	onContinue: () => void;
@@ -94,7 +109,8 @@ function RegisterFormSectionInner<Fields>({
 	const { isSubmitting, submitForm, values, validateForm } = form;
 	const { user, loading: userLoading } = useContext(AuthContext);
 	const [hasChanges, setHasChanges] = useState(false);
-
+	const [showConfirm, setShowConfirm] = useState(false);
+	const [confirmText, setConfirmText] = useState("");
 	React.useEffect(() => {
 		const newHasChanges =
 			!!initialValues && !compareObjectValues(values, initialValues);
@@ -115,6 +131,26 @@ function RegisterFormSectionInner<Fields>({
 			// @ts-ignore
 			return value !== null && value !== undefined && value !== "";
 		});
+	const onSave = React.useCallback(() => {
+		if (!hasChanges) {
+			onContinue();
+		} else {
+			submitForm()
+				.then(validateForm)
+				.then((errors) => {
+					const isValid = Object.keys(errors).length === 0;
+					if (isValid) {
+						return Promise.resolve();
+					} else {
+						return Promise.reject("invalid form");
+					}
+				})
+				.then(() => {
+					onContinue();
+				})
+				.catch((e) => console.log(e));
+		}
+	}, [hasChanges, submitForm, validateForm, onContinue]);
 	return (
 		<Form>
 			<div className="px-4 bg-white py-5 sm:p-6">
@@ -173,26 +209,14 @@ function RegisterFormSectionInner<Fields>({
 				<button
 					type={"button"}
 					onClick={() => {
-						console.log(hasChanges, initialValuesUnchanged);
-						if (!hasChanges) {
-							onContinue();
-						} else {
-							submitForm()
-								.then(validateForm)
-								.then((errors) => {
-									const isValid =
-										Object.keys(errors).length === 0;
-									if (isValid) {
-										return Promise.resolve();
-									} else {
-										return Promise.reject("invalid form");
-									}
-								})
-								.then(() => {
-									onContinue();
-								})
-								.catch((e) => console.log(e));
+						const confirmModalText =
+							confirmContinue && confirmContinue(values);
+						if (confirmModalText) {
+							setShowConfirm(true);
+							setConfirmText(confirmModalText);
+							return;
 						}
+						onSave();
 					}}
 					disabled={!canSubmit}
 					className={cx(
@@ -209,6 +233,23 @@ function RegisterFormSectionInner<Fields>({
 						: "Continue"}
 				</button>
 			</div>
+
+			<ConfirmModal
+				onConfirm={onSave}
+				confirmButtonText={
+					isSubmitting
+						? "Saving and Continuing..."
+						: hasChanges
+						? "Save and Continue"
+						: "Continue"
+				}
+				disabled={!canSubmit}
+				show={showConfirm}
+				setShow={setShowConfirm}
+				title={"Are you sure you want to continue?"}
+			>
+				{confirmText}
+			</ConfirmModal>
 		</Form>
 	);
 }
