@@ -1,7 +1,7 @@
 /* eslint-disable */
 // @ts-nocheck
-// from https://github.com/ZenLiuCN/PDFForm/blob/master/PDFForm.ts
-// apache 2.0 license
+// adapted from https://github.com/ZenLiuCN/PDFForm/blob/master/PDFForm.ts
+// this file: apache 2.0 license
 
 import * as pako from "pako";
 /*import {NuxtAxiosInstance} from "nuxt";*/
@@ -1401,7 +1401,7 @@ export const openOrDownload = (
 	fileType: string = "application/pdf",
 	newWindow: boolean = true,
 	downloadName?: string
-) =>
+): Promise<void> =>
 	new Promise((r, j) => {
 		const newBlob = new Blob([buf], { type: fileType });
 		if (window.navigator && window.navigator.msSaveOrOpenBlob) {

@@ -72,6 +72,42 @@ const loadOrRestoreFile = (
 			abort();
 		});
 };
+const isIOS = () => {
+	return (
+		[
+			"iPad Simulator",
+			"iPhone Simulator",
+			"iPod Simulator",
+			"iPad",
+			"iPhone",
+			"iPod",
+		].includes(navigator.platform) ||
+		// iPad on iOS 13 detection
+		(navigator.userAgent.includes("Mac") && "ontouchend" in document)
+	);
+};
+const openOrDownload = (
+	name: string,
+	form: Uint8Array | null,
+	unfilledPath: string = name
+): Promise<void> => {
+	if (isIOS()) {
+		const shouldContinue = confirm(
+			"Autofilled forms are not available on iOS browsers, so an unfilled form will be opened. If you'd like an autofilled PDF form, please visit this page on a non-mobile browser."
+		);
+		if (!shouldContinue) {
+			return Promise.resolve();
+		}
+	}
+	if (form === null || isIOS()) {
+		console.log(name, form, unfilledPath);
+		window.location.href = unfilledPath;
+	} else {
+		return pdfform.openOrDownload(form, "", true, name);
+	}
+	return Promise.resolve();
+};
+
 export default function WaiverFormsSection({
 	data,
 	setStepHasChanges,
@@ -246,12 +282,10 @@ export default function WaiverFormsSection({
 						<span className="inline-flex rounded-md shadow-sm my-2 mr-2">
 							<button
 								onClick={() =>
-									filledForms[0] !== null &&
-									pdfform.openOrDownload(
+									openOrDownload(
+										"sfmun-fuhsd-form.pdf",
 										filledForms[0],
-										"",
-										true,
-										"sfmun-fuhsd-form.pdf"
+										"/forms/FUHSD-field-trip-form.pdf"
 									)
 								}
 								className={
@@ -291,12 +325,10 @@ export default function WaiverFormsSection({
 						<span className="inline-flex rounded-md shadow-sm my-2 mr-2">
 							<button
 								onClick={() =>
-									filledForms[1] !== null &&
-									pdfform.openOrDownload(
+									openOrDownload(
+										"sfmun-liability-form.pdf",
 										filledForms[1],
-										"",
-										true,
-										"sfmun-liability-form.pdf"
+										"/forms/SFMUN-liability-release.pdf"
 									)
 								}
 								className={
