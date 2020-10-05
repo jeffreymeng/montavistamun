@@ -1,3 +1,7 @@
 .filepond--download-icon {
 	margin-right: 0.25em;
 }
+.filepond--drop-label,
+.filepond--drop-label label {
+	cursor: pointer;
+}
