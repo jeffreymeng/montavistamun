@@ -34,7 +34,8 @@ export default function VerticalSteps({
 		maxSwitchableStep = currentStep;
 	}
 	if (maxSwitchableStep === undefined) {
-		throw new Error("maxswitchablestep should not be undefined");
+		console.warn("maxswitchablestep should not be undefined");
+		return;
 	}
 	return (
 		<nav className={"pt-8"}>
@@ -51,7 +52,7 @@ export default function VerticalSteps({
 							<div
 								className={
 									"-ml-px absolute mt-0.5 top-4 left-4 w-0.5 h-full " +
-									(i < currentStep
+									(i < maxSwitchableStep + 1
 										? "bg-indigo-600"
 										: i <
 										  maxSwitchableStep /* because the line is attached to the element before*/
