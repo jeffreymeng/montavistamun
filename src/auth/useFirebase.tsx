@@ -20,7 +20,7 @@ export default function useFirebase(): null | typeof FirebaseType {
 			await Promise.all([
 				import("firebase/auth"),
 				import("firebase/firestore"),
-				import("firebase/functions"),
+				import("firebase/storage"),
 			]);
 			// lazy load firebase in an async IIFE
 			if (firebaseApp.apps.length === 0) {

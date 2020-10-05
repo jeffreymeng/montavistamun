@@ -107,7 +107,7 @@ function RegisterFormSectionInner<Fields>({
 	const canSubmit = !isSubmitting && !loading;
 	const canEdit = !isSubmitting && !loading;
 
-	const initialValuesNotEmpty =
+	const initialValuesUnchanged =
 		initialValues &&
 		Object.keys(initialValues).some((el) => {
 			const value = initialValues[el as keyof typeof initialValues];
@@ -145,12 +145,12 @@ function RegisterFormSectionInner<Fields>({
 
 			<div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
 				{/* If initial values exists and has at least one set value, then the user already has saved data. */}
-				{!hasChanges && initialValuesNotEmpty && (
+				{!hasChanges && initialValuesUnchanged && (
 					<span className="text-green-600 py-2 px-4 text-sm leading-5 font-medium">
 						<Icons.Check className={"inline-flex mr-1"} /> Saved
 					</span>
 				)}
-				{hasChanges && initialValuesNotEmpty && (
+				{hasChanges && initialValuesUnchanged && (
 					<>
 						<span className="inline-flex rounded-md shadow-sm">
 							<button
@@ -173,11 +173,10 @@ function RegisterFormSectionInner<Fields>({
 				<button
 					type={"button"}
 					onClick={() => {
-						console.log(hasChanges);
+						console.log(hasChanges, initialValuesUnchanged);
 						if (!hasChanges) {
 							onContinue();
 						} else {
-							console.log("asfd");
 							submitForm()
 								.then(validateForm)
 								.then((errors) => {
@@ -190,7 +189,6 @@ function RegisterFormSectionInner<Fields>({
 									}
 								})
 								.then(() => {
-									console.log("fsd");
 									onContinue();
 								})
 								.catch((e) => console.log(e));

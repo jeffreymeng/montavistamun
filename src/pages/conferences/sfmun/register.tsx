@@ -8,7 +8,7 @@ import Header from "../../../components/Header";
 import { Layout, Main } from "../../../components/layout";
 import EmergencyInformationSection from "../../../components/registration/sfmun/EmergencyInformationSection";
 import PersonalInformationSection from "../../../components/registration/sfmun/PersonalInformationSection";
-import WaivierFormsSection from "../../../components/registration/sfmun/WaivierFormsSection";
+import WaiverFormsSection from "../../../components/registration/sfmun/WaiverFormsSection";
 import VerticalSteps from "../../../components/shared/VerticalSteps";
 import Transition from "../../../components/Transition";
 import AuthContext from "../../../context/AuthContext";
@@ -24,11 +24,8 @@ export default function AboutPage({
 	const firebase = useFirebase();
 	const { user, loading: userLoading } = useContext(AuthContext);
 	const [step, setStep] = useState(0);
-	const [stepHasChanges, sd] = useState(false);
-	const setStepHasChanges = (b) => {
-		console.log("ss", b);
-		sd(b);
-	};
+	const [stepHasChanges, setStepHasChanges] = useState(false);
+
 	const [maxStep, setMaxStep] = useState(0);
 	const [data, updateData] = React.useReducer(
 		(state: Record<string, any>, action: Record<string, any>) => {
@@ -65,7 +62,6 @@ export default function AboutPage({
 	};
 	React.useEffect(() => {
 		const handler = (e: BeforeUnloadEvent) => {
-			console.log("before unload");
 			e.returnValue = "You have unsaved changes!";
 			return false;
 		};
@@ -90,6 +86,7 @@ export default function AboutPage({
 				}
 				const data = snapshot.data() || {
 					personalInformation: {},
+					emergencyInformation: {},
 				};
 				updateData({
 					personalInformation: {
@@ -120,17 +117,27 @@ export default function AboutPage({
 						healthInsuranceZip: "",
 						...data.emergencyInformation,
 					},
+					forms: {
+						...data.forms,
+					},
 				});
-				if (!data?.personalInformation) {
-					setStep(0);
-					setMaxStep(0);
-				} else if (!data.emergencyInformation) {
-					setStep(1);
-					setMaxStep(1);
-				} else if (!data.forms) {
-					setStep(2);
-					setMaxStep(2);
+				const rawData = snapshot.data();
+				let step = 0;
+				if (!rawData?.personalInformation) {
+					step = 0;
+				} else if (!rawData.emergencyInformation) {
+					step = 1;
+				} else if (
+					!rawData.forms?.fuhsdForm ||
+					!rawData.forms?.sfmunForm
+				) {
+					step = 2;
+				} else if (!rawData.preferences) {
+					step = 3;
 				}
+				setStep(step);
+				setMaxStep(step);
+
 				setLoadingData(false);
 				setStepHasChanges(false);
 			});
@@ -194,13 +201,19 @@ export default function AboutPage({
 													"TODO TODO TODO TODO TODO TODO", //TODO
 											},
 											{
-												title: "Confirm and Submit",
+												title: "Confirm and Submit", // TODO change this to confirmation screen?
 												description:
-													"You can still edit your registration until the deadline even after submitting.",
+													"You're now registered for SFMUN! You may still edit or cancel your registration until the deadline.",
 											},
 										]}
 										currentStep={step}
-										maxSwitchableStep={maxStep}
+										maxSwitchableStep={Math.min(
+											!data.forms?.fuhsdForm ||
+												!data.forms?.sfmunForm
+												? 2
+												: 1000,
+											maxStep
+										)}
 										onStepSwitch={(i) => {
 											if (stepHasChanges) {
 												setShowChangesNotSavedModal(
@@ -227,7 +240,7 @@ export default function AboutPage({
 									/>
 								)}
 								{step === 2 && (
-									<WaivierFormsSection
+									<WaiverFormsSection
 										data={data}
 										{...commonProps}
 									/>
@@ -425,8 +438,10 @@ export default function AboutPage({
 											</h3>
 											<div className="mt-2">
 												<p className="text-sm leading-5 text-gray-500">
-													Please save or discard your
-													changes first!
+													{step == 2 &&
+														"Please upload or delete your un-uploaded (gray) files first."}
+													{step !== 2 &&
+														"Please save or discard your changes first."}
 												</p>
 											</div>
 										</div>
