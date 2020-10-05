@@ -33,6 +33,9 @@ export default function VerticalSteps({
 	if (!maxSwitchableStep || maxSwitchableStep < currentStep) {
 		maxSwitchableStep = currentStep;
 	}
+	if (maxSwitchableStep === undefined) {
+		throw new Error("maxswitchablestep should not be undefined");
+	}
 	return (
 		<nav className={"pt-8"}>
 			<ul className="overflow-hidden">
@@ -86,7 +89,9 @@ export default function VerticalSteps({
 										(i <= currentStep
 											? "border-indigo-600 "
 											: "") +
-										(i < currentStep
+										(i < currentStep ||
+										(i < maxSwitchableStep &&
+											i !== currentStep)
 											? "bg-indigo-600 group-hover:bg-indigo-800 group-focus:bg-indigo-800 "
 											: "") +
 										(i > currentStep
@@ -97,7 +102,8 @@ export default function VerticalSteps({
 											: "")
 									}
 								>
-									{i < currentStep ? (
+									{i !== currentStep &&
+									i < maxSwitchableStep ? (
 										<Icons.Check className="w-5 h-5 text-white" />
 									) : i === currentStep ? (
 										<span className="h-2.5 w-2.5 bg-indigo-600 rounded-full"></span>

@@ -201,7 +201,7 @@ export default function AboutPage({
 													"TODO TODO TODO TODO TODO TODO", //TODO
 											},
 											{
-												title: "Confirm and Submit", // TODO change this to confirmation screen?
+												title: "You're Done!", // TODO change this to confirmation screen?
 												description:
 													"You're now registered for SFMUN! You may still edit or cancel your registration until the deadline.",
 											},

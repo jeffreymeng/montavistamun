@@ -272,39 +272,6 @@ export default function WaiverFormsSection({
 						</span>
 					</div>
 
-					{/*{fuhsdForm && (*/}
-					{/*	<div*/}
-					{/*		className={*/}
-					{/*			"mt-2 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md"*/}
-					{/*		}*/}
-					{/*	>*/}
-					{/*		<div className="text-center">*/}
-					{/*			<p className="mt-1 text-sm text-gray-600">*/}
-					{/*				Upload <b>{fuhsdForm?.name}</b>?*/}
-					{/*			</p>*/}
-					{/*			<div className={"mt-3"}>*/}
-					{/*				<button*/}
-					{/*					onClick={() => setFuhsdForm(null)}*/}
-					{/*					className={*/}
-					{/*						"py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white shadow-sm bg-red-600 hover:bg-red-500 focus:outline-none focus:shadow-outline-blue active:bg-red-600 transition duration-150 ease-in-out"*/}
-					{/*					}*/}
-					{/*				>*/}
-					{/*					Cancel*/}
-					{/*				</button>*/}
-					{/*				<button*/}
-					{/*					onClick={() =>*/}
-					{/*						console.log(fuhsdForm)*/}
-					{/*					}*/}
-					{/*					className={*/}
-					{/*						"ml-3 py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white shadow-sm bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline-blue active:bg-indigo-600 transition duration-150 ease-in-out"*/}
-					{/*					}*/}
-					{/*				>*/}
-					{/*					Upload*/}
-					{/*				</button>*/}
-					{/*			</div>*/}
-					{/*		</div>*/}
-					{/*	</div>*/}
-					{/*)}*/}
 					<FormUpload
 						file={fuhsdForm}
 						setFile={setFuhsdForm}
@@ -315,90 +282,6 @@ export default function WaiverFormsSection({
 						data={data}
 						handleUpdateData={handleUpdateData}
 					/>
-					{/*{!fuhsdForm && (*/}
-					{/*	<>*/}
-					{/*<Dropzone*/}
-					{/*	accept={"application/pdf"}*/}
-					{/*	maxFiles={1}*/}
-					{/*	multiple={false}*/}
-					{/*	maxSize={3 * 1000000}*/}
-					{/*	onDrop={(acceptedFiles) => {*/}
-					{/*		if (acceptedFiles.length >= 1) {*/}
-					{/*			setFuhsdForm(acceptedFiles[0]);*/}
-					{/*		}*/}
-					{/*	}}*/}
-					{/*>*/}
-					{/*	{({*/}
-					{/*		getRootProps,*/}
-					{/*		getInputProps,*/}
-					{/*		isDragActive,*/}
-					{/*		isDragReject,*/}
-					{/*	}) => (*/}
-					{/*		<section>*/}
-					{/*			<div*/}
-					{/*				{...getRootProps()}*/}
-					{/*				className={*/}
-					{/*					"mt-2 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md" +*/}
-					{/*					(isDragActive*/}
-					{/*						? " bg-gray-100"*/}
-					{/*						: "")*/}
-					{/*				}*/}
-					{/*			>*/}
-					{/*				<div className="text-center">*/}
-					{/*					<Icons.DocumentAddOutline className="mx-auto h-12 w-12 text-gray-400" />*/}
-					{/*					<input {...getInputProps()} />*/}
-					{/*					<p className="mt-1 text-sm text-gray-600">*/}
-					{/*						Drag and drop a file or*/}
-					{/*						click to select*/}
-					{/*					</p>*/}
-					{/*					<p*/}
-					{/*						className={*/}
-					{/*							"mt-1 text-xs " +*/}
-					{/*							(isDragReject*/}
-					{/*								? "text-red-500"*/}
-					{/*								: "text-gray-500")*/}
-					{/*						}*/}
-					{/*					>*/}
-					{/*						1 PDF up to 2.5 MB*/}
-					{/*					</p>*/}
-					{/*				</div>*/}
-					{/*			</div>*/}
-					{/*		</section>*/}
-					{/*	)}*/}
-					{/*</Dropzone>*/}
-					{/*		<p className="text-sm leading-5 py-2">*/}
-					{/*			If your PDF is larger than 2.5 MB, you'll need*/}
-					{/*			to use an{" "}*/}
-					{/*			<a*/}
-					{/*				href="https://pdfcompressor.com/"*/}
-					{/*				target={"_blank"}*/}
-					{/*				rel={"noopener noreferrer"}*/}
-					{/*				className="link"*/}
-					{/*			>*/}
-					{/*				online PDF compressor*/}
-					{/*			</a>*/}
-					{/*			.*/}
-					{/*		</p>*/}
-					{/*	</>*/}
-					{/*)}*/}
-					{/*{fuhsdForm && (*/}
-					{/*	<span className="inline-flex rounded-md shadow-sm mt-2">*/}
-					{/*		<button*/}
-					{/*			onClick={() => console.log(fuhsdForm)}*/}
-					{/*			className={*/}
-					{/*				"py-1 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white shadow-sm " +*/}
-					{/*				(fuhsdForm === null*/}
-					{/*					? "bg-indigo-300"*/}
-					{/*					: "bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline-blue active:bg-indigo-600 transition duration-150 ease-in-out")*/}
-					{/*			}*/}
-					{/*			disabled={fuhsdForm === null}*/}
-					{/*		>*/}
-					{/*			{fuhsdForm !== null*/}
-					{/*				? "Upload " + fuhsdForm?.name*/}
-					{/*				: "Nothing to Upload"}*/}
-					{/*		</button>*/}
-					{/*	</span>*/}
-					{/*)}*/}
 				</div>
 				<div className={"mt-4"}>
 					<h3 className="text-lg leading-6 font-medium text-gray-900">
@@ -668,7 +551,7 @@ function FormUpload({
 				// this loads an already uploaded image to firebase
 				load: (...props) => loadOrRestoreFile(firebase, user, ...props),
 			}}
-			labelIdle="Drag & Drop your files or click to Browse"
+			labelIdle="Drag a pdf here or click to browse"
 		/>
 	);
 }
