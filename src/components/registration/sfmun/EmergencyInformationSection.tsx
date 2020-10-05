@@ -106,9 +106,7 @@ export default function EmergencyInformationSection({
 				contactTwoPhone: Yup.string().test(
 					"is a phone number",
 					"This phone number doesn't look valid! Try using the format (xxx) xxx-xxxx.",
-					(v) =>
-						v === "" ||
-						(!!v && /^1?\d{10}$/.test(v.replace(/[^\d\w]/g, "")))
+					(v) => !v || /^1?\d{10}$/.test(v.replace(/[^\d\w]/g, ""))
 				),
 				householdMainLanguage: Yup.string()
 					.min(
@@ -228,7 +226,7 @@ export default function EmergencyInformationSection({
 					/>
 					<div className="col-span-6 mt-4">
 						<h3 className="text-lg leading-6 font-medium text-gray-900">
-							Second Emergency Contact
+							Second Emergency Contact (Optional)
 						</h3>
 					</div>
 					<Field

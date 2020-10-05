@@ -411,6 +411,7 @@ function FormUpload({
 			files={file}
 			onupdatefiles={setFile}
 			allowMultiple={false}
+			// If enabled, you also have to handle undoing delete off server
 			instantUpload={false}
 			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 			// @ts-ignore
