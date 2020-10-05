@@ -272,6 +272,7 @@ export default function AboutPage({
 										{...commonProps}
 									/>
 								)}
+								{/*	Step === 5 && If you'd like to help us improve your conference registration experience, please fill out this short survey: https://forms.gle/RFhr4TUbaWpSPDNX7 */}
 							</div>
 						</div>
 					</Main>
