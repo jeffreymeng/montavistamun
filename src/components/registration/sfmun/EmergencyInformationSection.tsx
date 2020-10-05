@@ -60,6 +60,13 @@ export default function EmergencyInformationSection({
 					contactTwoPhone:
 						data.contactTwoPhone &&
 						formatPhoneNumber(data.contactTwoPhone),
+					healthInsuranceZip:
+						data.healthInsuranceZip.length === 9
+							? `${data.healthInsuranceZip.substring(
+									0,
+									5
+							  )}-${data.healthInsuranceZip.substring(5, 9)}`
+							: data.healthInsuranceZip,
 				})
 			}
 			onHasChangesChange={(hasChanges: boolean) =>

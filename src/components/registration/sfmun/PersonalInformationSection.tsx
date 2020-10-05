@@ -48,6 +48,13 @@ export default function PersonalInformationSection({
 				handleUpdateData("personalInformation", {
 					...data,
 					phone: formatPhoneNumber(data.phone),
+					zip:
+						data.zip.length === 9
+							? `${data.zip.substring(0, 5)}-${data.zip.substring(
+									5,
+									9
+							  )}`
+							: data.zip,
 				})
 			}
 			onHasChangesChange={(hasChanges: boolean) =>
