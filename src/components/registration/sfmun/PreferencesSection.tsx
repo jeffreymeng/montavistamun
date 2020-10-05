@@ -57,7 +57,7 @@ export default function PreferencesSection({
 					"UNSC (Crisis)",
 					"Senate (Crisis)",
 				].every((el, i) => el === values.committee[i])
-					? "You haven't re-ordered any of the committees"
+					? "It doesn't look like you've re-ordered any of the committees."
 					: false
 			}
 		>

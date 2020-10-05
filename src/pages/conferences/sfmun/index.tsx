@@ -17,7 +17,7 @@ export default function SFMUNPage({
 				backgroundImage={data.headerImage}
 				title={"San Fransisco Model United Nations"}
 			>
-				January 1, 2020 to January 2, 2020
+				December 12, 2020 to December 13, 2020
 			</Header>
 			<Main>
 				<p>SFMUN Blurb Here</p>

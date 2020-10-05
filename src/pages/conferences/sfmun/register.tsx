@@ -214,7 +214,7 @@ export default function AboutPage({
 											{
 												title: "Committee Preferences",
 												description:
-													"Now comes the fun part!",
+													"Now comes the fun part! Look into the different committees offerred at SFMUN and indicate how much you like each one.",
 											},
 											{
 												title: "Donations",
