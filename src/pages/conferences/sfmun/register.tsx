@@ -150,7 +150,13 @@ export default function AboutPage({
 		setMaxStep,
 	};
 	return (
-		<Layout title={"SFMUN Registration"}>
+		<Layout
+			title={"SFMUN Registration"}
+			description={
+				"Register for SFMUN, MV Model UN's first conference of the year!"
+			}
+		>
+			{/*TODO*/}
 			<div className="min-h-ca">
 				<Header
 					title={"SFMUN Registration"}
