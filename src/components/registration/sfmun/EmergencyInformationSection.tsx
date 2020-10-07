@@ -53,6 +53,8 @@ export default function EmergencyInformationSection({
 	return (
 		<RegisterFormSection<EmergencyInformation>
 			data={data}
+			showBack
+			onBack={() => setStep(0)}
 			onSubmit={(data: EmergencyInformation) =>
 				handleUpdateData("emergencyInformation", {
 					...data,
@@ -176,10 +178,11 @@ export default function EmergencyInformationSection({
 				healthInsuranceState: "Loading...",
 				healthInsuranceZip: "Loading...",
 			}}
+			title={"Emergency Information"}
 		>
 			{({ errors, canEdit, touched, values }) => (
 				<>
-					<div className="col-span-6">
+					<div className="col-span-6 mt-4">
 						<h3 className="text-lg leading-6 font-medium text-gray-900">
 							First Emergency Contact
 						</h3>
@@ -200,6 +203,7 @@ export default function EmergencyInformationSection({
 						className="col-span-6 sm:col-span-2"
 						label={"Relationship to Participant"}
 						name={"contactOneRelationship"}
+						placeholder={"e.g. Mother, Father, Neighbor"}
 						disabled={!canEdit}
 						invalid={
 							errors.contactOneRelationship &&
@@ -252,6 +256,7 @@ export default function EmergencyInformationSection({
 						className="col-span-6 sm:col-span-2"
 						label={"Relationship to Participant"}
 						name={"contactTwoRelationship"}
+						placeholder={"e.g. Mother, Father, Neighbor"}
 						disabled={!canEdit}
 						invalid={
 							errors.contactTwoRelationship &&

@@ -6,6 +6,8 @@ import useRequireLogin from "../../../components/accounts/useRequireLogin";
 import FluidImage from "../../../components/FluidImage";
 import Header from "../../../components/Header";
 import { Layout, Main } from "../../../components/layout";
+import ConfirmationSection from "../../../components/registration/sfmun/ConfirmationSection";
+import DonationsSection from "../../../components/registration/sfmun/DonationsSection";
 import EmergencyInformationSection from "../../../components/registration/sfmun/EmergencyInformationSection";
 import PersonalInformationSection from "../../../components/registration/sfmun/PersonalInformationSection";
 import PreferencesSection from "../../../components/registration/sfmun/PreferencesSection";
@@ -47,16 +49,28 @@ export default function AboutPage({
 	) => {
 		if (!firebase) return;
 
-		await firebase
-			.firestore()
-			.collection("registration")
-			.doc(user?.uid)
-			.set(
-				{
-					[section]: validatedData,
-				},
-				{ merge: true }
-			);
+		await Promise.all([
+			firebase
+				.firestore()
+				.collection("registration")
+				.doc(user?.uid)
+				.set(
+					{
+						[section]: validatedData,
+					},
+					{ merge: true }
+				),
+			firebase
+				.firestore()
+				.collection("registration")
+				.doc(user?.uid)
+				.collection("history")
+				.add({
+					timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+					section,
+					newData: validatedData,
+				}),
+		]);
 		updateData({
 			[section]: validatedData,
 		});
@@ -147,11 +161,16 @@ export default function AboutPage({
 					step = 2;
 				} else if (!rawData.preferences) {
 					step = 3;
-				} else if (!rawData.donation) {
+				} else if (
+					!rawData.forms?.donation &&
+					!rawData.forms?.donationOptOut
+				) {
 					step = 4;
+				} else {
+					step = 5;
 				}
 				setStep(step);
-				setMaxStep(step);
+				setMaxStep(step === 5 ? 6 : step);
 
 				setLoadingData(false);
 				setStepHasChanges(false);
@@ -214,15 +233,15 @@ export default function AboutPage({
 											{
 												title: "Committee Preferences",
 												description:
-													"Now comes the fun part! Look into the different committees offerred at SFMUN and indicate how much you like each one.",
+													"Now comes the fun part! Look into the different committees offered at SFMUN and indicate how much you like each one.",
 											},
 											{
 												title: "Donations",
 												description:
-													"TODO TODO TODO TODO TODO TODO", //TODO
+													"To cover conference fees charged by SFMUN, we request a $25 donation, which will go directly towards making this conference possible.", //TODO
 											},
 											{
-												title: "You're Done!", // TODO change this to confirmation screen?
+												title: "You're Done!",
 												description:
 													"You're now registered for SFMUN! You may still edit or cancel your registration until the deadline.",
 											},
@@ -247,7 +266,11 @@ export default function AboutPage({
 									/>
 								</div>
 							</div>
-							<div className={"mt-10 mt-5 md:mt-0 md:col-span-2"}>
+							<div
+								className={
+									"mt-10 mt-5 md:mt-0 md:col-span-2 h-full"
+								}
+							>
 								{step === 0 && (
 									<PersonalInformationSection
 										data={data?.personalInformation}
@@ -272,7 +295,18 @@ export default function AboutPage({
 										{...commonProps}
 									/>
 								)}
-								{/*	Step === 5 && If you'd like to help us improve your conference registration experience, please fill out this short survey: https://forms.gle/RFhr4TUbaWpSPDNX7 */}
+								{step === 4 && (
+									<DonationsSection
+										data={data}
+										{...commonProps}
+									/>
+								)}
+								{step === 5 && (
+									<ConfirmationSection
+										data={data}
+										{...commonProps}
+									/>
+								)}
 							</div>
 						</div>
 					</Main>
@@ -312,7 +346,6 @@ export default function AboutPage({
 								>
 									<div>
 										<div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100">
-											{/* Heroicon name: check */}
 											<Icons.ExclamationOutline className="h-6 w-6 text-red-600" />
 										</div>
 										<div className="mt-3 text-center sm:mt-5">

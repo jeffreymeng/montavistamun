@@ -28,6 +28,8 @@ export default function PreferencesSection({
 		<RegisterFormSection<PreferencesInformation>
 			title={"Committee Preferences"}
 			data={data}
+			showBack
+			onBack={() => setStep(2)}
 			onSubmit={(data: PreferencesInformation) =>
 				handleUpdateData("preferences", {
 					...data,

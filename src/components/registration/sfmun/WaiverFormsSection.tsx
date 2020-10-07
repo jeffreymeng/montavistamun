@@ -2,30 +2,14 @@ import axios from "axios";
 // Import React FilePond
 import callbackBlobToBuffer from "blob-to-buffer";
 import cx from "classnames";
-import fileType from "file-type/browser";
-import FilePondPluginFileValidateSize from "filepond-plugin-file-validate-size";
-import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
-import FilePondPluginGetFile from "filepond-plugin-get-file";
-import "filepond-plugin-get-file/dist/filepond-plugin-get-file.min.css";
-// Import FilePond styles
-import "filepond/dist/filepond.min.css";
-import firebaseType from "firebase";
 import React, { useContext, useState } from "react";
-import {
-	File,
-	FilePond,
-	registerPlugin as registerFilepondPlugin,
-} from "react-filepond";
+import { File } from "react-filepond";
 import useFirebase from "../../../auth/useFirebase";
 import AuthContext from "../../../context/AuthContext";
 import "../../../css/file-upload.css";
+import FormUpload from "../FormUpload";
 import * as pdfform from "../PDFForm";
 
-registerFilepondPlugin(
-	FilePondPluginFileValidateSize,
-	FilePondPluginFileValidateType,
-	FilePondPluginGetFile
-);
 interface WaiverForms {
 	fuhsdForm: string;
 }
@@ -37,41 +21,7 @@ const blobToBuffer = (blob: Blob) =>
 			else res(buffer);
 		})
 	);
-const loadOrRestoreFile = (
-	firebase: firebaseType.app.App,
-	user: firebaseType.User,
-	fileName: string,
-	load: (f: string | Blob) => void,
-	error: (msg: string) => void,
-	progress: (isCalculable: boolean, current: number, max: number) => void,
-	abort: () => void,
-	request: any
-) => {
-	console.log("ytouwantmeloading");
-	console.log("Loading", fileName, !firebase);
-	if (!firebase) return;
-	// reset our progress
-	progress(false, 0, 1024);
 
-	// fetch the download URL from firebase
-	firebase
-		.storage()
-		.ref(`forms/sfmun/${user?.uid}/${fileName}`)
-		.getDownloadURL()
-		.then((url) => {
-			console.log(url);
-			axios.get(url).then((response) => {
-				const blob = new Blob([response.data]);
-				progress(true, blob.size, blob.size);
-
-				load(blob);
-			});
-		})
-		.catch((err) => {
-			error(err.message);
-			abort();
-		});
-};
 const isIOS = () => {
 	return (
 		[
@@ -119,7 +69,7 @@ export default function WaiverFormsSection({
 	handleUpdateData: (name: string, data: WaiverForms) => Promise<void>;
 	setStepHasChanges: (hasChanges: boolean) => void;
 	setStep: (step: number) => void;
-	setMaxStep: (maxStep: number) => void;
+	setMaxStep: (maxStep: number | ((old: number) => number)) => void;
 }) {
 	const firebase = useFirebase();
 
@@ -267,7 +217,7 @@ export default function WaiverFormsSection({
 	return (
 		<div className="mt-8 shadow rounded-md sm:overflow-hidden">
 			<div className={" px-4 bg-white sm:p-6 py-4"}>
-				<h3 className="text-lg leading-6 font-medium text-gray-900">
+				<h3 className="text-xl leading-6 font-bold text-gray-900">
 					Liability Forms
 				</h3>
 				<p className="mt-1 max-w-2xl text-sm leading-5 text-gray-500">
@@ -312,7 +262,6 @@ export default function WaiverFormsSection({
 						uploading={fuhsdUploading}
 						setUploading={setFuhsdUploading}
 						fieldName={"fuhsdForm"}
-						fileName={"sfmun-fuhsd-form.pdf"}
 						data={data}
 						handleUpdateData={handleUpdateData}
 					/>
@@ -354,18 +303,36 @@ export default function WaiverFormsSection({
 						uploading={sfmunUploading}
 						setUploading={setSfmunUploading}
 						fieldName={"sfmunForm"}
-						fileName={"sfmun-liability-form.pdf"}
 						data={data}
 						handleUpdateData={handleUpdateData}
 					/>
 				</div>
 			</div>
-			<div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
+			<div className="px-4 py-3 bg-gray-50 text-right sm:px-6 flex justify-between">
+				<span className="inline-flex rounded-md shadow-sm">
+					<button
+						type="button"
+						onClick={() => {
+							setStep(1);
+						}}
+						className={cx(
+							"py-2 px-4 border border-gray-300 rounded-md text-sm leading-5 font-medium text-gray-700",
+							fuhsdUploading ||
+								sfmunUploading ||
+								!data?.forms?.fuhsdForm ||
+								!data?.forms?.sfmunForm
+								? "bg-gray-300"
+								: "bg-white hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition duration-150 ease-in-out"
+						)}
+					>
+						Back
+					</button>
+				</span>
 				<button
 					type={"button"}
 					onClick={() => {
 						setStep(3);
-						setMaxStep(3);
+						setMaxStep((o) => Math.max(o, 3));
 					}}
 					disabled={
 						fuhsdUploading ||
@@ -391,200 +358,5 @@ export default function WaiverFormsSection({
 				</button>
 			</div>
 		</div>
-	);
-}
-function FormUpload({
-	file,
-	setFile,
-	uploading,
-	setUploading,
-	fieldName,
-	fileName,
-	data,
-	handleUpdateData,
-}: {
-	file?: File;
-	setFile: (file: File | null) => void;
-	uploading: boolean;
-	setUploading: (uploading: boolean) => void;
-	fieldName: string;
-	fileName: string;
-	data: Record<string, any>;
-	handleUpdateData: (name: string, data: WaiverForms) => Promise<void>;
-}) {
-	const firebase = useFirebase();
-	const { user } = useContext(AuthContext);
-	React.useEffect(() => {
-		if (!data || !firebase || !user) return;
-		if (!file && data.forms && data.forms[fieldName]) {
-			const fileName = data.forms[fieldName];
-			firebase
-				.storage()
-				.ref(`forms/sfmun/${user?.uid}/${fileName}`)
-				.getDownloadURL()
-				.then((url) => {
-					setFile([
-						{
-							source: fileName,
-
-							options: {
-								type: "limbo",
-								metadata: {
-									url,
-								},
-							},
-						},
-					]);
-				});
-		}
-	}, [data, firebase, user]);
-	return (
-		<FilePond
-			files={file}
-			onupdatefiles={setFile}
-			allowMultiple={false}
-			// If enabled, you also have to handle undoing delete off server
-			instantUpload={false}
-			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-			// @ts-ignore
-			maxFileSize={"3MB"}
-			allowDownloadByUrl={true}
-			fileValidateTypeDetectType={(source: Blob) =>
-				fileType.fromBlob(source).then((type) => type?.mime)
-			}
-			acceptedFileTypes={["application/pdf"]}
-			labelFileTypeNotAllowed={"That's not a PDF!"}
-			fileValidateTypeLabelExpectedTypes={"You may only upload pdfs"}
-			fileValidateTypeLabelExpectedTypesMap={{
-				"application/pdf": "pdf",
-			}}
-			server={{
-				process: (
-					inputName,
-					file,
-					metadata,
-					load,
-					onError,
-					updateProgress,
-					abort
-				) => {
-					if (!firebase) return;
-					setUploading(true);
-					const uploadTask = firebase
-						.storage()
-						.ref(`forms/sfmun/${user?.uid}/${fileName}`)
-						.put(file);
-
-					uploadTask.on(
-						"state_changed",
-						(snapshot) => {
-							updateProgress(
-								true,
-								snapshot.bytesTransferred,
-								snapshot.totalBytes
-							);
-
-							switch (snapshot.state) {
-								case firebase.storage.TaskState.PAUSED: // or 'paused'
-									console.log("Upload is paused");
-									break;
-								case firebase.storage.TaskState.RUNNING: // or 'running'
-									console.log("Upload is running");
-									break;
-							}
-						},
-						(error) => {
-							console.log(error);
-							setUploading(false);
-							switch ((error as { code?: string })?.code) {
-								case "storage/canceled":
-									console.log("Cancelled");
-									break;
-								case "storage/quota-exceeded":
-									onError(
-										"Sorry, but our server has run out of space for your file. Please email us at support@montavistamun.com and let us know."
-									);
-									break;
-								case "storage/invalid-checksum":
-									onError(
-										"It looks like this file got corrupted while we were uploading it. Please try again."
-									);
-									break;
-								case "storage/retry-limit-exceeded":
-									onError(
-										"The upload timed out. Please try again."
-									);
-									break;
-								default:
-									onError(
-										"An unknown error occurred. Please try again or email us at support@montavistamun.com"
-									);
-							}
-						},
-						() => {
-							// done!
-							handleUpdateData("forms", {
-								...(data?.forms || {}),
-								[fieldName]: fileName,
-							}).then(() => {
-								setUploading(false);
-								load(fileName);
-							});
-						}
-					);
-					return {
-						abort: () => {
-							// This function is entered if the user has tapped the cancel button
-							uploadTask.cancel();
-							setUploading(false);
-							handleUpdateData("forms", {
-								...(data?.forms || {}),
-								[fieldName]: "",
-							}).then(() => {
-								// Let FilePond know the request has been cancelled
-								abort();
-							});
-						},
-					};
-				},
-				restore: (...props) =>
-					loadOrRestoreFile(
-						firebase,
-						user,
-
-						...props
-					),
-				revert: (fileName, load, error) => {
-					if (!firebase) return;
-					setUploading(true);
-					firebase
-						.storage()
-						.ref(`forms/sfmun/${user?.uid}/${fileName}`)
-						.delete()
-						.then(() =>
-							handleUpdateData("forms", {
-								...(data?.forms || {}),
-								[fieldName]: "",
-							})
-						)
-						.then(() => {
-							load();
-							setUploading(false);
-						})
-						.catch((e) => {
-							setUploading(false);
-							switch (error.code) {
-								default:
-									error(
-										"An unknown error occurred while deleting your file."
-									);
-							}
-						});
-				},
-				// this loads an already uploaded image to firebase
-				load: (...props) => loadOrRestoreFile(firebase, user, ...props),
-			}}
-			labelIdle="Drag a pdf here or click to browse"
-		/>
 	);
 }

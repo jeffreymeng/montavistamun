@@ -1,6 +1,6 @@
 import * as Icons from "heroicons-react";
 import React from "react";
-
+// TODO: refactor into just the individual state for each step (checked, current, disabled)
 export default function VerticalSteps({
 	steps,
 	currentStep,

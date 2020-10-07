@@ -16,6 +16,8 @@ export default function RegisterFormSection<Fields>({
 	title,
 	subtitle,
 	children,
+	showBack,
+	onBack,
 	confirmContinue,
 }: {
 	data?: Fields;
@@ -26,6 +28,8 @@ export default function RegisterFormSection<Fields>({
 	loadingValues: Fields;
 	title?: string;
 	subtitle?: string;
+	onBack?: () => void;
+	showBack?: boolean;
 	/**
 	 * If provided, the function will be extecuted to check if a confirm save modal should be shown.
 	 * The modal will be shown if a string is returned, and the help text will be that string.
@@ -61,6 +65,8 @@ export default function RegisterFormSection<Fields>({
 						onContinue={onContinue}
 						onHasChangesChange={onHasChangesChange}
 						title={title}
+						showBack={showBack}
+						onBack={onBack}
 						subtitle={subtitle}
 						fields={children}
 						confirmContinue={confirmContinue}
@@ -94,10 +100,13 @@ function RegisterFormSectionInner<Fields>({
 	subtitle,
 	confirmContinue,
 	fields,
+	onBack,
+	showBack,
 }: {
 	loading: boolean;
 	confirmContinue?: (values: Fields) => false | string;
-
+	onBack?: () => void;
+	showBack?: boolean;
 	form: FormikProps<Fields>;
 	initialValues?: Fields;
 	onContinue: () => void;
@@ -156,7 +165,7 @@ function RegisterFormSectionInner<Fields>({
 			<div className="px-4 bg-white py-5 sm:p-6">
 				<div>
 					{title && (
-						<h3 className="text-lg leading-6 font-medium text-gray-900">
+						<h3 className="text-xl leading-6 font-bold text-gray-900">
 							{title}
 						</h3>
 					)}
@@ -179,18 +188,13 @@ function RegisterFormSectionInner<Fields>({
 				</div>
 			</div>
 
-			<div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
-				{/* If initial values exists and has at least one set value, then the user already has saved data. */}
-				{!hasChanges && initialValuesUnchanged && (
-					<span className="text-green-600 py-2 px-4 text-sm leading-5 font-medium">
-						<Icons.Check className={"inline-flex mr-1"} /> Saved
-					</span>
-				)}
-				{hasChanges && initialValuesUnchanged && (
-					<>
+			<div className="px-4 py-3 bg-gray-50 text-right sm:px-6 flex justify-between">
+				<div>
+					{showBack && (
 						<span className="inline-flex rounded-md shadow-sm">
 							<button
-								type="reset"
+								type="button"
+								onClick={() => onBack()}
 								disabled={!canSubmit}
 								className={cx(
 									"py-2 px-4 border border-gray-300 rounded-md text-sm leading-5 font-medium text-gray-700",
@@ -199,37 +203,63 @@ function RegisterFormSectionInner<Fields>({
 										: "bg-white hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition duration-150 ease-in-out"
 								)}
 							>
-								Discard Changes
+								Back
 							</button>
 						</span>
-					</>
-				)}
-				<button
-					type={"button"}
-					onClick={() => {
-						const confirmModalText =
-							confirmContinue && confirmContinue(values);
-						if (confirmModalText) {
-							setShowConfirm(true);
-							setConfirmText(confirmModalText);
-							return;
-						}
-						onSave();
-					}}
-					disabled={!canSubmit}
-					className={cx(
-						"ml-4 py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white shadow-sm",
-						!canSubmit
-							? "bg-indigo-300"
-							: "bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline-blue active:bg-indigo-600 transition duration-150 ease-in-out"
 					)}
-				>
-					{isSubmitting
-						? "Saving and Continuing..."
-						: hasChanges
-						? "Save and Continue"
-						: "Continue"}
-				</button>
+				</div>
+				<div>
+					{/* If initial values exists and has at least one set value, then the user already has saved data. */}
+					{!hasChanges && initialValuesUnchanged && (
+						<span className="text-green-600 py-2 px-4 text-sm leading-5 font-medium">
+							<Icons.Check className={"inline-flex mr-1"} /> Saved
+						</span>
+					)}
+					{hasChanges && initialValuesUnchanged && (
+						<>
+							<span className="inline-flex rounded-md shadow-sm">
+								<button
+									type="reset"
+									disabled={!canSubmit}
+									className={cx(
+										"py-2 px-4 border border-gray-300 rounded-md text-sm leading-5 font-medium text-gray-700",
+										!canSubmit
+											? "bg-gray-300"
+											: "bg-white hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition duration-150 ease-in-out"
+									)}
+								>
+									Discard Changes
+								</button>
+							</span>
+						</>
+					)}
+					<button
+						type={"button"}
+						onClick={() => {
+							const confirmModalText =
+								confirmContinue && confirmContinue(values);
+							if (confirmModalText) {
+								setShowConfirm(true);
+								setConfirmText(confirmModalText);
+								return;
+							}
+							onSave();
+						}}
+						disabled={!canSubmit}
+						className={cx(
+							"ml-4 py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white shadow-sm",
+							!canSubmit
+								? "bg-indigo-300"
+								: "bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline-blue active:bg-indigo-600 transition duration-150 ease-in-out"
+						)}
+					>
+						{isSubmitting
+							? "Saving and Continuing..."
+							: hasChanges
+							? "Save and Continue"
+							: "Continue"}
+					</button>
+				</div>
 			</div>
 
 			<ConfirmModal
