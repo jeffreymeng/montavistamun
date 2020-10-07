@@ -224,7 +224,8 @@ export default function AboutPage(): React.ReactElement {
 										},
 										{
 											subtitle: "Parent Night",
-											title: "Date Coming Soon",
+											title:
+												"Friday, October 9th, 6:00 PM",
 											primaryAction: {
 												title: "Join Meeting",
 												link: "/zoom",
