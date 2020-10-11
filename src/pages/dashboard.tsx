@@ -100,7 +100,65 @@ export default function AboutPage(): React.ReactElement {
 			nextUpdateTimeoutId && clearTimeout(nextUpdateTimeoutId);
 		};
 	}, []);
+	const cards: {
+		subtitle: string;
+		title: string;
+		primaryAction: {
+			title: string;
+			link: string;
+		};
+		secondaryAction: {
+			title: string;
+			link: string;
+		};
+		icon: string;
+	}[] = [
+		{
+			subtitle: "Next Member Meeting",
+			title: nextMeeting,
+			primaryAction: {
+				title: "Join Meeting",
+				link: "/zoom",
+			},
+			secondaryAction: {
+				title: "View All Events",
+				link: "/calendar",
+			},
+			icon: "UserGroup",
+		},
 
+		// {
+		// 	subtitle: "Registration Now Open",
+		// 	title:
+		// 		"Berkeley Model United Nations Conference (BMUN)",
+		// 	primaryAction: {
+		// 		title: "Register Now",
+		// 		link:
+		// 			"/conferences/bmun/register",
+		// 	},
+		// 	secondaryAction: {
+		// 		title: "Learn More",
+		// 		link: "/conferences/bmun",
+		// 	},
+		// 	icon: "Calendar",
+		// },
+		// {
+		// 	subtitle:
+		// 		"Conference You're Attending",
+		// 	title:
+		// 		"Santa Clara Valley Model United Nations (SCVMUN)",
+		// 	primaryAction: {
+		// 		title: "Update Registration",
+		// 		link:
+		// 			"/conferences/scvmun/register",
+		// 	},
+		// 	secondaryAction: {
+		// 		title: "Learn More",
+		// 		link: "/conferences/scvmun",
+		// 	},
+		// 	icon: "Calendar",
+		// },
+	];
 	return (
 		<Layout title={"Member Dashboard"}>
 			<div className="min-h-screen flex overflow-hidden bg-cool-gray-100">
@@ -196,90 +254,7 @@ export default function AboutPage(): React.ReactElement {
 								<div className="mt-2 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
 									{/* Card */}
 
-									{[
-										{
-											subtitle: "Next Member Meeting",
-											title: nextMeeting,
-											primaryAction: {
-												title: "Join Meeting",
-												link: "/zoom",
-											},
-											secondaryAction: {
-												title: "View All Events",
-												link: "/calendar",
-											},
-											icon: "UserGroup",
-										} as {
-											subtitle: string;
-											title: string;
-											primaryAction: {
-												title: string;
-												link: string;
-											};
-											secondaryAction: {
-												title: string;
-												link: string;
-											};
-											icon: string;
-										},
-										{
-											subtitle: "Parent Night",
-											title:
-												"Friday, October 9th, 6:00 PM",
-											primaryAction: {
-												title: "Join Meeting",
-												link: "/zoom",
-											},
-											secondaryAction: {
-												title: "View All Events",
-												link: "/calendar",
-											},
-											icon: "UserGroup",
-										} as {
-											subtitle: string;
-											title: string;
-											primaryAction: {
-												title: string;
-												link: string;
-											};
-											secondaryAction: {
-												title: string;
-												link: string;
-											};
-											icon: string;
-										},
-										// {+
-										// 	subtitle: "Registration Now Open",
-										// 	title:
-										// 		"Berkeley Model United Nations Conference (BMUN)",
-										// 	primaryAction: {
-										// 		title: "Register Now",
-										// 		link:
-										// 			"/conferences/bmun/register",
-										// 	},
-										// 	secondaryAction: {
-										// 		title: "Learn More",
-										// 		link: "/conferences/bmun",
-										// 	},
-										// 	icon: "Calendar",
-										// },
-										// {
-										// 	subtitle:
-										// 		"Conference You're Attending",
-										// 	title:
-										// 		"Santa Clara Valley Model United Nations (SCVMUN)",
-										// 	primaryAction: {
-										// 		title: "Update Registration",
-										// 		link:
-										// 			"/conferences/scvmun/register",
-										// 	},
-										// 	secondaryAction: {
-										// 		title: "Learn More",
-										// 		link: "/conferences/scvmun",
-										// 	},
-										// 	icon: "Calendar",
-										// },
-									].map((card) => (
+									{cards.map((card) => (
 										<div
 											key={card.title + card.subtitle}
 											className="bg-white overflow-hidden shadow rounded-lg flex flex-col justify-between"
