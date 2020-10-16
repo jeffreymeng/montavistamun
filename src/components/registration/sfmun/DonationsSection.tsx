@@ -106,6 +106,14 @@ export default function DonationsSection({
 							wish to do so,{" "}
 							<b>
 								please contact Mr. Hartford about your situation
+								(join his office hours{" "}
+								<a
+									href="https://fuhsd-org.zoom.us/j/95410126748?pwd=THQxTmhtYWRWSmlEOUIrTjhuY3Z4dz09"
+									className="link"
+								>
+									here
+								</a>
+								)
 							</b>
 							, then{" "}
 							<a
