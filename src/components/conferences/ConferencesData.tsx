@@ -1,18 +1,28 @@
 export default [
-	{
-		name: "Gunn Model UN Conference",
-		date: "October 24, 2020",
-		location: "Henry M. Gunn High School",
-		acronym: "gmunc",
-		text: `Gunn Model United Nations Conference is our first conference of the year, and the one where we always take the most novices too. Fun fact: Monta Vista won the Best Delegation award at GMUNC for 3 years in a row!`,
-	},
+	// {
+	// 	name: "Gunn Model UN Conference",
+	// 	date: "October 24, 2020",
+	// 	location: "Henry M. Gunn High School",
+	// 	acronym: "gmunc",
+	// 	text: `Gunn Model United Nations Conference is our first conference of the year, and the one where we always take the most novices too. Fun fact: Monta Vista won the Best Delegation award at GMUNC for 3 years in a row!`,
+	// },
 	{
 		name: "Stanford Model UN Conference",
 		date: "November 12, 2020 - November 15, 2020",
 		location: "Stanford University",
 		acronym: "smunc",
-		text: `Our second conference of the year, Stanford Model United Nations Conference is a competitive one mainly for veterans and varsity members. SMUNC is an intensive 3 days full of 5 committee sessions that will leave you exhausted, but happy that you had such a good time!
-`,
+		text: `Our easliest conference of the year, Stanford Model United Nations Conference is a competitive one mainly for veterans and varsity members. SMUNC is an intensive 3 days full of 5 committee sessions that will leave you exhausted, but happy that you had such a good time!`,
+		registration: "http://bit.ly/smunc2020app",
+		registrationText: "Application Now Open",
+	},
+	{
+		name: "Silicon Valley Model United Nations Conference",
+		date: "January 29, 2021 - January 30, 2021",
+		location: "Santa Teresa High School",
+		acronym: "scvmun",
+		text:
+			"Our second conference of the year will be the San Francisco Model United Nations conference, held by Lowell High School. Even if you don’t attend SMUNC, SFMUN is a great way to get started in Model UN. It’s a much less intense and more beginner-friendly conference, and it’s highly recommended for all delegates to attend.",
+		registration: "/conferences/sfmun/register",
 	},
 	{
 		name: "Silicon Valley Model United Nations Conference",

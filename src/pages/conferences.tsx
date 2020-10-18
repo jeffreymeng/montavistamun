@@ -1,12 +1,13 @@
-import { graphql } from "gatsby";
+import { graphql, navigate } from "gatsby";
 import { FluidObject } from "gatsby-image/index";
-import React from "react";
+import React, { useContext } from "react";
 import conferencesData from "../components/conferences/ConferencesData";
 import CTA from "../components/CTA";
 import FluidImage from "../components/FluidImage";
 import Header from "../components/Header";
 import HorizontalCard from "../components/HorizontalCard";
 import { Layout, Main } from "../components/layout";
+import AuthContext from "../context/AuthContext";
 export default function ConferencesPage({
 	data,
 }: {
@@ -28,6 +29,7 @@ export default function ConferencesPage({
 		edge.node.name,
 		{ childImageSharp: edge.node.image },
 	]);
+	const { user } = useContext(AuthContext);
 	return (
 		<Layout
 			title={"Conferences"}
@@ -53,7 +55,18 @@ export default function ConferencesPage({
 					most complete MUN experience possible.
 				</p>
 				{conferencesData.map(
-					({ name, date, location, acronym, text }, i) => {
+					(
+						{
+							name,
+							date,
+							location,
+							acronym,
+							text,
+							registration,
+							registrationText,
+						},
+						i
+					) => {
 						return (
 							<HorizontalCard
 								key={i}
@@ -66,12 +79,22 @@ export default function ConferencesPage({
 											acronym.toLowerCase()
 									) || [null, images[0][1]])[1]
 								}
-								// buttonText={
-								// 	i === 2
-								// 		? "Registration Now Open: Login to Continue"
-								// 		: undefined
-								// }
-								// TODO: when a conference comes up
+								onButtonClick={() => {
+									if (!registration) return;
+									if (registration.indexOf("/") === 0) {
+										navigate(registration);
+									} else {
+										window.location.href = registration;
+									}
+								}}
+								buttonText={
+									registration
+										? `${
+												registrationText ||
+												"Registration Now Open"
+										  }${user ? "" : ": Login to Continue"}`
+										: undefined
+								}
 							>
 								{text}
 							</HorizontalCard>
