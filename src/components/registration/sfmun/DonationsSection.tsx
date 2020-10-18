@@ -141,7 +141,7 @@ export default function DonationsSection({
 						<ul className="list-decimal ml-8">
 							<li>
 								Head to Monta Vista’s online Student Store and
-								find our conference donations{" "}
+								find our sfmun conference donation{" "}
 								<a
 									target={"_blank"}
 									rel={"noopener noreferrer"}
@@ -158,15 +158,15 @@ export default function DonationsSection({
 							<li>
 								Make sure you save a copy of your receipt
 								(screenshot or print &gt; save as PDF the
-								download page).
+								confirmation page).
 							</li>
 							<li>Upload your receipt below.</li>
 						</ul>
 						<p className={"mt-4"}>
 							Unfortunately, we are unable to process refunds with
-							the online system. Please make sure you confirm you
-							can attend the conference (
-							<b>December 12–13, 2020</b>) before donating!
+							the online system. Please confirm you can attend the
+							conference (<b>December 12–13, 2020</b>) before
+							donating!
 						</p>
 
 						<div className={"mt-4"}>

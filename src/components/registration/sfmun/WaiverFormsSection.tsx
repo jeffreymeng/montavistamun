@@ -12,6 +12,7 @@ import * as pdfform from "../PDFForm";
 
 interface WaiverForms {
 	fuhsdForm: string;
+	sfmunForm: string;
 }
 // make promise based
 const blobToBuffer = (blob: Blob) =>
@@ -50,7 +51,6 @@ const openOrDownload = (
 		}
 	}
 	if (form === null || isIOS()) {
-		console.log(name, form, unfilledPath);
 		window.location.href = unfilledPath;
 	} else {
 		return pdfform.openOrDownload(form, "", true, name);
@@ -66,7 +66,10 @@ export default function WaiverFormsSection({
 	setMaxStep,
 }: {
 	data: Record<string, any>;
-	handleUpdateData: (name: string, data: WaiverForms) => Promise<void>;
+	handleUpdateData: (
+		name: string,
+		data: WaiverForms | ((oldData: WaiverForms) => WaiverForms)
+	) => Promise<void>;
 	setStepHasChanges: (hasChanges: boolean) => void;
 	setStep: (step: number) => void;
 	setMaxStep: (maxStep: number | ((old: number) => number)) => void;

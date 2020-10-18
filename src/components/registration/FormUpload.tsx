@@ -37,14 +37,12 @@ const loadOrRestoreFile = (
 	if (!firebase || !user) return;
 	// reset our progress
 	progress(false, 0, 1024);
-	console.log(fileName);
 	// fetch the download URL from firebase
 	firebase
 		.storage()
 		.ref(`forms/sfmun/${user?.uid}/${fieldName}/${fileName}`)
 		.getDownloadURL()
 		.then((url) => {
-			console.log(url);
 			return axios.get(url, {
 				responseType: "arraybuffer",
 				headers: {
@@ -89,12 +87,14 @@ export default function FormUpload<Data>({
 	fileValidateTypeLabelExpectedTypes?: string;
 	labelIdle?: string;
 	data: Record<string, any>;
-	handleUpdateData: (name: string, data: Data) => Promise<void>;
+	handleUpdateData: (
+		name: string,
+		data: Data | ((oldData: Data) => Data)
+	) => Promise<void>;
 }) {
 	const firebase = useFirebase();
 	const { user } = useContext(AuthContext);
 	React.useEffect(() => {
-		console.log(file);
 		// if (file && file[0] && file[0].file) {
 		// 	const reader = new FileReader();
 		// 	console.log(file[0].file);
@@ -169,9 +169,10 @@ export default function FormUpload<Data>({
 					abort
 				) => {
 					if (!firebase) return;
-					setUploading(true);
+
 					const fileName = file.name;
-					console.log(file, file.name, file.type);
+					setUploading(true);
+					// console.log(file, file.name, file.type);
 					const uploadTask = firebase
 						.storage()
 						.ref(
@@ -231,6 +232,7 @@ export default function FormUpload<Data>({
 								...(data?.forms || {}),
 								[fieldName]: fileName,
 							}).then(() => {
+								// console.log("DONE", fieldName, fileName);
 								setUploading(false);
 								load(fileName);
 							});
@@ -264,10 +266,10 @@ export default function FormUpload<Data>({
 						)
 						.delete()
 						.then(() =>
-							handleUpdateData("forms", {
-								...(data?.forms || {}),
+							handleUpdateData("forms", (oldData) => ({
+								...(oldData?.forms || {}),
 								[fieldName]: "",
-							})
+							}))
 						)
 						.then(() => {
 							load();

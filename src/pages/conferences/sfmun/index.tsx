@@ -1,4 +1,4 @@
-import { graphql } from "gatsby";
+import { graphql, Link } from "gatsby";
 import React from "react";
 import FluidImage from "../../../components/FluidImage";
 import Header from "../../../components/Header";
@@ -20,9 +20,14 @@ export default function SFMUNPage({
 				December 12, 2020 to December 13, 2020
 			</Header>
 			<Main>
-				<p>SFMUN Blurb Here</p>
+				{/*<p>SFMUN Blurb Here</p>*/}
+				{/*<p>*/}
+				{/*	Also schedule, links to websites, important documents, etc.*/}
+				{/*</p>*/}
 				<p>
-					Also schedule, links to websites, important documents, etc.
+					<Link to={"/conferences/sfmun/register"} className="link">
+						Register Here
+					</Link>
 				</p>
 			</Main>
 		</Layout>

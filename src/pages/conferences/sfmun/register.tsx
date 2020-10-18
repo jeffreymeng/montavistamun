@@ -43,12 +43,29 @@ export default function AboutPage({
 	const [showChangesNotSavedModal, setShowChangesNotSavedModal] = useState(
 		false
 	);
+	function isFunction(
+		functionToCheck: any
+	): functionToCheck is (
+		oldData: Record<string, any>
+	) => Record<string, any> {
+		return (
+			functionToCheck &&
+			{}.toString.call(functionToCheck) === "[object Function]"
+		);
+	}
 	const handleUpdateData = async (
 		section: string,
-		validatedData: Record<string, any>
+		validatedDataOrFunction:
+			| Record<string, any>
+			| ((oldData: Record<string, any>) => Record<string, any>)
 	) => {
 		if (!firebase) return;
-
+		let validatedData: Record<string, any>;
+		if (isFunction(validatedDataOrFunction)) {
+			validatedData = validatedDataOrFunction(data);
+		} else {
+			validatedData = validatedDataOrFunction;
+		}
 		await Promise.all([
 			firebase
 				.firestore()

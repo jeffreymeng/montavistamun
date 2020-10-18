@@ -124,7 +124,6 @@ function RegisterFormSectionInner<Fields>({
 		const newHasChanges =
 			!!initialValues && !compareObjectValues(values, initialValues);
 		if (newHasChanges !== hasChanges) {
-			console.log(newHasChanges, initialValues, values);
 			setHasChanges(newHasChanges);
 			onHasChangesChange(newHasChanges);
 		}
