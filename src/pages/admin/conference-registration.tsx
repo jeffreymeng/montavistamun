@@ -14,7 +14,16 @@ export default function AdminLogPage(): React.ReactElement {
 		verified: userVerified,
 		admin: userAdmin,
 	} = React.useContext(AuthContext);
-	const [data, setData] = React.useState<{ id: string; data: any }[]>([]);
+	const [data, setData] = React.useState<
+		{
+			id: string;
+			data: any;
+			userData: {
+				id: string;
+				data: UserData;
+			};
+		}[]
+	>([]);
 	const [usersData, setUsersData] = React.useState<UserData[]>([]);
 	React.useEffect(() => {
 		if (!firebase) return;
@@ -60,32 +69,58 @@ export default function AdminLogPage(): React.ReactElement {
 		return () => unsubscribe();
 	}, [firebase]);
 	const statistics = React.useMemo(() => {
-		const count = {
-			personalInformation: 0,
-			emergencyInformation: 0,
-			liabilityForms: 0,
-			preferences: 0,
-			registered: 0,
+		const temp: {
+			personalInformation: string[];
+			emergencyInformation: string[];
+			liabilityForms: string[];
+			preferences: string[];
+			registered: string[];
+		} = {
+			personalInformation: [],
+			emergencyInformation: [],
+			liabilityForms: [],
+			preferences: [],
+			registered: [],
 		};
 		data.forEach((user) => {
 			console.log(user);
 
 			if (user.data.confirmation?.smuncConfirmed) {
-				count.registered++;
+				temp.registered.push(
+					user.userData.data.firstName +
+						" " +
+						user.userData.data.lastName
+				);
 			} else if (user.data.preferences) {
-				count.preferences++;
+				temp.preferences.push(
+					user.userData.data.firstName +
+						" " +
+						user.userData.data.lastName
+				);
 			} else if (user.data.forms) {
-				count.liabilityForms++;
+				temp.liabilityForms.push(
+					user.userData.data.firstName +
+						" " +
+						user.userData.data.lastName
+				);
 			} else if (user.data.emergencyInformation) {
-				count.emergencyInformation++;
+				temp.emergencyInformation.push(
+					user.userData.data.firstName +
+						" " +
+						user.userData.data.lastName
+				);
 			} else if (user.data.personalInformation) {
-				count.personalInformation++;
+				temp.personalInformation.push(
+					user.userData.data.firstName +
+						" " +
+						user.userData.data.lastName
+				);
 			} else {
 				// this should never happen
 				console.log("User with no registration data", user);
 			}
 		});
-		return count;
+		return temp;
 	}, [data]);
 	return (
 		<AdminLayout title={"Conference Registration Statistics"}>
@@ -104,33 +139,40 @@ export default function AdminLogPage(): React.ReactElement {
 			</h3>
 			<p className={"text-gray-700 mt-1"}>
 				Each step is mutually exclusive. A user will not be counted
-				twice.
+				twice. You can hover over a step for a few seconds to see the
+				names of the users on that step.
 			</p>
 			<ul className={"list-disc ml-5 mt-2"}>
-				<li>
-					{statistics.personalInformation} user
-					{statistics.personalInformation !== 1 ? "s have " : " has "}
+				<li title={statistics.personalInformation.join(", ")}>
+					{statistics.personalInformation.length} user
+					{statistics.personalInformation.length !== 1
+						? "s have "
+						: " has "}
 					just finished entering their personal information.
 				</li>
-				<li>
-					{statistics.emergencyInformation} user
-					{statistics.emergencyInformation !== 1 ? "s have" : " has "}
+				<li title={statistics.emergencyInformation.join(", ")}>
+					{statistics.emergencyInformation.length} user
+					{statistics.emergencyInformation.length !== 1
+						? "s have "
+						: " has "}
 					just finished entering their emergency contact information.
 				</li>
-				<li>
-					{statistics.liabilityForms} user
-					{statistics.liabilityForms !== 1 ? "s have" : " has "} just
-					finished submitting their liability forms.
+				<li title={statistics.liabilityForms.join(", ")}>
+					{statistics.liabilityForms.length} user
+					{statistics.liabilityForms.length !== 1
+						? "s have "
+						: " has "}
+					just finished submitting their liability forms.
 				</li>
-				<li>
-					{statistics.preferences} user
-					{statistics.preferences !== 1 ? "s have" : " has "} just
-					finished entering their preferences.
+				<li title={statistics.preferences.join(", ")}>
+					{statistics.preferences.length} user
+					{statistics.preferences.length !== 1 ? "s have " : " has "}
+					just finished entering their preferences.
 				</li>
-				<li>
-					{statistics.registered} user
-					{statistics.registered !== 1 ? "s have" : " has "} finished
-					registering for SFMUN.
+				<li title={statistics.registered.join(", ")}>
+					{statistics.registered.length} user
+					{statistics.registered.length !== 1 ? "s have " : " has "}
+					finished registering for SFMUN.
 				</li>
 			</ul>
 		</AdminLayout>
