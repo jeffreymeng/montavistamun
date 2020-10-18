@@ -13,4 +13,7 @@ export default interface UserData {
 	admin?: boolean;
 	verified?: boolean;
 	disabled?: boolean;
+
+	sfmunRegistered?: boolean;
+	sfmunRegistrationTimestamp?: firebaseType.firestore.Timestamp;
 }

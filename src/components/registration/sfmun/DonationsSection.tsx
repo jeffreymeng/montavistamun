@@ -240,7 +240,7 @@ export default function DonationsSection({
 									.doc(user?.uid)
 									.update({
 										sfmunRegistered: true,
-										timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+										sfmunRegistrationTimestamp: firebase.firestore.FieldValue.serverTimestamp(),
 									});
 							})
 							.then(() => {

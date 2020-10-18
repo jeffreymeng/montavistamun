@@ -33,6 +33,11 @@ export default function AdminHomePage(): React.ReactElement {
 					Edit Awards
 				</Link>
 			</p>
+			<p>
+				<Link to={"/admin/conference-registration"} className={"link"}>
+					Live Conference Registration Statistics
+				</Link>
+			</p>
 		</AdminLayout>
 	);
 }

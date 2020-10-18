@@ -260,7 +260,11 @@ export default function MembersPage(): React.ReactElement {
 		});
 		setShowConfirmModal(true);
 	};
-	const tableHeaders = ["Basic Information", "Permissions"];
+	const tableHeaders = [
+		"Basic Information",
+		"SFMUN Registration",
+		"Permissions",
+	];
 	const [showDisabled, setShowDisabled] = useState(false);
 	return (
 		<AdminLayout title={"Members"}>
@@ -573,14 +577,23 @@ export default function MembersPage(): React.ReactElement {
 													</div>
 												</div>
 											</td>
-											{/*<td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">*/}
-											{/*	<div className="text-sm leading-5 text-yellow-800">*/}
-											{/*		Registered, Not Paid*/}
-											{/*	</div>*/}
-											{/*	<div className="text-sm leading-5 text-gray-500">*/}
-											{/*		ECOSOC (partner: John Doe)*/}
-											{/*	</div>*/}
-											{/*</td>*/}
+											<td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+												<div
+													className={
+														"text-sm leading-5 " +
+														(data.sfmunRegistered
+															? "text-green-800"
+															: "text-yellow-800")
+													}
+												>
+													{data.sfmunRegistered
+														? "Registered"
+														: "Not Registered"}
+												</div>
+												{/*<div className="text-sm leading-5 text-gray-500">*/}
+												{/*	ECOSOC (partner: John Doe)*/}
+												{/*</div>*/}
+											</td>
 											<td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
 												<div
 													className={
@@ -619,7 +632,7 @@ export default function MembersPage(): React.ReactElement {
 											{/*	</Link>*/}
 											{/*</td>*/}
 										</tr>
-									))}{" "}
+									))}
 							</tbody>
 						</table>
 						<div className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
