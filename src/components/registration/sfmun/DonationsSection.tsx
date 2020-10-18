@@ -142,7 +142,7 @@ export default function DonationsSection({
 							<li>
 								Head to Monta Vista’s online Student Store and
 								find our conference donations{" "}
-								<a href={"#"} className={"link"}>
+								<a href={"http://montavistahs.3dcartstores.com/San-Francisco-Model-UN-Conference-Virtual-Conference_p_123.html"} className={"link"}>
 									here
 								</a>
 								.
