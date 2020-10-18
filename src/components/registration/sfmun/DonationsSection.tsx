@@ -142,7 +142,14 @@ export default function DonationsSection({
 							<li>
 								Head to Monta Vista’s online Student Store and
 								find our conference donations{" "}
-								<a href={"http://montavistahs.3dcartstores.com/San-Francisco-Model-UN-Conference-Virtual-Conference_p_123.html"} className={"link"}>
+								<a
+									target={"_blank"}
+									rel={"noopener noreferrer"}
+									href={
+										"http://montavistahs.3dcartstores.com/San-Francisco-Model-UN-Conference-Virtual-Conference_p_123.html"
+									}
+									className={"link"}
+								>
 									here
 								</a>
 								.
@@ -224,11 +231,23 @@ export default function DonationsSection({
 						setSubmitting(true);
 						handleUpdateData("confirm", {
 							sfmunConfirmed: true,
-						}).then(() => {
-							setSubmitting(false);
-							setStep(5);
-							setMaxStep((o) => Math.max(6)); // maxStep is one higher to check it
-						});
+						})
+							.then(() => {
+								if (!firebase) return;
+								return firebase
+									.firestore()
+									.collection("users")
+									.doc(user?.uid)
+									.update({
+										sfmunRegistered: true,
+										timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+									});
+							})
+							.then(() => {
+								setSubmitting(false);
+								setStep(5);
+								setMaxStep((o) => Math.max(6)); // maxStep is one higher to check it
+							});
 					}}
 					disabled={
 						uploading ||
