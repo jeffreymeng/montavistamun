@@ -138,36 +138,33 @@ export default function AdminLogPage(): React.ReactElement {
 				Registration Progress
 			</h3>
 			<p className={"text-gray-700 mt-1"}>
-				Each step is mutually exclusive. A user will not be counted
-				twice. You can hover over a step for a few seconds to see the
-				names of the users on that step.
+				You can hover over a step for a few seconds to see the names of
+				the users on that step.
 			</p>
 			<ul className={"list-disc ml-5 mt-2"}>
 				<li title={statistics.personalInformation.join(", ")}>
 					{statistics.personalInformation.length} user
 					{statistics.personalInformation.length !== 1
-						? "s have "
-						: " has "}
-					just finished entering their personal information.
+						? "s are "
+						: " is "}
+					on the emergency information step.
 				</li>
 				<li title={statistics.emergencyInformation.join(", ")}>
 					{statistics.emergencyInformation.length} user
 					{statistics.emergencyInformation.length !== 1
-						? "s have "
-						: " has "}
-					just finished entering their emergency contact information.
+						? "s ate "
+						: " is "}
+					on the liability forms step.
 				</li>
 				<li title={statistics.liabilityForms.join(", ")}>
 					{statistics.liabilityForms.length} user
-					{statistics.liabilityForms.length !== 1
-						? "s have "
-						: " has "}
-					just finished submitting their liability forms.
+					{statistics.liabilityForms.length !== 1 ? "s are " : " is "}
+					on the preferences step.
 				</li>
 				<li title={statistics.preferences.join(", ")}>
 					{statistics.preferences.length} user
-					{statistics.preferences.length !== 1 ? "s have " : " has "}
-					just finished entering their preferences.
+					{statistics.preferences.length !== 1 ? "s are " : " is "}
+					on the donations step.
 				</li>
 				<li title={statistics.registered.join(", ")}>
 					{statistics.registered.length} user
