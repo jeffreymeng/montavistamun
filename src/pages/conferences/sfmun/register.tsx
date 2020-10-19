@@ -30,19 +30,6 @@ export default function AboutPage({
 	const [stepHasChanges, setStepHasChanges] = useState(false);
 
 	const [maxStep, setMaxStep] = useState(0);
-	const [data, updateData] = React.useReducer(
-		(state: Record<string, any>, action: Record<string, any>) => {
-			return {
-				...state,
-				...action,
-			};
-		},
-		{}
-	);
-	const [loadingData, setLoadingData] = useState(true);
-	const [showChangesNotSavedModal, setShowChangesNotSavedModal] = useState(
-		false
-	);
 	function isFunction(
 		functionToCheck: any
 	): functionToCheck is (
@@ -53,45 +40,80 @@ export default function AboutPage({
 			{}.toString.call(functionToCheck) === "[object Function]"
 		);
 	}
-	const handleUpdateData = async (
-		section: string,
-		validatedDataOrFunction:
-			| Record<string, any>
-			| ((oldData: Record<string, any>) => Record<string, any>)
-	) => {
-		if (!firebase) return;
-		let validatedData: Record<string, any>;
-		if (isFunction(validatedDataOrFunction)) {
-			validatedData = validatedDataOrFunction(data);
-		} else {
-			validatedData = validatedDataOrFunction;
-		}
-		await Promise.all([
-			firebase
-				.firestore()
-				.collection("registration")
-				.doc(user?.uid)
-				.set(
-					{
-						[section]: validatedData,
-					},
-					{ merge: true }
-				),
-			firebase
-				.firestore()
-				.collection("registration")
-				.doc(user?.uid)
-				.collection("history")
-				.add({
-					timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-					section,
-					newData: validatedData,
-				}),
-		]);
-		updateData({
-			[section]: validatedData,
-		});
-	};
+	const [data, updateData] = React.useReducer(
+		(
+			state: Record<string, any>,
+			action:
+				| Record<string, any>
+				| ((legacyData: Record<string, any>) => Record<string, any>)
+		) => {
+			let updates;
+			if (isFunction(action)) {
+				updates = action(state);
+			} else {
+				updates = action;
+			}
+
+			return {
+				...state,
+				...updates,
+			};
+		},
+		{}
+	);
+	const [loadingData, setLoadingData] = useState(true);
+	const [showChangesNotSavedModal, setShowChangesNotSavedModal] = useState(
+		false
+	);
+
+	/**
+	 * Updates the data with a section. Dot notation up to one deep is supported (so max one dot in the section).
+	 */
+	const handleUpdateData = React.useCallback(
+		async (section: string, validatedData: any) => {
+			if (!firebase) return;
+
+			await Promise.all([
+				firebase
+					.firestore()
+					.collection("registration")
+					.doc(user?.uid)
+					.set(
+						{
+							[section.split(".")[0]]:
+								section.split(".").length > 1
+									? { [section.split(".")[1]]: validatedData }
+									: validatedData,
+						},
+						{ merge: true }
+					),
+				firebase
+					.firestore()
+					.collection("registration")
+					.doc(user?.uid)
+					.collection("history")
+					.add({
+						timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+						section,
+						newData: validatedData,
+					}),
+			]);
+			updateData((current) => {
+				if (section.indexOf(".") > -1) {
+					const sectionFragments = section.split(".");
+					return {
+						[sectionFragments[0]]: {
+							...current[sectionFragments[0]],
+							[sectionFragments[1]]: validatedData,
+						},
+					};
+				} else {
+					return { [section]: validatedData };
+				}
+			});
+		},
+		[firebase, data, updateData]
+	);
 	React.useEffect(() => {
 		const handler = (e: BeforeUnloadEvent) => {
 			e.returnValue = "You have unsaved changes!";
@@ -207,7 +229,6 @@ export default function AboutPage({
 				"Register for SFMUN, MV Model UN's first conference of the year!"
 			}
 		>
-			{/*TODO*/}
 			<div className="min-h-ca">
 				<Header
 					title={"SFMUN Registration"}

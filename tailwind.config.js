@@ -34,6 +34,9 @@ module.exports = {
 				"resize-x": "col-resize",
 				"resize-y": "row-resize",
 			},
+			listStyleType: {
+				circle: "circle",
+			},
 		},
 		customForms: (theme) => ({
 			default: {

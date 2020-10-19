@@ -139,8 +139,20 @@ function RegisterFormSectionInner<Fields>({
 			// @ts-ignore
 			return value !== null && value !== undefined && value !== "";
 		});
-	const onSave = React.useCallback(() => {
-		if (!hasChanges) {
+	const onSave = React.useCallback(async () => {
+		// there are no changes and at least some of the initial values (data) is not empty
+		const formIsValid = await validateForm()
+			.then((errors) => {
+				const isValid = Object.keys(errors).length === 0;
+				if (isValid) {
+					return Promise.resolve();
+				} else {
+					return Promise.reject("invalid form");
+				}
+			})
+			.then(() => true)
+			.catch(() => false);
+		if (!hasChanges && formIsValid) {
 			onContinue();
 		} else {
 			submitForm()

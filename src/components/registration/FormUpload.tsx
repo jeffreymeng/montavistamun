@@ -87,10 +87,7 @@ export default function FormUpload<Data>({
 	fileValidateTypeLabelExpectedTypes?: string;
 	labelIdle?: string;
 	data: Record<string, any>;
-	handleUpdateData: (
-		name: string,
-		data: Data | ((oldData: Data) => Data)
-	) => Promise<void>;
+	handleUpdateData: (name: string, data: any) => Promise<void>;
 }) {
 	const firebase = useFirebase();
 	const { user } = useContext(AuthContext);
@@ -228,10 +225,10 @@ export default function FormUpload<Data>({
 						},
 						() => {
 							// done!
-							handleUpdateData("forms", {
-								...(data?.forms || {}),
-								[fieldName]: fileName,
-							}).then(() => {
+							handleUpdateData(
+								"forms." + fieldName,
+								fileName
+							).then(() => {
 								// console.log("DONE", fieldName, fileName);
 								setUploading(false);
 								load(fileName);
@@ -243,13 +240,12 @@ export default function FormUpload<Data>({
 							// This function is entered if the user has tapped the cancel button
 							uploadTask.cancel();
 							setUploading(false);
-							handleUpdateData("forms", {
-								...(data?.forms || {}),
-								[fieldName]: "",
-							}).then(() => {
-								// Let FilePond know the request has been cancelled
-								abort();
-							});
+							handleUpdateData("forms." + fieldName, "").then(
+								() => {
+									// Let FilePond know the request has been cancelled
+									abort();
+								}
+							);
 						},
 					};
 				},
@@ -265,12 +261,7 @@ export default function FormUpload<Data>({
 							`forms/sfmun/${user?.uid}/${fieldName}/${fileName}`
 						)
 						.delete()
-						.then(() =>
-							handleUpdateData("forms", (oldData) => ({
-								...(oldData?.forms || {}),
-								[fieldName]: "",
-							}))
-						)
+						.then(() => handleUpdateData("forms." + fieldName, ""))
 						.then(() => {
 							load();
 							setUploading(false);
