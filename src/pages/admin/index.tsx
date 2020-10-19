@@ -35,7 +35,7 @@ export default function AdminHomePage(): React.ReactElement {
 			</p>
 			<p>
 				<Link to={"/admin/conference-registration"} className={"link"}>
-					Live Conference Registration Statistics
+					Conference Registration
 				</Link>
 			</p>
 		</AdminLayout>

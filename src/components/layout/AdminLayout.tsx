@@ -24,7 +24,7 @@ const AdminLinks: TypedPageOrDropdown[] = [
 	},
 	{
 		type: "page",
-		name: "Conference Registration Statistics",
+		name: "Conference Registration",
 		path: "/admin/conference-registration",
 		icon: <Icons.PencilAltOutline />,
 	},
