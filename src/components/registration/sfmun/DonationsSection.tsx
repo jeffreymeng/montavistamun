@@ -270,7 +270,7 @@ export default function DonationsSection({
 						? "Uploading..."
 						: !data?.forms?.donation && !data?.forms?.donationOptOut
 						? "Upload all forms to finish registration"
-						: !data.confirm?.smuncConfirmed
+						: !data.confirm?.sfmunConfirmed
 						? "Finish Registration"
 						: "Continue"}
 				</button>
