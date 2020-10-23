@@ -440,8 +440,8 @@ export default function AdminLogPage(): React.ReactElement {
 					>
 						{/* Allow user to show all steps unless every step is already shown */}
 						{expandStatistics.every((e) => e)
-							? "Hide All Steps"
-							: "Show All Steps"}
+							? "Collapse All Steps"
+							: "Expand All Steps"}
 					</button>
 				)}
 			</p>

@@ -188,7 +188,7 @@ export default function AboutPage({
 					},
 				});
 				const rawData = snapshot.data();
-				let step = 0;
+				let step;
 				if (!rawData?.personalInformation) {
 					step = 0;
 				} else if (!rawData.emergencyInformation) {
@@ -209,6 +209,7 @@ export default function AboutPage({
 					step = 5;
 				}
 				setStep(step);
+
 				setMaxStep(step === 5 ? 6 : step);
 
 				setLoadingData(false);
