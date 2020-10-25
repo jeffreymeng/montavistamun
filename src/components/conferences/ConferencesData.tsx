@@ -12,8 +12,8 @@ export default [
 		location: "Stanford University",
 		acronym: "smunc",
 		text: `Our easliest conference of the year, Stanford Model United Nations Conference is a competitive one mainly for veterans and varsity members. SMUNC is an intensive 3 days full of 5 committee sessions that will leave you exhausted, but happy that you had such a good time!`,
-		registration: "http://bit.ly/smunc2020app",
-		registrationText: "Application Now Open",
+		// registration: "http://bit.ly/smunc2020app",
+		// registrationText: "Application Now Open",
 	},
 	{
 		name: "Silicon Valley Model United Nations Conference",
