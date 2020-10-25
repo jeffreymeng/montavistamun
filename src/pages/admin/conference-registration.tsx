@@ -26,7 +26,10 @@ export default function AdminLogPage(): React.ReactElement {
 		{ label: "SFMUN Registration", value: "sfmun" },
 		{ label: "SMUNC Registration", value: "smunc" },
 	];
-	const selectedConference = window.location.hash?.substring(1) || "sfmun";
+	const selectedConference =
+		(typeof window !== "undefined"
+			? window.location.hash?.substring(1)
+			: "") || "sfmun";
 	const setSelectedConference = (conf: string) => {
 		window.location.hash = conf;
 	};
