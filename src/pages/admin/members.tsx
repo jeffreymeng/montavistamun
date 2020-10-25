@@ -262,7 +262,7 @@ export default function MembersPage(): React.ReactElement {
 	};
 	const tableHeaders = [
 		"Basic Information",
-		"SFMUN Registration",
+		// "SFMUN Registration",
 		"Permissions",
 	];
 	const [showDisabled, setShowDisabled] = useState(false);
@@ -577,23 +577,23 @@ export default function MembersPage(): React.ReactElement {
 													</div>
 												</div>
 											</td>
-											<td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
-												<div
-													className={
-														"text-sm leading-5 " +
-														(data.sfmunRegistered
-															? "text-green-800"
-															: "text-yellow-800")
-													}
-												>
-													{data.sfmunRegistered
-														? "Registered"
-														: "Not Registered"}
-												</div>
-												{/*<div className="text-sm leading-5 text-gray-500">*/}
-												{/*	ECOSOC (partner: John Doe)*/}
-												{/*</div>*/}
-											</td>
+											{/*<td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">*/}
+											{/*	<div*/}
+											{/*		className={*/}
+											{/*			"text-sm leading-5 " +*/}
+											{/*			(data.sfmunRegistered*/}
+											{/*				? "text-green-800"*/}
+											{/*				: "text-yellow-800")*/}
+											{/*		}*/}
+											{/*	>*/}
+											{/*		{data.sfmunRegistered*/}
+											{/*			? "Registered"*/}
+											{/*			: "Not Registered"}*/}
+											{/*	</div>*/}
+											{/*	/!*<div className="text-sm leading-5 text-gray-500">*!/*/}
+											{/*	/!*	ECOSOC (partner: John Doe)*!/*/}
+											{/*	/!*</div>*!/*/}
+											{/*</td>*/}
 											<td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
 												<div
 													className={

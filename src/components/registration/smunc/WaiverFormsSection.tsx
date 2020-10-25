@@ -11,8 +11,7 @@ import FormUpload from "../FormUpload";
 import * as pdfform from "../PDFForm";
 
 interface WaiverForms {
-	fuhsdForm: string;
-	sfmunForm: string;
+	smuncFuhsdForm: string;
 }
 // make promise based
 const blobToBuffer = (blob: Blob) =>
@@ -83,23 +82,16 @@ export default function WaiverFormsSection({
 	const { user } = useContext(AuthContext);
 	const [fuhsdForm, setFuhsdForm] = useState<File | null>(null);
 	const [fuhsdUploading, setFuhsdUploading] = useState(false);
-	const [sfmunForm, setSfmunForm] = useState<File | null>(null);
-	const [sfmunUploading, setSfmunUploading] = useState(false);
 
 	React.useEffect(() => {
 		setStepHasChanges(
 			fuhsdUploading ||
-				sfmunUploading ||
-				(fuhsdForm && fuhsdForm[0] && fuhsdForm[0].serverId === null) ||
-				(sfmunForm && sfmunForm[0] && sfmunForm[0].serverId === null)
+				(fuhsdForm && fuhsdForm[0] && fuhsdForm[0].serverId === null)
 		);
 	}, [
 		fuhsdUploading,
-		sfmunUploading,
 		fuhsdForm && fuhsdForm[0],
 		fuhsdForm && fuhsdForm[0]?.serverId,
-		sfmunForm && sfmunForm[0],
-		sfmunForm && sfmunForm[0]?.serverId,
 	]);
 	React.useEffect(() => {
 		if (!user || !data) return;
@@ -120,11 +112,10 @@ export default function WaiverFormsSection({
 
 			const filled = pdfform.fillForm(pdf, {
 				"Student's Name": [user?.displayName],
-				Destination: ["Online Model UN Conference (SFMUN)"],
-				"Date(s)": ["12/12/20 - 12/13/20"],
+				Destination: ["Online Model UN Conference (SMUNC)"],
+				"Date(s)": ["11/12/20 - 11/15/20"],
 				"Depature Time": ["None (Virtual)"],
 				"Return Time": ["None (Virtual)"],
-				// TODO is this correct
 				"Person in Charge": ["David Hartford"],
 				"Home Address": [
 					data.personalInformation.addressOne +
@@ -169,54 +160,6 @@ export default function WaiverFormsSection({
 			setFilledForms((o) => [filled, o[1]]);
 		})();
 	}, [user, data]);
-	React.useEffect(() => {
-		if (!user || !data) return;
-		(async () => {
-			const response = await axios.get(
-				"/forms/SFMUN-liability-release.pdf",
-				{
-					responseType: "arraybuffer",
-					headers: {
-						"Content-Type": "application/json",
-						Accept: "application/pdf",
-					},
-				}
-			);
-			const blob = new Blob([response.data]);
-			const pdf = (await blobToBuffer(blob)) as ArrayBuffer;
-			// const keys = Object.keys(pdfform.list_fields(pdf));
-			const filled = pdfform.fillForm(pdf, {
-				"agreement is clear and unambiguous as to its terms and that no other evidence shall be used or": [
-					user?.displayName,
-				],
-				"I HEREBY CERTIFY that I am the parent or guardian of": [
-					user?.displayName,
-				],
-				"1_2": [user?.displayName],
-				"1": [data.emergencyInformation.contactOneName],
-				"1_cr": [data.emergencyInformation.contactOneRelationship],
-				"1_ct": [data.emergencyInformation.contactOnePhone],
-				"2_ec": [data.emergencyInformation.contactTwoName],
-				"2_cr": [data.emergencyInformation.contactTwoRelationship],
-				"2_ct": [data.emergencyInformation.contactTwoPhone],
-				"2_2": [
-					data.personalInformation.addressOne +
-						(data.personalInformation.addressTwo
-							? ", " + data.personalInformation.addressTwo
-							: ""),
-				],
-				"3_2": [
-					data.personalInformation.city +
-						", " +
-						data.personalInformation.state +
-						", " +
-						data.personalInformation.zip,
-				],
-			});
-			setFilledForms((o) => [o[0], filled]);
-		})();
-	}, [user, data]);
-
 	return (
 		<div className="mt-8 shadow rounded-md sm:overflow-hidden">
 			<div className={" px-4 bg-white sm:p-6 py-4"}>
@@ -224,12 +167,15 @@ export default function WaiverFormsSection({
 					Liability Forms
 				</h3>
 				<p className="mt-1 max-w-2xl text-sm leading-5 text-gray-500">
-					You'll need to print out, sign, scan, and upload the
-					following forms.
+					We'll need you to fill out the following field trip form.
+					Note that in addition to the below form, you'll also have to
+					fill out another digital liability form for SMUNC; you
+					should receive an email from SMUNC with instructions on how
+					to fill this form out soon.
 				</p>
 				<div className={"mt-4"}>
 					<h3 className="text-lg leading-6 font-medium text-gray-900">
-						1. FUHSD Field Trip Form
+						FUHSD Field Trip Form
 					</h3>
 					<div>
 						<span className="inline-flex rounded-md shadow-sm my-2 mr-2">
@@ -264,48 +210,7 @@ export default function WaiverFormsSection({
 						setFile={setFuhsdForm}
 						uploading={fuhsdUploading}
 						setUploading={setFuhsdUploading}
-						fieldName={"fuhsdForm"}
-						data={data}
-						handleUpdateData={handleUpdateData}
-					/>
-				</div>
-				<div className={"mt-4"}>
-					<h3 className="text-lg leading-6 font-medium text-gray-900">
-						2. SFMUN Liability Release
-					</h3>
-					<div>
-						<span className="inline-flex rounded-md shadow-sm my-2 mr-2">
-							<button
-								onClick={() =>
-									openOrDownload(
-										"sfmun-liability-form.pdf",
-										filledForms[1],
-										"/forms/SFMUN-liability-release.pdf"
-									)
-								}
-								className={
-									"py-1 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white shadow-sm " +
-									(filledForms[1] === null
-										? "bg-indigo-300"
-										: "bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline-blue active:bg-indigo-600 transition duration-150 ease-in-out")
-								}
-								disabled={filledForms[1] === null}
-							>
-								{filledForms[1] === null
-									? "Generating Form..."
-									: "Download the form, "}
-							</button>
-						</span>
-						<span>
-							print it, sign it, scan it, then upload it below:
-						</span>
-					</div>
-					<FormUpload
-						file={sfmunForm}
-						setFile={setSfmunForm}
-						uploading={sfmunUploading}
-						setUploading={setSfmunUploading}
-						fieldName={"sfmunForm"}
+						fieldName={"smuncFuhsdForm"}
 						data={data}
 						handleUpdateData={handleUpdateData}
 					/>
@@ -318,10 +223,10 @@ export default function WaiverFormsSection({
 						onClick={() => {
 							setStep(1);
 						}}
-						disabled={fuhsdUploading || sfmunUploading}
+						disabled={fuhsdUploading}
 						className={cx(
 							"py-2 px-4 border border-gray-300 rounded-md text-sm leading-5 font-medium text-gray-700",
-							fuhsdUploading || sfmunUploading
+							fuhsdUploading
 								? "bg-gray-300"
 								: "bg-white hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition duration-150 ease-in-out"
 						)}
@@ -335,25 +240,17 @@ export default function WaiverFormsSection({
 						setStep(3);
 						setMaxStep((o) => Math.max(o, 3));
 					}}
-					disabled={
-						fuhsdUploading ||
-						sfmunUploading ||
-						!data?.forms?.fuhsdForm ||
-						!data?.forms?.sfmunForm
-					}
+					disabled={fuhsdUploading || !data?.forms?.smuncFuhsdForm}
 					className={cx(
 						"ml-4 py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white shadow-sm",
-						fuhsdUploading ||
-							sfmunUploading ||
-							!data?.forms?.fuhsdForm ||
-							!data?.forms?.sfmunForm
+						fuhsdUploading || !data?.forms?.smuncFuhsdForm
 							? "bg-indigo-300"
 							: "bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline-blue active:bg-indigo-600 transition duration-150 ease-in-out"
 					)}
 				>
-					{fuhsdUploading || sfmunUploading
+					{fuhsdUploading
 						? "Uploading..."
-						: !data?.forms?.fuhsdForm || !data?.forms?.sfmunForm
+						: !data?.forms?.smuncFuhsdForm
 						? "Upload all forms to continue"
 						: "Continue"}
 				</button>

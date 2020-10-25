@@ -8,11 +8,11 @@ import "../../../css/file-upload.css";
 import FormUpload from "../FormUpload";
 
 interface DonationForms {
-	donation?: string;
-	donationOptOut?: boolean;
+	smuncDonation?: string;
+	smuncDonationOptOut?: boolean;
 }
 interface ConfirmationData {
-	sfmunConfirmed: true;
+	smuncConfirmed: true;
 }
 // make promise based
 const blobToBuffer = (blob: Blob) =>
@@ -63,12 +63,12 @@ export default function DonationsSection({
 				</h3>
 				<p className="mt-2">
 					Before you submit, we just have one last step. To cover the
-					fees charged by SFMUN, we are requesting that you include a
-					donation of <b>$25</b> with your registration. Your
+					fees charged by SMUNC, we are requesting that you include a
+					donation of <b>$35</b> with your registration. Your
 					donations will go directly towards covering conference fees
 					and making this conference possible.
 				</p>
-				{data.forms?.donationOptOut && (
+				{data.forms?.smuncDonationOptOut && (
 					<>
 						<p className="mt-2">
 							You've indicated that you are financially unable to
@@ -91,7 +91,7 @@ export default function DonationsSection({
 							onClick={(e) => {
 								setSkipping(true);
 								handleUpdateData("forms", {
-									donationOptOut: false,
+									smuncDonationOptOut: false,
 								}).then(() => setSkipping(false));
 							}}
 						>
@@ -99,7 +99,7 @@ export default function DonationsSection({
 						</button>
 					</>
 				)}
-				{!data.forms?.donationOptOut && (
+				{!data.forms?.smuncDonationOptOut && (
 					<>
 						<p className="mt-2">
 							If you are financially unable to donate, or do not
@@ -123,13 +123,13 @@ export default function DonationsSection({
 									if (skipping) return;
 									setSkipping(true);
 									handleUpdateData("forms", {
-										donationOptOut: true,
+										smuncDonationOptOut: true,
 									}).then(() => setSkipping(false));
 								}}
 							>
 								{skipping
 									? "skipping donating..."
-									: "click here to skip donating"}
+									: "skip donating"}
 							</a>
 							.
 						</p>
@@ -141,12 +141,12 @@ export default function DonationsSection({
 						<ul className="list-decimal ml-8">
 							<li>
 								Head to Monta Vista’s online Student Store and
-								find our sfmun conference donation{" "}
+								find our smunc conference donation{" "}
 								<a
 									target={"_blank"}
 									rel={"noopener noreferrer"}
 									href={
-										"http://montavistahs.3dcartstores.com/San-Francisco-Model-UN-Conference-Virtual-Conference_p_123.html"
+										"http://montavistahs.3dcartstores.com/Stanford-Model-UN-Conference-Virtual-Conference_p_68.html"
 									}
 									className={"link"}
 								>
@@ -165,7 +165,7 @@ export default function DonationsSection({
 						<p className={"mt-4"}>
 							Unfortunately, we are unable to process refunds with
 							the online system. Please confirm you can attend the
-							conference (<b>December 12–13, 2020</b>) before
+							conference (<b>September 12-15, 2020</b>) before
 							donating!
 						</p>
 
@@ -175,7 +175,7 @@ export default function DonationsSection({
 								setFile={setReceipt}
 								uploading={uploading}
 								setUploading={setUploading}
-								fieldName={"donation"}
+								fieldName={"smuncDonation"}
 								data={data}
 								allowImagePreview
 								acceptedFileTypes={[
@@ -217,12 +217,12 @@ export default function DonationsSection({
 					type={"button"}
 					onClick={() => {
 						if (data.confirm?.smuncConfirmed) {
-							setStep(5);
+							setStep(4);
 							return;
 						}
 						setSubmitting(true);
 						handleUpdateData("confirm", {
-							sfmunConfirmed: true,
+							smuncConfirmed: true,
 						})
 							.then(() => {
 								if (!firebase) return;
@@ -231,38 +231,40 @@ export default function DonationsSection({
 									.collection("users")
 									.doc(user?.uid)
 									.update({
-										sfmunRegistered: true,
-										sfmunRegistrationTimestamp: firebase.firestore.FieldValue.serverTimestamp(),
+										smuncRegistered: true,
+										smuncRegistrationTimestamp: firebase.firestore.FieldValue.serverTimestamp(),
 									});
 							})
 							.then(() => {
 								setSubmitting(false);
-								setStep(5);
-								setMaxStep((o) => Math.max(6)); // maxStep is one higher to check it
+								setStep(4);
+								setMaxStep((o) => 5); // maxStep is one higher to check it
 							});
 					}}
 					disabled={
 						uploading ||
 						submitting ||
 						skipping ||
-						(!data?.forms?.donation && !data?.forms?.donationOptOut)
+						(!data?.forms?.smuncDonation &&
+							!data?.forms?.smuncDonationOptOut)
 					}
 					className={cx(
 						"ml-4 py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white shadow-sm",
 						uploading ||
 							submitting ||
 							skipping ||
-							(!data?.forms?.donation &&
-								!data?.forms?.donationOptOut)
+							(!data?.forms?.smuncDonation &&
+								!data?.forms?.smuncDonationOptOut)
 							? "bg-indigo-300"
 							: "bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline-blue active:bg-indigo-600 transition duration-150 ease-in-out"
 					)}
 				>
 					{uploading
 						? "Uploading..."
-						: !data?.forms?.donation && !data?.forms?.donationOptOut
+						: !data?.forms?.smuncDonation &&
+						  !data?.forms?.smuncDonationOptOut
 						? "Upload all forms to finish registration"
-						: !data.confirm?.sfmunConfirmed
+						: !data.confirm?.smuncConfirmed
 						? "Finish Registration"
 						: "Continue"}
 				</button>

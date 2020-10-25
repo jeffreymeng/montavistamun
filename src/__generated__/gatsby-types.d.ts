@@ -2799,4 +2799,14 @@ declare namespace GatsbyTypes {
 			}>;
 		}>;
 	};
+
+	type SMUNCRegisterPageQueryQueryVariables = Exact<{ [key: string]: never }>;
+
+	type SMUNCRegisterPageQueryQuery = {
+		readonly headerImage: Maybe<{
+			readonly childImageSharp: Maybe<{
+				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
+			}>;
+		}>;
+	};
 }
