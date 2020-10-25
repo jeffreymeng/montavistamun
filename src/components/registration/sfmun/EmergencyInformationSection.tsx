@@ -1,9 +1,11 @@
 import { Field } from "formik";
 import React, { useContext } from "react";
+import Select from "react-select";
 import * as Yup from "yup";
 import AuthContext from "../../../context/AuthContext";
 import InputGroup from "../../shared/InputGroup";
 import RegisterFormSection from "../RegisterFormSection";
+import stateOptions from "../stateOptions";
 interface EmergencyInformation {
 	contactOneName: string;
 	contactOnePhone: string;
@@ -149,10 +151,9 @@ export default function EmergencyInformationSection({
 					.min(3, "That doesn't look like a real city")
 					.max(128, "The city is too long")
 					.required("Please enter a city"),
-				healthInsuranceState: Yup.string()
-					.min(4, "Please enter the full state name")
-					.max(40, "The state is too long")
-					.required("Please enter a state"),
+				healthInsuranceState: Yup.string().required(
+					"Please enter a state"
+				),
 				healthInsuranceZip: Yup.string()
 					.matches(
 						/(^\d{5}$)|(^\d{9}$)|(^\d{5}-\d{4}$)/,
@@ -180,7 +181,14 @@ export default function EmergencyInformationSection({
 			}}
 			title={"Emergency Information"}
 		>
-			{({ errors, canEdit, touched, values }) => (
+			{({
+				errors,
+				canEdit,
+				touched,
+				values,
+				setFieldValue,
+				setFieldTouched,
+			}) => (
 				<>
 					<div className="col-span-6 mt-4">
 						<h3 className="text-lg leading-6 font-medium text-gray-900">
@@ -346,18 +354,54 @@ export default function EmergencyInformationSection({
 						}
 						error={errors.healthInsuranceCity}
 					/>
-					<Field
-						as={InputGroup}
-						className="col-span-6 sm:col-span-3 lg:col-span-2"
-						label={"State"}
-						name={"healthInsuranceState"}
-						disabled={!canEdit}
-						invalid={
-							errors.healthInsuranceState &&
-							!!touched.healthInsuranceState
-						}
-						error={errors.healthInsuranceState}
-					/>
+					<div className={"col-span-6 sm:col-span-3 lg:col-span-2"}>
+						<label
+							className={
+								"block text-sm font-medium leading-5 text-gray-700 "
+							}
+						>
+							State
+						</label>
+						<Select
+							isDisabled={!canEdit}
+							options={stateOptions}
+							className="mt-1"
+							menuPortalTarget={document.body}
+							styles={{
+								menuPortal: (base) => ({
+									...base,
+									zIndex: 9999,
+								}),
+							}}
+							value={stateOptions.find(
+								(o) =>
+									o.value === values.healthInsuranceState ||
+									// before adding this select, we encouraged full state names.
+									o.label.toLowerCase() ===
+										values.healthInsuranceState.toLowerCase()
+							)}
+							onChange={(v) =>
+								setFieldValue(
+									"healthInsuranceState",
+									Array.isArray(v) ? v[0].value : v.value
+								)
+							}
+							onBlur={() =>
+								setFieldTouched("healthInsuranceState")
+							}
+							invalid={
+								errors.healthInsuranceState &&
+								!!touched.healthInsuranceState
+							}
+							error={errors.healthInsuranceState}
+						/>
+						{errors.healthInsuranceState &&
+							!!touched.healthInsuranceState && (
+								<p className={"mt-2 text-sm text-red-600"}>
+									{errors.healthInsuranceState}
+								</p>
+							)}
+					</div>
 					<Field
 						as={InputGroup}
 						className="col-span-6 sm:col-span-3 lg:col-span-2"

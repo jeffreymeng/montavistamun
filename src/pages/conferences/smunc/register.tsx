@@ -158,7 +158,7 @@ export default function AboutPage({
 						addressTwo: "",
 						city: "",
 						zip: "",
-						state: "California",
+						state: "CA",
 						...data.personalInformation,
 					},
 					emergencyInformation: {

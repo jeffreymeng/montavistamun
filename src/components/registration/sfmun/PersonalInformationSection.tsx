@@ -1,10 +1,12 @@
 import { Field } from "formik";
 import { Link } from "gatsby";
 import React, { useContext } from "react";
+import Select from "react-select";
 import * as Yup from "yup";
 import AuthContext from "../../../context/AuthContext";
 import InputGroup from "../../shared/InputGroup";
 import RegisterFormSection from "../RegisterFormSection";
+import stateOptions from "../stateOptions";
 interface PersonalInformation {
 	phone: string;
 	addressOne: string;
@@ -85,10 +87,7 @@ export default function PersonalInformationSection({
 					.min(3, "That doesn't look like a real city")
 					.max(128, "Your city is too long")
 					.required("Please enter a city"),
-				state: Yup.string()
-					.min(4, "Please enter the full state name")
-					.max(40, "Your state is too long")
-					.required("Please enter a state"),
+				state: Yup.string().required("Please enter a state"),
 				zip: Yup.string()
 					.matches(
 						/(^\d{5}$)|(^\d{9}$)|(^\d{5}-\d{4}$)/,
@@ -105,7 +104,14 @@ export default function PersonalInformationSection({
 				zip: "Loading...",
 			}}
 		>
-			{({ errors, canEdit, touched }) => (
+			{({
+				errors,
+				canEdit,
+				touched,
+				values,
+				setFieldValue,
+				setFieldTouched,
+			}) => (
 				<>
 					<Field
 						as={InputGroup}
@@ -196,15 +202,48 @@ export default function PersonalInformationSection({
 						invalid={errors.city && !!touched.city}
 						error={errors.city}
 					/>
-					<Field
-						as={InputGroup}
-						className="col-span-6 sm:col-span-3 lg:col-span-2"
-						label={"State"}
-						name={"state"}
-						disabled={!canEdit}
-						invalid={errors.state && !!touched.state}
-						error={errors.state}
-					/>
+					<div className={"col-span-6 sm:col-span-3 lg:col-span-2"}>
+						<label
+							className={
+								"block text-sm font-medium leading-5 text-gray-700 "
+							}
+						>
+							State
+						</label>
+						<Select
+							isDisabled={!canEdit}
+							options={stateOptions}
+							className="mt-1"
+							menuPortalTarget={document.body}
+							styles={{
+								menuPortal: (base) => ({
+									...base,
+									zIndex: 9999,
+								}),
+							}}
+							value={stateOptions.find(
+								(o) =>
+									o.value === values.state ||
+									// before adding this select, we encouraged full state names.
+									o.label.toLowerCase() ===
+										values.state.toLowerCase()
+							)}
+							onChange={(v) =>
+								setFieldValue(
+									"state",
+									Array.isArray(v) ? v[0].value : v.value
+								)
+							}
+							onBlur={() => setFieldTouched("state")}
+							invalid={errors.state && !!touched.state}
+							error={errors.state}
+						/>
+						{errors.state && !!touched.state && (
+							<p className={"mt-2 text-sm text-red-600"}>
+								{errors.state}
+							</p>
+						)}
+					</div>
 					<Field
 						as={InputGroup}
 						className="col-span-6 sm:col-span-3 lg:col-span-2"
