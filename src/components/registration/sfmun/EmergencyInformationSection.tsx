@@ -366,7 +366,9 @@ export default function EmergencyInformationSection({
 							isDisabled={!canEdit}
 							options={stateOptions}
 							className="mt-1"
-							menuPortalTarget={document.body}
+							{...(typeof window === "undefined"
+								? {}
+								: { menuPortalTarget: document.body })}
 							styles={{
 								menuPortal: (base) => ({
 									...base,

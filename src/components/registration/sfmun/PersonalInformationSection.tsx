@@ -214,7 +214,9 @@ export default function PersonalInformationSection({
 							isDisabled={!canEdit}
 							options={stateOptions}
 							className="mt-1"
-							menuPortalTarget={document.body}
+							{...(typeof window === "undefined"
+								? {}
+								: { menuPortalTarget: document.body })}
 							styles={{
 								menuPortal: (base) => ({
 									...base,
