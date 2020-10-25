@@ -3,11 +3,13 @@ import { saveAs } from "file-saver";
 import JSZip from "jszip";
 import moment from "moment";
 import React, { useState } from "react";
+import Select from "react-select";
 import useFirebase from "../../auth/useFirebase";
 import UserData from "../../components/admin/UserData";
 import AdminLayout from "../../components/layout/AdminLayout";
 import AuthContext from "../../context/AuthContext";
 import { getGrade } from "../../utils/schoolYearUtils";
+import { approvedUserIds } from "../conferences/smunc/register";
 
 export default function AdminLogPage(): React.ReactElement {
 	const [target, setTarget] = useState("");
@@ -20,6 +22,14 @@ export default function AdminLogPage(): React.ReactElement {
 		verified: userVerified,
 		admin: userAdmin,
 	} = React.useContext(AuthContext);
+	const conferenceOptions = [
+		{ label: "SFMUN Registration", value: "sfmun" },
+		{ label: "SMUNC Registration", value: "smunc" },
+	];
+	const selectedConference = window.location.hash?.substring(1) || "sfmun";
+	const setSelectedConference = (conf: string) => {
+		window.location.hash = conf;
+	};
 	const [data, setData] = React.useState<
 		{
 			id: string;
@@ -101,22 +111,39 @@ export default function AdminLogPage(): React.ReactElement {
 			preferences: [],
 			registered: [],
 		};
-		data.forEach((user) => {
+
+		(selectedConference === "sfmun"
+			? data
+			: data.filter((u) => approvedUserIds.includes(u.userData.id))
+		).forEach((user) => {
 			console.log(user);
 
-			if (user.data.confirm?.sfmunConfirmed) {
+			if (
+				(selectedConference === "sfmun" &&
+					user.data.confirm?.sfmunConfirmed) ||
+				(selectedConference === "smunc" &&
+					user.data.confirm?.smuncConfirmed)
+			) {
 				temp.registered.push(
 					user.userData.data.firstName +
 						" " +
 						user.userData.data.lastName
 				);
-			} else if (user.data.preferences) {
+			} else if (
+				selectedConference === "sfmun" &&
+				user.data.preferences
+			) {
 				temp.preferences.push(
 					user.userData.data.firstName +
 						" " +
 						user.userData.data.lastName
 				);
-			} else if (user.data.forms) {
+			} else if (
+				(selectedConference === "sfmun" &&
+					user.data.forms?.sfmunForm) ||
+				(selectedConference === "smunc" &&
+					user.data.forms?.smuncFuhsdForm)
+			) {
 				temp.liabilityForms.push(
 					user.userData.data.firstName +
 						" " +
@@ -149,7 +176,7 @@ export default function AdminLogPage(): React.ReactElement {
 			temp.preferences,
 			temp.registered,
 		];
-	}, [data]);
+	}, [data, selectedConference]);
 	const [exportAllFields, setExportAllFields] = useState(false);
 	const exportRegistration = React.useCallback(
 		async (includeIncomplete: boolean, allFields: boolean) => {
@@ -175,12 +202,16 @@ export default function AdminLogPage(): React.ReactElement {
 				`FUHSD Field Trip Form Link (valid through ${moment()
 					.add(6, "days")
 					.format("M/D/Y")})`,
-				`SFMUN Liability Trip Form Link (valid through ${moment()
-					.add(6, "days")
-					.format("M/D/Y")})`,
-				`Donation Receipt Link (valid through ${moment()
-					.add(6, "days")
-					.format("M/D/Y")})`,
+				...(selectedConference === "sfmun"
+					? [
+							`SFMUN Liability Trip Form Link (valid through ${moment()
+								.add(6, "days")
+								.format("M/D/Y")})`,
+							`Donation Receipt Link (valid through ${moment()
+								.add(6, "days")
+								.format("M/D/Y")})`,
+					  ]
+					: []),
 			];
 			const headers = [
 				"Registration Complete",
@@ -191,38 +222,53 @@ export default function AdminLogPage(): React.ReactElement {
 				"Email",
 				"Phone Number",
 				...(allFields ? allFieldsHeaders : []),
-				...[
-					"First",
-					"Second",
-					"Third",
-					"Fourth",
-					"Fifth",
-					"Sixth",
-					"Seventh",
-					"Eighth",
-				].map((el) => `${el} Choice Committee`),
-				...[
-					"DISEC",
-					"IAEA",
-					"UNODC",
-					"SPECPOL",
-					"UNHCR",
-					"Catherine The Great's Coup",
-					"UNSC",
-					"Senate",
-				].map((el) => `${el} Committee Ranking`),
+				...(selectedConference === "sfmun"
+					? [
+							...[
+								"First",
+								"Second",
+								"Third",
+								"Fourth",
+								"Fifth",
+								"Sixth",
+								"Seventh",
+								"Eighth",
+							].map((el) => `${el} Choice Committee`),
+							...[
+								"DISEC",
+								"IAEA",
+								"UNODC",
+								"SPECPOL",
+								"UNHCR",
+								"Catherine The Great's Coup",
+								"UNSC",
+								"Senate",
+							].map((el) => `${el} Committee Ranking`),
+					  ]
+					: []),
 			];
+			let filteredRegistrationData = data;
+			if (selectedConference === "sfmun") {
+				filteredRegistrationData = filteredRegistrationData.filter(
+					(u) => approvedUserIds.includes(u.userData.id)
+				);
+			}
+			if (!includeIncomplete) {
+				filteredRegistrationData = filteredRegistrationData.filter(
+					(r) => r.data.confirm?.sfmunConfirmed
+				);
+			}
 			const registrations: {
 				files: { file: Blob | null; name?: string }[];
 				csvRow: string;
 				fullName: string;
 			}[] = await Promise.all(
-				(includeIncomplete
-					? data
-					: data.filter((r) => r.data.confirm?.sfmunConfirmed)
-				).map((registration) =>
+				filteredRegistrationData.map((registration) =>
 					Promise.all(
-						["fuhsdForm", "sfmunForm", "donation"]
+						(selectedConference === "sfmun"
+							? ["fuhsdForm", "sfmunForm", "donation"]
+							: ["smuncFuhsdForm"]
+						)
 							.map((field) =>
 								registration.data.forms &&
 								registration.data.forms[field]
@@ -328,38 +374,55 @@ export default function AdminLogPage(): React.ReactElement {
 										registration.data.emergencyInformation
 											?.healthInsuranceZip,
 										forms[0].link,
-										forms[1].link,
-										forms[2].link,
+										...(selectedConference === "sfmun"
+											? [forms[1].link, forms[2].link]
+											: []),
 								  ].map((field) => field || "")
 								: []),
-							...(registration.data.preferences?.committee ||
-								Array(8).fill("")),
-							...(registration.data.preferences?.committee
+							...(selectedConference === "sfmun"
 								? [
-										"DISEC",
-										"IAEA",
-										"UNODC",
-										"SPECPOL",
-										"UNHCR",
-										"Catherine The Great's Coup (Crisis)",
-										"UNSC (Crisis)",
-										"Senate (Crisis)",
-								  ].map(
-										(committee) =>
-											registration.data.preferences.committee.indexOf(
-												committee
-											) + 1
-								  )
-								: Array(8).fill("")),
+										...(registration.data.preferences
+											?.committee || Array(8).fill("")),
+										...(registration.data.preferences
+											?.committee
+											? [
+													"DISEC",
+													"IAEA",
+													"UNODC",
+													"SPECPOL",
+													"UNHCR",
+													"Catherine The Great's Coup (Crisis)",
+													"UNSC (Crisis)",
+													"Senate (Crisis)",
+											  ].map(
+													(committee) =>
+														registration.data.preferences.committee.indexOf(
+															committee
+														) + 1
+											  )
+											: Array(8).fill("")),
+								  ]
+								: []),
 						].join(","),
 					}))
 				)
 			);
 			const zip = new JSZip();
 			const fuhsdForms = zip.folder("FUHSD Field Trip Forms");
-			const sfmunForms = zip.folder("SFMUN Liability Forms");
-			const donationReceipts = zip.folder("Donation Receipts");
-			if (!fuhsdForms || !sfmunForms || !donationReceipts) {
+
+			const sfmunForms =
+				selectedConference === "sfmun"
+					? zip.folder("SFMUN Liability Forms")
+					: null;
+			const donationReceipts =
+				selectedConference === "sfmun"
+					? zip.folder("Donation Receipts")
+					: null;
+			if (
+				!fuhsdForms ||
+				(selectedConference === "sfmun" &&
+					(!sfmunForms || !donationReceipts))
+			) {
 				throw new Error("Unable to create zip folders.");
 			}
 			console.log(registrations);
@@ -367,22 +430,24 @@ export default function AdminLogPage(): React.ReactElement {
 				const name = r.fullName.replace(/\s/g, "-");
 				if (r.files[0] && r.files[0].file) {
 					fuhsdForms.file(
-						"FUHSD-field-trip-form-for-SFMUN-" + name + ".pdf",
+						`FUHSD-field-trip-form-for-${selectedConference.toUpperCase()}-${name}.pdf`,
 						r.files[0].file
 					);
 				}
-				if (r.files[1] && r.files[1].file) {
-					sfmunForms.file(
-						"SFMUN-liability-form-" + name + ".pdf",
-						r.files[1].file
-					);
-				}
-				if (r.files[2] && r.files[2].file) {
-					const ext = r.files[2].name?.split(".").pop();
-					donationReceipts.file(
-						"SFMUN-donation-receipt-" + name + "." + ext,
-						r.files[2].file
-					);
+				if (selectedConference === "sfmun") {
+					if (r.files[1] && r.files[1].file) {
+						sfmunForms.file(
+							"SFMUN-liability-form-" + name + ".pdf",
+							r.files[1].file
+						);
+					}
+					if (r.files[2] && r.files[2].file) {
+						const ext = r.files[2].name?.split(".").pop();
+						donationReceipts.file(
+							"SFMUN-donation-receipt-" + name + "." + ext,
+							r.files[2].file
+						);
+					}
 				}
 			});
 			const csv = [
@@ -390,9 +455,9 @@ export default function AdminLogPage(): React.ReactElement {
 				...registrations.map((r) => r.csvRow),
 			].join("\n");
 			zip.file(
-				"SFMUN-registration-data-" +
-					(allFields ? "all-fields" : "preferences") +
-					".csv",
+				`${selectedConference.toUpperCase()}-registration-data-${
+					allFields ? "all-fields" : "preferences"
+				}.csv`,
 				csv
 			);
 			const zipFile = await zip.generateAsync({
@@ -400,16 +465,16 @@ export default function AdminLogPage(): React.ReactElement {
 			});
 			saveAs(
 				zipFile,
-				"SFMUN-registration-export-" +
-					(allFields ? "all-fields" : "preferences-and-forms") +
-					"-" +
-					(includeIncomplete
+				`${selectedConference.toUpperCase()}-registration-export-${
+					allFields ? "all-fields" : "preferences-and-forms"
+				}-${
+					includeIncomplete
 						? "including-incomplete-registrations"
-						: "only-complete-registrations") +
-					".zip"
+						: "only-complete-registrations"
+				}.zip`
 			);
 		},
-		[data, firebase]
+		[data, selectedConference, firebase]
 	);
 	return (
 		<AdminLayout title={"Conference Registration"}>
@@ -420,9 +485,18 @@ export default function AdminLogPage(): React.ReactElement {
 			>
 				Conference Registration
 			</h1>
-			<p>
-				Displaying live data for <b>SFMUN Registration</b>.
-			</p>
+			<b>Displaying live data for:</b>
+			<Select
+				options={conferenceOptions}
+				value={conferenceOptions.find(
+					(c) => c.value === selectedConference
+				)}
+				onChange={(o) =>
+					Array.isArray(o)
+						? setSelectedConference(o[0].value)
+						: setSelectedConference(o.value)
+				}
+			/>
 			<h3 className={"text-xl leading-7 font-bold tracking-tight mt-4"}>
 				Registration Progress
 			</h3>
@@ -462,7 +536,7 @@ export default function AdminLogPage(): React.ReactElement {
 							  } step.`
 							: `${
 									step.length !== 1 ? "s have " : " has "
-							  } finished registering for SFMUN.`}{" "}
+							  } finished registering for ${selectedConference.toUpperCase()}.`}{" "}
 						{step.length > 0 && (
 							<>
 								(
