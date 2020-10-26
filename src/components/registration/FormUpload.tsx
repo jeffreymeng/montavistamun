@@ -135,7 +135,7 @@ export default function FormUpload<Data>({
 			instantUpload={false}
 			// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 			// @ts-ignore
-			maxFileSize={"3MB"}
+			maxFileSize={"20MB"}
 			allowImagePreview={allowImagePreview}
 			allowDownloadByUrl={true}
 			fileValidateTypeDetectType={(source: Blob) =>
