@@ -25,7 +25,7 @@ export default [
 		registration: "/conferences/sfmun/register",
 	},
 	{
-		name: "Silicon Valley Model United Nations Conference",
+		name: "Santa Clara Valley Model United Nations Conference",
 		date: "January 29, 2021 - January 30, 2021",
 		location: "Santa Teresa High School",
 		acronym: "scvmun",
