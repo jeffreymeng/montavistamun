@@ -16,7 +16,7 @@ export default [
 		// registrationText: "Application Now Open",
 	},
 	{
-		name: "Silicon Valley Model United Nations Conference",
+		name: "Santa Clara Valley Model United Nations Conference",
 		date: "January 29, 2021 - January 30, 2021",
 		location: "Santa Teresa High School",
 		acronym: "scvmun",
@@ -24,14 +24,14 @@ export default [
 			"Our second conference of the year will be the San Francisco Model United Nations conference, held by Lowell High School. Even if you don’t attend SMUNC, SFMUN is a great way to get started in Model UN. It’s a much less intense and more beginner-friendly conference, and it’s highly recommended for all delegates to attend.",
 		registration: "/conferences/sfmun/register",
 	},
-	{
-		name: "Santa Clara Valley Model United Nations Conference",
-		date: "January 29, 2021 - January 30, 2021",
-		location: "Santa Teresa High School",
-		acronym: "scvmun",
-		text:
-			"Santa Clara Valley Model United Nations Conference is our third conference of the year, and the one where we recommend to all members – novice or veteran. Participating at SCVMUN is a great way to get used to more difficult conferences, such as SMUNC, NAIMUN, and BMUN.",
-	},
+// 	{
+// 		name: "Santa Clara Valley Model United Nations Conference",
+// 		date: "January 29, 2021 - January 30, 2021",
+// 		location: "Santa Teresa High School",
+// 		acronym: "scvmun",
+// 		text:
+// 			"Santa Clara Valley Model United Nations Conference is our third conference of the year, and the one where we recommend to all members – novice or veteran. Participating at SCVMUN is a great way to get used to more difficult conferences, such as SMUNC, NAIMUN, and BMUN.",
+// 	},
 	{
 		name: "North American Invitational Model United Nations Conference",
 		date: "February 11, 2021 - February 14, 2021",
