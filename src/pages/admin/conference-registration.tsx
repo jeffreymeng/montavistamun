@@ -30,6 +30,9 @@ export default function AdminLogPage(): React.ReactElement {
 		(typeof window !== "undefined"
 			? window.location.hash?.substring(1)
 			: "") || "sfmun";
+	if (!["sfmun", "smunc"].includes(selectedConference)) {
+		window.location.hash = "sfmun";
+	}
 	const setSelectedConference = (conf: string) => {
 		window.location.hash = conf;
 	};
@@ -210,11 +213,11 @@ export default function AdminLogPage(): React.ReactElement {
 							`SFMUN Liability Trip Form Link (valid through ${moment()
 								.add(6, "days")
 								.format("M/D/Y")})`,
-							`Donation Receipt Link (valid through ${moment()
-								.add(6, "days")
-								.format("M/D/Y")})`,
 					  ]
 					: []),
+				`Donation Receipt Link (valid through ${moment()
+					.add(6, "days")
+					.format("M/D/Y")})`,
 			];
 			const headers = [
 				"Registration Complete",
@@ -251,14 +254,18 @@ export default function AdminLogPage(): React.ReactElement {
 					: []),
 			];
 			let filteredRegistrationData = data;
-			if (selectedConference === "sfmun") {
+			if (selectedConference === "smunc") {
 				filteredRegistrationData = filteredRegistrationData.filter(
 					(u) => approvedUserIds.includes(u.userData.id)
 				);
 			}
 			if (!includeIncomplete) {
 				filteredRegistrationData = filteredRegistrationData.filter(
-					(r) => r.data.confirm?.sfmunConfirmed
+					(r) =>
+						(selectedConference === "sfmun" &&
+							r.data.confirm?.sfmunConfirmed) ||
+						(selectedConference === "smunc" &&
+							r.data.confirm?.smuncConfirmed)
 				);
 			}
 			const registrations: {
@@ -270,7 +277,7 @@ export default function AdminLogPage(): React.ReactElement {
 					Promise.all(
 						(selectedConference === "sfmun"
 							? ["fuhsdForm", "sfmunForm", "donation"]
-							: ["smuncFuhsdForm"]
+							: ["smuncFuhsdForm", "smuncDonation"]
 						)
 							.map((field) =>
 								registration.data.forms &&
@@ -333,7 +340,13 @@ export default function AdminLogPage(): React.ReactElement {
 							registration.userData.data.lastName,
 						files: forms,
 						csvRow: [
-							!!registration.data.confirm?.sfmunConfirmed,
+							"" +
+								((selectedConference === "sfmun" &&
+									registration.data.confirm
+										?.sfmunConfirmed) ||
+									(selectedConference === "smunc" &&
+										registration.data.confirm
+											?.smuncConfirmed)),
 							registration.userData.id,
 							registration.userData.data.firstName,
 							registration.userData.data.lastName,
@@ -377,10 +390,11 @@ export default function AdminLogPage(): React.ReactElement {
 										registration.data.emergencyInformation
 											?.healthInsuranceZip,
 										forms[0].link,
+										forms[1].link,
 										...(selectedConference === "sfmun"
-											? [forms[1].link, forms[2].link]
+											? [forms[2].link]
 											: []),
-								  ].map((field) => field || "")
+								  ]
 								: []),
 							...(selectedConference === "sfmun"
 								? [
@@ -406,7 +420,13 @@ export default function AdminLogPage(): React.ReactElement {
 											: Array(8).fill("")),
 								  ]
 								: []),
-						].join(","),
+						]
+							.map((field) =>
+								(field + "").indexOf(",") > -1
+									? `"${field}"`
+									: field || ""
+							)
+							.join(","),
 					}))
 				)
 			);
@@ -417,14 +437,11 @@ export default function AdminLogPage(): React.ReactElement {
 				selectedConference === "sfmun"
 					? zip.folder("SFMUN Liability Forms")
 					: null;
-			const donationReceipts =
-				selectedConference === "sfmun"
-					? zip.folder("Donation Receipts")
-					: null;
+			const donationReceipts = zip.folder("Donation Receipts");
 			if (
 				!fuhsdForms ||
-				(selectedConference === "sfmun" &&
-					(!sfmunForms || !donationReceipts))
+				(selectedConference === "sfmun" && !sfmunForms) ||
+				!donationReceipts
 			) {
 				throw new Error("Unable to create zip folders.");
 			}
@@ -437,7 +454,7 @@ export default function AdminLogPage(): React.ReactElement {
 						r.files[0].file
 					);
 				}
-				if (selectedConference === "sfmun") {
+				if (selectedConference === "sfmun" && sfmunForms) {
 					if (r.files[1] && r.files[1].file) {
 						sfmunForms.file(
 							"SFMUN-liability-form-" + name + ".pdf",
@@ -451,12 +468,22 @@ export default function AdminLogPage(): React.ReactElement {
 							r.files[2].file
 						);
 					}
+				} else {
+					if (r.files[1] && r.files[1].file) {
+						const ext = r.files[1].name?.split(".").pop();
+						donationReceipts.file(
+							"SMUNC-donation-receipt-" + name + "." + ext,
+							r.files[1].file
+						);
+					}
 				}
 			});
+			console.log(registrations);
 			const csv = [
 				headers.join(","),
 				...registrations.map((r) => r.csvRow),
 			].join("\n");
+			console.log(registrations, csv, "huiadfshui");
 			zip.file(
 				`${selectedConference.toUpperCase()}-registration-data-${
 					allFields ? "all-fields" : "preferences"
@@ -595,7 +622,10 @@ export default function AdminLogPage(): React.ReactElement {
 					type="button"
 					className="relative inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 shadow-sm hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150"
 				>
-					<span>Export completed registrations</span>
+					<span>
+						Export completed {selectedConference.toUpperCase()}{" "}
+						registrations
+					</span>
 				</button>
 				<button
 					onClick={() => exportRegistration(true, exportAllFields)}
@@ -603,8 +633,8 @@ export default function AdminLogPage(): React.ReactElement {
 					className="mt-3 md:mt-0 md:ml-3 relative inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 shadow-sm hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150"
 				>
 					<span>
-						Export all registrations (including incomplete
-						registrations)
+						Export all {selectedConference.toUpperCase()}{" "}
+						registrations (including incomplete registrations)
 					</span>
 				</button>
 			</div>
