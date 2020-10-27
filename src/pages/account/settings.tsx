@@ -1,5 +1,5 @@
 import axios from "axios";
-import firebaseType from "firebase";
+import type firebaseType from "firebase";
 import { Check, InformationCircle } from "heroicons-react";
 import moment from "moment";
 import React, { useState } from "react";

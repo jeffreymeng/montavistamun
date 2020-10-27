@@ -1,5 +1,5 @@
 import axios from "axios";
-import firebaseType from "firebase";
+import type firebaseType from "firebase";
 import * as Icons from "heroicons-react";
 import React, { useState } from "react";
 import useFirebase from "../../auth/useFirebase";

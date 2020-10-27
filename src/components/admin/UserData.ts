@@ -1,4 +1,4 @@
-import firebaseType from "firebase";
+import type firebaseType from "firebase";
 
 export default interface UserData {
 	classOf: number;

@@ -1,4 +1,4 @@
-import firebaseType from "firebase";
+import type firebaseType from "firebase";
 import { graphql, useStaticQuery } from "gatsby";
 import React from "react";
 import Header from "../components/Header";

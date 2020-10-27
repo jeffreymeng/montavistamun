@@ -1,4 +1,5 @@
-import firebaseType, { User as FirebaseUser } from "firebase";
+import type firebaseType from "firebase";
+import type { User as FirebaseUser } from "firebase";
 import React, { ReactElement, ReactNode, useEffect, useState } from "react";
 import firebaseConfig from "../../firebase-config";
 
