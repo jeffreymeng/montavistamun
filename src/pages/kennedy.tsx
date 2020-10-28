@@ -130,10 +130,6 @@ export default function KennedyPage({
 										"December 12, 2020 - December 13, 2020",
 									location: "Lowell High School",
 									acronym: "sfmun",
-									registrationLink:
-										"https://bit.ly/kmun2021sfreg",
-									registrationDeadline:
-										"Wednesday, 10/14, 11:59pm",
 									text:
 										"SFMUN is our first conference of the year, held in San Fransisco. SFMUN's smaller committee sizes make it a very beginner friendly conference, and serves as the perfect way to hop into MUN.",
 								},
