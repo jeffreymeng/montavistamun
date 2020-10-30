@@ -216,7 +216,7 @@ export default function DonationsSection({
 				<button
 					type={"button"}
 					onClick={() => {
-						if (data.confirm?.smuncConfirmed) {
+						if (data.confirm?.sfmunConfirmed) {
 							setStep(5);
 							return;
 						}
