@@ -127,19 +127,19 @@ export default function AboutPage(): React.ReactElement {
 			icon: "UserGroup",
 		},
 
-		{
-			subtitle: "Registration Now Open",
-			title: "San Fransisco Model United Nations (SFMUN)",
-			primaryAction: {
-				title: "Register Now",
-				link: "/conferences/sfmun/register",
-			},
-			// secondaryAction: {
-			// 	title: "Learn More",
-			// 	link: "/conferences/bmun",
-			// },
-			icon: "Calendar",
-		},
+		// {
+		// 	subtitle: "Registration Now Open",
+		// 	title: "San Fransisco Model United Nations (SFMUN)",
+		// 	primaryAction: {
+		// 		title: "Register Now",
+		// 		link: "/conferences/sfmun/register",
+		// 	},
+		// 	// secondaryAction: {
+		// 	// 	title: "Learn More",
+		// 	// 	link: "/conferences/bmun",
+		// 	// },
+		// 	icon: "Calendar",
+		// },
 		// {
 		// 	subtitle:
 		// 		"Conference You're Attending",

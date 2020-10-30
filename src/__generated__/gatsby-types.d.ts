@@ -2810,12 +2810,12 @@ declare namespace GatsbyTypes {
 		}>;
 	};
 
-	type usersjmengDocumentscodemontavistamunsrccomponentsindexheroVideoTsx3462868773QueryVariables = Exact<{
+	type usersjmengDocumentscodemontavistamunsrccomponentsindexHeroTsx3097427686QueryVariables = Exact<{
 		[key: string]: never;
 	}>;
 
-	type usersjmengDocumentscodemontavistamunsrccomponentsindexheroVideoTsx3462868773Query = {
-		readonly thumbnail: Maybe<{
+	type usersjmengDocumentscodemontavistamunsrccomponentsindexHeroTsx3097427686Query = {
+		readonly hero: Maybe<{
 			readonly childImageSharp: Maybe<{
 				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
 			}>;
@@ -2839,12 +2839,12 @@ declare namespace GatsbyTypes {
 		}>;
 	};
 
-	type usersjmengDocumentscodemontavistamunsrccomponentsindexHeroTsx3097427686QueryVariables = Exact<{
+	type usersjmengDocumentscodemontavistamunsrccomponentsindexheroVideoTsx3462868773QueryVariables = Exact<{
 		[key: string]: never;
 	}>;
 
-	type usersjmengDocumentscodemontavistamunsrccomponentsindexHeroTsx3097427686Query = {
-		readonly hero: Maybe<{
+	type usersjmengDocumentscodemontavistamunsrccomponentsindexheroVideoTsx3462868773Query = {
+		readonly thumbnail: Maybe<{
 			readonly childImageSharp: Maybe<{
 				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
 			}>;

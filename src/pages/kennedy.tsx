@@ -139,10 +139,6 @@ export default function KennedyPage({
 									date: "January 29, 2021 - January 30, 2021",
 									location: "Santa Teresa High School",
 									acronym: "scvmun",
-									registrationLink:
-										"https://bit.ly/kmun2021scvreg",
-									registrationDeadline:
-										"Wednesday, 10/28, 11:59pm",
 									text:
 										"Santa Clara Valley Model United Nations Conference is our largest conference of the year!  At SCVMUN, over 1,000 delegates across schools on the west coast compete in rigorous policy and debate on a number of pressing and relevant issues.",
 								},
