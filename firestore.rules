@@ -1,0 +1,56 @@
+// note: these rules should be edited on github, not in the console, or your changes may get overwritten
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /{document=**} {
+    function notUpdatingField(fieldName) {
+
+        // if either is nonexistent...
+        return (!(fieldName in resource.data) || !(fieldName in request.resource.data)) ?
+            // both must be nonexistent
+            !(fieldName in request.resource.data) && !(fieldName in resource.data) :
+            // otherwise, both exist
+            // and they must contain equal values
+            resource.data[fieldName] != request.resource.data[fieldName];
+    }
+
+    function isAdmin() {
+      return "admin" in request.auth.token ? request.auth.token.admin : false; // return false if it's not defined
+    }
+
+      allow read, write: if false;
+
+      match /users/{userId} {
+        // they can change any field except verified and admin
+        allow read: if isAdmin() || (request.auth != null && request.auth.uid == userId);
+        allow create: if isAdmin() || (request.auth != null && request.auth.uid == userId && !("verified" in request.resource.data) && !("admin" in request.resource.data));
+        allow update: if isAdmin() || (request.auth != null && request.auth.uid == userId && notUpdatingField("verified") && notUpdatingField("admin"));
+      }
+
+      match /keys/{keyId} {
+        allow get: if request.auth != null && request.auth != null && request.auth.token != null && request.auth.token.verified;
+      }
+
+      match /awards/{awardId} {
+        allow read: if true;
+        allow create, update: if isAdmin();
+      }
+
+      match /admin-log/{logItemId} {
+        allow read, create: if isAdmin();
+      }
+
+      match /registration/{userId} {
+        allow read: if isAdmin() || (request.auth != null && request.auth.uid == userId);
+        allow write: if isAdmin() || (request.auth != null && request.auth.uid == userId);
+
+        match /history/{historyEntryId} {
+            allow read: if isAdmin() || (request.auth != null && request.auth.uid == userId);
+            allow create: if isAdmin() || (request.auth != null && request.auth.uid == userId);
+            allow update, delete: if isAdmin();
+        }
+      }
+    }
+   }
+}

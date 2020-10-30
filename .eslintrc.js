@@ -8,6 +8,8 @@ module.exports = {
 		"eslint:recommended",
 		"plugin:react/recommended",
 		"plugin:@typescript-eslint/recommended",
+		"plugin:jest/recommended",
+		"plugin:jest/style",
 	],
 	rules: {
 		"no-mixed-spaces-and-tabs": "off",

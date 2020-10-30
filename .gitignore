@@ -8,3 +8,5 @@ built-netlify-functions/**
 .netlify
 
 .env
+firestore-debug.log
+ui-debug.log
