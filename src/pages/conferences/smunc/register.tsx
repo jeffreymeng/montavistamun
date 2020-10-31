@@ -25,6 +25,7 @@ export const approvedUserIds = [
 	"UbE3rxCQ1XPVlpjUFhyxDn465P73",
 	"Z6ORSMesUtZs7hpzUbVKd19VAPD2",
 	"4BC7a7CWoQU0uzaLG2t2fbAuquv1",
+	"o8atTM2CJgU9YaRDMdyHFK3mnBW2",
 ];
 export default function AboutPage({
 	data: { headerImage },
