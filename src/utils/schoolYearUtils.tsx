@@ -17,11 +17,12 @@ export const getLastDayOfSchool = (year?: number): moment.Moment => {
 
 /**
  * get the first day of school during the current calendar year
+ *  @param year - The calendar year for which to return the last day of school. Defaults to the current calendar year.
  */
-export const getFirstDayOfSchool = (): moment.Moment => {
-	// we assume there are 10 full weeks of summer
+export const getFirstDayOfSchool = (year?: number): moment.Moment => {
+	// we assume there are at least 10 but not more than 11 full weeks of summer
 	// and that school starts on the following monday at 12:00 AM
-	return getLastDayOfSchool()
+	return getLastDayOfSchool(year)
 		.startOf("day") // set to 0:00 AM (so minutes, seconds are 0)
 		.hours(0) // set hour to 12
 		.day("Monday") // set it to the monday of the last week of school (so 4 days before end of school year)

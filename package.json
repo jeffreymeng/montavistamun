@@ -31,7 +31,7 @@
 		"serve": "gatsby serve",
 		"start": "npm run develop",
 		"start:firestore:emulators": "firebase emulators:start --only firestore",
-		"test": "npm run test:firestore",
+		"test": "firebase emulators:exec --only firestore \"jest\"",
 		"test:gui": "firebase emulators:exec --only firestore \"majestic\"",
 		"test:firestore": "firebase emulators:exec --only firestore \"jest ./tests/firestore-rules\""
 	},
