@@ -2,11 +2,12 @@ const { MAILCHIMP_API_KEY, FB_SERVICE_ACCOUNT } = process.env;
 const axios = require("axios").default;
 const crypto = require("crypto");
 const admin = require("firebase-admin");
-admin.initializeApp({
-	credential: admin.credential.cert(JSON.parse(FB_SERVICE_ACCOUNT)),
-	databaseURL: "https://montavistamodelun.firebaseio.com",
-});
-
+if (admin.apps.length === 0) {
+	admin.initializeApp({
+		credential: admin.credential.cert(FB_SERVICE_ACCOUNT),
+		databaseURL: "https://montavistamodelun.firebaseio.com",
+	});
+}
 export async function handler(event, context) {
 	if (event.httpMethod !== "POST") {
 		return { statusCode: 405, body: "Method Not Allowed" };

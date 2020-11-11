@@ -84,8 +84,9 @@ export default function AdminLogPage(): React.ReactElement {
 									(u) => u.id === doc.id
 								);
 								if (!userUserData) {
+									console.log(users, tempUserData);
 									throw new Error(
-										"Unable to find user data for registration with id:" +
+										"Unable to find user data for registration with id: " +
 											doc.id
 									);
 								}
@@ -171,7 +172,7 @@ export default function AdminLogPage(): React.ReactElement {
 				// this should never happen
 				console.log(user);
 				throw new Error(
-					"User with no registration data:" + user.userData.id
+					"User with no registration data: " + user.userData.id
 				);
 			}
 		});
@@ -537,13 +538,18 @@ export default function AdminLogPage(): React.ReactElement {
 						onClick={() => {
 							setExpandStatistics(
 								new Array(5).fill(
-									!expandStatistics.every((e) => e)
+									!expandStatistics.every(
+										(e, i) =>
+											e || statistics[i].length === 0
+									)
 								)
 							);
 						}}
 					>
-						{/* Allow user to show all steps unless every step is already shown */}
-						{expandStatistics.every((e) => e)
+						{/* Allow user to show all steps unless every step with users is already shown */}
+						{expandStatistics.every(
+							(e, i) => e || statistics[i].length === 0
+						)
 							? "Collapse All Steps"
 							: "Expand All Steps"}
 					</button>
