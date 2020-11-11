@@ -16,7 +16,7 @@ export default function CTA(): React.ReactElement {
 					Ready to start your MUN journey?
 					<br />
 					<span className="text-indigo-600">
-						Join MVMUN today and start recieving email updates
+						Join MV Model UN Today
 					</span>
 				</h2>
 				<div className="mt-8 flex lg:flex-shrink-0 lg:mt-0">

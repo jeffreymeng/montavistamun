@@ -506,7 +506,7 @@ export default function CreatePage({
 											Email
 										</label>
 										<span className="text-sm leading-5 text-gray-500">
-											We'll send you weekly updates
+											We'll email you weekly updates
 										</span>
 									</div>
 									<div className="mt-1 rounded-md shadow-sm">

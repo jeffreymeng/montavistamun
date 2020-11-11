@@ -21,7 +21,7 @@ export default function SettingsPage(): React.ReactElement {
 	useRequireLogin();
 
 	return (
-		<Layout title="Account Settings">
+		<Layout title="Account Settings" gray>
 			<Main wide className={"min-h-ca"}>
 				<h2 className="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:leading-9 sm:truncate">
 					Account Settings
