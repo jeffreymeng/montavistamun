@@ -268,10 +268,10 @@ export default function WaiverFormsSection({
 				>
 					{fuhsdUploading
 						? "Uploading..."
-						: !data?.forms?.scvmunFuhsdForm
-						? "Upload Files"
 						: !fuhsdForm || fuhsdForm.length === 0
 						? "Upload All Files to Continue"
+						: !data?.forms?.scvmunFuhsdForm
+						? "Upload Files"
 						: "Continue"}
 				</button>
 			</div>

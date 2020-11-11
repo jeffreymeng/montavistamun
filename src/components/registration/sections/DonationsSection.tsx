@@ -261,28 +261,28 @@ export default function DonationsSection({
 						uploading ||
 						submitting ||
 						skipping ||
-						!receipt ||
-						receipt.length == 0
+						((!receipt || receipt.length == 0) &&
+							!data?.forms?.scvmunDonationOptOut)
 					}
 					className={cx(
 						"ml-4 py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white shadow-sm",
 						uploading ||
 							submitting ||
 							skipping ||
-							!receipt ||
-							receipt.length == 0
+							((!receipt || receipt.length == 0) &&
+								!data?.forms?.scvmunDonationOptOut)
 							? "bg-indigo-300"
 							: "bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline-blue active:bg-indigo-600 transition duration-150 ease-in-out"
 					)}
 				>
 					{uploading
 						? "Uploading..."
-						: !data?.forms?.scvmunDonation &&
-						  !data?.forms?.scvmunDonationOptOut
-						? "Upload"
 						: (!receipt || receipt.length == 0) &&
 						  !data?.forms?.scvmunDonationOptOut
 						? "Upload all forms to finish registration"
+						: !data?.forms?.scvmunDonation &&
+						  !data?.forms?.scvmunDonationOptOut
+						? "Upload"
 						: !data.confirm?.scvmunConfirmed
 						? "Finish Registration"
 						: "Continue"}

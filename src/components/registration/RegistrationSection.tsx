@@ -249,7 +249,7 @@ export default function RegistrationSection() {
 					<div className="md:col-span-1">
 						<div className="px-4 sm:px-0 sticky top-24">
 							<h3 className="text-2xl font-bold leading-6 text-gray-900">
-								SFMUN Registration
+								SCVMUN Registration
 							</h3>
 							<p className="mt-1 max-w-2xl text-sm leading-5 text-gray-500">
 								Your information will be saved when you click
@@ -276,12 +276,12 @@ export default function RegistrationSection() {
 									{
 										title: "Committee Preferences",
 										description:
-											"Now comes the fun part! Look into the different committees offered at SFMUN and indicate how much you like each one.",
+											"Now comes the fun part! Look into the different committees offered at SCVMUN and indicate how much you like each one.",
 									},
 									{
 										title: "Donations",
 										description:
-											"To cover conference fees charged by SFMUN, we request a $25 donation, which will go directly towards making this conference possible.", //TODO
+											"To cover conference fees charged by SCVMUN, we request a $25 donation, which will go directly towards making this conference possible.",
 									},
 									{
 										title: "You're Done!",
