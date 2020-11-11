@@ -2,14 +2,13 @@ import axios from "axios";
 // Import React FilePond
 import callbackBlobToBuffer from "blob-to-buffer";
 import cx from "classnames";
-import React, { useContext, useState } from "react";
+import { User } from "firebase";
+import React, { useState } from "react";
 import { File } from "react-filepond";
 import useFirebase from "../../../auth/useFirebase";
-import AuthContext from "../../../context/AuthContext";
 import "../../../css/file-upload.css";
 import FormUpload from "../FormUpload";
 import * as pdfform from "../PDFForm";
-
 interface WaiverForms {
 	smuncFuhsdForm: string;
 }
@@ -63,7 +62,9 @@ export default function WaiverFormsSection({
 	handleUpdateData,
 	setStep,
 	setMaxStep,
+	user,
 }: {
+	user: User;
 	data: Record<string, any>;
 	handleUpdateData: (
 		name: string,
@@ -79,7 +80,6 @@ export default function WaiverFormsSection({
 		null,
 		null,
 	]);
-	const { user } = useContext(AuthContext);
 	const [fuhsdForm, setFuhsdForm] = useState<File | null>(null);
 	const [fuhsdUploading, setFuhsdUploading] = useState(false);
 
@@ -213,6 +213,7 @@ export default function WaiverFormsSection({
 						fieldName={"smuncFuhsdForm"}
 						data={data}
 						handleUpdateData={handleUpdateData}
+						user={user}
 					/>
 				</div>
 			</div>

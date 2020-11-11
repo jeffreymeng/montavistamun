@@ -1,12 +1,13 @@
+import { User } from "firebase";
 import { Field } from "formik";
 import { Link } from "gatsby";
-import React, { useContext } from "react";
+import React from "react";
 import Select from "react-select";
 import * as Yup from "yup";
-import AuthContext from "../../../context/AuthContext";
 import InputGroup from "../../shared/InputGroup";
-import RegisterFormSection from "../RegisterFormSection";
-import stateOptions from "../stateOptions";
+import RegisterFormSection from "./RegisterFormSection";
+import stateOptions from "./stateOptions";
+
 interface PersonalInformation {
 	phone: string;
 	addressOne: string;
@@ -31,7 +32,9 @@ export default function PersonalInformationSection({
 	handleUpdateData,
 	setStep,
 	setMaxStep,
+	user,
 }: {
+	user: User;
 	data?: PersonalInformation;
 	handleUpdateData: (
 		name: string,
@@ -41,9 +44,10 @@ export default function PersonalInformationSection({
 	setStep: (step: number) => void;
 	setMaxStep: (fn: (oldMaxStep: number) => number) => void;
 }) {
-	const { user, loading: userLoading } = useContext(AuthContext);
+	const userLoading = !user;
 	return (
 		<RegisterFormSection<PersonalInformation>
+			user={user}
 			title={"Personal Information"}
 			data={data}
 			onSubmit={(data: PersonalInformation) =>

@@ -1,16 +1,20 @@
 // Import React FilePond
 import cx from "classnames";
-import React, { useContext, useState } from "react";
+import { User } from "firebase";
+import React, { useState } from "react";
 import useFirebase from "../../../auth/useFirebase";
-import AuthContext from "../../../context/AuthContext";
 import "../../../css/file-upload.css";
+
 export default function ConfirmationSection({
 	data,
 	setStepHasChanges,
 	handleUpdateData,
 	setStep,
 	setMaxStep,
+	user,
 }: {
+	user: User;
+
 	data: Record<string, any>;
 	handleUpdateData: (
 		name: string,
@@ -22,7 +26,6 @@ export default function ConfirmationSection({
 }) {
 	const firebase = useFirebase();
 
-	const { user } = useContext(AuthContext);
 	const [submitting, setSubmitting] = useState(false);
 	return (
 		<div className="mt-8 shadow rounded-md sm:overflow-hidden">
@@ -32,7 +35,7 @@ export default function ConfirmationSection({
 				</h3>
 				<p className="mt-2">
 					{user?.displayName ? user?.displayName + ", y" : "Y"}ou are
-					now registered for SFMUN!
+					now registered for SCVMUN!
 				</p>
 				<p className="mt-2">
 					If you'd like to help us improve the conference registration

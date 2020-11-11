@@ -1,11 +1,12 @@
+import { User } from "firebase";
 import { Field } from "formik";
-import React, { useContext } from "react";
+import React from "react";
 import Select from "react-select";
 import * as Yup from "yup";
-import AuthContext from "../../../context/AuthContext";
 import InputGroup from "../../shared/InputGroup";
 import RegisterFormSection from "../RegisterFormSection";
 import stateOptions from "../stateOptions";
+
 interface EmergencyInformation {
 	contactOneName: string;
 	contactOnePhone: string;
@@ -41,7 +42,9 @@ export default function EmergencyInformationSection({
 	handleUpdateData,
 	setStep,
 	setMaxStep,
+	user,
 }: {
+	user: User;
 	data?: EmergencyInformation;
 	handleUpdateData: (
 		name: string,
@@ -51,9 +54,9 @@ export default function EmergencyInformationSection({
 	setStep: (step: number) => void;
 	setMaxStep: (fn: (oldMaxStep: number) => number) => void;
 }) {
-	const { user, loading: userLoading } = useContext(AuthContext);
 	return (
 		<RegisterFormSection<EmergencyInformation>
+			user={user}
 			data={data}
 			showBack
 			onBack={() => setStep(0)}

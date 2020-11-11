@@ -6,8 +6,8 @@ import useRequireLogin from "../../../components/accounts/useRequireLogin";
 import FluidImage from "../../../components/FluidImage";
 import Header from "../../../components/Header";
 import { Layout, Main } from "../../../components/layout";
-import EmergencyInformationSection from "../../../components/registration/sfmun/EmergencyInformationSection";
-import PersonalInformationSection from "../../../components/registration/sfmun/PersonalInformationSection";
+import EmergencyInformationSection from "../../../components/registration/sections/EmergencyInformationSection";
+import PersonalInformationSection from "../../../components/registration/sections/PersonalInformationSection";
 import ConfirmationSection from "../../../components/registration/smunc/ConfirmationSection";
 import DonationsSection from "../../../components/registration/smunc/DonationsSection";
 import WaiverFormsSection from "../../../components/registration/smunc/WaiverFormsSection";
@@ -228,6 +228,7 @@ export default function AboutPage({
 		setStepHasChanges,
 		setStep,
 		setMaxStep,
+		user,
 	};
 	if (userLoading) {
 		return (

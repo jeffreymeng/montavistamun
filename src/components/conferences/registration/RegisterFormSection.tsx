@@ -4,8 +4,7 @@ import { Form, Formik, FormikProps } from "formik";
 import * as Icons from "heroicons-react";
 import React, { ReactElement, useState } from "react";
 import * as Yup from "yup";
-import useRequireLogin from "../accounts/useRequireLogin";
-import ConfirmModal from "../ConfirmModal";
+import ConfirmModal from "../../ConfirmModal";
 export default function RegisterFormSection<Fields>({
 	data,
 	onSubmit,
@@ -21,7 +20,7 @@ export default function RegisterFormSection<Fields>({
 	confirmContinue,
 	user,
 }: {
-	user?: User;
+	user: User;
 	data?: Fields;
 	onSubmit: (data: Fields) => Promise<void>;
 	onHasChangesChange: (hasChanges: boolean) => void;
@@ -33,7 +32,7 @@ export default function RegisterFormSection<Fields>({
 	onBack?: () => void;
 	showBack?: boolean;
 	/**
-	 * If provided, the function will be extecuted to check if a confirm save modal should be shown.
+	 * If provided, the function will be executed to check if a confirm save modal should be shown.
 	 * The modal will be shown if a string is returned, and the help text will be that string.
 	 * @param values
 	 */
@@ -42,7 +41,6 @@ export default function RegisterFormSection<Fields>({
 		props: FormikProps<Fields> & { canEdit: boolean }
 	) => ReactElement;
 }): ReactElement {
-	useRequireLogin();
 	return (
 		<div className="shadow overflow-hidden sm:rounded-md">
 			<Formik
@@ -107,7 +105,7 @@ function RegisterFormSectionInner<Fields>({
 	showBack,
 	user,
 }: {
-	user?: User;
+	user: User;
 	loading: boolean;
 	confirmContinue?: (values: Fields) => false | string;
 	onBack?: () => void;
@@ -258,7 +256,7 @@ function RegisterFormSectionInner<Fields>({
 								setConfirmText(confirmModalText);
 								return;
 							}
-							onSave();
+							return onSave();
 						}}
 						disabled={!canSubmit}
 						className={cx(

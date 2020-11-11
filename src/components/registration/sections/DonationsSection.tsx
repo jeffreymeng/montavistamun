@@ -1,18 +1,19 @@
 // Import React FilePond
 import callbackBlobToBuffer from "blob-to-buffer";
 import cx from "classnames";
-import React, { useContext, useState } from "react";
+import { FilePond } from "filepond";
+import { User } from "firebase";
+import React, { useState } from "react";
 import useFirebase from "../../../auth/useFirebase";
-import AuthContext from "../../../context/AuthContext";
 import "../../../css/file-upload.css";
 import FormUpload from "../FormUpload";
 
 interface DonationForms {
-	donation?: string;
-	donationOptOut?: boolean;
+	scvmunDonation?: string;
+	scvmunDonationOptOut?: boolean;
 }
 interface ConfirmationData {
-	sfmunConfirmed: true;
+	scvmunConfirmed: true;
 }
 // make promise based
 const blobToBuffer = (blob: Blob) =>
@@ -29,7 +30,9 @@ export default function DonationsSection({
 	handleUpdateData,
 	setStep,
 	setMaxStep,
+	user,
 }: {
+	user: User;
 	data: Record<string, any>;
 	handleUpdateData: (
 		name: string,
@@ -41,7 +44,6 @@ export default function DonationsSection({
 }) {
 	const firebase = useFirebase();
 
-	const { user } = useContext(AuthContext);
 	const [receipt, setReceipt] = useState<
 		(File & { serverId: string | null })[] | null
 	>(null);
@@ -55,6 +57,7 @@ export default function DonationsSection({
 	}, [uploading, receipt && receipt[0], receipt && receipt[0]?.serverId]);
 	const [submitting, setSubmitting] = useState(false);
 	const [skipping, setSkipping] = useState(false);
+	const [uploadInstance, setUploadInstance] = useState<FilePond | null>(null);
 	return (
 		<div className="mt-8 shadow rounded-md sm:overflow-hidden">
 			<div className={"px-4 bg-white sm:p-6 py-4"}>
@@ -63,7 +66,7 @@ export default function DonationsSection({
 				</h3>
 				<p className="mt-2">
 					Before you submit, we just have one last step. To cover the
-					fees charged by SFMUN, we are requesting that you include a
+					fees charged by SCVMUN, we are requesting that you include a
 					donation of <b>$25</b> with your registration. Your
 					donations will go directly towards covering conference fees
 					and making this conference possible.
@@ -91,7 +94,7 @@ export default function DonationsSection({
 							onClick={(e) => {
 								setSkipping(true);
 								handleUpdateData("forms", {
-									donationOptOut: false,
+									scvmunDonationOptOut: false,
 								}).then(() => setSkipping(false));
 							}}
 						>
@@ -123,7 +126,7 @@ export default function DonationsSection({
 									if (skipping) return;
 									setSkipping(true);
 									handleUpdateData("forms", {
-										donationOptOut: true,
+										scvmunDonationOptOut: true,
 									}).then(() => setSkipping(false));
 								}}
 							>
@@ -141,12 +144,12 @@ export default function DonationsSection({
 						<ul className="list-decimal ml-8">
 							<li>
 								Head to Monta Vista’s online Student Store and
-								find our sfmun conference donation{" "}
+								find our scvmun conference donation{" "}
 								<a
 									target={"_blank"}
 									rel={"noopener noreferrer"}
 									href={
-										"http://montavistahs.3dcartstores.com/San-Francisco-Model-UN-Conference-Virtual-Conference_p_123.html"
+										"https://montavistahs.3dcartstores.com/Santa-Clara-Valley-Model-UN-Conference-Virtual-Conference_p_123.html"
 									}
 									className={"link"}
 								>
@@ -165,17 +168,21 @@ export default function DonationsSection({
 						<p className={"mt-4"}>
 							Unfortunately, we are unable to process refunds with
 							the online system. Please confirm you can attend the
-							conference (<b>December 12–13, 2020</b>) before
+							conference (<b>January 29-30, 2021</b>) before
 							donating!
 						</p>
 
 						<div className={"mt-4"}>
 							<FormUpload
+								onInstanceChange={(instance) =>
+									setUploadInstance(instance)
+								}
+								user={user}
 								file={receipt}
 								setFile={setReceipt}
 								uploading={uploading}
 								setUploading={setUploading}
-								fieldName={"donation"}
+								fieldName={"scvmunDonation"}
 								data={data}
 								allowImagePreview
 								acceptedFileTypes={[
@@ -216,13 +223,22 @@ export default function DonationsSection({
 				<button
 					type={"button"}
 					onClick={() => {
-						if (data.confirm?.sfmunConfirmed) {
+						if (
+							!data?.forms?.scvmunDonation &&
+							!data?.forms?.scvmunDonationOptOut
+						) {
+							if (!uploadInstance) return;
+							setUploading(true);
+							uploadInstance.processFile();
+							return;
+						}
+						if (data.confirm?.scvmunConfirmed) {
 							setStep(5);
 							return;
 						}
 						setSubmitting(true);
 						handleUpdateData("confirm", {
-							sfmunConfirmed: true,
+							scvmunConfirmed: true,
 						})
 							.then(() => {
 								if (!firebase) return;
@@ -231,8 +247,8 @@ export default function DonationsSection({
 									.collection("users")
 									.doc(user?.uid)
 									.update({
-										sfmunRegistered: true,
-										sfmunRegistrationTimestamp: firebase.firestore.FieldValue.serverTimestamp(),
+										scvmunRegistered: true,
+										scvmunRegistrationTimestamp: firebase.firestore.FieldValue.serverTimestamp(),
 									});
 							})
 							.then(() => {
@@ -245,24 +261,29 @@ export default function DonationsSection({
 						uploading ||
 						submitting ||
 						skipping ||
-						(!data?.forms?.donation && !data?.forms?.donationOptOut)
+						!receipt ||
+						receipt.length == 0
 					}
 					className={cx(
 						"ml-4 py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white shadow-sm",
 						uploading ||
 							submitting ||
 							skipping ||
-							(!data?.forms?.donation &&
-								!data?.forms?.donationOptOut)
+							!receipt ||
+							receipt.length == 0
 							? "bg-indigo-300"
 							: "bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline-blue active:bg-indigo-600 transition duration-150 ease-in-out"
 					)}
 				>
 					{uploading
 						? "Uploading..."
-						: !data?.forms?.donation && !data?.forms?.donationOptOut
+						: !data?.forms?.scvmunDonation &&
+						  !data?.forms?.scvmunDonationOptOut
+						? "Upload"
+						: (!receipt || receipt.length == 0) &&
+						  !data?.forms?.scvmunDonationOptOut
 						? "Upload all forms to finish registration"
-						: !data.confirm?.sfmunConfirmed
+						: !data.confirm?.scvmunConfirmed
 						? "Finish Registration"
 						: "Continue"}
 				</button>

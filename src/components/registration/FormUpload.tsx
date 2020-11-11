@@ -1,6 +1,6 @@
 import axios from "axios";
 import fileType from "file-type/browser";
-import { registerPlugin as registerFilepondPlugin } from "filepond";
+import { FilePond, registerPlugin as registerFilepondPlugin } from "filepond";
 import FilePondPluginFileValidateSize from "filepond-plugin-file-validate-size";
 import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
 import FilePondPluginGetFile from "filepond-plugin-get-file";
@@ -10,11 +10,11 @@ import FilePondPluginImagePreview from "filepond-plugin-image-preview";
 import "filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css";
 // Import FilePond styles
 import "filepond/dist/filepond.min.css";
-import firebaseType, * as FirebaseType from "firebase";
-import React, { useContext } from "react";
-import { File, FilePond } from "react-filepond";
+import type firebaseType from "firebase";
+import { User } from "firebase";
+import React, { useState } from "react";
+import { File, FilePond as ReactFilePond } from "react-filepond";
 import useFirebase from "../../auth/useFirebase";
-import AuthContext from "../../context/AuthContext";
 
 registerFilepondPlugin(
 	FilePondPluginImageExifOrientation,
@@ -42,7 +42,7 @@ const loadOrRestoreFile = (
 		.storage()
 		.ref(`forms/sfmun/${user?.uid}/${fieldName}/${fileName}`)
 		.getDownloadURL()
-		.then((url) => {
+		.then((url: string) => {
 			return axios.get(url, {
 				responseType: "arraybuffer",
 				headers: {
@@ -53,7 +53,7 @@ const loadOrRestoreFile = (
 		.then((response) => {
 			return new Blob([response.data]);
 		})
-		.then((blob) => {
+		.then((blob: Blob) => {
 			progress(true, blob.size, blob.size);
 			load(blob);
 		})
@@ -63,6 +63,7 @@ const loadOrRestoreFile = (
 		});
 };
 export default function FormUpload<Data>({
+	onInstanceChange,
 	file,
 	setFile,
 	uploading,
@@ -75,7 +76,10 @@ export default function FormUpload<Data>({
 	fileValidateTypeLabelExpectedTypes,
 	handleUpdateData,
 	allowImagePreview,
+	user,
 }: {
+	onInstanceChange: (newInstance: FilePond | null) => void;
+	user: User;
 	file?: File;
 	allowImagePreview?: boolean;
 	setFile: (file: File | null) => void;
@@ -90,18 +94,10 @@ export default function FormUpload<Data>({
 	handleUpdateData: (name: string, data: any) => Promise<void>;
 }) {
 	const firebase = useFirebase();
-	const { user } = useContext(AuthContext);
+	const [instance, setInstance] = useState<FilePond | null>(null);
 	React.useEffect(() => {
-		// if (file && file[0] && file[0].file) {
-		// 	const reader = new FileReader();
-		// 	console.log(file[0].file);
-		// 	reader.readAsDataURL(file[0].file);
-		// 	reader.onloadend = function () {
-		// 		const base64data = reader.result;
-		// 		console.log(base64data);
-		// 	};
-		// }
-	}, [file]);
+		onInstanceChange(instance);
+	}, [instance]);
 	React.useEffect(() => {
 		if (!data || !firebase || !user) return;
 		if (!file && data.forms && data.forms[fieldName]) {
@@ -127,7 +123,8 @@ export default function FormUpload<Data>({
 		}
 	}, [data, firebase, user]);
 	return (
-		<FilePond
+		<ReactFilePond
+			ref={(ref) => setInstance(ref)}
 			files={file}
 			onupdatefiles={setFile}
 			allowMultiple={false}

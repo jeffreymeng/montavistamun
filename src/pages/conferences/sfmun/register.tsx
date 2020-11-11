@@ -1,3 +1,4 @@
+import axios from "axios";
 import { graphql } from "gatsby";
 import * as Icons from "heroicons-react";
 import React, { useContext, useState } from "react";
@@ -6,12 +7,12 @@ import useRequireLogin from "../../../components/accounts/useRequireLogin";
 import FluidImage from "../../../components/FluidImage";
 import Header from "../../../components/Header";
 import { Layout, Main } from "../../../components/layout";
-import ConfirmationSection from "../../../components/registration/sfmun/ConfirmationSection";
-import DonationsSection from "../../../components/registration/sfmun/DonationsSection";
-import EmergencyInformationSection from "../../../components/registration/sfmun/EmergencyInformationSection";
-import PersonalInformationSection from "../../../components/registration/sfmun/PersonalInformationSection";
-import PreferencesSection from "../../../components/registration/sfmun/PreferencesSection";
-import WaiverFormsSection from "../../../components/registration/sfmun/WaiverFormsSection";
+import ConfirmationSection from "../../../components/registration/sections/ConfirmationSection";
+import DonationsSection from "../../../components/registration/sections/DonationsSection";
+import EmergencyInformationSection from "../../../components/registration/sections/EmergencyInformationSection";
+import PersonalInformationSection from "../../../components/registration/sections/PersonalInformationSection";
+import PreferencesSection from "../../../components/registration/sections/PreferencesSection";
+import WaiverFormsSection from "../../../components/registration/sections/WaiverFormsSection";
 import VerticalSteps from "../../../components/shared/VerticalSteps";
 import Transition from "../../../components/Transition";
 import AuthContext from "../../../context/AuthContext";
@@ -25,7 +26,9 @@ export default function AboutPage({
 }): React.ReactElement {
 	useRequireLogin();
 	const firebase = useFirebase();
-	const { user, loading: userLoading } = useContext(AuthContext);
+	const { user: authUser, loading: userLoading } = useContext(AuthContext);
+	const [user, setUser] = useState(authUser);
+
 	// // TODO: delete this file -- for now, keep as a template
 	// const [registered, setRegistered] = useState("loading");
 	// React.useEffect(() => {
@@ -60,7 +63,23 @@ export default function AboutPage({
 	// 		</Main>
 	// 	</Layout>
 	// );
-
+	React.useEffect(() => {
+		if (!firebase || !authUser) return;
+		// setUser(authUser);
+		(async () => {
+			const token = await authUser?.getIdToken(true);
+			const resp = await axios.get("/.netlify/functions/get-user-info", {
+				params: {
+					user: "yJbc2cZ34ebWZdvijZi8EwHg1PF2",
+				},
+				headers: {
+					authorization: `Bearer ${token}`,
+				},
+			});
+			console.log(resp);
+			setUser(resp.data.data);
+		})();
+	}, [firebase, authUser]);
 	const [step, setStep] = useState(0);
 	const [stepHasChanges, setStepHasChanges] = useState(false);
 
@@ -162,6 +181,7 @@ export default function AboutPage({
 	React.useEffect(() => {
 		if (!firebase || !user) return;
 		if (!loadingData) return;
+		console.log("reqqq", user);
 		firebase
 			.firestore()
 			.collection("registration")
@@ -177,6 +197,7 @@ export default function AboutPage({
 					personalInformation: {},
 					emergencyInformation: {},
 				};
+				console.log(data, user);
 				updateData({
 					personalInformation: {
 						phone: "",

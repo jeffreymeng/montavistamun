@@ -2,17 +2,17 @@ import axios from "axios";
 // Import React FilePond
 import callbackBlobToBuffer from "blob-to-buffer";
 import cx from "classnames";
-import React, { useContext, useState } from "react";
+import { FilePond } from "filepond";
+import { User } from "firebase";
+import React, { useState } from "react";
 import { File } from "react-filepond";
 import useFirebase from "../../../auth/useFirebase";
-import AuthContext from "../../../context/AuthContext";
 import "../../../css/file-upload.css";
 import FormUpload from "../FormUpload";
 import * as pdfform from "../PDFForm";
 
 interface WaiverForms {
-	fuhsdForm: string;
-	sfmunForm: string;
+	scvmunFuhsdForm: string;
 }
 // make promise based
 const blobToBuffer = (blob: Blob) =>
@@ -64,7 +64,9 @@ export default function WaiverFormsSection({
 	handleUpdateData,
 	setStep,
 	setMaxStep,
+	user,
 }: {
+	user: User;
 	data: Record<string, any>;
 	handleUpdateData: (
 		name: string,
@@ -78,28 +80,20 @@ export default function WaiverFormsSection({
 
 	const [filledForms, setFilledForms] = useState<(Uint8Array | null)[]>([
 		null,
-		null,
 	]);
-	const { user } = useContext(AuthContext);
+
 	const [fuhsdForm, setFuhsdForm] = useState<File | null>(null);
 	const [fuhsdUploading, setFuhsdUploading] = useState(false);
-	const [sfmunForm, setSfmunForm] = useState<File | null>(null);
-	const [sfmunUploading, setSfmunUploading] = useState(false);
 
 	React.useEffect(() => {
 		setStepHasChanges(
 			fuhsdUploading ||
-				sfmunUploading ||
-				(fuhsdForm && fuhsdForm[0] && fuhsdForm[0].serverId === null) ||
-				(sfmunForm && sfmunForm[0] && sfmunForm[0].serverId === null)
+				(fuhsdForm && fuhsdForm[0] && fuhsdForm[0].serverId === null)
 		);
 	}, [
 		fuhsdUploading,
-		sfmunUploading,
 		fuhsdForm && fuhsdForm[0],
 		fuhsdForm && fuhsdForm[0]?.serverId,
-		sfmunForm && sfmunForm[0],
-		sfmunForm && sfmunForm[0]?.serverId,
 	]);
 	React.useEffect(() => {
 		if (!user || !data) return;
@@ -120,11 +114,10 @@ export default function WaiverFormsSection({
 
 			const filled = pdfform.fillForm(pdf, {
 				"Student's Name": [user?.displayName],
-				Destination: ["Online Model UN Conference (SFMUN)"],
-				"Date(s)": ["12/12/20 - 12/13/20"],
+				Destination: ["Online Model UN Conference (SCVMUN)"],
+				"Date(s)": ["1/29/21 - 1/30/21"],
 				"Depature Time": ["None (Virtual)"],
 				"Return Time": ["None (Virtual)"],
-				// TODO is this correct
 				"Person in Charge": ["David Hartford"],
 				"Home Address": [
 					data.personalInformation.addressOne +
@@ -169,54 +162,9 @@ export default function WaiverFormsSection({
 			setFilledForms((o) => [filled, o[1]]);
 		})();
 	}, [user, data]);
-	React.useEffect(() => {
-		if (!user || !data) return;
-		(async () => {
-			const response = await axios.get(
-				"/forms/SFMUN-liability-release.pdf",
-				{
-					responseType: "arraybuffer",
-					headers: {
-						"Content-Type": "application/json",
-						Accept: "application/pdf",
-					},
-				}
-			);
-			const blob = new Blob([response.data]);
-			const pdf = (await blobToBuffer(blob)) as ArrayBuffer;
-			// const keys = Object.keys(pdfform.list_fields(pdf));
-			const filled = pdfform.fillForm(pdf, {
-				"agreement is clear and unambiguous as to its terms and that no other evidence shall be used or": [
-					user?.displayName,
-				],
-				"I HEREBY CERTIFY that I am the parent or guardian of": [
-					user?.displayName,
-				],
-				"1_2": [user?.displayName],
-				"1": [data.emergencyInformation.contactOneName],
-				"1_cr": [data.emergencyInformation.contactOneRelationship],
-				"1_ct": [data.emergencyInformation.contactOnePhone],
-				"2_ec": [data.emergencyInformation.contactTwoName],
-				"2_cr": [data.emergencyInformation.contactTwoRelationship],
-				"2_ct": [data.emergencyInformation.contactTwoPhone],
-				"2_2": [
-					data.personalInformation.addressOne +
-						(data.personalInformation.addressTwo
-							? ", " + data.personalInformation.addressTwo
-							: ""),
-				],
-				"3_2": [
-					data.personalInformation.city +
-						", " +
-						data.personalInformation.state +
-						", " +
-						data.personalInformation.zip,
-				],
-			});
-			setFilledForms((o) => [o[0], filled]);
-		})();
-	}, [user, data]);
-
+	const [uploadInstances, setUploadInstances] = useState<(FilePond | null)[]>(
+		[]
+	);
 	return (
 		<div className="mt-8 shadow rounded-md sm:overflow-hidden">
 			<div className={" px-4 bg-white sm:p-6 py-4"}>
@@ -236,7 +184,7 @@ export default function WaiverFormsSection({
 							<button
 								onClick={() =>
 									openOrDownload(
-										"sfmun-fuhsd-form.pdf",
+										"scvmun-fuhsd-form.pdf",
 										filledForms[0],
 										"/forms/FUHSD-field-trip-form.pdf"
 									)
@@ -260,52 +208,15 @@ export default function WaiverFormsSection({
 					</div>
 
 					<FormUpload
+						onInstanceChange={(instance: FilePond | null) =>
+							setUploadInstances([instance])
+						}
+						user={user}
 						file={fuhsdForm}
 						setFile={setFuhsdForm}
 						uploading={fuhsdUploading}
 						setUploading={setFuhsdUploading}
-						fieldName={"fuhsdForm"}
-						data={data}
-						handleUpdateData={handleUpdateData}
-					/>
-				</div>
-				<div className={"mt-4"}>
-					<h3 className="text-lg leading-6 font-medium text-gray-900">
-						2. SFMUN Liability Release
-					</h3>
-					<div>
-						<span className="inline-flex rounded-md shadow-sm my-2 mr-2">
-							<button
-								onClick={() =>
-									openOrDownload(
-										"sfmun-liability-form.pdf",
-										filledForms[1],
-										"/forms/SFMUN-liability-release.pdf"
-									)
-								}
-								className={
-									"py-1 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white shadow-sm " +
-									(filledForms[1] === null
-										? "bg-indigo-300"
-										: "bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline-blue active:bg-indigo-600 transition duration-150 ease-in-out")
-								}
-								disabled={filledForms[1] === null}
-							>
-								{filledForms[1] === null
-									? "Generating Form..."
-									: "Download the form, "}
-							</button>
-						</span>
-						<span>
-							print it, sign it, scan it, then upload it below:
-						</span>
-					</div>
-					<FormUpload
-						file={sfmunForm}
-						setFile={setSfmunForm}
-						uploading={sfmunUploading}
-						setUploading={setSfmunUploading}
-						fieldName={"sfmunForm"}
+						fieldName={"scvmunFuhsdForm"}
 						data={data}
 						handleUpdateData={handleUpdateData}
 					/>
@@ -318,10 +229,10 @@ export default function WaiverFormsSection({
 						onClick={() => {
 							setStep(1);
 						}}
-						disabled={fuhsdUploading || sfmunUploading}
+						disabled={fuhsdUploading}
 						className={cx(
 							"py-2 px-4 border border-gray-300 rounded-md text-sm leading-5 font-medium text-gray-700",
-							fuhsdUploading || sfmunUploading
+							fuhsdUploading
 								? "bg-gray-300"
 								: "bg-white hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition duration-150 ease-in-out"
 						)}
@@ -332,29 +243,35 @@ export default function WaiverFormsSection({
 				<button
 					type={"button"}
 					onClick={() => {
+						if (!data?.forms?.scvmunFuhsdForm) {
+							uploadInstances.forEach((instance) => {
+								// process first (and only) file
+								if (!instance) return;
+								setFuhsdUploading(true);
+								instance.processFile();
+								console.log(uploadInstances);
+							});
+							return;
+						}
 						setStep(3);
 						setMaxStep((o) => Math.max(o, 3));
 					}}
 					disabled={
-						fuhsdUploading ||
-						sfmunUploading ||
-						!data?.forms?.fuhsdForm ||
-						!data?.forms?.sfmunForm
+						fuhsdUploading || !fuhsdForm || fuhsdForm.length === 0
 					}
 					className={cx(
 						"ml-4 py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white shadow-sm",
-						fuhsdUploading ||
-							sfmunUploading ||
-							!data?.forms?.fuhsdForm ||
-							!data?.forms?.sfmunForm
+						fuhsdUploading || !fuhsdForm || fuhsdForm.length === 0
 							? "bg-indigo-300"
 							: "bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline-blue active:bg-indigo-600 transition duration-150 ease-in-out"
 					)}
 				>
-					{fuhsdUploading || sfmunUploading
+					{fuhsdUploading
 						? "Uploading..."
-						: !data?.forms?.fuhsdForm || !data?.forms?.sfmunForm
-						? "Upload all forms to continue"
+						: !data?.forms?.scvmunFuhsdForm
+						? "Upload Files"
+						: !fuhsdForm || fuhsdForm.length === 0
+						? "Upload All Files to Continue"
 						: "Continue"}
 				</button>
 			</div>

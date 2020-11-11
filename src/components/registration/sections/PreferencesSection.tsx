@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+import { User } from "firebase";
+import React from "react";
 import * as Yup from "yup";
-import AuthContext from "../../../context/AuthContext";
 import PreferenceList from "../../conferences/PreferenceList";
 import RegisterFormSection from "../RegisterFormSection";
+
 interface PreferencesInformation {
-	committee: string[];
+	scvmunCommittee: string[];
 }
 
 export default function PreferencesSection({
@@ -13,7 +14,9 @@ export default function PreferencesSection({
 	handleUpdateData,
 	setStep,
 	setMaxStep,
+	user,
 }: {
+	user: User;
 	data?: PreferencesInformation;
 	handleUpdateData: (
 		name: string,
@@ -23,9 +26,9 @@ export default function PreferencesSection({
 	setStep: (step: number) => void;
 	setMaxStep: (fn: (oldMaxStep: number) => number) => void;
 }) {
-	const { user, loading: userLoading } = useContext(AuthContext);
 	return (
 		<RegisterFormSection<PreferencesInformation>
+			user={user}
 			title={"Committee Preferences"}
 			data={data}
 			showBack
@@ -43,28 +46,34 @@ export default function PreferencesSection({
 				setMaxStep((old: number) => Math.max(old, 4));
 			}}
 			schema={Yup.object().shape({
-				committee: Yup.array().required(),
+				scvmunCommittee: Yup.array().required(),
 			})}
 			loadingValues={{
-				committee: ["Loading..."],
+				scvmunCommittee: ["Loading..."],
 			}}
-			confirmContinue={(values: { committee: string[] }) =>
+			confirmContinue={(values: { scvmunCommittee: string[] }) =>
 				[
-					"DISEC",
-					"IAEA",
-					"UNODC",
-					"SPECPOL",
-					"UNHCR",
-					"Catherine The Great's Coup (Crisis)",
-					"UNSC (Crisis)",
-					"Senate (Crisis)",
-				].every((el, i) => el === values.committee[i])
+					"IAEA (International Atomic Energy Association)",
+					"DISEC (Disarmament and International Security Committee)",
+					"WHO (World Health Organization)",
+					"UNEP (United Nations Environmental Programme)",
+					"SOCHUM (Social, Humanitarian and Cultural)",
+					"UNDP (United Nations Development Programme)",
+					"LEGAL (Legal Committee)",
+					"UNESCO (United Nations Educational, Scientific and Cultural Organization)",
+					"Security Council (Specialty Committee)",
+					"Historic Security Council (Specialty Committee)",
+					"NATO (Specialty Committee)",
+					"World Bank (Specialty Committee)",
+					"UNHCR (United Nations High Commissioner for Refugees) (Specialty Committee)",
+					"CSW (Commission on the Status of Women) (Specialty Committee)",
+				].every((el, i) => el === values.scvmunCommittee[i])
 					? "It doesn't look like you've re-ordered any of the committees."
 					: false
 			}
 		>
 			{({
-				values: { committee },
+				values: { scvmunCommittee },
 				errors,
 				canEdit,
 				touched,
@@ -74,7 +83,7 @@ export default function PreferencesSection({
 					<div className={"col-span-6"}>
 						<span className="inline-flex rounded-md shadow-sm my-2 mr-2">
 							<a
-								href={"https://www.sfmun.org/generalassemblies"}
+								href={"https://www.scvmun.com/committees"}
 								rel={"noopener noreferrer"}
 								target={"_blank"}
 								className={
@@ -100,15 +109,21 @@ export default function PreferencesSection({
 								onClick={(e) => {
 									e.preventDefault();
 
-									setFieldValue("committee", [
-										"DISEC",
-										"IAEA",
-										"UNODC",
-										"SPECPOL",
-										"UNHCR",
-										"Catherine The Great's Coup (Crisis)",
-										"UNSC (Crisis)",
-										"Senate (Crisis)",
+									setFieldValue("scvmunCommittee", [
+										"IAEA (International Atomic Energy Association)",
+										"DISEC (Disarmament and International Security Committee)",
+										"WHO (World Health Organization)",
+										"UNEP (United Nations Environmental Programme)",
+										"SOCHUM (Social, Humanitarian and Cultural)",
+										"UNDP (United Nations Development Programme)",
+										"LEGAL (Legal Committee)",
+										"UNESCO (United Nations Educational, Scientific and Cultural Organization)",
+										"Security Council (Specialty Committee)",
+										"Historic Security Council (Specialty Committee)",
+										"NATO (Specialty Committee)",
+										"World Bank (Specialty Committee)",
+										"UNHCR (United Nations High Commissioner for Refugees) (Specialty Committee)",
+										"CSW (Commission on the Status of Women) (Specialty Committee)",
 									]);
 								}}
 								className="link"
@@ -121,9 +136,9 @@ export default function PreferencesSection({
 							<b>Committee Most Wanted</b>
 						</p>
 						<PreferenceList
-							items={committee}
+							items={scvmunCommittee}
 							setItems={(items) =>
-								setFieldValue("committee", items)
+								setFieldValue("scvmunCommittee", items)
 							}
 						/>
 						<p className={"mt-1"}>

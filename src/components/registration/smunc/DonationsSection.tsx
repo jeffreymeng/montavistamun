@@ -1,9 +1,9 @@
 // Import React FilePond
 import callbackBlobToBuffer from "blob-to-buffer";
 import cx from "classnames";
-import React, { useContext, useState } from "react";
+import { User } from "firebase";
+import React, { useState } from "react";
 import useFirebase from "../../../auth/useFirebase";
-import AuthContext from "../../../context/AuthContext";
 import "../../../css/file-upload.css";
 import FormUpload from "../FormUpload";
 
@@ -29,7 +29,9 @@ export default function DonationsSection({
 	handleUpdateData,
 	setStep,
 	setMaxStep,
+	user,
 }: {
+	user: User;
 	data: Record<string, any>;
 	handleUpdateData: (
 		name: string,
@@ -41,7 +43,6 @@ export default function DonationsSection({
 }) {
 	const firebase = useFirebase();
 
-	const { user } = useContext(AuthContext);
 	const [receipt, setReceipt] = useState<
 		(File & { serverId: string | null })[] | null
 	>(null);
@@ -171,6 +172,7 @@ export default function DonationsSection({
 
 						<div className={"mt-4"}>
 							<FormUpload
+								user={user}
 								file={receipt}
 								setFile={setReceipt}
 								uploading={uploading}
