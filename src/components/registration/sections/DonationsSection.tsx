@@ -71,7 +71,7 @@ export default function DonationsSection({
 					donations will go directly towards covering conference fees
 					and making this conference possible.
 				</p>
-				{data.forms?.donationOptOut && (
+				{data.forms?.scvmunDonationOptOut && (
 					<>
 						<p className="mt-2">
 							You've indicated that you are financially unable to
@@ -102,7 +102,7 @@ export default function DonationsSection({
 						</button>
 					</>
 				)}
-				{!data.forms?.donationOptOut && (
+				{!data.forms?.scvmunDonationOptOut && (
 					<>
 						<p className="mt-2">
 							If you are financially unable to donate, or do not
