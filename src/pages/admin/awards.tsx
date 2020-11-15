@@ -474,10 +474,11 @@ export default function AboutPage(): React.ReactElement {
 									/>
 								</div>
 								<p className="mt-2 text-sm text-gray-500">
-									One per line. "First Last (Committee)" or
-									"First1 Last1 & First2 Last2 (Committee)"
-									Prefer the ampersand (&) over the word
-									"and".
+									One delegate / delegate pair per line.
+									"First Last (Committee)" or "First Last &
+									First Last (Committee)" For consistency,
+									make sure to use the ampersand (&) instead
+									of the word and for partners.
 								</p>
 							</div>
 						))}
