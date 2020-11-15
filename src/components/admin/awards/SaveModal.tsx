@@ -12,12 +12,14 @@ export default function SaveModal({
 	selectedConference,
 	conferenceData,
 	setData,
+	setSelectedConference,
 }: {
 	show: boolean;
 	setShow: (show: boolean) => void;
 	setData: (data: (data: any) => any) => void;
 	edits: string[];
 	selectedConference: string;
+	setSelectedConference: (newConference: string) => void;
 	conferenceData: ConferenceAwardsData | null;
 }) {
 	const { user, loading } = useContext(AuthContext);
@@ -113,30 +115,33 @@ export default function SaveModal({
 														"list-disc text-sm leading-5 text-gray-500 ml-6 mt-3"
 													}
 												>
-													{edits
-														.filter(
-															(e) =>
-																e !==
-																"Conference End Date"
-														)
-														.map((c) =>
-															c ===
-															"Conference Name" ? (
-																<React.Fragment
-																	key={c}
-																>
-																	<li>{c}</li>
-																	<li>
-																		Conference
-																		End Date
-																	</li>
-																</React.Fragment>
-															) : (
-																<li key={c}>
-																	{c}
+													{/* For new conferences, the end date is always automatically included. */}
+													{(selectedConference ===
+													"(NEW)"
+														? edits.filter(
+																(e) =>
+																	e !==
+																	"Conference End Date"
+														  )
+														: edits
+													).map((c) =>
+														c ===
+															"Conference Name" &&
+														selectedConference ===
+															"(NEW)" ? (
+															<React.Fragment
+																key={c}
+															>
+																<li>{c}</li>
+																<li>
+																	Conference
+																	End Date
 																</li>
-															)
-														)}
+															</React.Fragment>
+														) : (
+															<li key={c}>{c}</li>
+														)
+													)}
 												</ul>
 											</>
 										)}
@@ -250,6 +255,14 @@ export default function SaveModal({
 												}
 												setSubmitting(false);
 												setSuccess(true);
+												if (
+													selectedConference ===
+													"(NEW)"
+												) {
+													setSelectedConference(
+														newConferenceID
+													);
+												}
 											}}
 											type="button"
 											disabled={submitting}

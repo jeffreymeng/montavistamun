@@ -137,6 +137,7 @@ export default function AboutPage(): React.ReactElement {
 			?.award;
 		if (name !== (conferenceData?.name || ""))
 			changes.push("Conference Name");
+
 		if (
 			endDate.getFullYear() !==
 				(conferenceData?.time.toDate() || new Date()).getFullYear() ||
@@ -146,6 +147,7 @@ export default function AboutPage(): React.ReactElement {
 				(conferenceData?.time.toDate() || new Date()).getDate()
 		)
 			changes.push("Conference End Date");
+
 		if (imageURL !== (conferenceData?.imageURL || ""))
 			changes.push("Image");
 		if (delegationAward !== (conferenceData?.delegationAward || ""))
@@ -178,9 +180,17 @@ export default function AboutPage(): React.ReactElement {
 				changes.push(changeName);
 			}
 		});
-
+		console.log(changes);
 		return changes;
-	}, [data, name, awards, endDate, delegationAward, imageURL]);
+	}, [
+		data,
+		name,
+		awards,
+		endDate,
+		delegationAward,
+		imageURL,
+		selectedConference,
+	]);
 	const hasChanges = edits.length > 0;
 	React.useEffect(() => {
 		if (hasChanges) {
@@ -247,6 +257,7 @@ export default function AboutPage(): React.ReactElement {
 				conferenceData={conferenceData}
 				edits={edits}
 				selectedConference={selectedConference}
+				setSelectedConference={setSelectedConference}
 			/>
 			<h1
 				className={
