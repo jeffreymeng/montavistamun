@@ -4,10 +4,10 @@ import { Link } from "gatsby";
 import { Eye, EyeOff } from "heroicons-react";
 import Mailcheck from "mailcheck";
 import React, { useState } from "react";
-import FirebaseStoredUserData from "../../auth/FirebaseStoredUserData";
-import useFirebase from "../../auth/useFirebase";
 import { AuthLayout } from "../../components/layout";
 import AuthContext from "../../context/AuthContext";
+import FirebaseStoredUserData from "../../firebase/FirebaseStoredUserData";
+import useFirebase from "../../firebase/useFirebase";
 import { getClassOf, getIsSummer } from "../../utils/schoolYearUtils";
 import { LoginPageProps } from "./login";
 

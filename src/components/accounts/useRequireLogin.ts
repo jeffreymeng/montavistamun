@@ -1,8 +1,8 @@
 import { useLocation } from "@reach/router";
 import { navigate } from "gatsby";
 import React from "react";
-import useFirebase from "../../auth/useFirebase";
 import AuthContext from "../../context/AuthContext";
+import useFirebase from "../../firebase/useFirebase";
 
 export default function useRequireLogin(): void {
 	const { user, loading } = React.useContext(AuthContext);

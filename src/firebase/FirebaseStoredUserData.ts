@@ -1,3 +1,5 @@
+import type firebaseType from "firebase";
+
 export default interface FirebaseStoredUserData {
 	firstName: string;
 	lastName: string;
@@ -5,6 +7,6 @@ export default interface FirebaseStoredUserData {
 	classOf: number;
 	grade: {
 		grade: number;
-		asOf: firebase.firestore.Timestamp;
+		asOf: firebaseType.firestore.Timestamp;
 	};
 }

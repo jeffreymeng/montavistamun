@@ -1,8 +1,8 @@
 import axios from "axios";
 import * as Icons from "heroicons-react";
 import React, { useContext, useState } from "react";
-import useFirebase from "../../../auth/useFirebase";
 import AuthContext from "../../../context/AuthContext";
+import useFirebase from "../../../firebase/useFirebase";
 import { ConferenceAwardsData } from "../../../pages/awards";
 import Transition from "../../Transition";
 export default function SaveModal({

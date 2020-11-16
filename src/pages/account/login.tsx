@@ -1,9 +1,9 @@
 import classNames from "classnames";
 import { Link, navigate } from "gatsby";
 import React, { useState } from "react";
-import useFirebase from "../../auth/useFirebase";
 import { AuthLayout } from "../../components/layout";
 import AuthContext from "../../context/AuthContext";
+import useFirebase from "../../firebase/useFirebase";
 export interface LoginPageProps {
 	/**
 	 * A path to redirect the user to upon successful sign in.

@@ -4,8 +4,8 @@ import cx from "classnames";
 import { FilePond } from "filepond";
 import { User } from "firebase";
 import React, { useState } from "react";
-import useFirebase from "../../../auth/useFirebase";
 import "../../../css/file-upload.css";
+import useFirebase from "../../../firebase/useFirebase";
 import FormUpload from "../FormUpload";
 
 interface DonationForms {

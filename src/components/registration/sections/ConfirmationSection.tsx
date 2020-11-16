@@ -2,8 +2,8 @@
 import cx from "classnames";
 import { User } from "firebase";
 import React, { useState } from "react";
-import useFirebase from "../../../auth/useFirebase";
 import "../../../css/file-upload.css";
+import useFirebase from "../../../firebase/useFirebase";
 
 export default function ConfirmationSection({
 	data,

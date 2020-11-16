@@ -1,10 +1,10 @@
 import classNames from "classnames";
 import { Link } from "gatsby";
 import React, { useState } from "react";
-import useFirebase from "../../auth/useFirebase";
 import useRequireLogin from "../../components/accounts/useRequireLogin";
 import { AuthLayout } from "../../components/layout";
 import AuthContext from "../../context/AuthContext";
+import useFirebase from "../../firebase/useFirebase";
 export interface EmailVerificationProps {
 	/**
 	 * If provided, a continue button will be displayed allowing the user to continue to their original action.

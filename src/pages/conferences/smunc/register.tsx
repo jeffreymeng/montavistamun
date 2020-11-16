@@ -1,7 +1,6 @@
 import { graphql } from "gatsby";
 import * as Icons from "heroicons-react";
 import React, { useContext, useState } from "react";
-import useFirebase from "../../../auth/useFirebase";
 import useRequireLogin from "../../../components/accounts/useRequireLogin";
 import FluidImage from "../../../components/FluidImage";
 import Header from "../../../components/Header";
@@ -14,6 +13,7 @@ import WaiverFormsSection from "../../../components/registration/smunc/WaiverFor
 import VerticalSteps from "../../../components/shared/VerticalSteps";
 import Transition from "../../../components/Transition";
 import AuthContext from "../../../context/AuthContext";
+import useFirebase from "../../../firebase/useFirebase";
 export const approvedUserIds = [
 	"yJbc2cZ34ebWZdvijZi8EwHg1PF2",
 	"ujS4bKEXwoTzKqLwcDw9r1WQWFU2",

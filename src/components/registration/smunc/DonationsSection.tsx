@@ -3,8 +3,8 @@ import callbackBlobToBuffer from "blob-to-buffer";
 import cx from "classnames";
 import { User } from "firebase";
 import React, { useState } from "react";
-import useFirebase from "../../../auth/useFirebase";
 import "../../../css/file-upload.css";
+import useFirebase from "../../../firebase/useFirebase";
 import FormUpload from "../FormUpload";
 
 interface DonationForms {

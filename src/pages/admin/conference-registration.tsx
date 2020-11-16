@@ -4,10 +4,10 @@ import JSZip from "jszip";
 import moment from "moment";
 import React, { useState } from "react";
 import Select from "react-select";
-import useFirebase from "../../auth/useFirebase";
 import UserData from "../../components/admin/UserData";
 import AdminLayout from "../../components/layout/AdminLayout";
 import AuthContext from "../../context/AuthContext";
+import useFirebase from "../../firebase/useFirebase";
 import { getGrade } from "../../utils/schoolYearUtils";
 import { approvedUserIds } from "../conferences/smunc/register";
 

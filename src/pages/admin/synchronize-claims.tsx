@@ -1,9 +1,9 @@
 import axios from "axios";
 import React, { useState } from "react";
-import useFirebase from "../../auth/useFirebase";
 import useRequireLogin from "../../components/accounts/useRequireLogin";
 import { Layout, Main } from "../../components/layout";
 import AuthContext from "../../context/AuthContext";
+import useFirebase from "../../firebase/useFirebase";
 
 export default function AboutPage(): React.ReactElement {
 	const [eligible, setEligible] = useState(false);

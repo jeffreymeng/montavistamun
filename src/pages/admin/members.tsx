@@ -2,12 +2,12 @@ import axios from "axios";
 import type firebaseType from "firebase";
 import * as Icons from "heroicons-react";
 import React, { useState } from "react";
-import useFirebase from "../../auth/useFirebase";
 import SelectAllCheckbox from "../../components/admin/SelectAllCheckbox";
 import UserData from "../../components/admin/UserData";
 import AdminLayout from "../../components/layout/AdminLayout";
 import Transition from "../../components/Transition";
 import AuthContext from "../../context/AuthContext";
+import useFirebase from "../../firebase/useFirebase";
 import { getGrade } from "../../utils/schoolYearUtils";
 
 export default function MembersPage(): React.ReactElement {

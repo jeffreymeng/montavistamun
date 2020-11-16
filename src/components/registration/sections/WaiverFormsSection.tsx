@@ -6,8 +6,8 @@ import { FilePond } from "filepond";
 import { User } from "firebase";
 import React, { useState } from "react";
 import { File } from "react-filepond";
-import useFirebase from "../../../auth/useFirebase";
 import "../../../css/file-upload.css";
+import useFirebase from "../../../firebase/useFirebase";
 import FormUpload from "../FormUpload";
 import * as pdfform from "../PDFForm";
 

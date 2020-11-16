@@ -3,11 +3,11 @@ import * as Icons from "heroicons-react";
 import React, { useState } from "react";
 import Flatpickr from "react-flatpickr";
 import Select from "react-select";
-import useFirebase from "../../auth/useFirebase";
 import SaveModal from "../../components/admin/awards/SaveModal";
 import ConfirmationModal from "../../components/ConfirmModal";
 import AdminLayout from "../../components/layout/AdminLayout";
 import AuthContext from "../../context/AuthContext";
+import useFirebase from "../../firebase/useFirebase";
 import {
 	ConferenceAwardCard,
 	ConferenceAwardsData,

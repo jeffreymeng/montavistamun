@@ -1,7 +1,7 @@
 import * as Icons from "heroicons-react";
 import React, { useContext, useState } from "react";
-import useFirebase from "../../auth/useFirebase";
 import AuthContext from "../../context/AuthContext";
+import useFirebase from "../../firebase/useFirebase";
 import useRequireLogin from "../accounts/useRequireLogin";
 import { Main } from "../layout";
 import VerticalSteps from "../shared/VerticalSteps";

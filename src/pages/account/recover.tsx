@@ -1,8 +1,8 @@
 import classNames from "classnames";
 import { Link } from "gatsby";
 import React, { useState } from "react";
-import useFirebase from "../../auth/useFirebase";
 import { AuthLayout } from "../../components/layout";
+import useFirebase from "../../firebase/useFirebase";
 import { LoginPageProps } from "./login";
 export default function ForgotPasswordPage({
 	location: { state },

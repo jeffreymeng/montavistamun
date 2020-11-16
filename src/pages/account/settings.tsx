@@ -4,13 +4,13 @@ import { Check, InformationCircle } from "heroicons-react";
 import moment from "moment";
 import React, { useState } from "react";
 import Select from "react-select";
-import FirebaseStoredUserData from "../../auth/FirebaseStoredUserData";
-import useFirebase from "../../auth/useFirebase";
 import useRequireLogin from "../../components/accounts/useRequireLogin";
 import { Layout, Main } from "../../components/layout";
 import Transition from "../../components/Transition";
 import AuthContext from "../../context/AuthContext";
 import "../../css/select.css";
+import FirebaseStoredUserData from "../../firebase/FirebaseStoredUserData";
+import useFirebase from "../../firebase/useFirebase";
 import { getGrade, getLastDayOfSchool } from "../../utils/schoolYearUtils";
 export default function SettingsPage(): React.ReactElement {
 	const { user, loading } = React.useContext(AuthContext);

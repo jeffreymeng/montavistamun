@@ -14,7 +14,7 @@ import type firebaseType from "firebase";
 import { User } from "firebase";
 import React, { useState } from "react";
 import { File, FilePond as ReactFilePond } from "react-filepond";
-import useFirebase from "../../auth/useFirebase";
+import useFirebase from "../../firebase/useFirebase";
 
 registerFilepondPlugin(
 	FilePondPluginImageExifOrientation,

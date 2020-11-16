@@ -2,7 +2,6 @@ import axios from "axios";
 import { graphql } from "gatsby";
 import * as Icons from "heroicons-react";
 import React, { useContext, useState } from "react";
-import useFirebase from "../../../auth/useFirebase";
 import useRequireLogin from "../../../components/accounts/useRequireLogin";
 import FluidImage from "../../../components/FluidImage";
 import Header from "../../../components/Header";
@@ -16,6 +15,7 @@ import WaiverFormsSection from "../../../components/registration/sections/Waiver
 import VerticalSteps from "../../../components/shared/VerticalSteps";
 import Transition from "../../../components/Transition";
 import AuthContext from "../../../context/AuthContext";
+import useFirebase from "../../../firebase/useFirebase";
 
 export default function AboutPage({
 	data: { headerImage },
