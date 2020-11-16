@@ -2,7 +2,7 @@
 
 declare namespace GatsbyTypes {
 	type Maybe<T> = T | undefined;
-	type Exact<T extends { [key: string]: any }> = { [K in keyof T]: T[K] };
+	type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 	/** All built-in and custom scalars, mapped to their actual values */
 	type Scalars = {
 		ID: string;
@@ -12,6 +12,16 @@ declare namespace GatsbyTypes {
 		Float: number;
 		Date: string;
 		JSON: never;
+	};
+
+	type BlurredOptions = {
+		/** Width of the generated low-res preview. Default is 20px */
+		readonly width: Maybe<Scalars["Int"]>;
+		/**
+		 * Force the output format for the low-res preview. Default is to use the same
+		 * format as the input. You should rarely need to change this
+		 */
+		readonly toFormat: Maybe<ImageFormat>;
 	};
 
 	type BooleanQueryOperatorInput = {
@@ -725,6 +735,7 @@ declare namespace GatsbyTypes {
 		childImageSharp___sizes___originalName = "childImageSharp.sizes.originalName",
 		childImageSharp___sizes___presentationWidth = "childImageSharp.sizes.presentationWidth",
 		childImageSharp___sizes___presentationHeight = "childImageSharp.sizes.presentationHeight",
+		childImageSharp___gatsbyImageData = "childImageSharp.gatsbyImageData",
 		childImageSharp___original___width = "childImageSharp.original.width",
 		childImageSharp___original___height = "childImageSharp.original.height",
 		childImageSharp___original___src = "childImageSharp.original.src",
@@ -928,7 +939,7 @@ declare namespace GatsbyTypes {
 	};
 
 	enum ImageCropFocus {
-		CENTER = "CENTER",
+		CENTER = 0,
 		NORTH = 1,
 		NORTHEAST = 5,
 		EAST = 2,
@@ -950,10 +961,24 @@ declare namespace GatsbyTypes {
 	}
 
 	enum ImageFormat {
-		NO_CHANGE = "NO_CHANGE",
+		NO_CHANGE = "",
+		AUTO = "",
 		JPG = "jpg",
 		PNG = "png",
 		WEBP = "webp",
+	}
+
+	enum ImageLayout {
+		FIXED = "fixed",
+		FLUID = "fluid",
+		CONSTRAINED = "constrained",
+	}
+
+	enum ImagePlaceholder {
+		DOMINANT_COLOR = "dominantColor",
+		TRACED_SVG = "tracedSVG",
+		BLURRED = "blurred",
+		NONE = "none",
 	}
 
 	type ImageSharp = Node & {
@@ -963,6 +988,7 @@ declare namespace GatsbyTypes {
 		readonly fluid: Maybe<ImageSharpFluid>;
 		/** @deprecated Sizes was deprecated in Gatsby v2. It's been renamed to "fluid" https://example.com/write-docs-and-fix-this-example-link */
 		readonly sizes: Maybe<ImageSharpSizes>;
+		readonly gatsbyImageData: Scalars["JSON"];
 		readonly original: Maybe<ImageSharpOriginal>;
 		readonly resize: Maybe<ImageSharpResize>;
 		readonly id: Scalars["ID"];
@@ -1063,6 +1089,26 @@ declare namespace GatsbyTypes {
 		srcSetBreakpoints?: Maybe<ReadonlyArray<Maybe<Scalars["Int"]>>>;
 	};
 
+	type ImageSharp_gatsbyImageDataArgs = {
+		layout?: Maybe<ImageLayout>;
+		maxWidth: Maybe<Scalars["Int"]>;
+		maxHeight: Maybe<Scalars["Int"]>;
+		width: Maybe<Scalars["Int"]>;
+		height: Maybe<Scalars["Int"]>;
+		placeholder?: Maybe<ImagePlaceholder>;
+		blurredOptions: Maybe<BlurredOptions>;
+		tracedSVGOptions: Maybe<Potrace>;
+		formats?: Maybe<ReadonlyArray<Maybe<ImageFormat>>>;
+		outputPixelDensities: Maybe<ReadonlyArray<Maybe<Scalars["Float"]>>>;
+		sizes?: Maybe<Scalars["String"]>;
+		quality: Maybe<Scalars["Int"]>;
+		jpgOptions: Maybe<JPGOptions>;
+		pngOptions: Maybe<PNGOptions>;
+		webpOptions: Maybe<WebPOptions>;
+		transformOptions: Maybe<TransformOptions>;
+		background?: Maybe<Scalars["String"]>;
+	};
+
 	type ImageSharp_resizeArgs = {
 		width: Maybe<Scalars["Int"]>;
 		height: Maybe<Scalars["Int"]>;
@@ -1155,6 +1201,7 @@ declare namespace GatsbyTypes {
 		sizes___originalName = "sizes.originalName",
 		sizes___presentationWidth = "sizes.presentationWidth",
 		sizes___presentationHeight = "sizes.presentationHeight",
+		gatsbyImageData = "gatsbyImageData",
 		original___width = "original.width",
 		original___height = "original.height",
 		original___src = "original.src",
@@ -1257,6 +1304,7 @@ declare namespace GatsbyTypes {
 		readonly resolutions: Maybe<ImageSharpResolutionsFilterInput>;
 		readonly fluid: Maybe<ImageSharpFluidFilterInput>;
 		readonly sizes: Maybe<ImageSharpSizesFilterInput>;
+		readonly gatsbyImageData: Maybe<JSONQueryOperatorInput>;
 		readonly original: Maybe<ImageSharpOriginalFilterInput>;
 		readonly resize: Maybe<ImageSharpResizeFilterInput>;
 		readonly id: Maybe<StringQueryOperatorInput>;
@@ -1454,6 +1502,20 @@ declare namespace GatsbyTypes {
 		readonly nin: Maybe<ReadonlyArray<Maybe<Scalars["Int"]>>>;
 	};
 
+	type JPGOptions = {
+		readonly quality: Maybe<Scalars["Int"]>;
+		readonly progressive: Maybe<Scalars["Boolean"]>;
+	};
+
+	type JSONQueryOperatorInput = {
+		readonly eq: Maybe<Scalars["JSON"]>;
+		readonly ne: Maybe<Scalars["JSON"]>;
+		readonly in: Maybe<ReadonlyArray<Maybe<Scalars["JSON"]>>>;
+		readonly nin: Maybe<ReadonlyArray<Maybe<Scalars["JSON"]>>>;
+		readonly regex: Maybe<Scalars["JSON"]>;
+		readonly glob: Maybe<Scalars["JSON"]>;
+	};
+
 	/** Node Interface */
 	type Node = {
 		readonly id: Scalars["ID"];
@@ -1481,6 +1543,11 @@ declare namespace GatsbyTypes {
 		readonly pageCount: Scalars["Int"];
 		readonly perPage: Maybe<Scalars["Int"]>;
 		readonly totalCount: Scalars["Int"];
+	};
+
+	type PNGOptions = {
+		readonly quality: Maybe<Scalars["Int"]>;
+		readonly compressionSpeed: Maybe<Scalars["Int"]>;
 	};
 
 	type Potrace = {
@@ -1667,6 +1734,7 @@ declare namespace GatsbyTypes {
 		resolutions: Maybe<ImageSharpResolutionsFilterInput>;
 		fluid: Maybe<ImageSharpFluidFilterInput>;
 		sizes: Maybe<ImageSharpSizesFilterInput>;
+		gatsbyImageData: Maybe<JSONQueryOperatorInput>;
 		original: Maybe<ImageSharpOriginalFilterInput>;
 		resize: Maybe<ImageSharpResizeFilterInput>;
 		id: Maybe<StringQueryOperatorInput>;
@@ -2240,6 +2308,10 @@ declare namespace GatsbyTypes {
 		pluginCreator___pluginOptions___name = "pluginCreator.pluginOptions.name",
 		pluginCreator___pluginOptions___path = "pluginCreator.pluginOptions.path",
 		pluginCreator___pluginOptions___ignore = "pluginCreator.pluginOptions.ignore",
+		pluginCreator___pluginOptions___base64Width = "pluginCreator.pluginOptions.base64Width",
+		pluginCreator___pluginOptions___stripMetadata = "pluginCreator.pluginOptions.stripMetadata",
+		pluginCreator___pluginOptions___defaultQuality = "pluginCreator.pluginOptions.defaultQuality",
+		pluginCreator___pluginOptions___failOnError = "pluginCreator.pluginOptions.failOnError",
 		pluginCreator___pluginOptions___short_name = "pluginCreator.pluginOptions.short_name",
 		pluginCreator___pluginOptions___start_url = "pluginCreator.pluginOptions.start_url",
 		pluginCreator___pluginOptions___background_color = "pluginCreator.pluginOptions.background_color",
@@ -2258,6 +2330,9 @@ declare namespace GatsbyTypes {
 		pluginCreator___pluginOptions___appId = "pluginCreator.pluginOptions.appId",
 		pluginCreator___pluginOptions___enableOnDevMode = "pluginCreator.pluginOptions.enableOnDevMode",
 		pluginCreator___pluginOptions___pathCheck = "pluginCreator.pluginOptions.pathCheck",
+		pluginCreator___pluginOptions___allExtensions = "pluginCreator.pluginOptions.allExtensions",
+		pluginCreator___pluginOptions___isTSX = "pluginCreator.pluginOptions.isTSX",
+		pluginCreator___pluginOptions___jsxPragma = "pluginCreator.pluginOptions.jsxPragma",
 		pluginCreator___nodeAPIs = "pluginCreator.nodeAPIs",
 		pluginCreator___browserAPIs = "pluginCreator.browserAPIs",
 		pluginCreator___ssrAPIs = "pluginCreator.ssrAPIs",
@@ -2447,6 +2522,10 @@ declare namespace GatsbyTypes {
 		pluginOptions___name = "pluginOptions.name",
 		pluginOptions___path = "pluginOptions.path",
 		pluginOptions___ignore = "pluginOptions.ignore",
+		pluginOptions___base64Width = "pluginOptions.base64Width",
+		pluginOptions___stripMetadata = "pluginOptions.stripMetadata",
+		pluginOptions___defaultQuality = "pluginOptions.defaultQuality",
+		pluginOptions___failOnError = "pluginOptions.failOnError",
 		pluginOptions___short_name = "pluginOptions.short_name",
 		pluginOptions___start_url = "pluginOptions.start_url",
 		pluginOptions___background_color = "pluginOptions.background_color",
@@ -2465,6 +2544,9 @@ declare namespace GatsbyTypes {
 		pluginOptions___appId = "pluginOptions.appId",
 		pluginOptions___enableOnDevMode = "pluginOptions.enableOnDevMode",
 		pluginOptions___pathCheck = "pluginOptions.pathCheck",
+		pluginOptions___allExtensions = "pluginOptions.allExtensions",
+		pluginOptions___isTSX = "pluginOptions.isTSX",
+		pluginOptions___jsxPragma = "pluginOptions.jsxPragma",
 		nodeAPIs = "nodeAPIs",
 		browserAPIs = "browserAPIs",
 		ssrAPIs = "ssrAPIs",
@@ -2597,6 +2679,10 @@ declare namespace GatsbyTypes {
 		readonly name: Maybe<Scalars["String"]>;
 		readonly path: Maybe<Scalars["String"]>;
 		readonly ignore: Maybe<ReadonlyArray<Maybe<Scalars["String"]>>>;
+		readonly base64Width: Maybe<Scalars["Int"]>;
+		readonly stripMetadata: Maybe<Scalars["Boolean"]>;
+		readonly defaultQuality: Maybe<Scalars["Int"]>;
+		readonly failOnError: Maybe<Scalars["Boolean"]>;
 		readonly short_name: Maybe<Scalars["String"]>;
 		readonly start_url: Maybe<Scalars["String"]>;
 		readonly background_color: Maybe<Scalars["String"]>;
@@ -2615,12 +2701,19 @@ declare namespace GatsbyTypes {
 		readonly appId: Maybe<Scalars["String"]>;
 		readonly enableOnDevMode: Maybe<Scalars["Boolean"]>;
 		readonly pathCheck: Maybe<Scalars["Boolean"]>;
+		readonly allExtensions: Maybe<Scalars["Boolean"]>;
+		readonly isTSX: Maybe<Scalars["Boolean"]>;
+		readonly jsxPragma: Maybe<Scalars["String"]>;
 	};
 
 	type SitePluginPluginOptionsFilterInput = {
 		readonly name: Maybe<StringQueryOperatorInput>;
 		readonly path: Maybe<StringQueryOperatorInput>;
 		readonly ignore: Maybe<StringQueryOperatorInput>;
+		readonly base64Width: Maybe<IntQueryOperatorInput>;
+		readonly stripMetadata: Maybe<BooleanQueryOperatorInput>;
+		readonly defaultQuality: Maybe<IntQueryOperatorInput>;
+		readonly failOnError: Maybe<BooleanQueryOperatorInput>;
 		readonly short_name: Maybe<StringQueryOperatorInput>;
 		readonly start_url: Maybe<StringQueryOperatorInput>;
 		readonly background_color: Maybe<StringQueryOperatorInput>;
@@ -2639,6 +2732,9 @@ declare namespace GatsbyTypes {
 		readonly appId: Maybe<StringQueryOperatorInput>;
 		readonly enableOnDevMode: Maybe<BooleanQueryOperatorInput>;
 		readonly pathCheck: Maybe<BooleanQueryOperatorInput>;
+		readonly allExtensions: Maybe<BooleanQueryOperatorInput>;
+		readonly isTSX: Maybe<BooleanQueryOperatorInput>;
+		readonly jsxPragma: Maybe<StringQueryOperatorInput>;
 	};
 
 	type SitePluginSortInput = {
@@ -2675,6 +2771,19 @@ declare namespace GatsbyTypes {
 		readonly nin: Maybe<ReadonlyArray<Maybe<Scalars["String"]>>>;
 		readonly regex: Maybe<Scalars["String"]>;
 		readonly glob: Maybe<Scalars["String"]>;
+	};
+
+	type TransformOptions = {
+		readonly grayscale: Maybe<Scalars["Boolean"]>;
+		readonly duotone: Maybe<DuotoneGradient>;
+		readonly rotate: Maybe<Scalars["Int"]>;
+		readonly trim: Maybe<Scalars["Float"]>;
+		readonly cropFocus: Maybe<ImageCropFocus>;
+		readonly fit: Maybe<ImageFit>;
+	};
+
+	type WebPOptions = {
+		readonly quality: Maybe<Scalars["Int"]>;
 	};
 
 	type PagesQueryQueryVariables = Exact<{ [key: string]: never }>;
@@ -2780,6 +2889,28 @@ declare namespace GatsbyTypes {
 		};
 	};
 
+	type RegisterPageQueryQueryVariables = Exact<{ [key: string]: never }>;
+
+	type RegisterPageQueryQuery = {
+		readonly headerImage: Maybe<{
+			readonly childImageSharp: Maybe<{
+				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
+			}>;
+		}>;
+	};
+
+	type usersjmengDocumentscodemontavistamunsrcpagesconferencesscvmunregisterTsx1261803817QueryVariables = Exact<{
+		[key: string]: never;
+	}>;
+
+	type usersjmengDocumentscodemontavistamunsrcpagesconferencesscvmunregisterTsx1261803817Query = {
+		readonly headerImage: Maybe<{
+			readonly childImageSharp: Maybe<{
+				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
+			}>;
+		}>;
+	};
+
 	type SFMUNPageQueryQueryVariables = Exact<{ [key: string]: never }>;
 
 	type SFMUNPageQueryQuery = {
@@ -2803,28 +2934,6 @@ declare namespace GatsbyTypes {
 	type SMUNCRegisterPageQueryQueryVariables = Exact<{ [key: string]: never }>;
 
 	type SMUNCRegisterPageQueryQuery = {
-		readonly headerImage: Maybe<{
-			readonly childImageSharp: Maybe<{
-				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
-			}>;
-		}>;
-	};
-
-	type RegisterPageQueryQueryVariables = Exact<{ [key: string]: never }>;
-
-	type RegisterPageQueryQuery = {
-		readonly headerImage: Maybe<{
-			readonly childImageSharp: Maybe<{
-				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
-			}>;
-		}>;
-	};
-
-	type usersjmengDocumentscodemontavistamunsrcpagesconferencesscvmunregisterTsx1261803817QueryVariables = Exact<{
-		[key: string]: never;
-	}>;
-
-	type usersjmengDocumentscodemontavistamunsrcpagesconferencesscvmunregisterTsx1261803817Query = {
 		readonly headerImage: Maybe<{
 			readonly childImageSharp: Maybe<{
 				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;

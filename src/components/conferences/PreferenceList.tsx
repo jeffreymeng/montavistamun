@@ -4,7 +4,7 @@ import {
 	SortableContainer as RSHSortableContainer,
 	SortableElement as RSHSortableElement,
 } from "react-sortable-hoc";
-import "./sortableList.scss";
+import "./sortableList.css";
 
 const SortableItem = RSHSortableElement(
 	({ index, value }: { value: React.ReactNode; index: number }) => (

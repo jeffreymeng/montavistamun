@@ -1,7 +1,6 @@
+const path = require(`path`);
 const resolveConfig = require("tailwindcss/resolveConfig");
 const tailwindConfig = require("./tailwind.config.js");
-const path = require(`path`);
-
 const fullConfig = resolveConfig(tailwindConfig);
 
 module.exports = {
@@ -35,19 +34,7 @@ module.exports = {
 				icon: `static/images/favicons/android-chrome-512x512.png`,
 			},
 		},
-		{
-			resolve: `gatsby-plugin-postcss`,
-			options: {
-				postCssPlugins: [
-					require("postcss-import"),
-					require(`tailwindcss`)(tailwindConfig),
-					require(`autoprefixer`),
-					...(process.env.NODE_ENV === `production`
-						? [require(`cssnano`)]
-						: []),
-				],
-			},
-		},
+		`gatsby-plugin-postcss`,
 		{
 			resolve: `gatsby-plugin-typegen`,
 			options: {
@@ -76,16 +63,7 @@ module.exports = {
 				enableOnDevMode: true, // if 'false', heap will be fired on NODE_ENV=production only
 			},
 		},
-		{
-			resolve: `gatsby-plugin-sass`,
-			options: {
-				postCssPlugins: [
-					require("postcss-import"),
-					require(`tailwindcss`)(tailwindConfig),
-					// require(`autoprefixer`),
-				],
-			},
-		},
+
 		// `gatsby-plugin-offline`,
 	],
 };

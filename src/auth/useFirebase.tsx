@@ -15,7 +15,7 @@ export default function useFirebase(): null | typeof FirebaseType {
 		}
 		(async (): Promise<void> => {
 			// import firebase app
-			const firebaseApp: any = await import("firebase/app");
+			const firebaseApp: any = (await import("firebase/app")).default;
 			//
 			await Promise.all([
 				import("firebase/auth"),

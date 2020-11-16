@@ -27,7 +27,7 @@ const AuthProvider = ({ children }: { children: ReactNode }): ReactElement => {
 	React.useEffect(() => {
 		(async (): Promise<void> => {
 			// import firebase app
-			const firebaseApp: any = await import("firebase/app");
+			const firebaseApp: any = (await import("firebase/app")).default;
 			//
 			await Promise.all([
 				import("firebase/auth"),
