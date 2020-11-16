@@ -1,4 +1,6 @@
-const { MAILCHIMP_API_KEY, FB_SERVICE_ACCOUNT } = process.env;
+const { MAILCHIMP_API_KEY } = process.env;
+const FB_SERVICE_ACCOUNT = JSON.parse(process.env.FB_SERVICE_ACCOUNT);
+
 const axios = require("axios").default;
 const crypto = require("crypto");
 const admin = require("firebase-admin");
@@ -40,7 +42,6 @@ export async function handler(event, context) {
 			};
 		}
 		const tokenData = await admin.auth().verifyIdToken(token);
-		console.log("TD", token, tokenData);
 		if (tokenData.email !== email && !tokenData.admin) {
 			return {
 				statusCode: 403,
