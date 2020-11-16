@@ -141,8 +141,11 @@ export default function AdminLogPage(): React.ReactElement {
 						user.userData.data.lastName
 				);
 			} else if (
-				(selectedConference === "sfmun" && user.data.preferences) ||
-				(selectedConference === "scvmun" && user.data.scvmunPreferences)
+				(selectedConference === "sfmun" &&
+					user.data.preferences?.committee) ||
+				(selectedConference === "scvmun" &&
+					user.data.preferences?.scvmunCommittee &&
+					user.data.preferences?.scvmunPartnerPrefs)
 			) {
 				temp.preferences.push(
 					user.userData.data.firstName +
