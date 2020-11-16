@@ -83,14 +83,13 @@ export default function SaveModal({
 											<p className="text-sm leading-5 text-gray-500">
 												<b>
 													Your changes have been
-													saved, and you may now close
-													this window.
+													saved.
 												</b>{" "}
-												The website is currently being
-												re-built, and typically
-												automatically updates within 5
-												minutes (you may have to force
-												refresh). You can check the
+												Your updates will be pushed to
+												the awards page in about 5
+												minutes, after it is re-built
+												(you don't need to keep this
+												page open). You can check the
 												build status{" "}
 												<a
 													href="https://app.netlify.com/sites/montavistamun/deploys"
