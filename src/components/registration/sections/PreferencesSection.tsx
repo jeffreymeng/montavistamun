@@ -1,11 +1,14 @@
 import { User } from "firebase";
+import { Field } from "formik";
 import React from "react";
 import * as Yup from "yup";
 import PreferenceList from "../../conferences/PreferenceList";
+import InputGroup from "../../shared/InputGroup";
 import RegisterFormSection from "../RegisterFormSection";
 
 interface PreferencesInformation {
 	scvmunCommittee: string[];
+	scvmunPartnerPrefs: string;
 }
 
 export default function PreferencesSection({
@@ -47,9 +50,11 @@ export default function PreferencesSection({
 			}}
 			schema={Yup.object().shape({
 				scvmunCommittee: Yup.array().required(),
+				scvmunPartnerPrefs: Yup.string(),
 			})}
 			loadingValues={{
 				scvmunCommittee: ["Loading..."],
+				scvmunPartnerPrefs: "",
 			}}
 			confirmContinue={(values: { scvmunCommittee: string[] }) =>
 				[
@@ -73,7 +78,7 @@ export default function PreferencesSection({
 			}
 		>
 			{({
-				values: { scvmunCommittee },
+				values: { scvmunCommittee, scvmunPartnerPrefs },
 				errors,
 				canEdit,
 				touched,
@@ -144,6 +149,39 @@ export default function PreferencesSection({
 						<p className={"mt-1"}>
 							<b>Committee Least Wanted</b>
 						</p>
+						<h3 className="text-xl leading-6 font-bold text-gray-900 mt-6">
+							Partner Preferences
+						</h3>
+						<p className={"text-sm text-gray-800 mt-2"}>
+							All SCVMUN committees are double delegation
+							committees, so you'll be competing with a partner!
+							If you'd like to choose your partner, you can write
+							their name below. Feel free to also leave this field
+							blank, and we'll assign you a partner.{" "}
+							<b>
+								If you are choosing a partner, make sure you
+								coordinate with them so they also writes down
+								your name!
+							</b>{" "}
+							Only mutual partner requests will be considered.
+						</p>
+						<Field
+							className={"mt-2"}
+							as={InputGroup}
+							id={"scvmunPartnerPrefs"}
+							name={"scvmunPartnerPrefs"}
+							label={"Your Requested Partner"}
+							hint={"Optional"}
+							placeholder={
+								"If you'd like us to assign you one, feel free to leave this blank."
+							}
+							disabled={!canEdit}
+							invalid={
+								errors.scvmunPartnerPrefs &&
+								!!touched.scvmunPartnerPrefs
+							}
+							error={errors.scvmunPartnerPrefs}
+						/>
 					</div>
 				</>
 			)}
