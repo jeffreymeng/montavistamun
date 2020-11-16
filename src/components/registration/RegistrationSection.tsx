@@ -274,7 +274,8 @@ export default function RegistrationSection() {
 											"These forms will be mostly autofilled with the information you provide us in earlier steps, but you'll still need to get them signed.",
 									},
 									{
-										title: "Committee Preferences",
+										title:
+											"Committee and Partner Preferences",
 										description:
 											"Now comes the fun part! Look into the different committees offered at SCVMUN and indicate how much you like each one.",
 									},
