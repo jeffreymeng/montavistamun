@@ -287,7 +287,7 @@ export default function RegistrationSection() {
 									{
 										title: "You're Done!",
 										description:
-											"You're now registered for SFMUN! You may still edit or cancel your registration until the deadline.",
+											"You're now registered for SCVMUN! You may still edit or cancel your registration until the deadline.",
 									},
 								]}
 								currentStep={step}
