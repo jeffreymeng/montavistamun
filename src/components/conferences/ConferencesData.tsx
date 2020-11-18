@@ -31,6 +31,7 @@ export default [
 		acronym: "scvmun",
 		text:
 			"Santa Clara Valley Model United Nations Conference is our third conference of the year, and the one where we recommend to all members – novice or veteran. Participating at SCVMUN is a great way to get used to more difficult conferences, such as SMUNC, NAIMUN, and BMUN.",
+		registration: "/conferences/scvmun/register",
 	},
 	{
 		name: "North American Invitational Model United Nations Conference",
