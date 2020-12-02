@@ -11,7 +11,6 @@ import DonationsSection from "./bmunsections/DonationsSection";
 import WaiverFormsSection from "./bmunsections/WaiverFormsSection";
 import EmergencyInformationSection from "./sections/EmergencyInformationSection";
 import PersonalInformationSection from "./sections/PersonalInformationSection";
-import PreferencesSection from "./sections/PreferencesSection";
 
 function isFunction(
 	functionToCheck: any
@@ -21,9 +20,9 @@ function isFunction(
 		{}.toString.call(functionToCheck) === "[object Function]"
 	);
 }
-export default function RegistrationSection() {
-	const name = "SFMUN";
-	const key = "sfmun";
+export default function BMUNRegistrationSection() {
+	const name = "BMUN";
+	const key = "bmun";
 	useRequireLogin();
 	const firebase = useFirebase();
 	const { user, loading: userLoading } = useContext(AuthContext);
@@ -186,24 +185,6 @@ export default function RegistrationSection() {
 					forms: {
 						...data.forms,
 					},
-					preferences: {
-						scvmunCommittee: data.preferences?.scvmunCommittee || [
-							"IAEA (International Atomic Energy Association)",
-							"DISEC (Disarmament and International Security Committee)",
-							"WHO (World Health Organization)",
-							"UNEP (United Nations Environmental Programme)",
-							"SOCHUM (Social, Humanitarian and Cultural)",
-							"UNDP (United Nations Development Programme)",
-							"LEGAL (Legal Committee)",
-							"UNESCO (United Nations Educational, Scientific and Cultural Organization)",
-							"Security Council (Specialty Committee)",
-							"Historic Security Council (Specialty Committee)",
-							"NATO (Specialty Committee)",
-							"World Bank (Specialty Committee)",
-							"UNHCR (United Nations High Commissioner for Refugees) (Specialty Committee)",
-							"CSW (Commission on the Status of Women) (Specialty Committee)",
-						],
-					},
 				});
 				const rawData = snapshot.data();
 				let step;
@@ -211,23 +192,21 @@ export default function RegistrationSection() {
 					step = 0;
 				} else if (!rawData.emergencyInformation) {
 					step = 1;
-				} else if (!rawData.forms?.scvmunFuhsdForm) {
+				} else if (!rawData.forms?.bmunFuhsdForm) {
 					step = 2;
-				} else if (!rawData.preferences) {
-					step = 3;
 				} else if (
-					!rawData.forms?.scvmunDonation &&
-					!rawData.forms?.scvmunDonationOptOut
+					!rawData.forms?.bmunDonation &&
+					!rawData.forms?.bmunDonationOptOut
 				) {
-					step = 4;
+					step = 3;
 				} else {
-					step = 5;
+					step = 4;
 				}
 				setStep(step);
 
 				// typically, the current step will be displayed as incomplete circle
 				// the last step cannot be completed, so we want to display it as completed whenever we are on it
-				setMaxStep(step === 5 ? 6 : step);
+				setMaxStep(step === 4 ? 5 : step);
 
 				setLoadingData(false);
 				setStepHasChanges(false);
@@ -249,7 +228,7 @@ export default function RegistrationSection() {
 					<div className="md:col-span-1">
 						<div className="px-4 sm:px-0 sticky top-24">
 							<h3 className="text-2xl font-bold leading-6 text-gray-900">
-								SCVMUN Registration
+								BMUN Registration
 							</h3>
 							<p className="mt-1 max-w-2xl text-sm leading-5 text-gray-500">
 								Your information will be saved when you click
@@ -273,26 +252,21 @@ export default function RegistrationSection() {
 										description:
 											"These forms will be mostly autofilled with the information you provide us in earlier steps, but you'll still need to get them signed.",
 									},
-									{
-										title:
-											"Committee and Partner Preferences",
-										description:
-											"Now comes the fun part! Look into the different committees offered at SCVMUN and indicate how much you like each one.",
-									},
+
 									{
 										title: "Donations",
 										description:
-											"To cover conference fees charged by SCVMUN, we request a $25 donation, which will go directly towards making this conference possible.",
+											"To cover conference fees charged by BMUN, we request a $30 donation, which will go directly towards making this conference possible.",
 									},
 									{
 										title: "You're Done!",
 										description:
-											"You're now registered for SCVMUN! You may still edit or cancel your registration until the deadline.",
+											"You're now registered for BMUN! You may still edit or cancel your registration until the deadline.",
 									},
 								]}
 								currentStep={step}
 								maxSwitchableStep={Math.min(
-									!data.forms?.scvmunFuhsdForm ? 2 : 1000,
+									!data.forms?.bmunFuhsdForm ? 2 : 1000,
 									maxStep
 								)}
 								onStepSwitch={(i) => {
@@ -322,15 +296,9 @@ export default function RegistrationSection() {
 							<WaiverFormsSection data={data} {...commonProps} />
 						)}
 						{step === 3 && (
-							<PreferencesSection
-								data={data?.preferences}
-								{...commonProps}
-							/>
-						)}
-						{step === 4 && (
 							<DonationsSection data={data} {...commonProps} />
 						)}
-						{step === 5 && (
+						{step === 4 && (
 							<ConfirmationSection data={data} {...commonProps} />
 						)}
 					</div>
