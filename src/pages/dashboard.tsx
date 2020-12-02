@@ -129,10 +129,10 @@ export default function AboutPage(): React.ReactElement {
 
 		{
 			subtitle: "Registration Now Open",
-			title: "Santa Clara Valley Model United Nations (SCVMUN)",
+			title: "Berkeley Model United Nations (BMUN)",
 			primaryAction: {
 				title: "Register Now",
-				link: "/conferences/scvmun/register",
+				link: "/conferences/bmun/register",
 			},
 			// secondaryAction: {
 			// 	title: "Learn More",
