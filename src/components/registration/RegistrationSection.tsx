@@ -6,12 +6,6 @@ import useRequireLogin from "../accounts/useRequireLogin";
 import { Main } from "../layout";
 import VerticalSteps from "../shared/VerticalSteps";
 import Transition from "../Transition";
-import ConfirmationSection from "./bmunsections/ConfirmationSection";
-import DonationsSection from "./bmunsections/DonationsSection";
-import WaiverFormsSection from "./bmunsections/WaiverFormsSection";
-import EmergencyInformationSection from "./sections/EmergencyInformationSection";
-import PersonalInformationSection from "./sections/PersonalInformationSection";
-import PreferencesSection from "./sections/PreferencesSection";
 
 function isFunction(
 	functionToCheck: any
@@ -306,33 +300,48 @@ export default function RegistrationSection() {
 						</div>
 					</div>
 					<div className={"mt-10 mt-5 md:mt-0 md:col-span-2 h-full"}>
-						{step === 0 && (
-							<PersonalInformationSection
-								data={data?.personalInformation}
-								{...commonProps}
-							/>
-						)}
-						{step === 1 && (
-							<EmergencyInformationSection
-								data={data?.emergencyInformation}
-								{...commonProps}
-							/>
-						)}
-						{step === 2 && (
-							<WaiverFormsSection data={data} {...commonProps} />
-						)}
-						{step === 3 && (
-							<PreferencesSection
-								data={data?.preferences}
-								{...commonProps}
-							/>
-						)}
-						{step === 4 && (
-							<DonationsSection data={data} {...commonProps} />
-						)}
-						{step === 5 && (
-							<ConfirmationSection data={data} {...commonProps} />
-						)}
+						<h1
+							className={
+								"text-xl font-semibold leading-6 text-gray-900"
+							}
+						>
+							SCVMUN Registration is now closed. If you have any
+							questions, please email us at{" "}
+							<a
+								className={"link"}
+								href={"mailto:montavistamun@gmail.com"}
+							>
+								montavistamun@gmail.com
+							</a>
+							.
+						</h1>
+						{/*{step === 0 && (*/}
+						{/*	<PersonalInformationSection*/}
+						{/*		data={data?.personalInformation}*/}
+						{/*		{...commonProps}*/}
+						{/*	/>*/}
+						{/*)}*/}
+						{/*{step === 1 && (*/}
+						{/*	<EmergencyInformationSection*/}
+						{/*		data={data?.emergencyInformation}*/}
+						{/*		{...commonProps}*/}
+						{/*	/>*/}
+						{/*)}*/}
+						{/*{step === 2 && (*/}
+						{/*	<WaiverFormsSection data={data} {...commonProps} />*/}
+						{/*)}*/}
+						{/*{step === 3 && (*/}
+						{/*	<PreferencesSection*/}
+						{/*		data={data?.preferences}*/}
+						{/*		{...commonProps}*/}
+						{/*	/>*/}
+						{/*)}*/}
+						{/*{step === 4 && (*/}
+						{/*	<DonationsSection data={data} {...commonProps} />*/}
+						{/*)}*/}
+						{/*{step === 5 && (*/}
+						{/*	<ConfirmationSection data={data} {...commonProps} />*/}
+						{/*)}*/}
 					</div>
 				</div>
 			</Main>
