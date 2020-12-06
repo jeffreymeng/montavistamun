@@ -55,7 +55,7 @@ export default function AdminLogPage(): React.ReactElement {
 		{ id: string; data: UserData }[]
 	>([]);
 	const [expandStatistics, setExpandStatistics] = useState(() =>
-		new Array(5).fill(false)
+		new Array(3).fill(false)
 	);
 	React.useEffect(() => {
 		if (!firebase) return;
@@ -694,6 +694,7 @@ export default function AdminLogPage(): React.ReactElement {
 			{/*</p>*/}
 			<ul className={"list-disc ml-5 mt-2"}>
 				{statistics.map((step, i) => (
+					// don't show first two steps because they are misleading
 					<li key={i}>
 						{step.length} user
 						{i < statistics.length - 1

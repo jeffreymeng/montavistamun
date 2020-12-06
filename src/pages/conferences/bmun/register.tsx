@@ -59,7 +59,7 @@ export default function AboutPage({
 					title={"BMUN Registration"}
 					backgroundImage={headerImage}
 				>
-					{"February 26-28, 2020"}
+					{"February 26-28, 2021"}
 				</Header>
 
 				<BMUNRegistrationSection />
