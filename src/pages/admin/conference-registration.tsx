@@ -23,17 +23,20 @@ export default function AdminLogPage(): React.ReactElement {
 		admin: userAdmin,
 	} = React.useContext(AuthContext);
 	const conferenceOptions = [
+		{ label: "BMUN Registration", value: "bmun" },
 		{ label: "SCVMUN Registration", value: "scvmun" },
 		{ label: "SFMUN Registration", value: "sfmun" },
 		{ label: "SMUNC Registration", value: "smunc" },
 	];
 	const hash =
 		typeof window !== "undefined" ? window.location.hash?.substring(1) : "";
-	const selectedConference = ["sfmun", "smunc", "scvmun"].includes(hash)
+	const selectedConference = ["sfmun", "smunc", "scvmun", "bmun"].includes(
+		hash
+	)
 		? hash
-		: "scvmun";
-	if (!["sfmun", "smunc", "scvmun"].includes(selectedConference)) {
-		window.location.hash = "scvmun";
+		: "bmun";
+	if (!["sfmun", "smunc", "scvmun", "bmun"].includes(selectedConference)) {
+		window.location.hash = "bmun";
 	}
 	const setSelectedConference = (conf: string) => {
 		window.location.hash = conf;
@@ -133,7 +136,9 @@ export default function AdminLogPage(): React.ReactElement {
 				(selectedConference === "smunc" &&
 					user.data.confirm?.smuncConfirmed) ||
 				(selectedConference === "scvmun" &&
-					user.data.confirm?.scvmunConfirmed)
+					user.data.confirm?.scvmunConfirmed) ||
+				(selectedConference === "bmun" &&
+					user.data.confirm?.bmunConfirmed)
 			) {
 				temp.registered.push(
 					user.userData.data.firstName +
@@ -158,7 +163,9 @@ export default function AdminLogPage(): React.ReactElement {
 				(selectedConference === "smunc" &&
 					user.data.forms?.smuncFuhsdForm) ||
 				(selectedConference === "scvmun" &&
-					user.data.forms?.scvmunFuhsdForm)
+					user.data.forms?.scvmunFuhsdForm) ||
+				(selectedConference === "bmun" &&
+					user.data.forms?.bmunFuhsdForm)
 			) {
 				temp.liabilityForms.push(
 					user.userData.data.firstName +
@@ -309,7 +316,9 @@ export default function AdminLogPage(): React.ReactElement {
 						(selectedConference === "smunc" &&
 							r.data.confirm?.smuncConfirmed) ||
 						(selectedConference === "scvmun" &&
-							r.data.confirm?.scvmunConfirmed)
+							r.data.confirm?.scvmunConfirmed) ||
+						(selectedConference === "bmun" &&
+							r.data.confirm?.bmunConfirmed)
 				);
 			}
 			const registrations: {
@@ -323,7 +332,9 @@ export default function AdminLogPage(): React.ReactElement {
 							? ["fuhsdForm", "sfmunForm", "donation"]
 							: selectedConference === "smunc"
 							? ["smuncFuhsdForm", "smuncDonation"]
-							: ["scvmunFuhsdForm", "scvmunDonation"]
+							: selectedConference === "scvmun"
+							? ["scvmunFuhsdForm", "scvmunDonation"]
+							: ["bmunFuhsdForm", "bmunDonation"]
 						)
 							.map((field) =>
 								registration.data.forms &&
@@ -391,7 +402,9 @@ export default function AdminLogPage(): React.ReactElement {
 							(selectedConference === "smunc" &&
 								registration.data.confirm?.smuncConfirmed) ||
 							(selectedConference === "scvmun" &&
-								registration.data.confirm?.scvmunConfirmed)
+								registration.data.confirm?.scvmunConfirmed) ||
+							(selectedConference === "bmun" &&
+								registration.data.confirm?.bmunConfirmed)
 								? "TRUE"
 								: "FALSE",
 							registration.userData.id,
