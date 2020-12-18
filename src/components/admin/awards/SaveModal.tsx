@@ -85,11 +85,10 @@ export default function SaveModal({
 													Your changes have been
 													saved.
 												</b>{" "}
-												Your updates will be pushed to
-												the awards page in about 5
-												minutes, after it is re-built
-												(you don't need to keep this
-												page open). You can check the
+												You may now close this page.
+												Your changes are now being
+												built, and will be live in about
+												five minutes. You can check the
 												build status{" "}
 												<a
 													href="https://app.netlify.com/sites/montavistamun/deploys"

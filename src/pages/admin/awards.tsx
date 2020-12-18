@@ -435,6 +435,11 @@ export default function AboutPage(): React.ReactElement {
 							</p>
 						</div>
 						<h3 className="text-2xl font-bold mt-6">Awards</h3>
+						<p className="mt-2 text-sm text-gray-500">
+							List one delegate or delegate pair per line, in the
+							format "First Last (Committee)" or "First Last &
+							First Last (Committee)"
+						</p>
 						<div className={"mt-4"}>
 							<label
 								htmlFor="edit-conference-delegation-award"
@@ -484,13 +489,6 @@ export default function AboutPage(): React.ReactElement {
 										className="form-textarea block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
 									/>
 								</div>
-								<p className="mt-2 text-sm text-gray-500">
-									One delegate / delegate pair per line.
-									"First Last (Committee)" or "First Last &
-									First Last (Committee)" For consistency,
-									make sure to use the ampersand (&) instead
-									of the word and for partners.
-								</p>
 							</div>
 						))}
 					</form>
