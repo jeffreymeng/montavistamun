@@ -156,7 +156,7 @@ export function SpotlightConference({
 								}
 							</b>
 						</h3>
-						<ul className={"list-disc ml-5"}>
+						<ul className={"list-none ml-5"}>
 							{group.awards.map((delegate) => (
 								<li key={delegate}>{delegate}</li>
 							))}
@@ -241,7 +241,7 @@ export function ConferenceAwardCard({
 											}
 										</b>
 									</h3>
-									<ul className={"list-disc ml-5"}>
+									<ul className={"list-none ml-5"}>
 										{group.awards.map((delegate) => (
 											<li
 												key={delegate}
