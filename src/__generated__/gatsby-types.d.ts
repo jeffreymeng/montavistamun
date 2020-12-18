@@ -2899,11 +2899,11 @@ declare namespace GatsbyTypes {
 		}>;
 	};
 
-	type usersjmengDocumentscodemontavistamunsrcpagesconferencesbmunregisterTsx490389590QueryVariables = Exact<{
+	type usersjmengWebstormProjectsmontavistamunsrcpagesconferencesbmunregisterTsx490389590QueryVariables = Exact<{
 		[key: string]: never;
 	}>;
 
-	type usersjmengDocumentscodemontavistamunsrcpagesconferencesbmunregisterTsx490389590Query = {
+	type usersjmengWebstormProjectsmontavistamunsrcpagesconferencesbmunregisterTsx490389590Query = {
 		readonly headerImage: Maybe<{
 			readonly childImageSharp: Maybe<{
 				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
@@ -2911,11 +2911,11 @@ declare namespace GatsbyTypes {
 		}>;
 	};
 
-	type usersjmengDocumentscodemontavistamunsrcpagesconferencesscvmunregisterTsx1261803817QueryVariables = Exact<{
+	type usersjmengWebstormProjectsmontavistamunsrcpagesconferencesscvmunregisterTsx1261803817QueryVariables = Exact<{
 		[key: string]: never;
 	}>;
 
-	type usersjmengDocumentscodemontavistamunsrcpagesconferencesscvmunregisterTsx1261803817Query = {
+	type usersjmengWebstormProjectsmontavistamunsrcpagesconferencesscvmunregisterTsx1261803817Query = {
 		readonly headerImage: Maybe<{
 			readonly childImageSharp: Maybe<{
 				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
@@ -2949,6 +2949,88 @@ declare namespace GatsbyTypes {
 		readonly headerImage: Maybe<{
 			readonly childImageSharp: Maybe<{
 				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
+			}>;
+		}>;
+	};
+
+	type usersjmengWebstormProjectsmontavistamunsrccomponentsindexHeroTsx3097427686QueryVariables = Exact<{
+		[key: string]: never;
+	}>;
+
+	type usersjmengWebstormProjectsmontavistamunsrccomponentsindexHeroTsx3097427686Query = {
+		readonly hero: Maybe<{
+			readonly childImageSharp: Maybe<{
+				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
+			}>;
+		}>;
+	};
+
+	type GatsbyImageSharpFixedFragment = Pick<
+		ImageSharpFixed,
+		"base64" | "width" | "height" | "src" | "srcSet"
+	>;
+
+	type usersjmengWebstormProjectsmontavistamunsrccomponentsindexAboutTsx1042497523QueryVariables = Exact<{
+		[key: string]: never;
+	}>;
+
+	type usersjmengWebstormProjectsmontavistamunsrccomponentsindexAboutTsx1042497523Query = {
+		readonly socialsImage: Maybe<{
+			readonly childImageSharp: Maybe<{
+				readonly fixed: Maybe<GatsbyImageSharpFixedFragment>;
+			}>;
+		}>;
+	};
+
+	type usersjmengWebstormProjectsmontavistamunsrccomponentsindexheroVideoTsx3462868773QueryVariables = Exact<{
+		[key: string]: never;
+	}>;
+
+	type usersjmengWebstormProjectsmontavistamunsrccomponentsindexheroVideoTsx3462868773Query = {
+		readonly thumbnail: Maybe<{
+			readonly childImageSharp: Maybe<{
+				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
+			}>;
+		}>;
+	};
+
+	type AuthLayoutQueryQueryVariables = Exact<{ [key: string]: never }>;
+
+	type AuthLayoutQueryQuery = {
+		readonly headerImage: Maybe<{
+			readonly childImageSharp: Maybe<{
+				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
+			}>;
+		}>;
+	};
+
+	type usersjmengWebstormProjectsmontavistamunsrccomponentslayoutSeoTsx63159454QueryVariables = Exact<{
+		[key: string]: never;
+	}>;
+
+	type usersjmengWebstormProjectsmontavistamunsrccomponentslayoutSeoTsx63159454Query = {
+		readonly site: Maybe<{
+			readonly siteMetadata: Maybe<
+				Pick<SiteSiteMetadata, "title" | "description" | "author">
+			>;
+		}>;
+	};
+
+	type GatsbyImageSharpFixed_withWebp_noBase64Fragment = Pick<
+		ImageSharpFixed,
+		"width" | "height" | "src" | "srcSet" | "srcWebp" | "srcSetWebp"
+	>;
+
+	type usersjmengWebstormProjectsmontavistamunsrccomponentslayoutNavbarTsx608876523QueryVariables = Exact<{
+		[key: string]: never;
+	}>;
+
+	type usersjmengWebstormProjectsmontavistamunsrccomponentslayoutNavbarTsx608876523Query = {
+		readonly logo: Maybe<{
+			readonly childImageSharp: Maybe<{
+				readonly fixed: Maybe<
+					GatsbyImageSharpFixed_withWebp_noBase64Fragment
+				>;
 			}>;
 		}>;
 	};

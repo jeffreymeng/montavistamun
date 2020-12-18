@@ -30,6 +30,13 @@ exports.sourceNodes = async ({
 	let awardsData = [];
 	try {
 		const admin = require("firebase-admin");
+		if (!process.env.FB_SERVICE_ACCOUNT) {
+			throw {
+				code: "NO_FIREBASE_KEY",
+				message:
+					"Please set the firebase service account key as an environment variable.",
+			};
+		}
 		const FB_SERVICE_ACCOUNT = JSON.parse(process.env.FB_SERVICE_ACCOUNT);
 		admin.initializeApp({
 			credential: admin.credential.cert(FB_SERVICE_ACCOUNT),
@@ -46,6 +53,7 @@ exports.sourceNodes = async ({
 			});
 		});
 	} catch (e) {
+		console.log(e);
 		console.warn(
 			"Unable to fetch firebase data for awards due to error code " +
 				e.code +

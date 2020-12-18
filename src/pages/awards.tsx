@@ -1,6 +1,6 @@
 import type firebaseType from "firebase";
 import { graphql, useStaticQuery } from "gatsby";
-import React from "react";
+import React, { ReactElement } from "react";
 import Header from "../components/Header";
 import HorizontalCard from "../components/HorizontalCard";
 import { Layout, Main } from "../components/layout";
@@ -49,6 +49,7 @@ export default function AwardsPage(): React.ReactElement {
 					name
 					time
 					year
+					imageURL
 				}
 			}
 		}
@@ -89,7 +90,12 @@ export default function AwardsPage(): React.ReactElement {
 		</Layout>
 	);
 }
-export function SpotlightConference({ data }: { data: ConferenceAwardsData }) {
+export function SpotlightConference({
+	data,
+}: {
+	data: ConferenceAwardsData;
+}): ReactElement {
+	console.log(data);
 	return (
 		<HorizontalCard
 			imageURL={
@@ -161,13 +167,12 @@ export function SpotlightConference({ data }: { data: ConferenceAwardsData }) {
 	);
 }
 export function ConferenceAwardCard({
-	imageURL,
 	month,
 	year,
 	name,
 	delegationAward,
 	delegateAwards,
-}: ConferenceAwardsData) {
+}: ConferenceAwardsData): ReactElement {
 	return (
 		<div className="flex flex-col rounded-lg shadow-lg overflow-hidden">
 			<div className="flex-1 bg-white p-6 flex flex-col justify-between">

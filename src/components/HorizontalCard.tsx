@@ -54,7 +54,14 @@ export default function HorizontalCard({
 							fluid={props.image.childImageSharp.fluid}
 						/>
 					) : (
-						<img className={"w-full h-full"} src={props.imageURL} />
+						<img
+							className={"w-full h-full"}
+							style={{
+								objectFit: "cover",
+							}}
+							alt={"Conference Image"}
+							src={props.imageURL}
+						/>
 					)}
 				</div>
 			)}
