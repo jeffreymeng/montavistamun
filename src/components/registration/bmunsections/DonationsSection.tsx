@@ -144,7 +144,7 @@ export default function DonationsSection({
 						<ul className="list-decimal ml-8">
 							<li>
 								Head to Monta Vista’s online Student Store and
-								find our bmun conference donation{" "}
+								find our BMUN conference donation{" "}
 								<a
 									target={"_blank"}
 									rel={"noopener noreferrer"}
