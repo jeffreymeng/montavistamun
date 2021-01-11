@@ -69,22 +69,6 @@ export default function AdminStatsPage(): React.ReactElement {
 			labels: ["Freshmen", "Sophomores", "Juniors", "Seniors"],
 			datasets: [
 				{
-					label: "No Conferences",
-					data: [9, 10, 11, 12].map(
-						(grade) =>
-							allUsers.filter(
-								(el) =>
-									getGrade(el.data.classOf) == grade &&
-									!hasConfirmedConference(
-										allRegistration.find(
-											(reg) => reg.id == el.id
-										)
-									)
-							).length
-					),
-					backgroundColor: "rgb(75, 192, 192)",
-				},
-				{
 					label: "One Or More Conferences",
 					data: [9, 10, 11, 12].map(
 						(grade) =>
@@ -99,6 +83,22 @@ export default function AdminStatsPage(): React.ReactElement {
 							).length
 					),
 					backgroundColor: "rgb(54, 162, 235)",
+				},
+				{
+					label: "No Conferences",
+					data: [9, 10, 11, 12].map(
+						(grade) =>
+							allUsers.filter(
+								(el) =>
+									getGrade(el.data.classOf) == grade &&
+									!hasConfirmedConference(
+										allRegistration.find(
+											(reg) => reg.id == el.id
+										)
+									)
+							).length
+					),
+					backgroundColor: "rgb(75, 192, 192)",
 				},
 			],
 		}),
@@ -250,7 +250,7 @@ export default function AdminStatsPage(): React.ReactElement {
 											)
 									).length
 								}{" "}
-								{gradeWord} with 1+ registrations (
+								{gradeWord} with one or more registrations (
 								<a
 									className={"link"}
 									onClick={() =>
