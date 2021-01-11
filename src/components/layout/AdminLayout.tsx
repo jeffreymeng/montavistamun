@@ -28,6 +28,12 @@ const AdminLinks: TypedPageOrDropdown[] = [
 		path: "/admin/conference-registration",
 		icon: <Icons.PencilAltOutline />,
 	},
+	{
+		type: "page",
+		name: "Member Statistics",
+		path: "/admin/member-statistics",
+		icon: <Icons.ChartBarOutline />,
+	},
 	// {
 	// 	type: "page",
 	// 	name: "Edit Member Dashboard",

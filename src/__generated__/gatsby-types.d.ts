@@ -2899,11 +2899,11 @@ declare namespace GatsbyTypes {
 		}>;
 	};
 
-	type usersjmengWebstormProjectsmontavistamunsrcpagesconferencesbmunregisterTsx490389590QueryVariables = Exact<{
+	type usersjmengDocumentscodemontavistamunsrcpagesconferencesbmunregisterTsx490389590QueryVariables = Exact<{
 		[key: string]: never;
 	}>;
 
-	type usersjmengWebstormProjectsmontavistamunsrcpagesconferencesbmunregisterTsx490389590Query = {
+	type usersjmengDocumentscodemontavistamunsrcpagesconferencesbmunregisterTsx490389590Query = {
 		readonly headerImage: Maybe<{
 			readonly childImageSharp: Maybe<{
 				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
@@ -2911,11 +2911,21 @@ declare namespace GatsbyTypes {
 		}>;
 	};
 
-	type usersjmengWebstormProjectsmontavistamunsrcpagesconferencesscvmunregisterTsx1261803817QueryVariables = Exact<{
+	type usersjmengDocumentscodemontavistamunsrcpagesconferencesscvmunregisterTsx1261803817QueryVariables = Exact<{
 		[key: string]: never;
 	}>;
 
-	type usersjmengWebstormProjectsmontavistamunsrcpagesconferencesscvmunregisterTsx1261803817Query = {
+	type usersjmengDocumentscodemontavistamunsrcpagesconferencesscvmunregisterTsx1261803817Query = {
+		readonly headerImage: Maybe<{
+			readonly childImageSharp: Maybe<{
+				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
+			}>;
+		}>;
+	};
+
+	type SMUNCRegisterPageQueryQueryVariables = Exact<{ [key: string]: never }>;
+
+	type SMUNCRegisterPageQueryQuery = {
 		readonly headerImage: Maybe<{
 			readonly childImageSharp: Maybe<{
 				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
@@ -2936,16 +2946,6 @@ declare namespace GatsbyTypes {
 	type SFMUNRegisterPageQueryQueryVariables = Exact<{ [key: string]: never }>;
 
 	type SFMUNRegisterPageQueryQuery = {
-		readonly headerImage: Maybe<{
-			readonly childImageSharp: Maybe<{
-				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
-			}>;
-		}>;
-	};
-
-	type SMUNCRegisterPageQueryQueryVariables = Exact<{ [key: string]: never }>;
-
-	type SMUNCRegisterPageQueryQuery = {
 		readonly headerImage: Maybe<{
 			readonly childImageSharp: Maybe<{
 				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
