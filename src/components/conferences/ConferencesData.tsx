@@ -31,7 +31,6 @@ export default [
 		acronym: "scvmun",
 		text:
 			"Santa Clara Valley Model United Nations Conference is our third conference of the year, and the one where we recommend to all members – novice or veteran. Participating at SCVMUN is a great way to get used to more difficult conferences, such as SMUNC, NAIMUN, and BMUN.",
-		//registration: "/conferences/scvmun/register",
 	},
 	{
 		name: "North American Invitational Model United Nations Conference",
@@ -51,11 +50,12 @@ export default [
 	},
 	{
 		name: "South Bay Model United Nations",
-		date: "Date TBA", // TODO when available
+		date: "April 3, 2021",
 		location: "Monta Vista High School",
 		acronym: "sbmun",
 		text:
 			"South Bay Model United Nations Conference is our sixth conference of the year, and the one where students can continue practicing MUN skills with other delegates from the Bay Area. MUN conferences are rare in the spring season, so this is a great way for you to keep honing on your MUN abilities. ",
+		registration: "/conferences/sbmun/register",
 	},
 	{
 		name: "Davis Model United Nations Conference",

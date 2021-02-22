@@ -11,7 +11,7 @@ exports.createSchemaCustomization = ({ actions }) => {
       	name: String!
 		month: String!
 		year: Int!
-		time: Date!
+		time: Date! @dateformat
 		delegationAward: String
 		delegateAwards: [ConferenceAwardsData__DelegateAwards]
 		imageURL: String
