@@ -1,21 +1,14 @@
 import React, { useCallback, useEffect, useState } from "react";
+import useRequireLogin from "../../components/accounts/useRequireLogin";
 import LogDetailModal from "../../components/admin/logs/LogDetailModal";
 import LogItem, { AdminLogItem } from "../../components/admin/logs/LogItem";
 import AdminLayout from "../../components/layout/AdminLayout";
-import AuthContext from "../../context/AuthContext";
 import useFirebase from "../../firebase/useFirebase";
 
 export default function AdminLogPage(): React.ReactElement {
-	const [target, setTarget] = useState("");
-	const [admin, setAdmin] = useState("same");
-	const [verified, setVerified] = useState("same");
+	useRequireLogin();
+
 	const firebase = useFirebase();
-	const {
-		user,
-		loading,
-		verified: userVerified,
-		admin: userAdmin,
-	} = React.useContext(AuthContext);
 	const [actions, setActions] = useState<Record<string, any>[]>([]);
 	const [canLoadMore, setCanLoadMore] = useState(true);
 	const [loadingMore, setLoadingMore] = useState(false);

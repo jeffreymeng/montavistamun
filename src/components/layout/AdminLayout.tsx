@@ -34,12 +34,12 @@ const AdminLinks: TypedPageOrDropdown[] = [
 		path: "/admin/member-statistics",
 		icon: <Icons.ChartBarOutline />,
 	},
-	// {
-	// 	type: "page",
-	// 	name: "Edit Member Dashboard",
-	// 	path: "/admin/edit-member-dashboard",
-	// 	icon: <Icons.PencilOutline />,
-	// },
+	{
+		type: "page",
+		name: "Admin Logs",
+		path: "/admin/logs",
+		icon: <Icons.CollectionOutline />,
+	},
 ];
 export default function AdminLayout({
 	title,
