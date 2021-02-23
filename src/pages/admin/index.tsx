@@ -38,6 +38,16 @@ export default function AdminHomePage(): React.ReactElement {
 					Conference Registration
 				</Link>
 			</p>
+			<p>
+				<Link to={"/admin/member-statistics"} className={"link"}>
+					Member Statistics
+				</Link>
+			</p>
+			<p>
+				<Link to={"/admin/logs"} className={"link"}>
+					Admin Logs
+				</Link>
+			</p>
 		</AdminLayout>
 	);
 }
