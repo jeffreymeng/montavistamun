@@ -56,7 +56,7 @@ export default function LogDetailModal({
 						<li key={"admin"}>
 							{!data.newData?.admin ? "Demoted" : "Promoted"}{" "}
 							{usersData[data.target]?.name} (
-							{usersData[data.target]?.email})
+							{usersData[data.target]?.email}){" "}
 							{data.newData?.verified ? "from" : "to"}{" "}
 							administrator.
 						</li>
