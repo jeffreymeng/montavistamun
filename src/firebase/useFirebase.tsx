@@ -6,7 +6,7 @@ import useIsMounted from "ismounted";
 import React, { useState } from "react";
 import firebaseConfig from "../../firebase-config";
 
-export default function useFirebase(): null | typeof FirebaseType {
+export default function useFirebase(): null | typeof FirebaseType.default {
 	const isMounted = useIsMounted();
 	const [firebase, setFirebase] = useState(null);
 	React.useEffect(() => {
@@ -31,5 +31,5 @@ export default function useFirebase(): null | typeof FirebaseType {
 			}
 		})();
 	}, [firebaseConfig]);
-	return firebase;
+	return firebase as null | typeof FirebaseType.default;
 }
