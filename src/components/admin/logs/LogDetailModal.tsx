@@ -88,9 +88,17 @@ export default function LogDetailModal({
 							(data.newData.imageURL || "") && (
 							<li className={"mt-1"}>
 								<b>Image URL:</b>{" "}
-								{data.previousData.imageURL || "<empty>"}{" "}
+								{(
+									<a href={data.previousData.imageURL}>
+										{data.previousData.imageURL}
+									</a>
+								) || "<empty>"}{" "}
 								<b>changed to</b>{" "}
-								{data.newData.imageURL || "<empty>"}
+								{(
+									<a href={data.newData.imageURL}>
+										{data.newData.imageURL}
+									</a>
+								) || "<empty>"}
 							</li>
 						)}
 						{((data.previousData.month || "") !==
@@ -135,35 +143,25 @@ export default function LogDetailModal({
 										)}
 										:
 									</b>
-									<ul className={"list-disc ml-5"}>
+									<ul
+										className={
+											"list-disc ml-5 text-red-600"
+										}
+									>
 										{data.previousData.delegateAwards[
 											i
-										].awards
-											.filter(
-												(a, j) =>
-													!data.newData.delegateAwards[
-														i
-													]?.awards[j]?.includes(a)
-											)
-											.map((a, j) => (
-												<li key={j}>
-													<b>Removed</b> {a}
-												</li>
-											))}
+										].awards.map((a, j) => (
+											<li key={j}>{a}</li>
+										))}
 									</ul>
-									<ul className={"list-disc ml-5"}>
-										{award.awards
-											.filter(
-												(a, j) =>
-													!data.previousData.delegateAwards[
-														i
-													]?.awards[j]?.includes(a)
-											)
-											.map((a, j) => (
-												<li key={j}>
-													<b>Added</b> {a}
-												</li>
-											))}
+									<ul
+										className={
+											"list-disc ml-5 text-green-600"
+										}
+									>
+										{award.awards.map((a, j) => (
+											<li key={j}>{a}</li>
+										))}
 									</ul>
 								</li>
 							))}
@@ -182,7 +180,10 @@ export default function LogDetailModal({
 							{data.newData.delegationAward}
 						</li>
 						<li className={"mt-1"}>
-							<b>Image URL:</b> {data.newData.imageURL}
+							<b>Image URL:</b>{" "}
+							<a href={data.newData.imageURL}>
+								{data.newData.imageURL}
+							</a>
 						</li>
 						<li className={"mt-1"}>
 							<b>Time:</b> {data.newData.month}{" "}
