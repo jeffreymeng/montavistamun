@@ -1,15 +1,9 @@
-import type firebaseType from "firebase";
-import moment from "moment";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
+import LogDetailModal from "../../components/admin/logs/LogDetailModal";
+import LogItem, { AdminLogItem } from "../../components/admin/logs/LogItem";
 import AdminLayout from "../../components/layout/AdminLayout";
 import AuthContext from "../../context/AuthContext";
 import useFirebase from "../../firebase/useFirebase";
-
-const actionNameMap: Record<string, string> = {
-	"update-user-permissions": "updated a user",
-	"create-award": "created an award",
-	"update-award": "updated an award",
-};
 
 export default function AdminLogPage(): React.ReactElement {
 	const [target, setTarget] = useState("");
@@ -23,26 +17,54 @@ export default function AdminLogPage(): React.ReactElement {
 		admin: userAdmin,
 	} = React.useContext(AuthContext);
 	const [actions, setActions] = useState<Record<string, any>[]>([]);
-	const [names, setNames] = useState<Record<string, string>>({});
+	const [canLoadMore, setCanLoadMore] = useState(true);
 	const [loadingMore, setLoadingMore] = useState(false);
-	useEffect(() => {
-		if (!firebase) return;
-		const newNames: Record<string, string> = {};
-		firebase
-			.firestore()
-			.collection("users")
-			.get()
-			.then((snapshot) => {
-				snapshot.docs.forEach((docSnapshot) => {
-					const data = docSnapshot.data();
-					newNames[docSnapshot.id] =
-						(data.firstName || "Unknown First Name") +
-						" " +
-						(data.lastName || "Unknown Last Name");
+	const [usersData, setUsersData] = useState<{
+		[uid: string]: {
+			name: string;
+			email: string;
+		};
+	}>({});
+	const [requestedUsers, setRequestedUsers] = useState<string[]>([]);
+	const [showDetailModal, setShowDetailModal] = useState(false);
+	const [detailModalData, setDetailModalData] = useState<{
+		id: string;
+		loading: boolean;
+		data?: AdminLogItem;
+	}>({ loading: true, id: "" });
+	const requestUserData = useCallback(
+		(uid: string) => {
+			if (!firebase) return;
+			if (requestedUsers.includes(uid)) return;
+			setRequestedUsers((old) => [...old, uid]);
+			firebase
+				.firestore()
+				.collection("users")
+				.doc(uid)
+				.get()
+				.then((snapshot) => {
+					const data = snapshot.data();
+					setUsersData((old) => {
+						return {
+							...old,
+							[uid]: {
+								name:
+									data?.firstName || data?.lastName
+										? `${data?.firstName || ""}${
+												data?.firstName &&
+												data?.lastName
+													? " "
+													: ""
+										  }${data?.lastName || ""}`
+										: "User " + uid,
+								email: data?.email,
+							},
+						};
+					});
 				});
-			});
-		setNames(newNames);
-	}, [firebase]);
+		},
+		[firebase, requestedUsers]
+	);
 	useEffect(() => {
 		if (!firebase) return;
 		// fetch the most recent 20 and listen for new documents
@@ -73,7 +95,7 @@ export default function AdminLogPage(): React.ReactElement {
 			.firestore()
 			.collection("admin-log")
 			.orderBy("timestamp", "desc")
-			.limit(12)
+			.limit(16)
 			.get()
 			.then((snapshot) => {
 				setActions((oldActions) => [
@@ -88,7 +110,51 @@ export default function AdminLogPage(): React.ReactElement {
 				]);
 			});
 	}, [firebase]);
-	console.log(actions);
+	useEffect(() => {
+		if (!firebase) return;
+		const handler = () => {
+			const id = window.location.hash?.substring(1) || "";
+			if (id) {
+				const data = actions.find((a) => a.id == id) || null;
+				if (data) {
+					setDetailModalData({
+						id: id,
+						data: data.data,
+						loading: false,
+					});
+					setShowDetailModal(true);
+				} else {
+					setDetailModalData({
+						id: id,
+						loading: true,
+					});
+					setShowDetailModal(true);
+					firebase
+						.firestore()
+						.collection("admin-log")
+						.doc(id)
+						.get()
+						.then((snapshot) => {
+							const data = snapshot.data() as AdminLogItem;
+							requestUserData(data?.user);
+							if (data?.action == "update-user-permissions") {
+								requestUserData(data?.target);
+							}
+							setDetailModalData({
+								id: id,
+								loading: false,
+								data: data,
+							});
+						});
+				}
+			} else {
+				setShowDetailModal(false);
+			}
+		};
+		window.addEventListener("hashchange", handler);
+		handler();
+		return () => window.removeEventListener("hashchange", handler);
+	}, [firebase, actions]);
 	return (
 		<AdminLayout title={"Admin Logs"}>
 			<h1
@@ -96,7 +162,7 @@ export default function AdminLogPage(): React.ReactElement {
 					"text-3xl leading-9 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10 mb-6"
 				}
 			>
-				Admin Logs
+				Live Admin Logs
 			</h1>
 			<div className="bg-white shadow overflow-hidden sm:rounded-md">
 				{actions.length === 0 ? (
@@ -112,61 +178,20 @@ export default function AdminLogPage(): React.ReactElement {
 				) : (
 					<ul>
 						{actions.map(({ id, data }) => (
-							<li key={id}>
-								<a
-									href="/"
-									className="block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out"
-								>
-									<div className="px-4 py-4 flex items-center sm:px-6">
-										<div className="min-w-0 flex-1 sm:flex sm:items-center sm:justify-between">
-											<div>
-												<div className="text-sm leading-5 font-medium truncate">
-													{names[data.user]}{" "}
-													{actionNameMap[data.action]
-														? actionNameMap[
-																data.action
-														  ]
-														: data.action}
-												</div>
-											</div>
-											<div className="mt-4 flex-shrink-0 sm:mt-0">
-												<div className="mt-2 flex">
-													<div className="flex items-center text-sm leading-5 text-gray-500">
-														{/* Heroicon name: calendar */}
-														<svg
-															className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400"
-															viewBox="0 0 20 20"
-															fill="currentColor"
-														>
-															<path
-																fillRule="evenodd"
-																d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-																clipRule="evenodd"
-															/>
-														</svg>
-														<span>
-															<time dateTime="2020-01-07">
-																{moment(
-																	(data.timestamp as firebaseType.firestore.Timestamp).toDate()
-																).format(
-																	"M/D/YY h:mm:ss A"
-																)}
-															</time>
-														</span>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</a>
-							</li>
+							<LogItem
+								key={id}
+								id={id}
+								data={data}
+								requestUserData={requestUserData}
+								usersData={usersData}
+							/>
 						))}
 						<li>
 							<a
 								className="block hover:bg-gray-50 focus:outline-none focus:bg-gray-50 transition duration-150 ease-in-out"
 								onClick={() => {
 									if (!firebase) return;
-									if (loadingMore) return;
+									if (loadingMore || !canLoadMore) return;
 									setLoadingMore(true);
 									firebase
 										.firestore()
@@ -176,9 +201,21 @@ export default function AdminLogPage(): React.ReactElement {
 											actions[actions.length - 1].data
 												.timestamp
 										)
-										.limit(6)
+										.limit(8)
 										.get()
 										.then((snapshot) => {
+											if (
+												snapshot
+													.docChanges()
+													.filter(
+														(change) =>
+															change.type ===
+															"added"
+													).length < 8
+											) {
+												setCanLoadMore(false);
+												return;
+											}
 											setActions((oldActions) => [
 												...oldActions,
 												...snapshot
@@ -199,7 +236,9 @@ export default function AdminLogPage(): React.ReactElement {
 							>
 								<div className="px-4 py-4 flex items-center sm:px-6">
 									<div className="text-md leading-5 font-medium truncate">
-										{loadingMore
+										{!canLoadMore
+											? "No more to load"
+											: loadingMore
 											? "Loading More..."
 											: "Load More"}
 									</div>
@@ -209,6 +248,11 @@ export default function AdminLogPage(): React.ReactElement {
 					</ul>
 				)}
 			</div>
+			<LogDetailModal
+				show={showDetailModal}
+				data={detailModalData}
+				usersData={usersData}
+			/>
 		</AdminLayout>
 	);
 }
