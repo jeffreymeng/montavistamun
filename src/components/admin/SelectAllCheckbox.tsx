@@ -1,5 +1,5 @@
 import * as Icons from "heroicons-react";
-import React, { useState } from "react";
+import React, { ReactElement, useState } from "react";
 import Transition from "../Transition";
 import UserData from "./UserData";
 
@@ -23,7 +23,7 @@ export default function SelectAllCheckbox({
 			data: UserData;
 		}[]
 	>;
-}) {
+}): ReactElement {
 	const [selectAllDropdownOpen, setSelectAllDropdownOpen] = useState(false);
 	const [emails, setEmails] = useState("");
 	const [errors, setErrors] = React.useState<[string, string][]>([]);

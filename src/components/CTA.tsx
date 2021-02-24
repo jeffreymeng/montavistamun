@@ -1,14 +1,6 @@
 import { Link } from "gatsby";
-import React, { useState } from "react";
+import React from "react";
 export default function CTA(): React.ReactElement {
-	const [error, setError] = useState("");
-	const [submitting, setSubmitting] = useState(false);
-	const [success, setSuccess] = useState(false);
-	const [firstName, setFirstName] = useState("");
-	const [lastName, setLastName] = useState("");
-	const [email, setEmail] = useState("");
-	const [grade, setGrade] = useState("");
-
 	return (
 		<div className="bg-gray-50">
 			<div className="max-w-screen-xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between">

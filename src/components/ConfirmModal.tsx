@@ -1,5 +1,5 @@
 import * as Icons from "heroicons-react";
-import React from "react";
+import React, { ReactElement } from "react";
 import Transition from "./Transition";
 
 export default function ConfirmationModal({
@@ -20,7 +20,7 @@ export default function ConfirmationModal({
 	Icon?: React.ReactNode;
 	confirmButtonText: string;
 	disabled?: boolean;
-}) {
+}): ReactElement {
 	return (
 		<Transition show={show}>
 			<div className="fixed z-10 inset-0 overflow-y-auto">
