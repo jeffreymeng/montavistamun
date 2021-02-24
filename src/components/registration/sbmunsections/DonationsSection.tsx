@@ -67,9 +67,9 @@ export default function DonationsSection({
 				<p className="mt-2">
 					Before you submit, we just have one last step. To cover the
 					fees charged by SBMUN, we are requesting that you include a
-					donation of <b>$30</b> with your registration. Your
-					donations will go directly towards covering conference fees
-					and making this conference possible.
+					donation of <b>25</b> with your registration. Your donations
+					will go directly towards covering conference fees and making
+					this conference possible.
 				</p>
 				{data.forms?.sbmunDonationOptOut && (
 					<>
@@ -208,7 +208,7 @@ export default function DonationsSection({
 				<span className="inline-flex rounded-md shadow-sm">
 					<button
 						type="button"
-						onClick={() => setStep(2)}
+						onClick={() => setStep(3)}
 						disabled={uploading || skipping}
 						className={cx(
 							"py-2 px-4 border border-gray-300 rounded-md text-sm leading-5 font-medium text-gray-700",
@@ -233,7 +233,7 @@ export default function DonationsSection({
 							return;
 						}
 						if (data.confirm?.sbmunConfirmed) {
-							setStep(4);
+							setStep(5);
 							return;
 						}
 						setSubmitting(true);
@@ -253,8 +253,8 @@ export default function DonationsSection({
 							})
 							.then(() => {
 								setSubmitting(false);
-								setStep(4);
-								setMaxStep((o) => 5); // maxStep is one higher to check it
+								setStep(5);
+								setMaxStep((o) => 6); // maxStep is one higher to check it
 							});
 					}}
 					disabled={

@@ -8,6 +8,7 @@ import VerticalSteps from "../shared/VerticalSteps";
 import Transition from "../Transition";
 import ConfirmationSection from "./sbmunsections/ConfirmationSection";
 import DonationsSection from "./sbmunsections/DonationsSection";
+import PreferencesSection from "./sbmunsections/PreferencesSection";
 import WaiverFormsSection from "./sbmunsections/WaiverFormsSection";
 import EmergencyInformationSection from "./sections/EmergencyInformationSection";
 import PersonalInformationSection from "./sections/PersonalInformationSection";
@@ -182,6 +183,33 @@ export default function SBMUNRegistrationSection() {
 						healthInsuranceZip: "",
 						...data.emergencyInformation,
 					},
+					preferences: {
+						scvmunCommittee: [
+							"IAEA (International Atomic Energy Association)",
+							"DISEC (Disarmament and International Security Committee)",
+							"WHO (World Health Organization)",
+							"UNEP (United Nations Environmental Programme)",
+							"SOCHUM (Social, Humanitarian and Cultural)",
+							"UNDP (United Nations Development Programme)",
+							"LEGAL (Legal Committee)",
+							"UNESCO (United Nations Educational, Scientific and Cultural Organization)",
+							"Security Council (Specialty Committee)",
+							"Historic Security Council (Specialty Committee)",
+							"NATO (Specialty Committee)",
+							"World Bank (Specialty Committee)",
+							"UNHCR (United Nations High Commissioner for Refugees) (Specialty Committee)",
+							"CSW (Commission on the Status of Women) (Specialty Committee)",
+						],
+						sbmunCommittee: [
+							"WHO",
+							"UNESCO",
+							"DISEC",
+							"World Economic Forum",
+							"JCC East Germany (Crisis)",
+							"JCC West Germany (Crisis)",
+						],
+						...data.preferences,
+					},
 					forms: {
 						...data.forms,
 					},
@@ -194,19 +222,21 @@ export default function SBMUNRegistrationSection() {
 					step = 1;
 				} else if (!rawData.forms?.sbmunFuhsdForm) {
 					step = 2;
+				} else if (!rawData.preferences) {
+					step = 3;
 				} else if (
 					!rawData.forms?.sbmunDonation &&
 					!rawData.forms?.sbmunDonationOptOut
 				) {
-					step = 3;
-				} else {
 					step = 4;
+				} else {
+					step = 5;
 				}
 				setStep(step);
 
 				// typically, the current step will be displayed as incomplete circle
 				// the last step cannot be completed, so we want to display it as completed whenever we are on it
-				setMaxStep(step === 4 ? 5 : step);
+				setMaxStep(step === 5 ? 6 : step);
 
 				setLoadingData(false);
 				setStepHasChanges(false);
@@ -252,7 +282,11 @@ export default function SBMUNRegistrationSection() {
 										description:
 											"These forms will be mostly autofilled with the information you provide us in earlier steps, but you'll still need to get them signed.",
 									},
-
+									{
+										title: "Committee Preferences",
+										description:
+											"Now comes the fun part! Look into the different committees offered at SFMUN and indicate how much you like each one.",
+									},
 									{
 										title: "Donations",
 										description:
@@ -296,9 +330,15 @@ export default function SBMUNRegistrationSection() {
 							<WaiverFormsSection data={data} {...commonProps} />
 						)}
 						{step === 3 && (
-							<DonationsSection data={data} {...commonProps} />
+							<PreferencesSection
+								data={data?.preferences}
+								{...commonProps}
+							/>
 						)}
 						{step === 4 && (
+							<DonationsSection data={data} {...commonProps} />
+						)}
+						{step === 5 && (
 							<ConfirmationSection data={data} {...commonProps} />
 						)}
 					</div>

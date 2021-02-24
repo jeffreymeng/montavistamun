@@ -181,7 +181,7 @@ export default function RegistrationSection() {
 						...data.forms,
 					},
 					preferences: {
-						scvmunCommittee: data.preferences?.scvmunCommittee || [
+						scvmunCommittee: [
 							"IAEA (International Atomic Energy Association)",
 							"DISEC (Disarmament and International Security Committee)",
 							"WHO (World Health Organization)",
@@ -197,6 +197,15 @@ export default function RegistrationSection() {
 							"UNHCR (United Nations High Commissioner for Refugees) (Specialty Committee)",
 							"CSW (Commission on the Status of Women) (Specialty Committee)",
 						],
+						sbmunCommittee: [
+							"WHO",
+							"UNESCO",
+							"DISEC",
+							"World Economic Forum",
+							"JCC East Germany (Crisis)",
+							"JCC West Germany (Crisis)",
+						],
+						...data.preferences,
 					},
 				});
 				const rawData = snapshot.data();
