@@ -297,6 +297,16 @@ export default function AboutPage(): React.ReactElement {
 								);
 								setFields((o as { value: string }).value);
 							}}
+							styles={{
+								input: (provided) => ({
+									...provided,
+									borderStyle: "none !important",
+									outline: "2px solid transparent !important",
+									outlineOffset: "2px !important",
+									boxShadow: "none !important",
+									"--tw-ring-color": "transparent !important",
+								}),
+							}}
 						/>
 						{hasChanges && (
 							<p className="mt-2 text-sm text-gray-500">
@@ -353,9 +363,10 @@ export default function AboutPage(): React.ReactElement {
 							<div className="mt-1 relative rounded-md shadow-sm">
 								<input
 									value={name}
+									type={"text"}
 									onChange={(e) => setName(e.target.value)}
 									id="edit-conference-name"
-									className="form-input block w-full sm:text-sm sm:leading-5"
+									className="focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
 								/>
 							</div>
 							<p className="mt-2 text-sm text-gray-500">
@@ -376,7 +387,8 @@ export default function AboutPage(): React.ReactElement {
 									value={endDate}
 									onChange={(d) => setEndDate(d[0])}
 									id={"edit-conference-end-date"}
-									className="form-input block w-full sm:text-sm sm:leading-5"
+									type={"date"}
+									className="focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
 									options={{
 										dateFormat: "F j, Y",
 									}}
@@ -401,8 +413,9 @@ export default function AboutPage(): React.ReactElement {
 									onChange={(e) =>
 										setImageURL(e.target.value)
 									}
+									type={"text"}
 									id="edit-conference-imageurl"
-									className="form-input block w-full sm:text-sm sm:leading-5"
+									className=" focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
 									placeholder={"Must include https://"}
 								/>
 							</div>
@@ -453,8 +466,9 @@ export default function AboutPage(): React.ReactElement {
 									onChange={(e) =>
 										setDelegationAward(e.target.value)
 									}
+									type={"text"}
 									id="edit-conference-delegation-award"
-									className="form-input block w-full sm:text-sm sm:leading-5"
+									className=" focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
 								/>
 							</div>
 						</div>
@@ -486,7 +500,7 @@ export default function AboutPage(): React.ReactElement {
 										}}
 										id={"edit-conference-award-" + i}
 										rows={3}
-										className="form-textarea block w-full transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+										className="focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md"
 									/>
 								</div>
 							</div>

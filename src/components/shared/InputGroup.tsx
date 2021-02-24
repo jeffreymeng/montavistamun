@@ -149,8 +149,9 @@ export default function InputGroup({
 			>
 				<input
 					id={id}
+					type={"text"}
 					className={cx(
-						"form-input block w-full sm:text-sm sm:leading-5",
+						"block w-full sm:text-sm sm:leading-5",
 						disabled ? "bg-gray-100" : "bg-white",
 						invalid &&
 							"pr-10 border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:ring-red-500",

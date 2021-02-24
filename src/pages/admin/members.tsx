@@ -540,7 +540,7 @@ export default function MembersPage(): React.ReactElement {
 											>
 												<input
 													type="checkbox"
-													className="form-checkbox h-6 w-6"
+													className="h-6 w-6 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
 													checked={selectedUsers.has(
 														id
 													)}

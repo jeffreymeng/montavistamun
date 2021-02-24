@@ -242,7 +242,7 @@ export default function SettingsPage(): React.ReactElement {
 				{/*								<div className="flex items-center">*/}
 				{/*									<input*/}
 				{/*										id="push_everything"*/}
-				{/*										name="form-input push_notifications"*/}
+				{/*										name="push_notifications"*/}
 				{/*										type="radio"*/}
 				{/*										className="form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"*/}
 				{/*									/>*/}
@@ -258,7 +258,7 @@ export default function SettingsPage(): React.ReactElement {
 				{/*								<div className="mt-4 flex items-center">*/}
 				{/*									<input*/}
 				{/*										id="push_email"*/}
-				{/*										name="form-input push_notifications"*/}
+				{/*										name="push_notifications"*/}
 				{/*										type="radio"*/}
 				{/*										className="form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"*/}
 				{/*									/>*/}
@@ -274,7 +274,7 @@ export default function SettingsPage(): React.ReactElement {
 				{/*								<div className="mt-4 flex items-center">*/}
 				{/*									<input*/}
 				{/*										id="push_nothing"*/}
-				{/*										name="form-input push_notifications"*/}
+				{/*										name="push_notifications"*/}
 				{/*										type="radio"*/}
 				{/*										className="form-radio h-4 w-4 text-indigo-600 transition duration-150 ease-in-out"*/}
 				{/*									/>*/}
@@ -476,8 +476,9 @@ function PersonalInformationDisplay() {
 									setFirstName(e.target.value);
 									setProfileChangeError("");
 								}}
+								type={"text"}
 								className={
-									"mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 " +
+									"mt-1 block w-full shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md " +
 									(loadingProfile || profileChangeSubmitting
 										? "bg-gray-100"
 										: "")
@@ -502,8 +503,9 @@ function PersonalInformationDisplay() {
 									setLastName(e.target.value);
 									setProfileChangeError("");
 								}}
+								type={"text"}
 								className={
-									"mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 " +
+									"mt-1 block w-full py-2 px-3 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md " +
 									(loadingProfile || profileChangeSubmitting
 										? "bg-gray-100"
 										: "")
@@ -543,6 +545,16 @@ function PersonalInformationDisplay() {
 								);
 							}}
 							className={"mt-1 block w-full text-sm"}
+							styles={{
+								input: (provided) => ({
+									...provided,
+									borderStyle: "none !important",
+									outline: "2px solid transparent !important",
+									outlineOffset: "2px !important",
+									boxShadow: "none !important",
+									"--tw-ring-color": "transparent !important",
+								}),
+							}}
 						/>
 						{/*<span id="class_of">*/}
 						{/*	{classOf} (<a>this is wrong</a>)*/}
@@ -794,7 +806,7 @@ function ChangePasswordModal({
 														setError("");
 													}}
 													className={
-														"mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 " +
+														"mt-1 block w-full py-2 px-3 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md " +
 														(submitting
 															? "bg-gray-100"
 															: "")
@@ -825,7 +837,7 @@ function ChangePasswordModal({
 														setError("");
 													}}
 													className={
-														"mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 " +
+														"mt-1 block w-full py-2 px-3 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md " +
 														(submitting
 															? "bg-gray-100"
 															: "")
@@ -851,7 +863,7 @@ function ChangePasswordModal({
 														setError("");
 													}}
 													className={
-														"mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 " +
+														"mt-1 block w-full py-2 px-3 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md " +
 														(submitting
 															? "bg-gray-100"
 															: "")
@@ -1130,7 +1142,7 @@ function ChangeEmailModal({
 														setError("");
 													}}
 													className={
-														"mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 " +
+														"mt-1 block w-full py-2 px-3 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md " +
 														(submitting
 															? "bg-gray-100"
 															: "")
@@ -1158,7 +1170,7 @@ function ChangeEmailModal({
 														setError("");
 													}}
 													className={
-														"mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 " +
+														"mt-1 block w-full py-2 px-3 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md " +
 														(submitting
 															? "bg-gray-100"
 															: "")

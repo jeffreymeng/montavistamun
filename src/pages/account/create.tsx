@@ -470,7 +470,7 @@ export default function CreatePage({
 												>
 													<input
 														id={`grade${el}`}
-														name="form-input grade"
+														name="grade"
 														type="radio"
 														disabled={submitting}
 														className={`form-radio h-4 w-4 transition duration-150 ease-in-out ${

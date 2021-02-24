@@ -68,7 +68,7 @@ export default function SelectAllCheckbox({
 				<input
 					type="checkbox"
 					className={
-						"form-checkbox h-6 w-6 " +
+						"h-6 w-6  text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded " +
 						(selectedUsers.size > 0 &&
 						selectedUsers.size < users.length
 							? "indeterminate"
