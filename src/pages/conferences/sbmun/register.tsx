@@ -19,7 +19,7 @@ export default function AboutPage({
 		>
 			<div className="min-h-ca">
 				<Header
-					title={"BMUN Registration"}
+					title={"SBMUN Registration"}
 					backgroundImage={headerImage}
 				>
 					{"April 3, 2021"}

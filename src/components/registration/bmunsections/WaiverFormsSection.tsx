@@ -193,7 +193,7 @@ export default function WaiverFormsSection({
 									"py-1 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white shadow-sm " +
 									(filledForms[0] === null
 										? "bg-indigo-300"
-										: "bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline-blue active:bg-indigo-600 transition duration-150 ease-in-out")
+										: "bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:ring-blue-500 active:bg-indigo-600 transition duration-150 ease-in-out")
 								}
 								disabled={filledForms[0] === null}
 							>
@@ -234,7 +234,7 @@ export default function WaiverFormsSection({
 							"py-2 px-4 border border-gray-300 rounded-md text-sm leading-5 font-medium text-gray-700",
 							fuhsdUploading
 								? "bg-gray-300"
-								: "bg-white hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition duration-150 ease-in-out"
+								: "bg-white hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:ring-blue-500 active:bg-gray-50 active:text-gray-800 transition duration-150 ease-in-out"
 						)}
 					>
 						Back
@@ -263,7 +263,7 @@ export default function WaiverFormsSection({
 						"ml-4 py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white shadow-sm",
 						fuhsdUploading || !fuhsdForm || fuhsdForm.length === 0
 							? "bg-indigo-300"
-							: "bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline-blue active:bg-indigo-600 transition duration-150 ease-in-out"
+							: "bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:ring-blue-500 active:bg-indigo-600 transition duration-150 ease-in-out"
 					)}
 				>
 					{fuhsdUploading

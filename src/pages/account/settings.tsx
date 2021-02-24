@@ -292,7 +292,7 @@ export default function SettingsPage(): React.ReactElement {
 				{/*						</fieldset>*/}
 				{/*					</div>*/}
 				{/*					<div className="px-4 py-3 bg-gray-50 text-right sm:px-6">*/}
-				{/*						<button className="py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 shadow-sm hover:bg-indigo-500 focus:outline-none focus:shadow-outline-blue focus:bg-indigo-500 active:bg-indigo-600 transition duration-150 ease-in-out">*/}
+				{/*						<button className="py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 shadow-sm hover:bg-indigo-500 focus:outline-none focus:ring-blue-500 focus:bg-indigo-500 active:bg-indigo-600 transition duration-150 ease-in-out">*/}
 				{/*							Save*/}
 				{/*						</button>*/}
 				{/*					</div>*/}
@@ -317,9 +317,10 @@ function PersonalInformationDisplay() {
 	const [classOf, setClassOf] = useState(-1);
 	const [loadingProfile, setLoadingProfile] = useState(true);
 	const [profileChangeSuccess, setProfileChangeSuccess] = useState(false);
-	const [profileChangeError, setProfileChangeError] = React.useState<
-		React.ReactNode
-	>("");
+	const [
+		profileChangeError,
+		setProfileChangeError,
+	] = React.useState<React.ReactNode>("");
 	const [profileChangeSubmitting, setProfileChangeSubmitting] = useState(
 		false
 	);
@@ -476,7 +477,7 @@ function PersonalInformationDisplay() {
 									setProfileChangeError("");
 								}}
 								className={
-									"mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 " +
+									"mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 " +
 									(loadingProfile || profileChangeSubmitting
 										? "bg-gray-100"
 										: "")
@@ -502,7 +503,7 @@ function PersonalInformationDisplay() {
 									setProfileChangeError("");
 								}}
 								className={
-									"mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 " +
+									"mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 " +
 									(loadingProfile || profileChangeSubmitting
 										? "bg-gray-100"
 										: "")
@@ -573,7 +574,7 @@ function PersonalInformationDisplay() {
 							loadingProfile ||
 							profileChangeSubmitting
 								? "bg-indigo-300"
-								: "bg-indigo-600 hover:bg-indigo-500 focus:shadow-outline-blue active:bg-indigo-600"
+								: "bg-indigo-600 hover:bg-indigo-500 focus:ring-blue-500 active:bg-indigo-600"
 						} shadow-sm focus:outline-none`}
 					>
 						{profileChangeSubmitting
@@ -666,7 +667,7 @@ function ChangePasswordModal({
 											resetForm();
 											onClose();
 										}}
-										className="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-indigo-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition ease-in-out duration-150 sm:text-sm sm:leading-5"
+										className="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-indigo-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:ring-indigo-500 transition ease-in-out duration-150 sm:text-sm sm:leading-5"
 									>
 										Close
 									</button>
@@ -793,7 +794,7 @@ function ChangePasswordModal({
 														setError("");
 													}}
 													className={
-														"mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 " +
+														"mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 " +
 														(submitting
 															? "bg-gray-100"
 															: "")
@@ -824,7 +825,7 @@ function ChangePasswordModal({
 														setError("");
 													}}
 													className={
-														"mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 " +
+														"mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 " +
 														(submitting
 															? "bg-gray-100"
 															: "")
@@ -850,7 +851,7 @@ function ChangePasswordModal({
 														setError("");
 													}}
 													className={
-														"mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 " +
+														"mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 " +
 														(submitting
 															? "bg-gray-100"
 															: "")
@@ -873,7 +874,7 @@ function ChangePasswordModal({
 											className={
 												(submitting
 													? "bg-indigo-400"
-													: "bg-indigo-600 hover:bg-indigo-500 focus:border-indigo-700 focus:shadow-outline-indigo") +
+													: "bg-indigo-600 hover:bg-indigo-500 focus:border-indigo-700 focus:ring-indigo-500") +
 												" " +
 												"inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 text-base leading-6 font-medium text-white shadow-sm focus:outline-none transition ease-in-out duration-150 sm:text-sm sm:leading-5"
 											}
@@ -892,7 +893,7 @@ function ChangePasswordModal({
 											className={
 												(submitting
 													? "bg-gray-50 opacity-75"
-													: "hover:text-gray-500 focus:border-blue-300 focus:shadow-outline-blue") +
+													: "hover:text-gray-500 focus:border-blue-300 focus:ring-blue-500") +
 												" " +
 												"inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-base leading-6 font-medium text-gray-700 shadow-sm focus:outline-none transition ease-in-out duration-150 sm:text-sm sm:leading-5"
 											}
@@ -1001,7 +1002,7 @@ function ChangeEmailModal({
 											resetForm();
 											onClose();
 										}}
-										className="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-indigo-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition ease-in-out duration-150 sm:text-sm sm:leading-5"
+										className="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-indigo-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:ring-indigo-500 transition ease-in-out duration-150 sm:text-sm sm:leading-5"
 									>
 										Close
 									</button>
@@ -1129,7 +1130,7 @@ function ChangeEmailModal({
 														setError("");
 													}}
 													className={
-														"mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 " +
+														"mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 " +
 														(submitting
 															? "bg-gray-100"
 															: "")
@@ -1157,7 +1158,7 @@ function ChangeEmailModal({
 														setError("");
 													}}
 													className={
-														"mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 " +
+														"mt-1 form-input block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5 " +
 														(submitting
 															? "bg-gray-100"
 															: "")
@@ -1192,7 +1193,7 @@ function ChangeEmailModal({
 											className={
 												(submitting
 													? "bg-indigo-400"
-													: "bg-indigo-600 hover:bg-indigo-500 focus:border-indigo-700 focus:shadow-outline-indigo") +
+													: "bg-indigo-600 hover:bg-indigo-500 focus:border-indigo-700 focus:ring-indigo-500") +
 												" " +
 												"inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 text-base leading-6 font-medium text-white shadow-sm focus:outline-none transition ease-in-out duration-150 sm:text-sm sm:leading-5"
 											}
@@ -1211,7 +1212,7 @@ function ChangeEmailModal({
 											className={
 												(submitting
 													? "bg-gray-50 opacity-75"
-													: "hover:text-gray-500 focus:border-blue-300 focus:shadow-outline-blue") +
+													: "hover:text-gray-500 focus:border-blue-300 focus:ring-blue-500") +
 												" " +
 												"inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-base leading-6 font-medium text-gray-700 shadow-sm focus:outline-none transition ease-in-out duration-150 sm:text-sm sm:leading-5"
 											}

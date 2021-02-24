@@ -2381,8 +2381,6 @@ declare namespace GatsbyTypes {
 		| "pluginCreator.pluginOptions.failOnError"
 		| "pluginCreator.pluginOptions.short_name"
 		| "pluginCreator.pluginOptions.start_url"
-		| "pluginCreator.pluginOptions.background_color"
-		| "pluginCreator.pluginOptions.theme_color"
 		| "pluginCreator.pluginOptions.display"
 		| "pluginCreator.pluginOptions.icon"
 		| "pluginCreator.pluginOptions.legacy"
@@ -2593,8 +2591,6 @@ declare namespace GatsbyTypes {
 		| "pluginOptions.failOnError"
 		| "pluginOptions.short_name"
 		| "pluginOptions.start_url"
-		| "pluginOptions.background_color"
-		| "pluginOptions.theme_color"
 		| "pluginOptions.display"
 		| "pluginOptions.icon"
 		| "pluginOptions.legacy"
@@ -2740,8 +2736,6 @@ declare namespace GatsbyTypes {
 		readonly failOnError: Maybe<Scalars["Boolean"]>;
 		readonly short_name: Maybe<Scalars["String"]>;
 		readonly start_url: Maybe<Scalars["String"]>;
-		readonly background_color: Maybe<Scalars["String"]>;
-		readonly theme_color: Maybe<Scalars["String"]>;
 		readonly display: Maybe<Scalars["String"]>;
 		readonly icon: Maybe<Scalars["String"]>;
 		readonly legacy: Maybe<Scalars["Boolean"]>;
@@ -2772,8 +2766,6 @@ declare namespace GatsbyTypes {
 		readonly failOnError: Maybe<BooleanQueryOperatorInput>;
 		readonly short_name: Maybe<StringQueryOperatorInput>;
 		readonly start_url: Maybe<StringQueryOperatorInput>;
-		readonly background_color: Maybe<StringQueryOperatorInput>;
-		readonly theme_color: Maybe<StringQueryOperatorInput>;
 		readonly display: Maybe<StringQueryOperatorInput>;
 		readonly icon: Maybe<StringQueryOperatorInput>;
 		readonly legacy: Maybe<BooleanQueryOperatorInput>;
@@ -2848,16 +2840,40 @@ declare namespace GatsbyTypes {
 		};
 	};
 
-	type GatsbyImageSharpFluid_withWebpFragment = Pick<
-		ImageSharpFluid,
-		| "base64"
-		| "aspectRatio"
-		| "src"
-		| "srcSet"
-		| "srcWebp"
-		| "srcSetWebp"
-		| "sizes"
-	>;
+	type awardsPageQueryQueryVariables = Exact<{ [key: string]: never }>;
+
+	type awardsPageQueryQuery = {
+		readonly headerImage: Maybe<{
+			readonly childImageSharp: Maybe<{
+				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
+			}>;
+		}>;
+		readonly awardsData: {
+			readonly nodes: ReadonlyArray<
+				Pick<
+					ConferenceAwardsData,
+					| "delegationAward"
+					| "id"
+					| "month"
+					| "name"
+					| "time"
+					| "year"
+					| "imageURL"
+				> & {
+					readonly delegateAwards: Maybe<
+						ReadonlyArray<
+							Maybe<
+								Pick<
+									ConferenceAwardsData__DelegateAwards,
+									"awards" | "type"
+								>
+							>
+						>
+					>;
+				}
+			>;
+		};
+	};
 
 	type ConferencesPageQueryQueryVariables = Exact<{ [key: string]: never }>;
 
@@ -2945,45 +2961,9 @@ declare namespace GatsbyTypes {
 		}>;
 	};
 
-	type usersjmengDocumentscodemontavistamunsrcpagesconferencesbmunregisterTsx490389590QueryVariables = Exact<{
-		[key: string]: never;
-	}>;
+	type Unnamed_1_QueryVariables = Exact<{ [key: string]: never }>;
 
-	type usersjmengDocumentscodemontavistamunsrcpagesconferencesbmunregisterTsx490389590Query = {
-		readonly headerImage: Maybe<{
-			readonly childImageSharp: Maybe<{
-				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
-			}>;
-		}>;
-	};
-
-	type usersjmengDocumentscodemontavistamunsrcpagesconferencessbmunregisterTsx490389590QueryVariables = Exact<{
-		[key: string]: never;
-	}>;
-
-	type usersjmengDocumentscodemontavistamunsrcpagesconferencessbmunregisterTsx490389590Query = {
-		readonly headerImage: Maybe<{
-			readonly childImageSharp: Maybe<{
-				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
-			}>;
-		}>;
-	};
-
-	type usersjmengDocumentscodemontavistamunsrcpagesconferencesscvmunregisterTsx1261803817QueryVariables = Exact<{
-		[key: string]: never;
-	}>;
-
-	type usersjmengDocumentscodemontavistamunsrcpagesconferencesscvmunregisterTsx1261803817Query = {
-		readonly headerImage: Maybe<{
-			readonly childImageSharp: Maybe<{
-				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
-			}>;
-		}>;
-	};
-
-	type SMUNCRegisterPageQueryQueryVariables = Exact<{ [key: string]: never }>;
-
-	type SMUNCRegisterPageQueryQuery = {
+	type Unnamed_1_Query = {
 		readonly headerImage: Maybe<{
 			readonly childImageSharp: Maybe<{
 				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
@@ -3011,22 +2991,12 @@ declare namespace GatsbyTypes {
 		}>;
 	};
 
-	type Unnamed_1_QueryVariables = Exact<{ [key: string]: never }>;
-
-	type Unnamed_1_Query = {
-		readonly hero: Maybe<{
-			readonly childImageSharp: Maybe<{
-				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
-			}>;
-		}>;
-	};
-
 	type Unnamed_2_QueryVariables = Exact<{ [key: string]: never }>;
 
 	type Unnamed_2_Query = {
-		readonly socialsImage: Maybe<{
+		readonly headerImage: Maybe<{
 			readonly childImageSharp: Maybe<{
-				readonly fixed: Maybe<GatsbyImageSharpFixedFragment>;
+				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
 			}>;
 		}>;
 	};
@@ -3034,6 +3004,46 @@ declare namespace GatsbyTypes {
 	type Unnamed_3_QueryVariables = Exact<{ [key: string]: never }>;
 
 	type Unnamed_3_Query = {
+		readonly headerImage: Maybe<{
+			readonly childImageSharp: Maybe<{
+				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
+			}>;
+		}>;
+	};
+
+	type SMUNCRegisterPageQueryQueryVariables = Exact<{ [key: string]: never }>;
+
+	type SMUNCRegisterPageQueryQuery = {
+		readonly headerImage: Maybe<{
+			readonly childImageSharp: Maybe<{
+				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
+			}>;
+		}>;
+	};
+
+	type Unnamed_4_QueryVariables = Exact<{ [key: string]: never }>;
+
+	type Unnamed_4_Query = {
+		readonly hero: Maybe<{
+			readonly childImageSharp: Maybe<{
+				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
+			}>;
+		}>;
+	};
+
+	type Unnamed_5_QueryVariables = Exact<{ [key: string]: never }>;
+
+	type Unnamed_5_Query = {
+		readonly socialsImage: Maybe<{
+			readonly childImageSharp: Maybe<{
+				readonly fixed: Maybe<GatsbyImageSharpFixedFragment>;
+			}>;
+		}>;
+	};
+
+	type Unnamed_6_QueryVariables = Exact<{ [key: string]: never }>;
+
+	type Unnamed_6_Query = {
 		readonly thumbnail: Maybe<{
 			readonly childImageSharp: Maybe<{
 				readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment>;
@@ -3051,23 +3061,23 @@ declare namespace GatsbyTypes {
 		}>;
 	};
 
-	type Unnamed_4_QueryVariables = Exact<{ [key: string]: never }>;
+	type Unnamed_7_QueryVariables = Exact<{ [key: string]: never }>;
 
-	type Unnamed_4_Query = {
-		readonly site: Maybe<{
-			readonly siteMetadata: Maybe<
-				Pick<SiteSiteMetadata, "title" | "description" | "author">
-			>;
-		}>;
-	};
-
-	type Unnamed_5_QueryVariables = Exact<{ [key: string]: never }>;
-
-	type Unnamed_5_Query = {
+	type Unnamed_7_Query = {
 		readonly logo: Maybe<{
 			readonly childImageSharp: Maybe<{
 				readonly fixed: Maybe<GatsbyImageSharpFixed_withWebp_noBase64Fragment>;
 			}>;
+		}>;
+	};
+
+	type Unnamed_8_QueryVariables = Exact<{ [key: string]: never }>;
+
+	type Unnamed_8_Query = {
+		readonly site: Maybe<{
+			readonly siteMetadata: Maybe<
+				Pick<SiteSiteMetadata, "title" | "description" | "author">
+			>;
 		}>;
 	};
 
@@ -3126,6 +3136,17 @@ declare namespace GatsbyTypes {
 	type GatsbyImageSharpFluid_tracedSVGFragment = Pick<
 		ImageSharpFluid,
 		"tracedSVG" | "aspectRatio" | "src" | "srcSet" | "sizes"
+	>;
+
+	type GatsbyImageSharpFluid_withWebpFragment = Pick<
+		ImageSharpFluid,
+		| "base64"
+		| "aspectRatio"
+		| "src"
+		| "srcSet"
+		| "srcWebp"
+		| "srcSetWebp"
+		| "sizes"
 	>;
 
 	type GatsbyImageSharpFluid_withWebp_tracedSVGFragment = Pick<

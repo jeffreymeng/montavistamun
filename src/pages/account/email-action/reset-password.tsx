@@ -219,7 +219,7 @@ export default function HandleEmailActionPage({
 										setPassword(e.target.value)
 									}
 									disabled={submitting}
-									className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+									className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
 								/>
 								<div className="absolute inset-y-0 right-0 flex items-center">
 									<button
@@ -239,7 +239,7 @@ export default function HandleEmailActionPage({
 										className={
 											"h-full py-0 px-3 border-transparent bg-transparent text-gray-500 sm:text-sm sm:leading-5 rounded-md focus:outline-none transition duration-150 ease-in-out " +
 											(submitting
-												? "focus:shadow-outline-blue focus:border-blue-300 hover:text-gray-700 active:text-gray-900 "
+												? "focus:ring-blue-500 focus:border-blue-300 hover:text-gray-700 active:text-gray-900 "
 												: "")
 										}
 									>
@@ -266,7 +266,7 @@ export default function HandleEmailActionPage({
 									value={confirm}
 									onChange={(e) => setConfirm(e.target.value)}
 									disabled={submitting}
-									className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+									className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
 								/>
 								<div className="absolute inset-y-0 right-0 flex items-center">
 									<button
@@ -286,7 +286,7 @@ export default function HandleEmailActionPage({
 										className={
 											"h-full py-0 px-3 border-transparent bg-transparent text-gray-500 sm:text-sm sm:leading-5 rounded-md focus:outline-none transition duration-150 ease-in-out " +
 											(submitting
-												? "focus:shadow-outline-blue focus:border-blue-300 hover:text-gray-700 active:text-gray-900 "
+												? "focus:ring-blue-500 focus:border-blue-300 hover:text-gray-700 active:text-gray-900 "
 												: "")
 										}
 									>
@@ -315,7 +315,7 @@ export default function HandleEmailActionPage({
 										"w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white transition duration-150 ease-in-out",
 										submitting
 											? "bg-indigo-400"
-											: "bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700"
+											: "bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:ring-indigo-500 active:bg-indigo-700"
 									)}
 								>
 									{submitting
@@ -335,7 +335,7 @@ export default function HandleEmailActionPage({
 					<Link
 						to={"/account/login"}
 						className={
-							"mt-4 w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white transition duration-150 ease-in-out bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700"
+							"mt-4 w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white transition duration-150 ease-in-out bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:ring-indigo-500 active:bg-indigo-700"
 						}
 					>
 						Log In

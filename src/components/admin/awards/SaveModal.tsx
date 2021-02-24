@@ -267,7 +267,7 @@ export default function SaveModal({
 											className={
 												(submitting
 													? "bg-purple-300"
-													: "bg-purple-600 hover:bg-purple-500 focus:outline-none focus:border-purple-700 focus:shadow-outline-purple") +
+													: "bg-purple-600 hover:bg-purple-500 focus:outline-none focus:border-purple-700 focus:ring-purple-500") +
 												" inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 text-base leading-6 font-medium text-white shadow-sm transition ease-in-out duration-150 sm:text-sm sm:leading-5"
 											}
 										>
@@ -291,7 +291,7 @@ export default function SaveModal({
 										className={
 											(submitting
 												? "bg-gray-200"
-												: "bg-white hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue") +
+												: "bg-white hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:ring-blue-500") +
 											" inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-base leading-6 font-medium text-gray-700 shadow-sm transition ease-in-out duration-150 sm:text-sm sm:leading-5"
 										}
 									>

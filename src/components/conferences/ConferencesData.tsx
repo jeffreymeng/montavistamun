@@ -55,7 +55,7 @@ export default [
 		acronym: "sbmun",
 		text:
 			"South Bay Model United Nations Conference is our sixth conference of the year, and the one where students can continue practicing MUN skills with other delegates from the Bay Area. MUN conferences are rare in the spring season, so this is a great way for you to keep honing on your MUN abilities. ",
-		registration: "/conferences/sbmun/register",
+		// registration: "/conferences/sbmun/register",
 	},
 	{
 		name: "Davis Model United Nations Conference",

@@ -2,18 +2,12 @@ import React, { useEffect, useMemo, useState } from "react";
 import { Bar as BarChart } from "react-chartjs-2";
 import UserData from "../../components/admin/UserData";
 import AdminLayout from "../../components/layout/AdminLayout";
-import AuthContext from "../../context/AuthContext";
 import useFirebase from "../../firebase/useFirebase";
 import { getGrade } from "../../utils/schoolYearUtils";
 
 export default function AdminStatsPage(): React.ReactElement {
 	const firebase = useFirebase();
-	const {
-		user,
-		loading,
-		verified: userVerified,
-		admin: userAdmin,
-	} = React.useContext(AuthContext);
+
 	const [allUsers, setAllUsers] = useState<{ id: string; data: UserData }[]>(
 		[]
 	);

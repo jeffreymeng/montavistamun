@@ -23,6 +23,7 @@ export default function AdminLogPage(): React.ReactElement {
 		admin: userAdmin,
 	} = React.useContext(AuthContext);
 	const conferenceOptions = [
+		{ label: "SBMUN Registration", value: "sbmun" },
 		{ label: "BMUN Registration", value: "bmun" },
 		{ label: "SCVMUN Registration", value: "scvmun" },
 		{ label: "SFMUN Registration", value: "sfmun" },
@@ -30,13 +31,21 @@ export default function AdminLogPage(): React.ReactElement {
 	];
 	const hash =
 		typeof window !== "undefined" ? window.location.hash?.substring(1) : "";
-	const selectedConference = ["sfmun", "smunc", "scvmun", "bmun"].includes(
-		hash
-	)
+	const selectedConference = [
+		"sfmun",
+		"smunc",
+		"scvmun",
+		"bmun",
+		"sbmun",
+	].includes(hash)
 		? hash
 		: "bmun";
-	if (!["sfmun", "smunc", "scvmun", "bmun"].includes(selectedConference)) {
-		window.location.hash = "bmun";
+	if (
+		!["sfmun", "smunc", "scvmun", "bmun", "sbmun"].includes(
+			selectedConference
+		)
+	) {
+		window.location.hash = "sbmun";
 	}
 	const setSelectedConference = (conf: string) => {
 		window.location.hash = conf;
@@ -138,7 +147,9 @@ export default function AdminLogPage(): React.ReactElement {
 				(selectedConference === "scvmun" &&
 					user.data.confirm?.scvmunConfirmed) ||
 				(selectedConference === "bmun" &&
-					user.data.confirm?.bmunConfirmed)
+					user.data.confirm?.bmunConfirmed) ||
+				(selectedConference === "sbmun" &&
+					user.data.confirm?.sbmunConfirmed)
 			) {
 				temp.registered.push(
 					user.userData.data.firstName +
@@ -150,7 +161,9 @@ export default function AdminLogPage(): React.ReactElement {
 					user.data.preferences?.committee) ||
 				(selectedConference === "scvmun" &&
 					user.data.preferences?.scvmunCommittee &&
-					user.data.preferences?.scvmunPartnerPrefs)
+					user.data.preferences?.scvmunPartnerPrefs) ||
+				(selectedConference === "sbmun" &&
+					user.data.preferences?.sbmunCommittee)
 			) {
 				temp.preferences.push(
 					user.userData.data.firstName +
@@ -165,7 +178,9 @@ export default function AdminLogPage(): React.ReactElement {
 				(selectedConference === "scvmun" &&
 					user.data.forms?.scvmunFuhsdForm) ||
 				(selectedConference === "bmun" &&
-					user.data.forms?.bmunFuhsdForm)
+					user.data.forms?.bmunFuhsdForm) ||
+				(selectedConference === "sbmun" &&
+					user.data.forms?.sbmunFuhsdForm)
 			) {
 				temp.liabilityForms.push(
 					user.userData.data.firstName +
@@ -757,7 +772,7 @@ export default function AdminLogPage(): React.ReactElement {
 				<button
 					onClick={() => exportRegistration(false, exportAllFields)}
 					type="button"
-					className="relative inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 shadow-sm hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150"
+					className="relative inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 shadow-sm hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:ring-indigo-500 active:bg-indigo-700 transition ease-in-out duration-150"
 				>
 					<span>
 						Export completed {selectedConference.toUpperCase()}{" "}
@@ -767,7 +782,7 @@ export default function AdminLogPage(): React.ReactElement {
 				<button
 					onClick={() => exportRegistration(true, exportAllFields)}
 					type="button"
-					className="mt-3 md:mt-0 md:ml-3 relative inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 shadow-sm hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700 transition ease-in-out duration-150"
+					className="mt-3 md:mt-0 md:ml-3 relative inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-indigo-600 shadow-sm hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:ring-indigo-500 active:bg-indigo-700 transition ease-in-out duration-150"
 				>
 					<span>
 						Export all {selectedConference.toUpperCase()}{" "}

@@ -1,19 +1,7 @@
 import { Link } from "gatsby";
-import React, { useState } from "react";
+import React from "react";
 import AdminLayout from "../../components/layout/AdminLayout";
-import AuthContext from "../../context/AuthContext";
-import useFirebase from "../../firebase/useFirebase";
 export default function AdminHomePage(): React.ReactElement {
-	const [target, setTarget] = useState("");
-	const [admin, setAdmin] = useState("same");
-	const [verified, setVerified] = useState("same");
-	const firebase = useFirebase();
-	const {
-		user,
-		loading,
-		verified: userVerified,
-		admin: userAdmin,
-	} = React.useContext(AuthContext);
 	return (
 		<AdminLayout title={"Admin Dashboard"}>
 			<h1

@@ -69,7 +69,7 @@ export default function AboutPage(): React.ReactElement {
 							className={
 								(submitting
 									? "bg-indigo-200"
-									: "bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo active:bg-indigo-700") +
+									: "bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:ring-indigo-500 active:bg-indigo-700") +
 								" " +
 								"mt-4 w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white transition duration-150 ease-in-out"
 							}

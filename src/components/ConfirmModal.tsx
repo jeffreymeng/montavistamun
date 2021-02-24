@@ -56,9 +56,9 @@ export default function ConfirmationModal({
 						>
 							<div className="sm:flex sm:items-start">
 								<div className="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
-									{/*
-									//@ts-ignore */}
 									{Icon ? (
+										//eslint-disable-next-line @typescript-eslint/ban-ts-comment
+										//@ts-ignore
 										<Icon className="h-6 w-6 text-red-600" />
 									) : (
 										<Icons.ExclamationOutline className="h-6 w-6 text-red-600" />
@@ -83,7 +83,7 @@ export default function ConfirmationModal({
 										className={
 											(disabled
 												? "bg-red-300"
-												: "bg-red-600 hover:bg-red-500 focus:outline-none focus:border-red-700 focus:shadow-outline-red") +
+												: "bg-red-600 hover:bg-red-500 focus:outline-none focus:border-red-700 focus:ring-red-500") +
 											" inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 text-base leading-6 font-medium text-white shadow-sm transition ease-in-out duration-150 sm:text-sm sm:leading-5"
 										}
 									>
@@ -98,7 +98,7 @@ export default function ConfirmationModal({
 										className={
 											(disabled
 												? "bg-gray-200"
-												: "bg-white hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue") +
+												: "bg-white hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:ring-blue-500") +
 											" inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-base leading-6 font-medium text-gray-700 shadow-sm transition ease-in-out duration-150 sm:text-sm sm:leading-5"
 										}
 									>

@@ -153,7 +153,7 @@ export default function InputGroup({
 						"form-input block w-full sm:text-sm sm:leading-5",
 						disabled ? "bg-gray-100" : "bg-white",
 						invalid &&
-							"pr-10 border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:shadow-outline-red",
+							"pr-10 border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:ring-red-500",
 						inputClassName
 					)}
 					aria-invalid={invalid}

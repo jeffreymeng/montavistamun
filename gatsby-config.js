@@ -28,8 +28,6 @@ module.exports = {
 				name: `montavistamun`,
 				short_name: `mvmun`,
 				start_url: `/`,
-				background_color: fullConfig.theme.colors.white,
-				theme_color: fullConfig.theme.colors.teal["400"],
 				display: `minimal-ui`,
 				icon: `static/images/favicons/android-chrome-512x512.png`,
 			},

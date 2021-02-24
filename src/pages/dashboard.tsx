@@ -9,7 +9,7 @@ import { Layout } from "../components/layout";
 import AuthContext from "../context/AuthContext";
 type CalendarEvent = calendar_v3.Schema$Event;
 export default function AboutPage(): React.ReactElement {
-	const { user, loading, verified, admin } = React.useContext(AuthContext);
+	const { user, verified } = React.useContext(AuthContext);
 	useRequireLogin();
 	const [eventsCache, setEventsCache] = useState<CalendarEvent[]>([]);
 	const [nextMeeting, setNextMeeting] = useState("Loading...");
@@ -134,10 +134,10 @@ export default function AboutPage(): React.ReactElement {
 		//		title: "Register Now",
 		//		link: "/conferences/bmun/register",
 		//	},
-			// secondaryAction: {
-			// 	title: "Learn More",
-			// 	link: "/conferences/bmun",
-			// },
+		// secondaryAction: {
+		// 	title: "Learn More",
+		// 	link: "/conferences/bmun",
+		// },
 		//	icon: "Calendar",
 		//},
 		// {
@@ -227,7 +227,7 @@ export default function AboutPage(): React.ReactElement {
 										{/*<span className="shadow-sm rounded-md">*/}
 										{/*	<button*/}
 										{/*		type="button"*/}
-										{/*		className="inline-flex items-center px-4 py-2 border border-cool-gray-300 text-sm leading-5 font-medium rounded-md text-cool-gray-700 bg-white hover:text-cool-gray-500 focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:text-cool-gray-800 active:bg-cool-gray-50 transition duration-150 ease-in-out"*/}
+										{/*		className="inline-flex items-center px-4 py-2 border border-cool-gray-300 text-sm leading-5 font-medium rounded-md text-cool-gray-700 bg-white hover:text-cool-gray-500 focus:outline-none focus:ring-blue-500 focus:border-blue-300 active:text-cool-gray-800 active:bg-cool-gray-50 transition duration-150 ease-in-out"*/}
 										{/*	>*/}
 										{/*		Add money*/}
 										{/*	</button>*/}
@@ -236,7 +236,7 @@ export default function AboutPage(): React.ReactElement {
 											<span className="shadow-sm rounded-md">
 												<Link
 													to="/account/create"
-													className="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-teal-600 hover:bg-teal-500 focus:outline-none focus:shadow-outline-teal focus:border-teal-700 active:bg-teal-700 transition duration-150 ease-in-out"
+													className="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-teal-600 hover:bg-teal-500 focus:outline-none focus:ring-teal-500 focus:border-teal-700 active:bg-teal-700 transition duration-150 ease-in-out"
 												>
 													Verify Your Email
 												</Link>
@@ -357,7 +357,7 @@ export default function AboutPage(): React.ReactElement {
 }
 
 function UpdatesTable() {
-	const { user, loading, verified, admin } = React.useContext(AuthContext);
+	const { user } = React.useContext(AuthContext);
 	const [loadingData, setLoadingData] = useState(true);
 	const [data, setData] = useState([]);
 	const [numPages, setNumPages] = useState(0);
@@ -500,7 +500,7 @@ function UpdatesTable() {
 								(page == numPages
 									? "bg-gray-50"
 									: "hover:text-cool-gray-500 ") +
-								" relative inline-flex items-center px-4 py-2 border border-cool-gray-300 text-sm leading-5 font-medium rounded-md text-cool-gray-700 bg-white focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-cool-gray-100 active:text-cool-gray-700 transition ease-in-out duration-150"
+								" relative inline-flex items-center px-4 py-2 border border-cool-gray-300 text-sm leading-5 font-medium rounded-md text-cool-gray-700 bg-white focus:outline-none focus:ring-blue-500 focus:border-blue-300 active:bg-cool-gray-100 active:text-cool-gray-700 transition ease-in-out duration-150"
 							}
 						>
 							Previous
@@ -512,7 +512,7 @@ function UpdatesTable() {
 								(page >= numPages
 									? "bg-gray-50"
 									: "hover:text-cool-gray-500 ") +
-								" ml-3 relative inline-flex items-center px-4 py-2 border border-cool-gray-300 text-sm leading-5 font-medium rounded-md text-cool-gray-700 bg-white focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-cool-gray-100 active:text-cool-gray-700 transition ease-in-out duration-150"
+								" ml-3 relative inline-flex items-center px-4 py-2 border border-cool-gray-300 text-sm leading-5 font-medium rounded-md text-cool-gray-700 bg-white focus:outline-none focus:ring-blue-500 focus:border-blue-300 active:bg-cool-gray-100 active:text-cool-gray-700 transition ease-in-out duration-150"
 							}
 						>
 							Next
@@ -538,7 +538,7 @@ function UpdatesTable() {
 								<tbody className="bg-white divide-y divide-cool-gray-200">
 									{(!data || data.length == 0) && (
 										<tr className="bg-white">
-											<td className="max-w-0 w-full px-6 py-4 whitespace-no-wrap text-sm leading-5 text-cool-gray-900">
+											<td className="max-w-0 w-full px-6 py-4 whitespace-nowrap text-sm leading-5 text-cool-gray-900">
 												<p className="text-cool-gray-500 truncate group-hover:text-cool-gray-900 text-base transition ease-in-out duration-150">
 													{loadingData
 														? "Loading..."
@@ -546,7 +546,7 @@ function UpdatesTable() {
 												</p>
 											</td>
 											{/* Spacer so the column header fits (text is hidden) */}
-											<td className="px-6 py-4 text-right whitespace-no-wrap text-sm leading-5">
+											<td className="px-6 py-4 text-right whitespace-nowrap text-sm leading-5">
 												<span className={"invisible"}>
 													Not Applicable
 												</span>
@@ -585,7 +585,7 @@ function UpdatesTable() {
 															)
 														}
 													>
-														<td className="max-w-0 w-full px-6 py-4 whitespace-no-wrap text-sm leading-5 text-cool-gray-900">
+														<td className="max-w-0 w-full px-6 py-4 whitespace-nowrap text-sm leading-5 text-cool-gray-900">
 															{/*fake link to show preview*/}
 															<a
 																href={
@@ -614,7 +614,7 @@ function UpdatesTable() {
 															</a>
 														</td>
 
-														<td className="px-6 py-4 text-right whitespace-no-wrap text-sm leading-5 text-cool-gray-500 hover:text-cool-gray-900 ">
+														<td className="px-6 py-4 text-right whitespace-nowrap text-sm leading-5 text-cool-gray-500 hover:text-cool-gray-900 ">
 															{/*fake link to show preview*/}
 															<a
 																href={
@@ -682,7 +682,7 @@ function UpdatesTable() {
 											page == 1
 												? "bg-gray-100"
 												: "hover:text-cool-gray-500") +
-											" relative inline-flex items-center p-2 border border-cool-gray-300 text-sm leading-5 font-medium rounded-md text-cool-gray-700 bg-white focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-cool-gray-100 active:text-cool-gray-700 transition ease-in-out duration-150"
+											" relative inline-flex items-center p-2 border border-cool-gray-300 text-sm leading-5 font-medium rounded-md text-cool-gray-700 bg-white focus:outline-none focus:ring-blue-500 focus:border-blue-300 active:bg-cool-gray-100 active:text-cool-gray-700 transition ease-in-out duration-150"
 										}
 									>
 										<Icons.ChevronLeft />
@@ -702,7 +702,7 @@ function UpdatesTable() {
 											page >= numPages
 												? "bg-gray-100"
 												: "hover:text-cool-gray-500") +
-											" ml-3 relative inline-flex items-center p-2 border border-cool-gray-300 text-sm leading-5 font-medium rounded-md text-cool-gray-700 bg-white focus:outline-none focus:shadow-outline-blue focus:border-blue-300 active:bg-cool-gray-100 active:text-cool-gray-700 transition ease-in-out duration-150"
+											" ml-3 relative inline-flex items-center p-2 border border-cool-gray-300 text-sm leading-5 font-medium rounded-md text-cool-gray-700 bg-white focus:outline-none focus:ring-blue-500 focus:border-blue-300 active:bg-cool-gray-100 active:text-cool-gray-700 transition ease-in-out duration-150"
 										}
 									>
 										<Icons.ChevronRight />

@@ -215,7 +215,7 @@ function RegisterFormSectionInner<Fields>({
 									"py-2 px-4 border border-gray-300 rounded-md text-sm leading-5 font-medium text-gray-700",
 									!canSubmit
 										? "bg-gray-300"
-										: "bg-white hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition duration-150 ease-in-out"
+										: "bg-white hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:ring-blue-500 active:bg-gray-50 active:text-gray-800 transition duration-150 ease-in-out"
 								)}
 							>
 								Back
@@ -240,7 +240,7 @@ function RegisterFormSectionInner<Fields>({
 										"py-2 px-4 border border-gray-300 rounded-md text-sm leading-5 font-medium text-gray-700",
 										!canSubmit
 											? "bg-gray-300"
-											: "bg-white hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-50 active:text-gray-800 transition duration-150 ease-in-out"
+											: "bg-white hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:ring-blue-500 active:bg-gray-50 active:text-gray-800 transition duration-150 ease-in-out"
 									)}
 								>
 									Discard Changes
@@ -265,7 +265,7 @@ function RegisterFormSectionInner<Fields>({
 							"ml-4 py-2 px-4 border border-transparent text-sm leading-5 font-medium rounded-md text-white shadow-sm",
 							!canSubmit
 								? "bg-indigo-300"
-								: "bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:shadow-outline-blue active:bg-indigo-600 transition duration-150 ease-in-out"
+								: "bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:ring-blue-500 active:bg-indigo-600 transition duration-150 ease-in-out"
 						)}
 					>
 						{isSubmitting

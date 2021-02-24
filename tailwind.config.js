@@ -2,10 +2,6 @@
 const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
-	future: {
-		removeDeprecatedGapUtilities: true,
-		purgeLayersByDefault: true,
-	},
 	purge: [
 		"./src/**/*.js",
 		"./src/**/*.jsx",
@@ -55,6 +51,9 @@ module.exports = {
 		}),
 	},
 	variants: {},
-	// https://github.com/tailwindcss/custom-forms
-	plugins: [require("@tailwindcss/ui"), require("@tailwindcss/custom-forms")],
+	plugins: [
+		require("@tailwindcss/aspect-ratio"),
+		require("@tailwindcss/forms"),
+		require("@tailwindcss/typography"),
+	],
 };

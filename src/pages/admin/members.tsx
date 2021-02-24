@@ -47,14 +47,14 @@ export default function MembersPage(): React.ReactElement {
 					id: string;
 					data: UserData;
 				}[] = [];
-				(querySnapshot as firebaseType.firestore.QuerySnapshot<
-					UserData
-				>).forEach((doc) => {
-					newUsers.push({
-						id: doc.id,
-						data: doc.data(),
-					});
-				});
+				(querySnapshot as firebaseType.firestore.QuerySnapshot<UserData>).forEach(
+					(doc) => {
+						newUsers.push({
+							id: doc.id,
+							data: doc.data(),
+						});
+					}
+				);
 				setUsers(newUsers);
 				setLoadingUsers(false);
 			});
@@ -285,7 +285,7 @@ export default function MembersPage(): React.ReactElement {
 						className={
 							(selectedUsers.size === 0
 								? "bg-gray-200"
-								: "bg-white hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 ") +
+								: "bg-white hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:ring-blue-500 active:bg-gray-100 active:text-gray-700 ") +
 							" " +
 							"relative inline-flex items-center px-4 py-2 rounded-l-md border border-gray-300 text-sm leading-5 font-medium text-gray-700 transition ease-in-out duration-150"
 						}
@@ -301,7 +301,7 @@ export default function MembersPage(): React.ReactElement {
 						className={
 							(selectedUsers.size === 0
 								? "bg-gray-200"
-								: "bg-white hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 ") +
+								: "bg-white hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:ring-blue-500 active:bg-gray-100 active:text-gray-700 ") +
 							" " +
 							"-ml-px relative inline-flex items-center px-4 py-2 rounded-r-md border border-gray-300 text-sm leading-5 font-medium text-gray-700 transition ease-in-out duration-150"
 						}
@@ -317,7 +317,7 @@ export default function MembersPage(): React.ReactElement {
 						className={
 							(selectedUsers.size === 0
 								? "bg-gray-200"
-								: "bg-white hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 ") +
+								: "bg-white hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:ring-blue-500 active:bg-gray-100 active:text-gray-700 ") +
 							" " +
 							"relative inline-flex items-center px-4 py-2 rounded-l-md border border-gray-300 text-sm leading-5 font-medium text-gray-700 transition ease-in-out duration-150"
 						}
@@ -338,7 +338,7 @@ export default function MembersPage(): React.ReactElement {
 							(selectedUsers.size === 0 ||
 							selectedUsers.has(user?.uid || "")
 								? "bg-gray-200"
-								: "bg-white hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 ") +
+								: "bg-white hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:ring-blue-500 active:bg-gray-100 active:text-gray-700 ") +
 							" " +
 							"-ml-px relative inline-flex items-center px-4 py-2 rounded-r-md border border-gray-300 text-sm leading-5 font-medium text-gray-700 transition ease-in-out duration-150"
 						}
@@ -440,7 +440,7 @@ export default function MembersPage(): React.ReactElement {
 										onClick={() =>
 											confirmModal?.onConfirm()
 										}
-										className="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-indigo-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:shadow-outline-indigo transition ease-in-out duration-150 sm:text-sm sm:leading-5"
+										className="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-indigo-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:ring-indigo-500 transition ease-in-out duration-150 sm:text-sm sm:leading-5"
 									>
 										{confirmModal?.buttonText}
 									</button>
@@ -451,7 +451,7 @@ export default function MembersPage(): React.ReactElement {
 											setShowConfirmModal(false)
 										}
 										type="button"
-										className="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-base leading-6 font-medium text-gray-700 shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue transition ease-in-out duration-150 sm:text-sm sm:leading-5"
+										className="inline-flex justify-center w-full rounded-md border border-gray-300 px-4 py-2 bg-white text-base leading-6 font-medium text-gray-700 shadow-sm hover:text-gray-500 focus:outline-none focus:border-blue-300 focus:ring-blue-500 transition ease-in-out duration-150 sm:text-sm sm:leading-5"
 									>
 										Cancel
 									</button>
@@ -490,7 +490,7 @@ export default function MembersPage(): React.ReactElement {
 								{loadingUsers && (
 									<tr>
 										<td
-											className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 w-full"
+											className="px-6 py-4 whitespace-nowrap border-b border-gray-200 w-full"
 											colSpan={tableHeaders.length + 1}
 										>
 											<div className="text-sm leading-5 font-medium text-gray-900">
@@ -502,7 +502,7 @@ export default function MembersPage(): React.ReactElement {
 								{!loadingUsers && users.length === 0 && (
 									<tr>
 										<td
-											className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 w-full"
+											className="px-6 py-4 whitespace-nowrap border-b border-gray-200 w-full"
 											colSpan={tableHeaders.length + 1}
 										>
 											<div className="text-sm leading-5 font-medium text-gray-900">
@@ -563,7 +563,7 @@ export default function MembersPage(): React.ReactElement {
 												{/*	<Icons.Check />*/}
 												{/*</button>*/}
 											</td>
-											<td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+											<td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
 												<div>
 													<div className="text-sm leading-5 font-medium text-gray-900">
 														{`${data.firstName} ${
@@ -577,7 +577,7 @@ export default function MembersPage(): React.ReactElement {
 													</div>
 												</div>
 											</td>
-											{/*<td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">*/}
+											{/*<td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">*/}
 											{/*	<div*/}
 											{/*		className={*/}
 											{/*			"text-sm leading-5 " +*/}
@@ -594,7 +594,7 @@ export default function MembersPage(): React.ReactElement {
 											{/*	/!*	ECOSOC (partner: John Doe)*!/*/}
 											{/*	/!*</div>*!/*/}
 											{/*</td>*/}
-											<td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200">
+											<td className="px-6 py-4 whitespace-nowrap border-b border-gray-200">
 												<div
 													className={
 														"flex flex-row space-x-4"
@@ -620,10 +620,10 @@ export default function MembersPage(): React.ReactElement {
 													)}
 												</div>
 											</td>
-											{/*<td className="px-6 py-4 whitespace-no-wrap border-b border-gray-200 text-sm leading-5 text-gray-500">*/}
+											{/*<td className="px-6 py-4 whitespace-nowrap border-b border-gray-200 text-sm leading-5 text-gray-500">*/}
 											{/*	Owner*/}
 											{/*</td>*/}
-											{/*<td className="px-6 py-4 whitespace-no-wrap text-right border-b border-gray-200 text-sm leading-5 font-medium">*/}
+											{/*<td className="px-6 py-4 whitespace-nowrap text-right border-b border-gray-200 text-sm leading-5 font-medium">*/}
 											{/*	<Link*/}
 											{/*		to="#"*/}
 											{/*		className="text-indigo-600 hover:text-indigo-900"*/}
@@ -650,7 +650,7 @@ export default function MembersPage(): React.ReactElement {
 									{/*<nav className="relative z-0 inline-flex shadow-sm">*/}
 									{/*	<a*/}
 									{/*		href="/"*/}
-									{/*		className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150"*/}
+									{/*		className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:ring-blue-500 active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150"*/}
 									{/*		aria-label="Previous"*/}
 									{/*	>*/}
 									{/*		<svg*/}
@@ -667,19 +667,19 @@ export default function MembersPage(): React.ReactElement {
 									{/*	</a>*/}
 									{/*	<a*/}
 									{/*		href="/"*/}
-									{/*		className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"*/}
+									{/*		className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:ring-blue-500 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"*/}
 									{/*	>*/}
 									{/*		1*/}
 									{/*	</a>*/}
 									{/*	<a*/}
 									{/*		href="/"*/}
-									{/*		className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"*/}
+									{/*		className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:ring-blue-500 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"*/}
 									{/*	>*/}
 									{/*		2*/}
 									{/*	</a>*/}
 									{/*	<a*/}
 									{/*		href="/"*/}
-									{/*		className="hidden md:inline-flex -ml-px relative items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"*/}
+									{/*		className="hidden md:inline-flex -ml-px relative items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:ring-blue-500 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"*/}
 									{/*	>*/}
 									{/*		3*/}
 									{/*	</a>*/}
@@ -688,25 +688,25 @@ export default function MembersPage(): React.ReactElement {
 									{/*	</span>*/}
 									{/*	<a*/}
 									{/*		href="/"*/}
-									{/*		className="hidden md:inline-flex -ml-px relative items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"*/}
+									{/*		className="hidden md:inline-flex -ml-px relative items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:ring-blue-500 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"*/}
 									{/*	>*/}
 									{/*		8*/}
 									{/*	</a>*/}
 									{/*	<a*/}
 									{/*		href="/"*/}
-									{/*		className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"*/}
+									{/*		className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:ring-blue-500 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"*/}
 									{/*	>*/}
 									{/*		9*/}
 									{/*	</a>*/}
 									{/*	<a*/}
 									{/*		href="/"*/}
-									{/*		className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"*/}
+									{/*		className="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-700 hover:text-gray-500 focus:z-10 focus:outline-none focus:border-blue-300 focus:ring-blue-500 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"*/}
 									{/*	>*/}
 									{/*		10*/}
 									{/*	</a>*/}
 									{/*	<a*/}
 									{/*		href="/"*/}
-									{/*		className="-ml-px relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150"*/}
+									{/*		className="-ml-px relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:ring-blue-500 active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150"*/}
 									{/*		aria-label="Next"*/}
 									{/*	>*/}
 									{/*		<svg*/}
