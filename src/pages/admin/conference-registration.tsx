@@ -246,6 +246,12 @@ export default function AdminLogPage(): React.ReactElement {
 								.add(6, "days")
 								.format("M/D/Y")})`,
 					  ]
+					: selectedConference === "sbmun"
+					? [
+							`SBMUN Delegate Information Trip Form Link (valid through ${moment()
+								.add(6, "days")
+								.format("M/D/Y")})`,
+					  ]
 					: []),
 				`Donation Receipt Link (valid through ${moment()
 					.add(6, "days")
@@ -264,7 +270,8 @@ export default function AdminLogPage(): React.ReactElement {
 					? ["Requested Partner"]
 					: []),
 				...(selectedConference === "sfmun" ||
-				selectedConference === "scvmun"
+				selectedConference === "scvmun" ||
+				selectedConference === "sbmun"
 					? [
 							...[
 								"First",
@@ -273,8 +280,10 @@ export default function AdminLogPage(): React.ReactElement {
 								"Fourth",
 								"Fifth",
 								"Sixth",
-								"Seventh",
-								"Eighth",
+								...(selectedConference === "scvmun" ||
+								selectedConference === "sfmun"
+									? ["Seventh", "Eighth"]
+									: []),
 								...(selectedConference === "scvmun"
 									? [
 											"Ninth",
@@ -296,6 +305,15 @@ export default function AdminLogPage(): React.ReactElement {
 										"Catherine The Great's Coup",
 										"UNSC",
 										"Senate",
+								  ]
+								: selectedConference === "sbmun"
+								? [
+										"WHO",
+										"UNESCO",
+										"DISEC",
+										"World Economic Forum",
+										"JCC East Germany (Crisis)",
+										"JCC West Germany (Crisis)",
 								  ]
 								: [
 										"IAEA",
@@ -333,6 +351,8 @@ export default function AdminLogPage(): React.ReactElement {
 						(selectedConference === "scvmun" &&
 							r.data.confirm?.scvmunConfirmed) ||
 						(selectedConference === "bmun" &&
+							r.data.confirm?.bmunConfirmed) ||
+						(selectedConference === "sbmun" &&
 							r.data.confirm?.bmunConfirmed)
 				);
 			}
@@ -349,6 +369,8 @@ export default function AdminLogPage(): React.ReactElement {
 							? ["smuncFuhsdForm", "smuncDonation"]
 							: selectedConference === "scvmun"
 							? ["scvmunFuhsdForm", "scvmunDonation"]
+							: selectedConference === "sbmun"
+							? ["sbmunFuhsdForm", "sbmunForm", "sbmunDonation"]
 							: ["bmunFuhsdForm", "bmunDonation"]
 						)
 							.map((field) =>
@@ -419,7 +441,9 @@ export default function AdminLogPage(): React.ReactElement {
 							(selectedConference === "scvmun" &&
 								registration.data.confirm?.scvmunConfirmed) ||
 							(selectedConference === "bmun" &&
-								registration.data.confirm?.bmunConfirmed)
+								registration.data.confirm?.bmunConfirmed) ||
+							(selectedConference === "sbmun" &&
+								registration.data.confirm?.sbmunConfirmed)
 								? "TRUE"
 								: "FALSE",
 							registration.userData.id,
@@ -466,7 +490,8 @@ export default function AdminLogPage(): React.ReactElement {
 											?.healthInsuranceZip,
 										forms[0].link,
 										forms[1].link,
-										...(selectedConference === "sfmun"
+										...(selectedConference === "sfmun" ||
+										selectedConference === "sbmun"
 											? [forms[2].link]
 											: []),
 								  ]
@@ -499,6 +524,27 @@ export default function AdminLogPage(): React.ReactElement {
 														) + 1
 											  )
 											: Array(8).fill("")),
+								  ]
+								: selectedConference === "sbmun"
+								? [
+										...(registration.data.preferences
+											?.committee || Array(6).fill("")),
+										...(registration.data.preferences
+											?.committee
+											? [
+													"WHO",
+													"UNESCO",
+													"DISEC",
+													"World Economic Forum",
+													"JCC East Germany (Crisis)",
+													"JCC West Germany (Crisis)",
+											  ].map(
+													(committee) =>
+														registration.data.preferences.committee.indexOf(
+															committee
+														) + 1
+											  )
+											: Array(6).fill("")),
 								  ]
 								: selectedConference === "scvmun"
 								? [
@@ -582,6 +628,10 @@ export default function AdminLogPage(): React.ReactElement {
 				selectedConference === "sfmun"
 					? zip.folder("SFMUN Liability Forms")
 					: null;
+			const sbmunForms =
+				selectedConference === "sbmun"
+					? zip.folder("SBMUN Delegate Information Forms")
+					: null;
 			const donationReceipts = zip.folder("Donation Receipts");
 			if (
 				!fuhsdForms ||
@@ -603,6 +653,20 @@ export default function AdminLogPage(): React.ReactElement {
 					if (r.files[1] && r.files[1].file) {
 						sfmunForms.file(
 							"SFMUN-liability-form-" + name + ".pdf",
+							r.files[1].file
+						);
+					}
+					if (r.files[2] && r.files[2].file) {
+						const ext = r.files[2].name?.split(".").pop();
+						donationReceipts.file(
+							"SFMUN-donation-receipt-" + name + "." + ext,
+							r.files[2].file
+						);
+					}
+				} else if (selectedConference === "sbmun" && sfmunForms) {
+					if (r.files[1] && r.files[1].file) {
+						sfmunForms.file(
+							"SBMUN-information-form-" + name + ".pdf",
 							r.files[1].file
 						);
 					}
