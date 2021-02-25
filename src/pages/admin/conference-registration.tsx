@@ -528,9 +528,10 @@ export default function AdminLogPage(): React.ReactElement {
 								: selectedConference === "sbmun"
 								? [
 										...(registration.data.preferences
-											?.committee || Array(6).fill("")),
+											?.sbmunCommittee ||
+											Array(6).fill("")),
 										...(registration.data.preferences
-											?.committee
+											?.sbmunCommittee
 											? [
 													"WHO",
 													"UNESCO",
@@ -540,7 +541,7 @@ export default function AdminLogPage(): React.ReactElement {
 													"JCC West Germany (Crisis)",
 											  ].map(
 													(committee) =>
-														registration.data.preferences.committee.indexOf(
+														registration.data.preferences.sbmunCommittee.indexOf(
 															committee
 														) + 1
 											  )
