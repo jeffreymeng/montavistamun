@@ -39,7 +39,7 @@ export default function AdminLogPage(): React.ReactElement {
 		"sbmun",
 	].includes(hash)
 		? hash
-		: "bmun";
+		: "sbmun";
 	if (
 		!["sfmun", "smunc", "scvmun", "bmun", "sbmun"].includes(
 			selectedConference
@@ -737,6 +737,16 @@ export default function AdminLogPage(): React.ReactElement {
 						? setSelectedConference(o[0].value)
 						: setSelectedConference(o.value)
 				}
+				styles={{
+					input: (provided) => ({
+						...provided,
+						borderStyle: "none !important",
+						outline: "2px solid transparent !important",
+						outlineOffset: "2px !important",
+						boxShadow: "none !important",
+						"--tw-ring-color": "transparent !important",
+					}),
+				}}
 			/>
 			<h3 className={"text-xl leading-7 font-bold tracking-tight mt-4"}>
 				Registration Progress
