@@ -283,7 +283,7 @@ export default function AboutPage(): React.ReactElement {
 						<Select
 							isDisabled={hasChanges}
 							id={"conference-select"}
-							className={"mt-1"}
+							className={"mt-1 tw-forms-disable"}
 							placeholder={"Select a conference to edit..."}
 							options={options}
 							value={
@@ -297,16 +297,7 @@ export default function AboutPage(): React.ReactElement {
 								);
 								setFields((o as { value: string }).value);
 							}}
-							styles={{
-								input: (provided) => ({
-									...provided,
-									borderStyle: "none !important",
-									outline: "2px solid transparent !important",
-									outlineOffset: "2px !important",
-									boxShadow: "none !important",
-									"--tw-ring-color": "transparent !important",
-								}),
-							}}
+
 						/>
 						{hasChanges && (
 							<p className="mt-2 text-sm text-gray-500">

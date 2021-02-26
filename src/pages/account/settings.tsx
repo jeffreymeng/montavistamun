@@ -544,17 +544,7 @@ function PersonalInformationDisplay() {
 										  opt.value
 								);
 							}}
-							className={"mt-1 block w-full text-sm"}
-							styles={{
-								input: (provided) => ({
-									...provided,
-									borderStyle: "none !important",
-									outline: "2px solid transparent !important",
-									outlineOffset: "2px !important",
-									boxShadow: "none !important",
-									"--tw-ring-color": "transparent !important",
-								}),
-							}}
+							className={"mt-1 block w-full text-sm tw-forms-disable"}
 						/>
 						{/*<span id="class_of">*/}
 						{/*	{classOf} (<a>this is wrong</a>)*/}

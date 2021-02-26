@@ -217,7 +217,7 @@ export default function PersonalInformationSection({
 						<Select
 							isDisabled={!canEdit}
 							options={stateOptions}
-							className="mt-1"
+							className="mt-1 tw-forms-disable"
 							{...(typeof window === "undefined"
 								? {}
 								: { menuPortalTarget: document.body })}
@@ -225,15 +225,8 @@ export default function PersonalInformationSection({
 								menuPortal: (base) => ({
 									...base,
 									zIndex: 9999,
-								}),
-								input: (provided) => ({
-									...provided,
-									borderStyle: "none !important",
-									outline: "2px solid transparent !important",
-									outlineOffset: "2px !important",
-									boxShadow: "none !important",
-									"--tw-ring-color": "transparent !important",
-								}),
+								})
+
 							}}
 							value={stateOptions.find(
 								(o) =>

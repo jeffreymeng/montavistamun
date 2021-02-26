@@ -1,3 +1,6 @@
 .Select.is-open {
 	z-index: 1000 !important;
 }
+.tw-forms-disable input {
+	--tw-ring-color: transparent !important;
+}

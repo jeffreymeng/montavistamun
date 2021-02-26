@@ -1,6 +1,6 @@
 // See https://tailwindcss.com/docs/configuration for details
 const defaultTheme = require("tailwindcss/defaultTheme");
-
+const colors = require("tailwindcss/colors");
 module.exports = {
 	purge: [
 		"./src/**/*.js",
@@ -13,6 +13,11 @@ module.exports = {
 			fontFamily: {
 				sans: ["Inter var", ...defaultTheme.fontFamily.sans],
 			},
+
+			colors: {
+				cyan: colors.cyan,
+			},
+
 			maxWidth: {
 				"7xl": "80rem",
 				"8xl": "88rem",

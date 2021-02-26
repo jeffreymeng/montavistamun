@@ -368,7 +368,7 @@ export default function EmergencyInformationSection({
 						<Select
 							isDisabled={!canEdit}
 							options={stateOptions}
-							className="mt-1"
+							className="mt-1 tw-forms-disable"
 							{...(typeof window === "undefined"
 								? {}
 								: { menuPortalTarget: document.body })}

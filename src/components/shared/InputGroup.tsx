@@ -144,14 +144,12 @@ export default function InputGroup({
 				</div>
 			)}
 
-			<div
-				className={cx("relative rounded-md shadow-sm", label && "mt-1")}
-			>
+			<div className={cx(label && "mt-1")}>
 				<input
 					id={id}
 					type={"text"}
 					className={cx(
-						"block w-full sm:text-sm sm:leading-5",
+						"shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border-gray-300 rounded-md",
 						disabled ? "bg-gray-100" : "bg-white",
 						invalid &&
 							"pr-10 border-red-300 text-red-900 placeholder-red-300 focus:border-red-300 focus:ring-red-500",

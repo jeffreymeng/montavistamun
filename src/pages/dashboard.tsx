@@ -159,7 +159,7 @@ export default function AboutPage(): React.ReactElement {
 	];
 	return (
 		<Layout title={"Member Dashboard"}>
-			<div className="min-h-screen flex overflow-hidden bg-cool-gray-100">
+			<div className="min-h-screen flex overflow-hidden bg-gray-100">
 				<div
 					className="flex-1 overflow-auto focus:outline-none"
 					tabIndex={0}
@@ -168,13 +168,13 @@ export default function AboutPage(): React.ReactElement {
 						{/* Page header */}
 						<div className="bg-white shadow">
 							<div className="px-4 sm:px-6 lg:max-w-7xl lg:mx-auto lg:px-8">
-								<div className="py-6 md:flex md:items-center md:justify-between lg:border-t lg:border-cool-gray-200">
+								<div className="py-6 md:flex md:items-center md:justify-between lg:border-t lg:border-gray-200">
 									<div className="flex-1 min-w-0">
 										{/* Profile */}
 										<div className="flex items-center">
 											<div>
 												<div className="flex items-center">
-													<h1 className="ml-3 text-2xl font-bold leading-7 text-cool-gray-900 sm:leading-9 sm:truncate">
+													<h1 className="ml-3 text-2xl font-bold leading-7 text-gray-900 sm:leading-9 sm:truncate">
 														{new Date().getHours() <
 														6
 															? "Hello"
@@ -195,7 +195,7 @@ export default function AboutPage(): React.ReactElement {
 															<dt className="sr-only">
 																Account status
 															</dt>
-															<dd className="mt-3 flex items-center text-sm leading-5 text-cool-gray-500 font-medium sm:mr-6 sm:mt-0">
+															<dd className="mt-3 flex items-center text-sm leading-5 text-gray-500 font-medium sm:mr-6 sm:mt-0">
 																<svg
 																	className="flex-shrink-0 mr-1.5 h-5 w-5 text-green-400"
 																	viewBox="0 0 20 20"
@@ -227,7 +227,7 @@ export default function AboutPage(): React.ReactElement {
 										{/*<span className="shadow-sm rounded-md">*/}
 										{/*	<button*/}
 										{/*		type="button"*/}
-										{/*		className="inline-flex items-center px-4 py-2 border border-cool-gray-300 text-sm leading-5 font-medium rounded-md text-cool-gray-700 bg-white hover:text-cool-gray-500 focus:outline-none focus:ring-blue-500 focus:border-blue-300 active:text-cool-gray-800 active:bg-cool-gray-50 transition duration-150 ease-in-out"*/}
+										{/*		className="inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:ring-blue-500 focus:border-blue-300 active:text-gray-800 active:bg-gray-50 transition duration-150 ease-in-out"*/}
 										{/*	>*/}
 										{/*		Add money*/}
 										{/*	</button>*/}
@@ -255,29 +255,29 @@ export default function AboutPage(): React.ReactElement {
 									{cards.map((card) => (
 										<div
 											key={card.title + card.subtitle}
-											className="bg-white overflow-hidden shadow rounded-lg flex flex-col justify-between"
+											className="bg-white overflow-hidden shadow rounded-lg"
 										>
 											<div className="p-5">
-												<div className="flex items-top">
-													<div className="flex-shrink-0 mt-3">
+												<div className="flex items-center">
+													<div className="flex-shrink-0">
 														{React.createElement(
 															// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 															// @ts-ignore
 															Icons[card.icon],
 															{
 																className:
-																	"h-6 w-6 text-cool-gray-400",
+																	"h-6 w-6 text-gray-400",
 															},
 															null
 														)}
 													</div>
 													<div className="ml-5 w-0 flex-1">
 														<dl>
-															<dt className="text-sm leading-5 font-medium text-cool-gray-500 truncate">
+															<dt className="text-sm font-medium text-gray-500 truncate">
 																{card.subtitle}
 															</dt>
 															<dd>
-																<div className="text-lg leading-7 font-medium text-cool-gray-900">
+																<div className="text-lg font-medium text-gray-900">
 																	{card.title}
 																</div>
 															</dd>
@@ -285,51 +285,39 @@ export default function AboutPage(): React.ReactElement {
 													</div>
 												</div>
 											</div>
-											<div className="bg-cool-gray-50 px-5 py-3">
-												<div className="text-sm leading-5 flex justify-between">
+											<div className="bg-gray-50 px-5 py-3">
+												<div className="text-sm flex justify-between">
 													{card.primaryAction && (
-														<a
-															href={
+														<Link
+															to={
 																card
 																	.primaryAction
 																	.link
 															}
-															target={"_blank"}
-															rel={
-																"noopener noreferrer"
-															}
-															className={
-																"font-medium text-teal-600 hover:text-teal-900 transition ease-in-out duration-150"
-															}
+															className="font-medium text-cyan-700 hover:text-cyan-900"
 														>
 															{
 																card
 																	.primaryAction
 																	.title
 															}
-														</a>
+														</Link>
 													)}
 													{card.secondaryAction && (
-														<a
-															href={
+														<Link
+															to={
 																card
 																	.secondaryAction
 																	.link
 															}
-															target={"_blank"}
-															rel={
-																"noopener noreferrer"
-															}
-															className={
-																"font-medium text-gray-500 hover:text-gray-900 transition ease-in-out duration-150"
-															}
+															className="font-medium text-gray-700 hover:text-gray-900"
 														>
 															{
 																card
 																	.secondaryAction
 																	.title
 															}
-														</a>
+														</Link>
 													)}
 												</div>
 											</div>
@@ -338,7 +326,7 @@ export default function AboutPage(): React.ReactElement {
 								</div>
 							</div>
 
-							<h2 className="max-w-7xl mx-auto mt-8 px-4 text-lg leading-6 font-medium text-cool-gray-900 sm:px-6 lg:px-8">
+							<h2 className="max-w-7xl mx-auto mt-8 px-4 text-lg leading-6 font-medium text-gray-900 sm:px-6 lg:px-8">
 								Your Member Updates
 							</h2>
 							<p className="text-gray-500 text-md mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-2 mb-4">
@@ -403,12 +391,12 @@ function UpdatesTable() {
 	return (
 		<>
 			<div className="shadow sm:hidden">
-				<ul className="mt-2 divide-y divide-cool-gray-200 overflow-hidden shadow sm:hidden">
+				<ul className="mt-2 divide-y divide-gray-200 overflow-hidden shadow sm:hidden">
 					{(!data || data.length == 0) && (
 						<li className="block px-4 py-4 bg-white">
 							<div className="flex items-center space-x-4">
 								<div className="flex-1 flex space-x-2 truncate">
-									<div className="text-cool-gray-500 text-sm truncate">
+									<div className="text-gray-500 text-sm truncate">
 										<p className="truncate">
 											{loadingData
 												? "Loading..."
@@ -446,18 +434,18 @@ function UpdatesTable() {
 											}
 											target={"_blank"}
 											rel={"noopener noreferrer"}
-											className="block px-4 py-4 bg-white hover:bg-cool-gray-50"
+											className="block px-4 py-4 bg-white hover:bg-gray-50"
 										>
 											<div className="flex items-center space-x-4">
 												<div className="flex-1 flex space-x-2 truncate">
-													<div className="text-cool-gray-900 text-md truncate">
+													<div className="text-gray-900 text-md truncate">
 														<p className="truncate">
 															{
 																email.settings
 																	.subject_line
 															}
 														</p>
-														<p className="text-cool-gray-500 font-medium text-sm truncate">
+														<p className="text-gray-500 font-medium text-sm truncate">
 															{
 																email.settings
 																	.preview_text
@@ -474,7 +462,7 @@ function UpdatesTable() {
 												</div>
 												<div>
 													<svg
-														className="flex-shrink-0 h-5 w-5 text-cool-gray-400"
+														className="flex-shrink-0 h-5 w-5 text-gray-400"
 														viewBox="0 0 20 20"
 														fill="currentColor"
 													>
@@ -491,7 +479,7 @@ function UpdatesTable() {
 								)
 							)}
 				</ul>
-				<nav className="bg-white px-4 py-3 flex items-center justify-between border-t border-cool-gray-200">
+				<nav className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200">
 					<div className="flex-1 flex justify-between">
 						<button
 							onClick={() => setPage((current) => current - 1)}
@@ -499,8 +487,8 @@ function UpdatesTable() {
 							className={
 								(page == numPages
 									? "bg-gray-50"
-									: "hover:text-cool-gray-500 ") +
-								" relative inline-flex items-center px-4 py-2 border border-cool-gray-300 text-sm leading-5 font-medium rounded-md text-cool-gray-700 bg-white focus:outline-none focus:ring-blue-500 focus:border-blue-300 active:bg-cool-gray-100 active:text-cool-gray-700 transition ease-in-out duration-150"
+									: "hover:text-gray-500 ") +
+								" relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white focus:outline-none focus:ring-blue-500 focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"
 							}
 						>
 							Previous
@@ -511,8 +499,8 @@ function UpdatesTable() {
 							className={
 								(page >= numPages
 									? "bg-gray-50"
-									: "hover:text-cool-gray-500 ") +
-								" ml-3 relative inline-flex items-center px-4 py-2 border border-cool-gray-300 text-sm leading-5 font-medium rounded-md text-cool-gray-700 bg-white focus:outline-none focus:ring-blue-500 focus:border-blue-300 active:bg-cool-gray-100 active:text-cool-gray-700 transition ease-in-out duration-150"
+									: "hover:text-gray-500 ") +
+								" ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white focus:outline-none focus:ring-blue-500 focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"
 							}
 						>
 							Next
@@ -524,22 +512,22 @@ function UpdatesTable() {
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 					<div className="flex flex-col mt-2">
 						<div className="align-middle min-w-full overflow-x-auto shadow overflow-hidden sm:rounded-lg">
-							<table className="min-w-full divide-y divide-cool-gray-200">
+							<table className="min-w-full divide-y divide-gray-200">
 								<thead>
 									<tr>
-										<th className="px-6 py-3 bg-cool-gray-50 text-left text-xs leading-4 font-medium text-cool-gray-500 uppercase tracking-wider">
+										<th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
 											Subject
 										</th>
-										<th className="px-6 py-3 bg-cool-gray-50 text-right text-xs leading-4 font-medium text-cool-gray-500 uppercase tracking-wider">
+										<th className="px-6 py-3 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
 											Date Sent
 										</th>
 									</tr>
 								</thead>
-								<tbody className="bg-white divide-y divide-cool-gray-200">
+								<tbody className="bg-white divide-y divide-gray-200">
 									{(!data || data.length == 0) && (
 										<tr className="bg-white">
-											<td className="max-w-0 w-full px-6 py-4 whitespace-nowrap text-sm leading-5 text-cool-gray-900">
-												<p className="text-cool-gray-500 truncate group-hover:text-cool-gray-900 text-base transition ease-in-out duration-150">
+											<td className="max-w-0 w-full px-6 py-4 whitespace-nowrap text-sm leading-5 text-gray-900">
+												<p className="text-gray-500 truncate group-hover:text-gray-900 text-base transition ease-in-out duration-150">
 													{loadingData
 														? "Loading..."
 														: "We haven't sent you any member update emails yet."}
@@ -585,7 +573,7 @@ function UpdatesTable() {
 															)
 														}
 													>
-														<td className="max-w-0 w-full px-6 py-4 whitespace-nowrap text-sm leading-5 text-cool-gray-900">
+														<td className="max-w-0 w-full px-6 py-4 whitespace-nowrap text-sm leading-5 text-gray-900">
 															{/*fake link to show preview*/}
 															<a
 																href={
@@ -597,14 +585,14 @@ function UpdatesTable() {
 																	e.preventDefault()
 																}
 															>
-																<p className="text-cool-gray-500 truncate group-hover:text-cool-gray-900 text-base transition ease-in-out duration-150">
+																<p className="text-gray-500 truncate group-hover:text-gray-900 text-base transition ease-in-out duration-150">
 																	{
 																		email
 																			.settings
 																			.subject_line
 																	}
 																</p>
-																<p className="text-cool-gray-400 truncate group-hover:text-cool-gray-700 text-sm transition ease-in-out duration-150">
+																<p className="text-gray-400 truncate group-hover:text-gray-700 text-sm transition ease-in-out duration-150">
 																	{
 																		email
 																			.settings
@@ -614,7 +602,7 @@ function UpdatesTable() {
 															</a>
 														</td>
 
-														<td className="px-6 py-4 text-right whitespace-nowrap text-sm leading-5 text-cool-gray-500 hover:text-cool-gray-900 ">
+														<td className="px-6 py-4 text-right whitespace-nowrap text-sm leading-5 text-gray-500 hover:text-gray-900 ">
 															{/*fake link to show preview*/}
 															<a
 																href={
@@ -644,10 +632,10 @@ function UpdatesTable() {
 							</table>
 
 							{/* Pagination */}
-							<nav className="bg-white px-4 py-3 flex items-center justify-between border-t border-cool-gray-200 sm:px-6">
+							<nav className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
 								{data && data.length > 0 && (
 									<div className="hidden sm:block">
-										<p className="text-sm leading-5 text-cool-gray-700">
+										<p className="text-sm leading-5 text-gray-700">
 											Showing{" "}
 											<span className="font-medium">
 												{page * 10 - 9}
@@ -681,8 +669,8 @@ function UpdatesTable() {
 											data.length == 0 ||
 											page == 1
 												? "bg-gray-100"
-												: "hover:text-cool-gray-500") +
-											" relative inline-flex items-center p-2 border border-cool-gray-300 text-sm leading-5 font-medium rounded-md text-cool-gray-700 bg-white focus:outline-none focus:ring-blue-500 focus:border-blue-300 active:bg-cool-gray-100 active:text-cool-gray-700 transition ease-in-out duration-150"
+												: "hover:text-gray-500") +
+											" relative inline-flex items-center p-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white focus:outline-none focus:ring-blue-500 focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"
 										}
 									>
 										<Icons.ChevronLeft />
@@ -701,8 +689,8 @@ function UpdatesTable() {
 											data.length == 0 ||
 											page >= numPages
 												? "bg-gray-100"
-												: "hover:text-cool-gray-500") +
-											" ml-3 relative inline-flex items-center p-2 border border-cool-gray-300 text-sm leading-5 font-medium rounded-md text-cool-gray-700 bg-white focus:outline-none focus:ring-blue-500 focus:border-blue-300 active:bg-cool-gray-100 active:text-cool-gray-700 transition ease-in-out duration-150"
+												: "hover:text-gray-500") +
+											" ml-3 relative inline-flex items-center p-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white focus:outline-none focus:ring-blue-500 focus:border-blue-300 active:bg-gray-100 active:text-gray-700 transition ease-in-out duration-150"
 										}
 									>
 										<Icons.ChevronRight />
