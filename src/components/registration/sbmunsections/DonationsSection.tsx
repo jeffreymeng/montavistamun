@@ -145,12 +145,11 @@ export default function DonationsSection({
 							<li>
 								Head to Monta Vista’s online Student Store and
 								find our SBMUN conference donation{" "}
-								{/* TODO: add actual link */}
 								<a
 									target={"_blank"}
 									rel={"noopener noreferrer"}
 									href={
-										"https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+										"https://montavistahs.3dcartstores.com/South-Bay-Model-UN-Conference-Virtual-Conference_p_68.html"
 									}
 									className={"link"}
 								>

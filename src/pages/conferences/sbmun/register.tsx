@@ -33,7 +33,7 @@ export default function AboutPage({
 
 export const query = graphql`
 	query {
-		headerImage: file(relativePath: { eq: "conferences/bmun.jpg" }) {
+		headerImage: file(relativePath: { eq: "headers/sbmun-registration.jpg" }) {
 			childImageSharp {
 				fluid(maxWidth: 1200, quality: 90) {
 					...GatsbyImageSharpFluid_withWebp
