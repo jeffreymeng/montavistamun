@@ -290,7 +290,7 @@ export default function SBMUNRegistrationSection() {
 									{
 										title: "Donations",
 										description:
-											"To cover conference fees charged by SBMUN, we request a $30 donation, which will go directly towards making this conference possible.",
+											"To cover conference fees charged by SBMUN, we request a $25 donation, which will go directly towards making this conference possible.",
 									},
 									{
 										title: "You're Done!",

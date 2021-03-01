@@ -67,7 +67,7 @@ export default function DonationsSection({
 				<p className="mt-2">
 					Before you submit, we just have one last step. To cover the
 					fees charged by SBMUN, we are requesting that you include a
-					donation of <b>25</b> with your registration. Your donations
+					donation of <b>$25</b> with your registration. Your donations
 					will go directly towards covering conference fees and making
 					this conference possible.
 				</p>
