@@ -113,19 +113,19 @@ export default function AboutPage(): React.ReactElement {
 		};
 		icon: string;
 	}[] = [
-		{
-			subtitle: "Next Member Meeting",
-			title: nextMeeting,
-			primaryAction: {
-				title: "Join Meeting",
-				link: "/zoom",
-			},
-			secondaryAction: {
-				title: "View All Events",
-				link: "/calendar",
-			},
-			icon: "UserGroup",
-		},
+		// {
+		// 	subtitle: "Next Member Meeting",
+		// 	title: nextMeeting,
+		// 	primaryAction: {
+		// 		title: "Join Meeting",
+		// 		link: "/zoom",
+		// 	},
+		// 	secondaryAction: {
+		// 		title: "View All Events",
+		// 		link: "/calendar",
+		// 	},
+		// 	icon: "UserGroup",
+		// },
 
 		//{
 		//	subtitle: "Registration Now Open",
@@ -294,7 +294,7 @@ export default function AboutPage(): React.ReactElement {
 																	.primaryAction
 																	.link
 															}
-															className="font-medium text-cyan-700 hover:text-cyan-900"
+															className="font-medium text-indigo-700 hover:text-indigo-900"
 														>
 															{
 																card
