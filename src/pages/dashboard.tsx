@@ -72,7 +72,10 @@ export default function AboutPage(): React.ReactElement {
 						formattedStartTime: event.startTime.format(FORMAT),
 						formattedEndTime: event.endTime.format(FORMAT),
 					}));
-
+				if (times.length == 0) {
+					setNextMeeting(null);
+					return;
+				}
 				setNextMeeting(times[0].formattedStartTime);
 				const secondsUntilNextUpdate = Math.abs(
 					moment().diff(times[0].endTime, "milliseconds")
@@ -113,19 +116,23 @@ export default function AboutPage(): React.ReactElement {
 		};
 		icon: string;
 	}[] = [
-		// {
-		// 	subtitle: "Next Member Meeting",
-		// 	title: nextMeeting,
-		// 	primaryAction: {
-		// 		title: "Join Meeting",
-		// 		link: "/zoom",
-		// 	},
-		// 	secondaryAction: {
-		// 		title: "View All Events",
-		// 		link: "/calendar",
-		// 	},
-		// 	icon: "UserGroup",
-		// },
+		...(nextMeeting
+			? [
+					{
+						subtitle: "Next Member Meeting",
+						title: nextMeeting,
+						primaryAction: {
+							title: "Join Meeting",
+							link: "/zoom",
+						},
+						secondaryAction: {
+							title: "View All Events",
+							link: "/calendar",
+						},
+						icon: "UserGroup",
+					},
+			  ]
+			: []),
 
 		//{
 		//	subtitle: "Registration Now Open",
