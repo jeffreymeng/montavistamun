@@ -9,6 +9,6 @@
   to = "https://fuhsd-org.zoom.us/j/98614836312?pwd=Q3B4bkovSHk5ZlB4MGFjWTFJcW9RUT09"
   force = true # ensure that we always redirect
 [[redirects]]
-  from = "/'join"
+  from = "/join"
   to = "https://mailchi.mp/264e166a5d90/mvmun21-22"
   force = true # ensure that we always redirect
