@@ -9,6 +9,8 @@ export default function Footer({
 		<div className={dark ? "bg-gray-800" : "bg-white"}>
 			<div className="max-w-screen-xl mx-auto py-12 px-4 sm:px-6 md:flex md:items-center md:justify-between lg:px-8">
 				<div className="flex justify-center md:order-2">
+					<p className={"text-gray-400 mr-6"}>Contact Us:</p>
+
 					<a
 						href="mailto:info@montavistamun.com"
 						className={

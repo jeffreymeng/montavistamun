@@ -56,14 +56,16 @@ export default function Hero({
 					<div className="lg:grid lg:grid-cols-12 lg:gap-8">
 						<div className="sm:text-center md:max-w-2xl md:mx-auto lg:col-span-6 lg:text-left">
 							<h2 className="text-4xl tracking-tight leading-10 font-extrabold text-gray-900 sm:text-5xl sm:leading-none md:text-6xl">
-								Become a{" "}
-								<span className="text-indigo-600">leader</span>{" "}
-								with MV Model UN
+								<span className="text-indigo-600">
+									Stand out
+								</span>{" "}
+								from the crowd
 							</h2>
 							<p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-								We're a close-knit community that strives to
-								provide experiences in teamwork, negotiation,
-								and diplomacy by simulating the United Nations.
+								We’re a close-knit community that strives for
+								experiences in leadership, diplomacy, and
+								problem-solving by simulating the United
+								Nations.
 							</p>
 							<div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
 								<div className="rounded-md shadow">

@@ -65,8 +65,8 @@ export default function About({
 					<h3 className="text-center text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl sm:leading-10">
 						Club. Delegation. Community.
 					</h3>
-					<p className="mt-4 max-w-xl mx-auto text-center text-3xl leading-7 text-gray-500">
-						This is what makes us different.
+					<p className="mt-4 max-w-2xl mx-auto text-center text-3xl leading-7 text-gray-500">
+						Here’s how we stand out — and how you can, too.
 					</p>
 				</div>
 
