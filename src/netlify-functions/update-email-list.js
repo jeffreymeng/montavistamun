@@ -121,7 +121,7 @@ export async function handler(event, context) {
 						status: "active",
 					},
 					{
-						name: "2020-2021 Members",
+						name: "2021-2022 Members",
 						status: "active",
 					},
 				],
