@@ -18,20 +18,20 @@ export default function Video() {
 		}
 	`);
 	return (
-		<div className="relative mx-auto w-full rounded-lg shadow-lg lg:mx-4 xl:mx-8">
+		<div className="relative w-full mx-auto rounded-lg shadow-lg lg:mx-4 xl:mx-8">
 			{showVideo && (
-				<div className="relative block w-full min-h-32 lg:min-h-64 xl:min-h-80 rounded-lg overflow-hidden focus:outline-none focus:ring bg-gray-300">
+				<div className="relative block w-full overflow-hidden bg-gray-300 rounded-lg min-h-32 lg:min-h-64 xl:min-h-80 focus:outline-none focus:ring">
 					<YouTube
 						className={""}
 						opts={{
 							width: "100%",
 							playerVars: {
-								start: 2,
+								start: 0,
 								autoplay: 1,
 								rel: 0,
 							},
 						}}
-						videoId={"xc1dnpIKIcY"}
+						videoId={"v29pdTZH7RE"}
 					/>
 				</div>
 			)}
@@ -39,7 +39,7 @@ export default function Video() {
 				<button
 					onClick={() => setShowVideo(true)}
 					type="button"
-					className="relative block w-full rounded-lg overflow-hidden focus:outline-none focus:ring"
+					className="relative block w-full overflow-hidden rounded-lg focus:outline-none focus:ring"
 				>
 					<Img
 						className="w-full"
@@ -47,9 +47,9 @@ export default function Video() {
 						alt="We Are MVMUN"
 					/>
 
-					<div className="absolute inset-0 w-full h-full flex items-center justify-center">
+					<div className="absolute inset-0 flex items-center justify-center w-full h-full">
 						<svg
-							className="h-20 w-20 text-indigo-500"
+							className="w-20 h-20 text-indigo-500"
 							fill="currentColor"
 							viewBox="0 0 84 84"
 						>
