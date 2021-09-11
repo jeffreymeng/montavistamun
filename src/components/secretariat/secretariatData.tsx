@@ -152,7 +152,29 @@ export default [
 		memeBio: "",
 	},
 	{
-		name: "Elizabeth Li",
+		name: "Amy Hu",
+		position: "Director of Public Relations",
+		bio: (
+			<>
+				Hi I am Amy Hu and I am going to be your PR officer this year. I
+				am a junior and joined Model UN in sophomore year seeking to
+				join an inclusive community of open-minded and creative people.
+				When I joined MVMUN, I was blown away at how talented MVMUN
+				members are and I was so excited to be able to contribute to the
+				MVMUN team. After a long year of being hypnotized by zoom, I
+				can’t wait to experience MUN person next year. I hope this year
+				is going to be a blast and I hope you will enjoy MVMUN as much
+				as I have enjoyed it so far. As an officer, I wish to be as
+				approachable as possible so feel free to message me about
+				anything at any time. My Instagram is @amy_whooo and I am always
+				open on discord and messenger!
+			</>
+		),
+		memeBioNickname: "",
+		memeBio: "",
+	},
+	{
+		name: "Elizabeth Lee",
 		position: "President of Kennedy, Kennedy/MVMUN Liaison",
 		bio: (
 			<>
