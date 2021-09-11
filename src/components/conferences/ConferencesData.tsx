@@ -8,7 +8,7 @@ export default [
 	// },
 	{
 		name: "Stanford Model UN Conference",
-		date: "November 12, 2020 - November 15, 2020",
+		date: "November 12, 2020 - November 14, 2020",
 		location: "Stanford University",
 		acronym: "smunc",
 		text: `Our earliest conference of the year, Stanford Model United Nations Conference is a competitive one mainly for veterans and varsity members. SMUNC is an intensive 3 days full of 5 committee sessions that will leave you exhausted, but happy that you had such a good time!`,
@@ -17,7 +17,7 @@ export default [
 	},
 	{
 		name: "San Fransisco Model United Nations Conference",
-		date: "December 12, 2020 - December 13, 2020",
+		date: "December 11, 2020 - December 12, 2020",
 		location: "Lowell High School",
 		acronym: "sfmun",
 		text:
@@ -26,7 +26,7 @@ export default [
 	},
 	{
 		name: "Santa Clara Valley Model United Nations Conference",
-		date: "January 29, 2021 - January 30, 2021",
+		date: "January 28, 2021 - January 29, 2021",
 		location: "Santa Teresa High School",
 		acronym: "scvmun",
 		text:
@@ -34,7 +34,7 @@ export default [
 	},
 	{
 		name: "North American Invitational Model United Nations Conference",
-		date: "February 11, 2021 - February 14, 2021",
+		date: "February 17, 2021 - February 20, 2021",
 		location: "Georgetown University",
 		acronym: "naimun",
 		text:
@@ -42,7 +42,7 @@ export default [
 	},
 	{
 		name: "Berkeley Model United Nations Conference",
-		date: "February 26, 2021 - February 28, 2021",
+		date: "March 4, 2021 - March 6, 2021",
 		location: "University of California, Berkeley",
 		acronym: "bmun",
 		text:
@@ -50,7 +50,7 @@ export default [
 	},
 	{
 		name: "South Bay Model United Nations",
-		date: "April 3, 2021",
+		date: "TBA",
 		location: "Monta Vista High School",
 		acronym: "sbmun",
 		text:
@@ -59,7 +59,7 @@ export default [
 	},
 	{
 		name: "Davis Model United Nations Conference",
-		date: "May 15, 2020 - May 16, 2020",
+		date: "TBA",
 		location: "University of California, Davis",
 		acronym: "dmunc",
 		text:

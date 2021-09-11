@@ -44,15 +44,22 @@ export default function ConferencesPage({
 			</Header>
 			<Main>
 				<h1 className={"text-3xl leading-9 font-extrabold"}>
-					A special note about online conferences
+					In-person conferences are back!
 				</h1>
 				<p className="text-lg mt-3">
-					As the world adapts to life amid a global pandemic, we’re
-					adapting as well. That’s why we’re overhauling our approach
-					to teaching Model UN as many conferences transition to an
-					online format, and why we’re working hard to organize our
-					own online mock conferences while ensuring you receive the
-					most complete MUN experience possible.
+					Now that we’re in person, there is so much more we can do!
+					Meetings will be more productive, training will be more
+					efficient, and club operations will be smoother. Model UN is
+					best known for its conferences, which allow you to take
+					advantage of all the previous benefits as well as grow
+					closer to other members. Especially for travel conferences,
+					you are essentially going on a vacation with your favorite
+					people (yes, Model UN is that fun) while putting your
+					speaking and leadership skills to the test. Of course, you
+					will also be able to participate in mock conferences before
+					actual conferences to master conference etiquette and work
+					out the kinks. We’re sure you will have a great experience
+					with conferences, and we hope you join us for our next one!
 				</p>
 				{conferencesData.map(
 					(

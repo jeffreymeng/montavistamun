@@ -76,18 +76,14 @@ export default function About({
 							Build Lasting Skills
 						</h4>
 						<p className="mt-3 text-lg leading-7 text-gray-500">
-							We aim to promote a wide range of skills while
-							debating world affairs and leading others toward
-							global solutions and individual goals. Our
-							philosophy is centered around providing real
-							experiences for our members and tackling real-world
-							issues, in order to build a stronger sense of
-							leadership and a better understanding of our world.
+							We promote a wide range of skills while debating
+							world affairs and leading others toward global
+							solutions and individual goals. Our club is built
+							around real experiences tackling real-world issues.
 							There's so much more to global politics than giving
-							speeches or debating policies; we provide our
-							members with nuanced lessons from experienced
-							veterans as well as plenty of practice at our
-							conferences.
+							speeches or debating policies, with nuanced lessons
+							from Model UN veterans and hands-on practice giving
+							you the chance to grow.
 						</p>
 
 						<ul className="mt-10">
@@ -255,7 +251,7 @@ export default function About({
 								Build Lasting Connections
 							</h4>
 							<p className="mt-3 text-lg leading-7 text-gray-500">
-								It's not just the skills you'll learn in Model
+								It’s not just the skills you'll learn in Model
 								UN that will stay with you throughout your life;
 								it's the connections as well. Many of us have
 								made new friends — and we promise, you'll fit
@@ -310,6 +306,31 @@ export default function About({
 												community will be here to
 												support you. Everybody is
 												welcome — don’t be shy!
+											</p>
+										</div>
+									</div>
+								</li>
+								<li className="mt-10">
+									<div className="flex">
+										<div className="flex-shrink-0">
+											<div className="flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+												<Icons.Chat className="h-6 w-6" />
+											</div>
+										</div>
+										<div className="ml-4">
+											<h5 className="text-lg leading-6 font-medium text-gray-900">
+												Engaging Meetings
+											</h5>
+											<p className="mt-2 text-base leading-6 text-gray-500">
+												We know content-heavy meetings
+												can become tedious, which is why
+												we’ve implemented interactive
+												and hands-on activities during
+												each meeting to help learn the
+												material. From small-group
+												discussions to whole-group mock
+												conferences, our meetings are
+												nothing short of fun.
 											</p>
 										</div>
 									</div>
