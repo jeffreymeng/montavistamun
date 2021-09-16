@@ -122,8 +122,8 @@ export default function AboutPage(): React.ReactElement {
 						subtitle: "Next Member Meeting",
 						title: nextMeeting,
 						primaryAction: {
-							title: "Join Meeting",
-							link: "/zoom",
+							title: "Room C107",
+							link: "#",
 						},
 						secondaryAction: {
 							title: "View All Events",
@@ -166,12 +166,12 @@ export default function AboutPage(): React.ReactElement {
 	];
 	return (
 		<Layout title={"Member Dashboard"}>
-			<div className="min-h-screen flex overflow-hidden bg-gray-100">
+			<div className="flex min-h-screen overflow-hidden bg-gray-100">
 				<div
 					className="flex-1 overflow-auto focus:outline-none"
 					tabIndex={0}
 				>
-					<main className="flex-1 relative pb-8 z-0">
+					<main className="relative z-0 flex-1 pb-8">
 						{/* Page header */}
 						<div className="bg-white shadow">
 							<div className="px-4 sm:px-6 lg:max-w-7xl lg:mx-auto lg:px-8">
@@ -196,13 +196,13 @@ export default function AboutPage(): React.ReactElement {
 															`, ${user?.displayName}`}
 													</h1>
 												</div>
-												<dl className="mt-6 flex flex-col sm:ml-3 sm:mt-1 sm:flex-row sm:flex-wrap">
+												<dl className="flex flex-col mt-6 sm:ml-3 sm:mt-1 sm:flex-row sm:flex-wrap">
 													{verified && (
 														<>
 															<dt className="sr-only">
 																Account status
 															</dt>
-															<dd className="mt-3 flex items-center text-sm leading-5 text-gray-500 font-medium sm:mr-6 sm:mt-0">
+															<dd className="flex items-center mt-3 text-sm font-medium leading-5 text-gray-500 sm:mr-6 sm:mt-0">
 																<svg
 																	className="flex-shrink-0 mr-1.5 h-5 w-5 text-green-400"
 																	viewBox="0 0 20 20"
@@ -218,7 +218,7 @@ export default function AboutPage(): React.ReactElement {
 																verified member.
 																<Link
 																	to="/resources"
-																	className="link ml-2"
+																	className="ml-2 link"
 																>
 																	View member
 																	resources
@@ -230,20 +230,20 @@ export default function AboutPage(): React.ReactElement {
 											</div>
 										</div>
 									</div>
-									<div className="mt-6 flex space-x-3 md:mt-0 md:ml-4">
-										{/*<span className="shadow-sm rounded-md">*/}
+									<div className="flex mt-6 space-x-3 md:mt-0 md:ml-4">
+										{/*<span className="rounded-md shadow-sm">*/}
 										{/*	<button*/}
 										{/*		type="button"*/}
-										{/*		className="inline-flex items-center px-4 py-2 border border-gray-300 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:text-gray-500 focus:outline-none focus:ring-blue-500 focus:border-blue-300 active:text-gray-800 active:bg-gray-50 transition duration-150 ease-in-out"*/}
+										{/*		className="inline-flex items-center px-4 py-2 text-sm font-medium leading-5 text-gray-700 transition duration-150 ease-in-out bg-white border border-gray-300 rounded-md hover:text-gray-500 focus:outline-none focus:ring-blue-500 focus:border-blue-300 active:text-gray-800 active:bg-gray-50"*/}
 										{/*	>*/}
 										{/*		Add money*/}
 										{/*	</button>*/}
 										{/*</span>*/}
 										{user && !user.emailVerified && (
-											<span className="shadow-sm rounded-md">
+											<span className="rounded-md shadow-sm">
 												<Link
 													to="/account/create"
-													className="inline-flex items-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-teal-600 hover:bg-teal-500 focus:outline-none focus:ring-teal-500 focus:border-teal-700 active:bg-teal-700 transition duration-150 ease-in-out"
+													className="inline-flex items-center px-4 py-2 text-sm font-medium leading-5 text-white transition duration-150 ease-in-out bg-teal-600 border border-transparent rounded-md hover:bg-teal-500 focus:outline-none focus:ring-teal-500 focus:border-teal-700 active:bg-teal-700"
 												>
 													Verify Your Email
 												</Link>
@@ -255,14 +255,14 @@ export default function AboutPage(): React.ReactElement {
 						</div>
 
 						<div className="mt-8">
-							<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-								<div className="mt-2 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+							<div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+								<div className="grid grid-cols-1 gap-5 mt-2 sm:grid-cols-2 lg:grid-cols-3">
 									{/* Card */}
 
 									{cards.map((card) => (
 										<div
 											key={card.title + card.subtitle}
-											className="bg-white overflow-hidden shadow rounded-lg"
+											className="overflow-hidden bg-white rounded-lg shadow"
 										>
 											<div className="p-5">
 												<div className="flex items-center">
@@ -278,7 +278,7 @@ export default function AboutPage(): React.ReactElement {
 															null
 														)}
 													</div>
-													<div className="ml-5 w-0 flex-1">
+													<div className="flex-1 w-0 ml-5">
 														<dl>
 															<dt className="text-sm font-medium text-gray-500 truncate">
 																{card.subtitle}
@@ -292,8 +292,8 @@ export default function AboutPage(): React.ReactElement {
 													</div>
 												</div>
 											</div>
-											<div className="bg-gray-50 px-5 py-3">
-												<div className="text-sm flex justify-between">
+											<div className="px-5 py-3 bg-gray-50">
+												<div className="flex justify-between text-sm">
 													{card.primaryAction && (
 														<Link
 															to={
@@ -333,10 +333,10 @@ export default function AboutPage(): React.ReactElement {
 								</div>
 							</div>
 
-							<h2 className="max-w-7xl mx-auto mt-8 px-4 text-lg leading-6 font-medium text-gray-900 sm:px-6 lg:px-8">
+							<h2 className="px-4 mx-auto mt-8 text-lg font-medium leading-6 text-gray-900 max-w-7xl sm:px-6 lg:px-8">
 								Your Member Updates
 							</h2>
-							<p className="text-gray-500 text-md mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-2 mb-4">
+							<p className="px-4 mx-auto mt-2 mb-4 text-gray-500 text-md max-w-7xl sm:px-6 lg:px-8">
 								View all the member update emails we have sent
 								to {user?.email || "you"}. Click any update to
 								view it in a new tab.
@@ -398,12 +398,12 @@ function UpdatesTable() {
 	return (
 		<>
 			<div className="shadow sm:hidden">
-				<ul className="mt-2 divide-y divide-gray-200 overflow-hidden shadow sm:hidden">
+				<ul className="mt-2 overflow-hidden divide-y divide-gray-200 shadow sm:hidden">
 					{(!data || data.length == 0) && (
 						<li className="block px-4 py-4 bg-white">
 							<div className="flex items-center space-x-4">
-								<div className="flex-1 flex space-x-2 truncate">
-									<div className="text-gray-500 text-sm truncate">
+								<div className="flex flex-1 space-x-2 truncate">
+									<div className="text-sm text-gray-500 truncate">
 										<p className="truncate">
 											{loadingData
 												? "Loading..."
@@ -444,15 +444,15 @@ function UpdatesTable() {
 											className="block px-4 py-4 bg-white hover:bg-gray-50"
 										>
 											<div className="flex items-center space-x-4">
-												<div className="flex-1 flex space-x-2 truncate">
-													<div className="text-gray-900 text-md truncate">
+												<div className="flex flex-1 space-x-2 truncate">
+													<div className="text-gray-900 truncate text-md">
 														<p className="truncate">
 															{
 																email.settings
 																	.subject_line
 															}
 														</p>
-														<p className="text-gray-500 font-medium text-sm truncate">
+														<p className="text-sm font-medium text-gray-500 truncate">
 															{
 																email.settings
 																	.preview_text
@@ -469,7 +469,7 @@ function UpdatesTable() {
 												</div>
 												<div>
 													<svg
-														className="flex-shrink-0 h-5 w-5 text-gray-400"
+														className="flex-shrink-0 w-5 h-5 text-gray-400"
 														viewBox="0 0 20 20"
 														fill="currentColor"
 													>
@@ -486,8 +486,8 @@ function UpdatesTable() {
 								)
 							)}
 				</ul>
-				<nav className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200">
-					<div className="flex-1 flex justify-between">
+				<nav className="flex items-center justify-between px-4 py-3 bg-white border-t border-gray-200">
+					<div className="flex justify-between flex-1">
 						<button
 							onClick={() => setPage((current) => current - 1)}
 							disabled={page == 1}
@@ -516,16 +516,16 @@ function UpdatesTable() {
 				</nav>
 			</div>
 			<div className="hidden sm:block">
-				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+				<div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
 					<div className="flex flex-col mt-2">
-						<div className="align-middle min-w-full overflow-x-auto shadow overflow-hidden sm:rounded-lg">
+						<div className="min-w-full overflow-hidden overflow-x-auto align-middle shadow sm:rounded-lg">
 							<table className="min-w-full divide-y divide-gray-200">
 								<thead>
 									<tr>
-										<th className="px-6 py-3 bg-gray-50 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+										<th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-left text-gray-500 uppercase bg-gray-50">
 											Subject
 										</th>
-										<th className="px-6 py-3 bg-gray-50 text-right text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">
+										<th className="px-6 py-3 text-xs font-medium leading-4 tracking-wider text-right text-gray-500 uppercase bg-gray-50">
 											Date Sent
 										</th>
 									</tr>
@@ -533,15 +533,15 @@ function UpdatesTable() {
 								<tbody className="bg-white divide-y divide-gray-200">
 									{(!data || data.length == 0) && (
 										<tr className="bg-white">
-											<td className="max-w-0 w-full px-6 py-4 whitespace-nowrap text-sm leading-5 text-gray-900">
-												<p className="text-gray-500 truncate group-hover:text-gray-900 text-base transition ease-in-out duration-150">
+											<td className="w-full px-6 py-4 text-sm leading-5 text-gray-900 max-w-0 whitespace-nowrap">
+												<p className="text-base text-gray-500 truncate transition duration-150 ease-in-out group-hover:text-gray-900">
 													{loadingData
 														? "Loading..."
 														: "We haven't sent you any member update emails yet."}
 												</p>
 											</td>
 											{/* Spacer so the column header fits (text is hidden) */}
-											<td className="px-6 py-4 text-right whitespace-nowrap text-sm leading-5">
+											<td className="px-6 py-4 text-sm leading-5 text-right whitespace-nowrap">
 												<span className={"invisible"}>
 													Not Applicable
 												</span>
@@ -570,7 +570,7 @@ function UpdatesTable() {
 												}) => (
 													<tr
 														key={email.id}
-														className="bg-white hover:bg-gray-100 cursor-pointer"
+														className="bg-white cursor-pointer hover:bg-gray-100"
 														onClick={() =>
 															window.open(
 																email.long_archive_url +
@@ -580,7 +580,7 @@ function UpdatesTable() {
 															)
 														}
 													>
-														<td className="max-w-0 w-full px-6 py-4 whitespace-nowrap text-sm leading-5 text-gray-900">
+														<td className="w-full px-6 py-4 text-sm leading-5 text-gray-900 max-w-0 whitespace-nowrap">
 															{/*fake link to show preview*/}
 															<a
 																href={
@@ -592,14 +592,14 @@ function UpdatesTable() {
 																	e.preventDefault()
 																}
 															>
-																<p className="text-gray-500 truncate group-hover:text-gray-900 text-base transition ease-in-out duration-150">
+																<p className="text-base text-gray-500 truncate transition duration-150 ease-in-out group-hover:text-gray-900">
 																	{
 																		email
 																			.settings
 																			.subject_line
 																	}
 																</p>
-																<p className="text-gray-400 truncate group-hover:text-gray-700 text-sm transition ease-in-out duration-150">
+																<p className="text-sm text-gray-400 truncate transition duration-150 ease-in-out group-hover:text-gray-700">
 																	{
 																		email
 																			.settings
@@ -609,7 +609,7 @@ function UpdatesTable() {
 															</a>
 														</td>
 
-														<td className="px-6 py-4 text-right whitespace-nowrap text-sm leading-5 text-gray-500 hover:text-gray-900 ">
+														<td className="px-6 py-4 text-sm leading-5 text-right text-gray-500 whitespace-nowrap hover:text-gray-900 ">
 															{/*fake link to show preview*/}
 															<a
 																href={
@@ -639,7 +639,7 @@ function UpdatesTable() {
 							</table>
 
 							{/* Pagination */}
-							<nav className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
+							<nav className="flex items-center justify-between px-4 py-3 bg-white border-t border-gray-200 sm:px-6">
 								{data && data.length > 0 && (
 									<div className="hidden sm:block">
 										<p className="text-sm leading-5 text-gray-700">
@@ -661,7 +661,7 @@ function UpdatesTable() {
 										</p>
 									</div>
 								)}
-								<div className="flex-1 flex justify-between sm:justify-end">
+								<div className="flex justify-between flex-1 sm:justify-end">
 									<button
 										onClick={() =>
 											setPage((current) => current - 1)

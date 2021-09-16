@@ -94,9 +94,9 @@ export default function CreatePage({
 			}
 		>
 			{done ? (
-				<div className="mx-auto w-full max-w-sm">
+				<div className="w-full max-w-sm mx-auto">
 					<div>
-						<h2 className="mt-6 text-3xl leading-9 font-extrabold text-gray-900">
+						<h2 className="mt-6 text-3xl font-extrabold leading-9 text-gray-900">
 							Welcome
 							{name && (
 								<>
@@ -159,8 +159,8 @@ export default function CreatePage({
 							Join Our Discord
 						</a>
 						<br />
-						Attend your first member meeting
-						{/*	TODO: add time */}
+						Attend your first member meeting (Thursday lunches in
+						C207!)
 					</h5>
 
 					{verificationComplete && (
@@ -186,7 +186,7 @@ export default function CreatePage({
 								weekly member updates.
 							</h4>
 
-							<span className="block w-full rounded-md shadow-sm mt-5">
+							<span className="block w-full mt-5 rounded-md shadow-sm">
 								<button
 									type="submit"
 									disabled={resendTimeLeft > 0}
@@ -210,7 +210,7 @@ export default function CreatePage({
 								</button>
 							</span>
 							{timesResent >= 1 && (
-								<p className="text-md mt-5">
+								<p className="mt-5 text-md">
 									<b>Having problems getting our emails?</b>
 									<br />
 									Remember to check your spam folder. If you
@@ -228,9 +228,9 @@ export default function CreatePage({
 					)}
 				</div>
 			) : (
-				<div className="mx-auto w-full max-w-sm">
+				<div className="w-full max-w-sm mx-auto">
 					<div>
-						<h2 className="mt-6 text-3xl leading-9 font-extrabold text-gray-900">
+						<h2 className="mt-6 text-3xl font-extrabold leading-9 text-gray-900">
 							Start your MUN journey today
 						</h2>
 						<p className="mt-2 text-sm leading-5 text-gray-600 max-w">
@@ -239,7 +239,7 @@ export default function CreatePage({
 								state={{
 									continueURL: state?.continueURL,
 								}}
-								className="font-medium text-indigo-600 hover:text-indigo-500 focus:outline-none focus:underline transition ease-in-out duration-150"
+								className="font-medium text-indigo-600 transition duration-150 ease-in-out hover:text-indigo-500 focus:outline-none focus:underline"
 							>
 								Already have an account?
 							</Link>
@@ -449,7 +449,7 @@ export default function CreatePage({
 												setName(e.target.value)
 											}
 											disabled={submitting}
-											className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+											className="block w-full px-3 py-2 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-blue-500 focus:border-blue-300 sm:text-sm sm:leading-5"
 										/>
 									</div>
 								</div>
@@ -489,7 +489,7 @@ export default function CreatePage({
 														}
 														checked={grade == el}
 													/>
-													<span className="ml-2 block text-sm leading-5 font-medium text-gray-700">
+													<span className="block ml-2 text-sm font-medium leading-5 text-gray-700">
 														{el}th
 													</span>
 												</label>
@@ -541,7 +541,7 @@ export default function CreatePage({
 												);
 											}}
 											disabled={submitting}
-											className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+											className="block w-full px-3 py-2 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-blue-500 focus:border-blue-300 sm:text-sm sm:leading-5"
 										/>
 									</div>
 									{emailSuggestion && (
@@ -579,7 +579,7 @@ export default function CreatePage({
 											For Your Member Account
 										</span>
 									</div>
-									<div className="mt-1 relative rounded-md shadow-sm">
+									<div className="relative mt-1 rounded-md shadow-sm">
 										<input
 											id="password"
 											type={
@@ -593,7 +593,7 @@ export default function CreatePage({
 												setPassword(e.target.value)
 											}
 											disabled={submitting}
-											className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-300 transition duration-150 ease-in-out sm:text-sm sm:leading-5"
+											className="block w-full px-3 py-2 placeholder-gray-400 transition duration-150 ease-in-out border border-gray-300 rounded-md appearance-none focus:outline-none focus:ring-blue-500 focus:border-blue-300 sm:text-sm sm:leading-5"
 										/>
 										<div className="absolute inset-y-0 right-0 flex items-center">
 											<button
@@ -631,7 +631,7 @@ export default function CreatePage({
 
 								{error && (
 									<div className="mt-6 text-left">
-										<div className="text-sm  text-red-400 leading-5">
+										<div className="text-sm leading-5 text-red-400">
 											{typeof error === "string" ? (
 												<p>{error}</p>
 											) : (
@@ -651,7 +651,7 @@ export default function CreatePage({
 										updates every week.
 									</p>
 
-									<span className="block w-full rounded-md shadow-sm mt-2">
+									<span className="block w-full mt-2 rounded-md shadow-sm">
 										<button
 											type="submit"
 											disabled={submitting}
