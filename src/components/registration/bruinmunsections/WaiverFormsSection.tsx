@@ -12,7 +12,7 @@ import FormUpload from "../FormUpload";
 import * as pdfform from "../PDFForm";
 
 interface WaiverForms {
-	scvmunFuhsdForm: string;
+	bruinmunFuhsdForm: string;
 }
 // make promise based
 const blobToBuffer = (blob: Blob) =>
@@ -58,7 +58,6 @@ const openOrDownload = (
 	return Promise.resolve();
 };
 
-
 export default function WaiverFormsSection({
 	data,
 	setStepHasChanges,
@@ -77,7 +76,6 @@ export default function WaiverFormsSection({
 	setStep: (step: number) => void;
 	setMaxStep: (maxStep: number | ((old: number) => number)) => void;
 }) {
-
 	const firebase = useFirebase();
 
 	const [filledForms, setFilledForms] = useState<(Uint8Array | null)[]>([
@@ -116,11 +114,11 @@ export default function WaiverFormsSection({
 
 			const filled = pdfform.fillForm(pdf, {
 				"Student's Name": [user?.displayName],
-				Destination: ["Online Model UN Conference (SCVMUN)"],
-				"Date(s)": ["1/29/21 - 1/30/21"],
+				"Destination": ["Online Model UN Conference (BruinMUN)"],
+				"Date(s)": ["11/6/21 - 11/7/21"],
 				"Depature Time": ["None (Virtual)"],
 				"Return Time": ["None (Virtual)"],
-				"Person in Charge": ["David Hartford"],
+				"Person in Charge": ["Pete Pelkey"],
 				"Home Address": [
 					data.personalInformation.addressOne +
 						(data.personalInformation.addressTwo
@@ -186,7 +184,7 @@ export default function WaiverFormsSection({
 							<button
 								onClick={() =>
 									openOrDownload(
-										"scvmun-fuhsd-form.pdf",
+										"bruinmun-fuhsd-form.pdf",
 										filledForms[0],
 										"/forms/FUHSD-field-trip-form.pdf"
 									)
@@ -218,7 +216,7 @@ export default function WaiverFormsSection({
 						setFile={setFuhsdForm}
 						uploading={fuhsdUploading}
 						setUploading={setFuhsdUploading}
-						fieldName={"scvmunFuhsdForm"}
+						fieldName={"bruinmunFuhsdForm"}
 						data={data}
 						handleUpdateData={handleUpdateData}
 					/>
@@ -245,7 +243,7 @@ export default function WaiverFormsSection({
 				<button
 					type={"button"}
 					onClick={() => {
-						if (!data?.forms?.scvmunFuhsdForm) {
+						if (!data?.forms?.bruinmunFuhsdForm) {
 							uploadInstances.forEach((instance) => {
 								// process first (and only) file
 								if (!instance) return;
@@ -272,7 +270,7 @@ export default function WaiverFormsSection({
 						? "Uploading..."
 						: !fuhsdForm || fuhsdForm.length === 0
 						? "Upload All Files to Continue"
-						: !data?.forms?.scvmunFuhsdForm
+						: !data?.forms?.bruinmunFuhsdForm
 						? "Upload Files"
 						: "Continue"}
 				</button>

@@ -23,6 +23,7 @@ export default function AdminLogPage(): React.ReactElement {
 		admin: userAdmin,
 	} = React.useContext(AuthContext);
 	const conferenceOptions = [
+		{ label: "BruinMUN Registration", value: "bruinmun" },
 		{ label: "SBMUN Registration", value: "sbmun" },
 		{ label: "BMUN Registration", value: "bmun" },
 		{ label: "SCVMUN Registration", value: "scvmun" },
@@ -32,6 +33,7 @@ export default function AdminLogPage(): React.ReactElement {
 	const hash =
 		typeof window !== "undefined" ? window.location.hash?.substring(1) : "";
 	const selectedConference = [
+		"bruinmun",
 		"sfmun",
 		"smunc",
 		"scvmun",
@@ -39,13 +41,13 @@ export default function AdminLogPage(): React.ReactElement {
 		"sbmun",
 	].includes(hash)
 		? hash
-		: "sbmun";
+		: "bruinmun";
 	if (
-		!["sfmun", "smunc", "scvmun", "bmun", "sbmun"].includes(
+		!["bruinmun", "sfmun", "smunc", "scvmun", "bmun", "sbmun"].includes(
 			selectedConference
 		)
 	) {
-		window.location.hash = "sbmun";
+		window.location.hash = "bruinmun";
 	}
 	const setSelectedConference = (conf: string) => {
 		window.location.hash = conf;
@@ -59,10 +61,10 @@ export default function AdminLogPage(): React.ReactElement {
 				data: UserData;
 			};
 		}[]
-		>([]);
+	>([]);
 	const [usersData, setUsersData] = useState<
 		{ id: string; data: UserData }[]
-		>([]);
+	>([]);
 	const [expandStatistics, setExpandStatistics] = useState(() =>
 		new Array(3).fill(false)
 	);
@@ -101,7 +103,7 @@ export default function AdminLogPage(): React.ReactElement {
 									console.log(users, tempUserData);
 									throw new Error(
 										"Unable to find user data for registration with id: " +
-										doc.id
+											doc.id
 									);
 								}
 								users.push({
@@ -134,8 +136,8 @@ export default function AdminLogPage(): React.ReactElement {
 		};
 
 		(selectedConference === "smunc"
-				? data.filter((u) => approvedUserIds.includes(u.userData.id))
-				: data
+			? data.filter((u) => approvedUserIds.includes(u.userData.id))
+			: data
 		).forEach((user) => {
 			console.log(user);
 
@@ -148,13 +150,15 @@ export default function AdminLogPage(): React.ReactElement {
 					user.data.confirm?.scvmunConfirmed) ||
 				(selectedConference === "bmun" &&
 					user.data.confirm?.bmunConfirmed) ||
+				(selectedConference === "bruinmun" &&
+					user.data.confirm?.bmunConfirmed) ||
 				(selectedConference === "sbmun" &&
 					user.data.confirm?.sbmunConfirmed)
 			) {
 				temp.registered.push(
 					user.userData.data.firstName +
-					" " +
-					user.userData.data.lastName
+						" " +
+						user.userData.data.lastName
 				);
 			} else if (
 				(selectedConference === "sfmun" &&
@@ -163,12 +167,14 @@ export default function AdminLogPage(): React.ReactElement {
 					user.data.preferences?.scvmunCommittee &&
 					user.data.preferences?.scvmunPartnerPrefs) ||
 				(selectedConference === "sbmun" &&
-					user.data.preferences?.sbmunCommittee)
+					user.data.preferences?.sbmunCommittee) ||
+				(selectedConference === "bruinmun" &&
+					user.data.preferences?.bruinmunCommittee)
 			) {
 				temp.preferences.push(
 					user.userData.data.firstName +
-					" " +
-					user.userData.data.lastName
+						" " +
+						user.userData.data.lastName
 				);
 			} else if (
 				(selectedConference === "sfmun" &&
@@ -179,25 +185,27 @@ export default function AdminLogPage(): React.ReactElement {
 					user.data.forms?.scvmunFuhsdForm) ||
 				(selectedConference === "bmun" &&
 					user.data.forms?.bmunFuhsdForm) ||
+				(selectedConference === "bruinmun" &&
+					user.data.forms?.bmunFuhsdForm) ||
 				(selectedConference === "sbmun" &&
 					user.data.forms?.sbmunFuhsdForm)
 			) {
 				temp.liabilityForms.push(
 					user.userData.data.firstName +
-					" " +
-					user.userData.data.lastName
+						" " +
+						user.userData.data.lastName
 				);
 			} else if (user.data.emergencyInformation) {
 				temp.emergencyInformation.push(
 					user.userData.data.firstName +
-					" " +
-					user.userData.data.lastName
+						" " +
+						user.userData.data.lastName
 				);
 			} else if (user.data.personalInformation) {
 				temp.personalInformation.push(
 					user.userData.data.firstName +
-					" " +
-					user.userData.data.lastName
+						" " +
+						user.userData.data.lastName
 				);
 			} else {
 				// this should never happen
@@ -242,17 +250,17 @@ export default function AdminLogPage(): React.ReactElement {
 					.format("M/D/Y")})`,
 				...(selectedConference === "sfmun"
 					? [
-						`SFMUN Liability Trip Form Link (valid through ${moment()
-							.add(6, "days")
-							.format("M/D/Y")})`,
-					]
+							`SFMUN Liability Trip Form Link (valid through ${moment()
+								.add(6, "days")
+								.format("M/D/Y")})`,
+					  ]
 					: selectedConference === "sbmun"
-						? [
+					? [
 							`SBMUN Delegate Information Trip Form Link (valid through ${moment()
 								.add(6, "days")
 								.format("M/D/Y")})`,
-						]
-						: []),
+					  ]
+					: []),
 				`Donation Receipt Link (valid through ${moment()
 					.add(6, "days")
 					.format("M/D/Y")})`,
@@ -274,49 +282,49 @@ export default function AdminLogPage(): React.ReactElement {
 				selectedConference === "scvmun" ||
 				selectedConference === "sbmun"
 					? [
-						...[
-							"First",
-							"Second",
-							"Third",
-							"Fourth",
-							"Fifth",
-							"Sixth",
-							...(selectedConference === "scvmun" ||
-							selectedConference === "sfmun"
-								? ["Seventh", "Eighth"]
-								: []),
-							...(selectedConference === "scvmun"
-								? [
-									"Ninth",
-									"Tenth",
-									"Eleventh",
-									"Twelfth",
-									"Thirteenth",
-									"Fourteenth",
-								]
-								: []),
-						].map((el) => `${el} Choice Committee`),
-						...(selectedConference === "sfmun"
-								? [
-									"DISEC",
-									"IAEA",
-									"UNODC",
-									"SPECPOL",
-									"UNHCR",
-									"Catherine The Great's Coup",
-									"UNSC",
-									"Senate",
-								]
-								: selectedConference === "sbmun"
+							...[
+								"First",
+								"Second",
+								"Third",
+								"Fourth",
+								"Fifth",
+								"Sixth",
+								...(selectedConference === "scvmun" ||
+								selectedConference === "sfmun"
+									? ["Seventh", "Eighth"]
+									: []),
+								...(selectedConference === "scvmun"
 									? [
+											"Ninth",
+											"Tenth",
+											"Eleventh",
+											"Twelfth",
+											"Thirteenth",
+											"Fourteenth",
+									  ]
+									: []),
+							].map((el) => `${el} Choice Committee`),
+							...(selectedConference === "sfmun"
+								? [
+										"DISEC",
+										"IAEA",
+										"UNODC",
+										"SPECPOL",
+										"UNHCR",
+										"Catherine The Great's Coup",
+										"UNSC",
+										"Senate",
+								  ]
+								: selectedConference === "sbmun"
+								? [
 										"WHO",
 										"UNESCO",
 										"DISEC",
 										"World Economic Forum",
 										"JCC East Germany (Crisis)",
 										"JCC West Germany (Crisis)",
-									]
-									: [
+								  ]
+								: [
 										"IAEA",
 										"DISEC",
 										"WHO",
@@ -331,9 +339,9 @@ export default function AdminLogPage(): React.ReactElement {
 										"World Bank (Spec)",
 										"UNHCR (Spec)",
 										"CSW (Spec)",
-									]
-						).map((el) => `${el} Committee Ranking`),
-					]
+								  ]
+							).map((el) => `${el} Committee Ranking`),
+					  ]
 					: []),
 			];
 			let filteredRegistrationData = data;
@@ -365,49 +373,49 @@ export default function AdminLogPage(): React.ReactElement {
 				filteredRegistrationData.map((registration) =>
 					Promise.all(
 						(selectedConference === "sfmun"
-								? ["fuhsdForm", "sfmunForm", "donation"]
-								: selectedConference === "smunc"
-									? ["smuncFuhsdForm", "smuncDonation"]
-									: selectedConference === "scvmun"
-										? ["scvmunFuhsdForm", "scvmunDonation"]
-										: selectedConference === "sbmun"
-											? ["sbmunFuhsdForm", "sbmunForm", "sbmunDonation"]
-											: ["bmunFuhsdForm", "bmunDonation"]
+							? ["fuhsdForm", "sfmunForm", "donation"]
+							: selectedConference === "smunc"
+							? ["smuncFuhsdForm", "smuncDonation"]
+							: selectedConference === "scvmun"
+							? ["scvmunFuhsdForm", "scvmunDonation"]
+							: selectedConference === "sbmun"
+							? ["sbmunFuhsdForm", "sbmunForm", "sbmunDonation"]
+							: ["bmunFuhsdForm", "bmunDonation"]
 						)
 							.map((field) =>
 								registration.data.forms &&
 								registration.data.forms[field]
 									? firebase
-										.storage()
-										.ref(
-											`forms/sfmun/${registration.userData.id}/${field}/${registration.data.forms[field]}`
-										)
-										.getDownloadURL()
-										.then((link) =>
-											axios
-												.get(link, {
-													responseType:
-														"arraybuffer",
-													headers: {
-														"Content-Type":
-															"application/json",
-														Accept:
-															"application/pdf",
-													},
-												})
-												.then((response) => ({
-													file: new Blob([
-														response.data,
-													]),
-													link: link,
-													name:
-														registration.data
-															.forms[field],
-												}))
-										)
+											.storage()
+											.ref(
+												`forms/sfmun/${registration.userData.id}/${field}/${registration.data.forms[field]}`
+											)
+											.getDownloadURL()
+											.then((link) =>
+												axios
+													.get(link, {
+														responseType:
+															"arraybuffer",
+														headers: {
+															"Content-Type":
+																"application/json",
+															Accept:
+																"application/pdf",
+														},
+													})
+													.then((response) => ({
+														file: new Blob([
+															response.data,
+														]),
+														link: link,
+														name:
+															registration.data
+																.forms[field],
+													}))
+											)
 									: Promise.reject({
-										code: "storage/object-not-found",
-									})
+											code: "storage/object-not-found",
+									  })
 							)
 							.map((promise) =>
 								promise.catch((e) => {
@@ -455,137 +463,137 @@ export default function AdminLogPage(): React.ReactElement {
 							registration.data?.personalInformation?.phone,
 							...(allFields
 								? [
-									registration.data.personalInformation
-										?.addressOne,
-									registration.data.personalInformation
-										?.addressTwo,
-									registration.data.personalInformation
-										?.city,
-									registration.data.personalInformation
-										?.state,
-									registration.data.personalInformation
-										?.zip,
-									registration.data.emergencyInformation
-										?.contactOneName,
-									registration.data.emergencyInformation
-										?.contactOnePhone,
-									registration.data.emergencyInformation
-										?.contactOneRelationship,
-									registration.data.emergencyInformation
-										?.contactTwoName,
-									registration.data.emergencyInformation
-										?.contactTwoPhone,
-									registration.data.emergencyInformation
-										?.contactTwoRelationship,
-									registration.data.emergencyInformation
-										?.healthInsuranceCarrier,
-									registration.data.emergencyInformation
-										?.healthInsuranceAddressOne,
-									registration.data.emergencyInformation
-										?.healthInsuranceAddressTwo,
-									registration.data.emergencyInformation
-										?.healthInsuranceCity,
-									registration.data.emergencyInformation
-										?.healthInsuranceState,
-									registration.data.emergencyInformation
-										?.healthInsuranceZip,
-									forms[0].link,
-									forms[1].link,
-									...(selectedConference === "sfmun" ||
-									selectedConference === "sbmun"
-										? [forms[2].link]
-										: []),
-									(selectedConference === "sfmun" &&
-										registration.data.forms
-											?.sfmunDonationOptOut) ||
-									(selectedConference === "smunc" &&
-										registration.data.forms
-											?.smuncDonationOptOut) ||
-									(selectedConference === "scvmun" &&
-										registration.data.forms
-											?.scvmunDonationOptOut) ||
-									(selectedConference === "bmun" &&
-										registration.data.forms
-											?.bmunDonationOptOut) ||
-									(selectedConference === "sbmun" &&
-										registration.data.forms
-											?.sbmunDonationOptOut)
-										? "TRUE"
-										: "FALSE",
-								]
+										registration.data.personalInformation
+											?.addressOne,
+										registration.data.personalInformation
+											?.addressTwo,
+										registration.data.personalInformation
+											?.city,
+										registration.data.personalInformation
+											?.state,
+										registration.data.personalInformation
+											?.zip,
+										registration.data.emergencyInformation
+											?.contactOneName,
+										registration.data.emergencyInformation
+											?.contactOnePhone,
+										registration.data.emergencyInformation
+											?.contactOneRelationship,
+										registration.data.emergencyInformation
+											?.contactTwoName,
+										registration.data.emergencyInformation
+											?.contactTwoPhone,
+										registration.data.emergencyInformation
+											?.contactTwoRelationship,
+										registration.data.emergencyInformation
+											?.healthInsuranceCarrier,
+										registration.data.emergencyInformation
+											?.healthInsuranceAddressOne,
+										registration.data.emergencyInformation
+											?.healthInsuranceAddressTwo,
+										registration.data.emergencyInformation
+											?.healthInsuranceCity,
+										registration.data.emergencyInformation
+											?.healthInsuranceState,
+										registration.data.emergencyInformation
+											?.healthInsuranceZip,
+										forms[0].link,
+										forms[1].link,
+										...(selectedConference === "sfmun" ||
+										selectedConference === "sbmun"
+											? [forms[2].link]
+											: []),
+										(selectedConference === "sfmun" &&
+											registration.data.forms
+												?.sfmunDonationOptOut) ||
+										(selectedConference === "smunc" &&
+											registration.data.forms
+												?.smuncDonationOptOut) ||
+										(selectedConference === "scvmun" &&
+											registration.data.forms
+												?.scvmunDonationOptOut) ||
+										(selectedConference === "bmun" &&
+											registration.data.forms
+												?.bmunDonationOptOut) ||
+										(selectedConference === "sbmun" &&
+											registration.data.forms
+												?.sbmunDonationOptOut)
+											? "TRUE"
+											: "FALSE",
+								  ]
 								: []),
 							...(selectedConference === "scvmun"
 								? [
-									registration.data.preferences
-										?.scvmunPartnerPrefs,
-								]
+										registration.data.preferences
+											?.scvmunPartnerPrefs,
+								  ]
 								: []),
 							...(selectedConference === "sfmun"
 								? [
-									...(registration.data.preferences
-										?.committee || Array(8).fill("")),
-									...(registration.data.preferences
-										?.committee
-										? [
-											"DISEC",
-											"IAEA",
-											"UNODC",
-											"SPECPOL",
-											"UNHCR",
-											"Catherine The Great's Coup (Crisis)",
-											"UNSC (Crisis)",
-											"Senate (Crisis)",
-										].map(
-											(committee) =>
-												registration.data.preferences.committee.indexOf(
-													committee
-												) + 1
-										)
-										: Array(8).fill("")),
-								]
-								: selectedConference === "sbmun"
-									? [
 										...(registration.data.preferences
-												?.sbmunCommittee ||
+											?.committee || Array(8).fill("")),
+										...(registration.data.preferences
+											?.committee
+											? [
+													"DISEC",
+													"IAEA",
+													"UNODC",
+													"SPECPOL",
+													"UNHCR",
+													"Catherine The Great's Coup (Crisis)",
+													"UNSC (Crisis)",
+													"Senate (Crisis)",
+											  ].map(
+													(committee) =>
+														registration.data.preferences.committee.indexOf(
+															committee
+														) + 1
+											  )
+											: Array(8).fill("")),
+								  ]
+								: selectedConference === "sbmun"
+								? [
+										...(registration.data.preferences
+											?.sbmunCommittee ||
 											Array(6).fill("")),
 										...(registration.data.preferences
 											?.sbmunCommittee
 											? [
-												"WHO",
-												"UNESCO",
-												"DISEC",
-												"World Economic Forum",
-												"JCC East Germany (Crisis)",
-												"JCC West Germany (Crisis)",
-											].map(
-												(committee) =>
-													registration.data.preferences.sbmunCommittee.indexOf(
-														committee
-													) + 1
-											)
+													"WHO",
+													"UNESCO",
+													"DISEC",
+													"World Economic Forum",
+													"JCC East Germany (Crisis)",
+													"JCC West Germany (Crisis)",
+											  ].map(
+													(committee) =>
+														registration.data.preferences.sbmunCommittee.indexOf(
+															committee
+														) + 1
+											  )
 											: Array(6).fill("")),
-									]
-									: selectedConference === "scvmun"
-										? [
-											...(registration.data.preferences?.scvmunCommittee?.map(
-												(el: string) =>
-													[
-														el,
-														"IAEA",
-														"DISEC",
-														"WHO",
-														"UNEP",
-														"SOCHUM",
-														"UNDP",
-														"LEGAL",
-														"UNESCO",
-														"Security Council (Spec)",
-														"Historic Security Council (Spec)",
-														"NATO (Spec)",
-														"World Bank (Spec)",
-														"UNHCR (Spec)",
-														"CSW (Spec)",
-													][
+								  ]
+								: selectedConference === "scvmun"
+								? [
+										...(registration.data.preferences?.scvmunCommittee?.map(
+											(el: string) =>
+												[
+													el,
+													"IAEA",
+													"DISEC",
+													"WHO",
+													"UNEP",
+													"SOCHUM",
+													"UNDP",
+													"LEGAL",
+													"UNESCO",
+													"Security Council (Spec)",
+													"Historic Security Council (Spec)",
+													"NATO (Spec)",
+													"World Bank (Spec)",
+													"UNHCR (Spec)",
+													"CSW (Spec)",
+												][
 													[
 														"IAEA (International Atomic Energy Association)",
 														"DISEC (Disarmament and International Security Committee)",
@@ -602,11 +610,11 @@ export default function AdminLogPage(): React.ReactElement {
 														"UNHCR (United Nations High Commissioner for Refugees) (Specialty Committee)",
 														"CSW (Commission on the Status of Women) (Specialty Committee)",
 													].indexOf(el) + 1
-														]
-											) || Array(14).fill("")),
-											...(registration.data.preferences
-												?.scvmunCommittee
-												? [
+												]
+										) || Array(14).fill("")),
+										...(registration.data.preferences
+											?.scvmunCommittee
+											? [
 													"IAEA (International Atomic Energy Association)",
 													"DISEC (Disarmament and International Security Committee)",
 													"WHO (World Health Organization)",
@@ -621,15 +629,15 @@ export default function AdminLogPage(): React.ReactElement {
 													"World Bank (Specialty Committee)",
 													"UNHCR (United Nations High Commissioner for Refugees) (Specialty Committee)",
 													"CSW (Commission on the Status of Women) (Specialty Committee)",
-												].map(
+											  ].map(
 													(committee) =>
 														registration.data.preferences.scvmunCommittee.indexOf(
 															committee
 														) + 1
-												)
-												: Array(14).fill("")),
-										]
-										: []),
+											  )
+											: Array(14).fill("")),
+								  ]
+								: []),
 						]
 							.map((field) =>
 								(field + "").indexOf(",") > -1
@@ -701,10 +709,10 @@ export default function AdminLogPage(): React.ReactElement {
 						const ext = r.files[1].name?.split(".").pop();
 						donationReceipts.file(
 							selectedConference.toUpperCase() +
-							"-donation-receipt-" +
-							name +
-							"." +
-							ext,
+								"-donation-receipt-" +
+								name +
+								"." +
+								ext,
 							r.files[1].file
 						);
 					}
@@ -798,11 +806,11 @@ export default function AdminLogPage(): React.ReactElement {
 						{step.length} user
 						{i < statistics.length - 1
 							? `${
-								step.length !== 1 ? "s are " : " is "
-							} on the ${["preferences", "donations"][i]} step.`
+									step.length !== 1 ? "s are " : " is "
+							  } on the ${["preferences", "donations"][i]} step.`
 							: `${
-								step.length !== 1 ? "s have " : " has "
-							} finished registering for ${selectedConference.toUpperCase()}.`}{" "}
+									step.length !== 1 ? "s have " : " has "
+							  } finished registering for ${selectedConference.toUpperCase()}.`}{" "}
 						{step.length > 0 && (
 							<>
 								(

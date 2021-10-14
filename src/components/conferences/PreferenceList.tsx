@@ -29,6 +29,7 @@ export default function PreferenceList({
 	items: string[];
 	setItems: (items: string[]) => void;
 }) {
+	console.log(items);
 	return (
 		<SortableContainer
 			onSortEnd={({ oldIndex, newIndex }) =>
@@ -36,13 +37,16 @@ export default function PreferenceList({
 			}
 			helperClass={"SortableHelper cursor-resize-y"}
 		>
-			{items.map((value, index) => (
-				<SortableItem
-					key={`item-${value}`}
-					index={index}
-					value={value}
-				/>
-			))}
+			{items.map((value, index) => {
+
+				return (
+					<SortableItem
+						key={`item-${value}`}
+						index={index}
+						value={value}
+					/>
+				);
+			})}
 		</SortableContainer>
 	);
 }
