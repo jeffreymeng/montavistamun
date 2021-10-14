@@ -160,7 +160,7 @@ export default function DonationsSection({
 						<p className={"mt-4"}>
 							Unfortunately, we are unable to process refunds with
 							the online system. Please confirm you can attend the
-							conference (<b>February 26-28, 2021</b>) before
+							conference (<b>November 6-7, 2021</b>) before
 							donating!
 						</p>
 
