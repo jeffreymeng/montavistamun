@@ -46,7 +46,7 @@ export default function ConferencesPage({
 				<h1 className={"text-3xl leading-9 font-extrabold"}>
 					In-person conferences are back!
 				</h1>
-				<p className="text-lg mt-3">
+				<p className="mt-3 text-lg">
 					Now that we’re in person, there is so much more we can do!
 					Meetings will be more productive, training will be more
 					efficient, and club operations will be smoother. Model UN is
@@ -78,7 +78,11 @@ export default function ConferencesPage({
 							<HorizontalCard
 								key={i}
 								subtitle={`${date} | ${location}`}
-								title={acronym.toUpperCase() + ": " + name}
+								title={
+									acronym == acronym.toLowerCase()
+										? acronym.toUpperCase() + ": " + name
+										: acronym + ": " + name
+								}
 								image={
 									(images.find(
 										(img) =>
