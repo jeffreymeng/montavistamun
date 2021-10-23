@@ -151,7 +151,7 @@ export default function AdminLogPage(): React.ReactElement {
 				(selectedConference === "bmun" &&
 					user.data.confirm?.bmunConfirmed) ||
 				(selectedConference === "bruinmun" &&
-					user.data.confirm?.bmunConfirmed) ||
+					user.data.confirm?.bruinmunConfirmed) ||
 				(selectedConference === "sbmun" &&
 					user.data.confirm?.sbmunConfirmed)
 			) {
@@ -186,7 +186,7 @@ export default function AdminLogPage(): React.ReactElement {
 				(selectedConference === "bmun" &&
 					user.data.forms?.bmunFuhsdForm) ||
 				(selectedConference === "bruinmun" &&
-					user.data.forms?.bmunFuhsdForm) ||
+					user.data.forms?.bruinmunFuhsdForm) ||
 				(selectedConference === "sbmun" &&
 					user.data.forms?.sbmunFuhsdForm)
 			) {
@@ -280,7 +280,8 @@ export default function AdminLogPage(): React.ReactElement {
 					: []),
 				...(selectedConference === "sfmun" ||
 				selectedConference === "scvmun" ||
-				selectedConference === "sbmun"
+				selectedConference === "sbmun" ||
+				selectedConference === "bruinmun"
 					? [
 							...[
 								"First",
@@ -290,7 +291,8 @@ export default function AdminLogPage(): React.ReactElement {
 								"Fifth",
 								"Sixth",
 								...(selectedConference === "scvmun" ||
-								selectedConference === "sfmun"
+								selectedConference === "sfmun" ||
+								selectedConference === "bruinmun"
 									? ["Seventh", "Eighth"]
 									: []),
 								...(selectedConference === "scvmun"
@@ -314,6 +316,17 @@ export default function AdminLogPage(): React.ReactElement {
 										"Catherine The Great's Coup",
 										"UNSC",
 										"Senate",
+								  ]
+								: selectedConference === "bruinmun"
+								? [
+										"UNDP",
+										"ECOSOC",
+										"UNESCAP",
+										"UNHCR",
+										"SPECPOL",
+										"Ukrainskaya Revolyutsiya",
+										"Novice SOCHUM",
+										"Novice UNEP",
 								  ]
 								: selectedConference === "sbmun"
 								? [
@@ -362,7 +375,9 @@ export default function AdminLogPage(): React.ReactElement {
 						(selectedConference === "bmun" &&
 							r.data.confirm?.bmunConfirmed) ||
 						(selectedConference === "sbmun" &&
-							r.data.confirm?.sbmunConfirmed)
+							r.data.confirm?.sbmunConfirmed) ||
+						(selectedConference === "bruinmun" &&
+							r.data.confirm?.bruinmunConfirmed)
 				);
 			}
 			const registrations: {
@@ -378,6 +393,8 @@ export default function AdminLogPage(): React.ReactElement {
 							? ["smuncFuhsdForm", "smuncDonation"]
 							: selectedConference === "scvmun"
 							? ["scvmunFuhsdForm", "scvmunDonation"]
+							: selectedConference === "bruinmun"
+							? ["bruinmunFuhsdForm", "bruinmunDonation"]
 							: selectedConference === "sbmun"
 							? ["sbmunFuhsdForm", "sbmunForm", "sbmunDonation"]
 							: ["bmunFuhsdForm", "bmunDonation"]
@@ -451,6 +468,8 @@ export default function AdminLogPage(): React.ReactElement {
 								registration.data.confirm?.scvmunConfirmed) ||
 							(selectedConference === "bmun" &&
 								registration.data.confirm?.bmunConfirmed) ||
+							(selectedConference === "bruinmun" &&
+								registration.data.confirm?.bruinmunConfirmed) ||
 							(selectedConference === "sbmun" &&
 								registration.data.confirm?.sbmunConfirmed)
 								? "TRUE"
@@ -515,6 +534,9 @@ export default function AdminLogPage(): React.ReactElement {
 										(selectedConference === "bmun" &&
 											registration.data.forms
 												?.bmunDonationOptOut) ||
+										(selectedConference === "bruinmun" &&
+											registration.data.forms
+												?.bruinmunDonationOptOut) ||
 										(selectedConference === "sbmun" &&
 											registration.data.forms
 												?.sbmunDonationOptOut)
@@ -573,6 +595,30 @@ export default function AdminLogPage(): React.ReactElement {
 											  )
 											: Array(6).fill("")),
 								  ]
+									: selectedConference === "bruinmun"
+										? [
+											...(registration.data.preferences
+													?.bruinmunCommittee ||
+												Array(8).fill("")),
+											...(registration.data.preferences
+												?.bruinmunCommittee
+												? [
+													"UNDP",
+													"ECOSOC",
+													"UNESCAP",
+													"UNHCR",
+													"SPECPOL",
+													"Ukrainskaya Revolyutsiya",
+													"Novice SOCHUM",
+													"Novice UNEP",
+												].map(
+													(committee) =>
+														registration.data.preferences.bruinmunCommittee.indexOf(
+															committee
+														) + 1
+												)
+												: Array(6).fill("")),
+										]
 								: selectedConference === "scvmun"
 								? [
 										...(registration.data.preferences?.scvmunCommittee?.map(
