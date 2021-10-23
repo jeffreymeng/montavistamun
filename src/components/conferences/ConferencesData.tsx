@@ -22,7 +22,7 @@ export default [
 		acronym: "BruinMUN",
 		text:
 			"BruinMUN is our first conference of the year. It’s a great chance for newer delegates to try out the skills and procedures you’ve learned and for experienced delegates to get a refresher, all from the comfort of your own home. All in all, it’s an excellent way to jump into MUN for the year!",
-		registration: "/conferences/bruinmun/register",
+		// registration: "/conferences/bruinmun/register",
 		// registrationText: "Application Now Open",
 	},
 	{

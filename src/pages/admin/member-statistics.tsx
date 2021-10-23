@@ -57,7 +57,10 @@ export default function AdminStatsPage(): React.ReactElement {
 		(el.data.confirm?.scvmunConfirmed ||
 			el.data.confirm?.smuncConfirmed ||
 			el.data.confirm?.bmunConfirmed ||
-			el.data.confirm?.sfmunConfirmed);
+			el.data.confirm?.sfmunConfirmed ||
+			el.data.confirm?.sbmunConfirmed ||
+			el.data.confirm?.bruinmunConfirmed
+		 	);
 	const chartData = useMemo(
 		() => ({
 			labels: ["Freshmen", "Sophomores", "Juniors", "Seniors"],
