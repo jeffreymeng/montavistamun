@@ -27,7 +27,7 @@ export default function AdminLogPage(): React.ReactElement {
 		{ label: "SBMUN Registration", value: "sbmun" },
 		{ label: "BMUN Registration", value: "bmun" },
 		{ label: "SCVMUN Registration", value: "scvmun" },
-		{ label: "SFMUN Registration", value: "sfmun" },
+		{ label: "SFMUN 2020 Registration", value: "sfmun" },
 		{ label: "SMUNC Registration", value: "smunc" },
 	];
 	const hash =

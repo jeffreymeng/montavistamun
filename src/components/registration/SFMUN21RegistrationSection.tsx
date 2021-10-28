@@ -193,6 +193,7 @@ export default function sfmun21RegistrationSection() {
 							"Brundtland Commission (Spec)",
 						],
 						sfmun21CommitteeConfirm: false,
+						sfmun21PartnerPrefs: "",
 						...data.preferences,
 					},
 					forms: {
@@ -207,7 +208,10 @@ export default function sfmun21RegistrationSection() {
 					step = 1;
 				} else if (!rawData.forms?.sfmun21FuhsdForm) {
 					step = 2;
-				} else if (!rawData.preferences.sfmun21CommitteeConfirm) {
+				} else if (
+					!rawData.preferences.sfmun21CommitteeConfirm ||
+					!rawData.preferences.sfmun21PartnerPrefs
+				) {
 					step = 3;
 				} else if (
 					!rawData.forms?.sfmun21Donation &&

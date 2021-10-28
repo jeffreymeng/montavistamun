@@ -3,6 +3,8 @@ import React from "react";
 import * as Yup from "yup";
 import PreferenceList from "../../conferences/PreferenceList";
 import RegisterFormSection from "../RegisterFormSection";
+import {Field} from "formik";
+import InputGroup from "../../shared/InputGroup";
 
 interface PreferencesInformation {
 	sfmun21Committee: string[];
@@ -168,6 +170,39 @@ export default function PreferencesSection({
 										ordering your committees to continue.
 									</p>
 								)}
+							<h3 className="text-xl leading-6 font-bold text-gray-900 mt-6">
+								Partner Preferences
+							</h3>
+							<p className={"text-sm text-gray-800 mt-2"}>
+								Most SFMUN committees are double delegation
+								committees, which means you may be competing with a partner!
+								If you'd like to choose your partner, you can write
+								their name below. Feel free to also leave this field
+								blank, and we'll assign you a partner.{" "}
+								<b>
+									If you are choosing a partner, make sure you
+									coordinate with them so they also writes down
+									your name!
+								</b>{" "}
+								Only mutual partner requests will be considered.
+							</p>
+							<Field
+								className={"mt-2"}
+								as={InputGroup}
+								id={"sfmun21PartnerPrefs"}
+								name={"sfmun21PartnerPrefs"}
+								label={"Your Requested Partner"}
+								hint={"Optional"}
+								placeholder={
+									"If you'd like us to assign you one, feel free to leave this blank."
+								}
+								disabled={!canEdit}
+								invalid={
+									errors.sfmun21PartnerPrefs &&
+									!!touched.sfmun21PartnerPrefs
+								}
+								error={errors.sfmun21PartnerPrefs}
+							/>
 						</div>
 					</>
 				);
