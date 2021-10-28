@@ -209,8 +209,7 @@ export default function sfmun21RegistrationSection() {
 				} else if (!rawData.forms?.sfmun21FuhsdForm) {
 					step = 2;
 				} else if (
-					!rawData.preferences.sfmun21CommitteeConfirm ||
-					!rawData.preferences.sfmun21PartnerPrefs
+					!rawData.preferences.sfmun21CommitteeConfirm
 				) {
 					step = 3;
 				} else if (
