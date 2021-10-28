@@ -1,5 +1,5 @@
 import axios from "axios";
-import { graphql } from "gatsby";
+import { graphql, Link } from "gatsby";
 import * as Icons from "heroicons-react";
 import React, { useContext, useState } from "react";
 import useRequireLogin from "../../../components/accounts/useRequireLogin";
@@ -23,40 +23,48 @@ export default function AboutPage({
 	const { user: authUser, loading: userLoading } = useContext(AuthContext);
 	const [user, setUser] = useState(authUser);
 
-	// // TODO: delete this file -- for now, keep as a template
-	// const [registered, setRegistered] = useState("loading");
-	// React.useEffect(() => {
-	// 	if (!firebase || !user) return;
-	// 	firebase
-	// 		.firestore()
-	// 		.collection("registration")
-	// 		.doc(user.uid)
-	// 		.get()
-	// 		.then((snapshot) => snapshot.data())
-	// 		.then((data) => setRegistered(data?.confirm?.sfmunConfirmed));
-	// }, [firebase, user]);
-	// return (
-	// 	<Layout title={"SFMUN"}>
-	// 		<Header
-	// 			backgroundImage={headerImage}
-	// 			title={"SFMUN Registration is Now Closed"}
-	// 		>
-	// 			Your Registration Status:{" "}
-	// 			{registered === "loading"
-	// 				? "Loading..."
-	// 				: registered
-	// 				? "Successfully Registered"
-	// 				: "Not Registered"}
-	// 		</Header>
-	// 		<Main>
-	// 			If you have any questions, feel free to email us at{" "}
-	// 			<a href="mailto:montavistamun@gmail.com" className="link">
-	// 				montavistamun@gmail.com
-	// 			</a>
-	// 			.
-	// 		</Main>
-	// 	</Layout>
-	// );
+	// TODO: delete this file -- for now, keep as a template
+	const [registered, setRegistered] = useState("loading");
+	React.useEffect(() => {
+		if (!firebase || !user) return;
+		firebase
+			.firestore()
+			.collection("registration")
+			.doc(user.uid)
+			.get()
+			.then((snapshot) => snapshot.data())
+			.then((data) => setRegistered(data?.confirm?.sfmunConfirmed));
+	}, [firebase, user]);
+	return (
+		<Layout title={"SFMUN"}>
+			<Header
+				backgroundImage={headerImage}
+				title={"SFMUN 2020 Registration is Now Closed"}
+			>
+				Your Registration Status:{" "}
+				{registered === "loading"
+					? "Loading..."
+					: registered
+					? "Successfully Registered"
+					: "Not Registered"}
+			</Header>
+			<Main>
+				<p>
+					If you have any questions, feel free to email us at{" "}
+					<a href="mailto:montavistamun@gmail.com" className="link">
+						montavistamun@gmail.com
+					</a>
+					.
+				</p>
+				<p>
+					<b>
+						If you're looking for SFMUN 2021 Registration, click{" "}
+						<Link to={"/conferences/sfmun21/register"} className={"link"}>here</Link>.
+					</b>
+				</p>
+			</Main>
+		</Layout>
+	);
 	React.useEffect(() => {
 		if (!firebase || !authUser) return;
 		// setUser(authUser);
