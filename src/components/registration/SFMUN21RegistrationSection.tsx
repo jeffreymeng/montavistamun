@@ -6,12 +6,12 @@ import useRequireLogin from "../accounts/useRequireLogin";
 import { Main } from "../layout";
 import VerticalSteps from "../shared/VerticalSteps";
 import Transition from "../Transition";
+import EmergencyInformationSection from "./sections/EmergencyInformationSection";
+import PersonalInformationSection from "./sections/PersonalInformationSection";
 import ConfirmationSection from "./sfmun21sections/ConfirmationSection";
 import DonationsSection from "./sfmun21sections/DonationsSection";
 import PreferencesSection from "./sfmun21sections/PreferencesSection";
 import WaiverFormsSection from "./sfmun21sections/WaiverFormsSection";
-import EmergencyInformationSection from "./sections/EmergencyInformationSection";
-import PersonalInformationSection from "./sections/PersonalInformationSection";
 
 function isFunction(
 	functionToCheck: any
@@ -190,7 +190,7 @@ export default function sfmun21RegistrationSection() {
 							"UNHCR",
 							"1929 Atlantic City Crime Conference (Spec)",
 							"UNSC (Spec)",
-							"Brundtland Commission (Spec)"
+							"Brundtland Commission (Spec)",
 						],
 						sfmun21CommitteeConfirm: false,
 						...data.preferences,
@@ -241,11 +241,11 @@ export default function sfmun21RegistrationSection() {
 			<Main wide noMobileXPadding>
 				<div className="md:grid md:grid-cols-3 md:gap-6">
 					<div className="md:col-span-1">
-						<div className="px-4 sm:px-0 sticky top-24">
+						<div className="sticky px-4 sm:px-0 top-24">
 							<h3 className="text-2xl font-bold leading-6 text-gray-900">
 								SFMUN Registration
 							</h3>
-							<p className="mt-1 max-w-2xl text-sm leading-5 text-gray-500">
+							<p className="max-w-2xl mt-1 text-sm leading-5 text-gray-500">
 								Your information will be saved when you click
 								the save button for each step, so you don't need
 								to complete this all at once.
@@ -260,7 +260,7 @@ export default function sfmun21RegistrationSection() {
 									{
 										title: "Emergency Information",
 										description:
-											"Although conferences will be online, we still require your emergency contacts and insurance information just in case.",
+											"This information will be saved to speed up registration for future conferences.",
 									},
 									{
 										title: "Liability Forms",
@@ -330,8 +330,8 @@ export default function sfmun21RegistrationSection() {
 				</div>
 			</Main>
 			<Transition show={showChangesNotSavedModal}>
-				<div className="fixed z-10 inset-0 overflow-y-auto">
-					<div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+				<div className="fixed inset-0 z-10 overflow-y-auto">
+					<div className="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
 						<Transition
 							enter="ease-out duration-300"
 							enterFrom="opacity-0"
@@ -356,18 +356,18 @@ export default function sfmun21RegistrationSection() {
 							leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
 						>
 							<div
-								className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6"
+								className="inline-block px-4 pt-5 pb-4 overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6"
 								role="dialog"
 								aria-modal="true"
 								aria-labelledby="modal-headline"
 							>
 								<div>
-									<div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100">
-										<Icons.ExclamationOutline className="h-6 w-6 text-red-600" />
+									<div className="flex items-center justify-center w-12 h-12 mx-auto bg-red-100 rounded-full">
+										<Icons.ExclamationOutline className="w-6 h-6 text-red-600" />
 									</div>
 									<div className="mt-3 text-center sm:mt-5">
 										<h3
-											className="text-lg leading-6 font-medium text-gray-900"
+											className="text-lg font-medium leading-6 text-gray-900"
 											id="modal-headline"
 										>
 											You Have Unsaved Changes
@@ -391,7 +391,7 @@ export default function sfmun21RegistrationSection() {
 													false
 												)
 											}
-											className="inline-flex justify-center w-full rounded-md border border-transparent px-4 py-2 bg-indigo-600 text-base leading-6 font-medium text-white shadow-sm hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:ring-indigo-500 transition ease-in-out duration-150 sm:text-sm sm:leading-5"
+											className="inline-flex justify-center w-full px-4 py-2 text-base font-medium leading-6 text-white transition duration-150 ease-in-out bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-500 focus:outline-none focus:border-indigo-700 focus:ring-indigo-500 sm:text-sm sm:leading-5"
 										>
 											Back
 										</button>

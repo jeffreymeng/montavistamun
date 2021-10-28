@@ -114,10 +114,10 @@ export default function WaiverFormsSection({
 
 			const filled = pdfform.fillForm(pdf, {
 				"Student's Name": [user?.displayName],
-				"Destination": ["Online Model UN Conference (SFMUN)"],
+				"Destination": ["Lowell High School"],
 				"Date(s)": ["12/11/21 to 12/12/21"],
-				"Depature Time": ["None (Virtual)"],
-				"Return Time": ["None (Virtual)"],
+				"Depature Time": ["7:00am"],
+				"Return Time": ["5:00pm"],
 				"Person in Charge": ["Pete Pelkey"],
 				"Home Address": [
 					data.personalInformation.addressOne +
@@ -166,21 +166,21 @@ export default function WaiverFormsSection({
 		[]
 	);
 	return (
-		<div className="mt-8 shadow rounded-md sm:overflow-hidden">
+		<div className="mt-8 rounded-md shadow sm:overflow-hidden">
 			<div className={" px-4 bg-white sm:p-6 py-4"}>
-				<h3 className="text-xl leading-6 font-bold text-gray-900">
+				<h3 className="text-xl font-bold leading-6 text-gray-900">
 					Liability Forms
 				</h3>
-				<p className="mt-1 max-w-2xl text-sm leading-5 text-gray-500">
+				<p className="max-w-2xl mt-1 text-sm leading-5 text-gray-500">
 					You'll need to print out, sign, scan, and upload the
 					following forms.
 				</p>
 				<div className={"mt-4"}>
-					<h3 className="text-lg leading-6 font-medium text-gray-900">
+					<h3 className="text-lg font-medium leading-6 text-gray-900">
 						1. FUHSD Field Trip Form
 					</h3>
 					<div>
-						<span className="inline-flex rounded-md shadow-sm my-2 mr-2">
+						<span className="inline-flex my-2 mr-2 rounded-md shadow-sm">
 							<button
 								onClick={() =>
 									openOrDownload(
@@ -222,7 +222,7 @@ export default function WaiverFormsSection({
 					/>
 				</div>
 			</div>
-			<div className="px-4 py-3 bg-gray-50 text-right sm:px-6 flex justify-between">
+			<div className="flex justify-between px-4 py-3 text-right bg-gray-50 sm:px-6">
 				<span className="inline-flex rounded-md shadow-sm">
 					<button
 						type="button"
