@@ -65,9 +65,9 @@ export default function PreferencesSection({
 				return (
 					<>
 						<div className={"col-span-6"}>
-							<span className="inline-flex rounded-md shadow-sm my-2 mr-2">
+							<span className="inline-flex my-2 mr-2 rounded-md shadow-sm">
 								<a
-									href={"https://www.sfmun21.org/committees"}
+									href={"https://www.sfmun.org/committees"}
 									rel={"noopener noreferrer"}
 									target={"_blank"}
 									className={
@@ -94,14 +94,12 @@ export default function PreferencesSection({
 										e.preventDefault();
 
 										setFieldValue("sfmun21Committee", [
-											"UNDP",
-											"ECOSOC",
-											"UNESCAP",
+											"World Health Organization",
+											"UNESCO",
 											"UNHCR",
-											"SPECPOL",
-											"Ukrainskaya Revolyutsiya",
-											"Novice SOCHUM",
-											"Novice UNEP",
+											"1929 Atlantic City Crime Conference",
+											"UNSC",
+											"Brutland Commission",
 										]);
 									}}
 									className="link"

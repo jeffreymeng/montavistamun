@@ -59,15 +59,15 @@ export default function DonationsSection({
 	const [skipping, setSkipping] = useState(false);
 	const [uploadInstance, setUploadInstance] = useState<FilePond | null>(null);
 	return (
-		<div className="mt-8 shadow rounded-md sm:overflow-hidden">
+		<div className="mt-8 rounded-md shadow sm:overflow-hidden">
 			<div className={"px-4 bg-white sm:p-6 py-4"}>
-				<h3 className="text-xl leading-6 font-bold text-gray-900">
+				<h3 className="text-xl font-bold leading-6 text-gray-900">
 					Hang in there — you’re almost done!
 				</h3>
 				<p className="mt-2">
 					Before you submit, we just have one last step. To cover the
 					fees charged by SFMUN, we are requesting that you include a
-					donation of <b>$45</b> with your registration. Your
+					donation of <b>$30</b> with your registration. Your
 					donations will go directly towards covering conference fees
 					and making this conference possible.
 				</p>
@@ -77,8 +77,7 @@ export default function DonationsSection({
 							You've indicated that you are financially unable to
 							donate, or do not wish to do so, and that{" "}
 							<b>
-								you've talked to Mr. Pelkey about your
-								situation
+								you've talked to Mr. Pelkey about your situation
 							</b>
 							. You may now move on to the next step by clicking
 							the continue button below.
@@ -108,7 +107,8 @@ export default function DonationsSection({
 							If you are financially unable to donate, or do not
 							wish to do so,{" "}
 							<b>
-								please contact Mr. Pelkey during tutorial in room C107
+								please contact Mr. Pelkey during tutorial in
+								room C107
 							</b>
 							, then{" "}
 							<a
@@ -129,11 +129,11 @@ export default function DonationsSection({
 							.
 						</p>
 
-						<h3 className="text-lg leading-6 font-medium text-gray-900 mt-6 mb-2">
+						<h3 className="mt-6 mb-2 text-lg font-medium leading-6 text-gray-900">
 							How to Donate
 						</h3>
 
-						<ul className="list-decimal ml-8">
+						<ul className="ml-8 list-decimal">
 							<li>
 								Head to Monta Vista’s online Student Store and
 								find our SFMUN conference donation{" "}
@@ -141,15 +141,11 @@ export default function DonationsSection({
 									target={"_blank"}
 									rel={"noopener noreferrer"}
 									href={
-										"magiclink://montavistamun:sfmun21donation"
+										"https://montavistahs.3dcartstores.com/SFMUN-Conference-Virtual-Conference_p_68.html"
 									}
-									onClick={e => {
-										e.preventDefault();
-										window.location.href = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
-									}}
 									className={"link"}
 								>
-									dylan is stupid
+									here
 								</a>
 								.
 							</li>
@@ -164,7 +160,7 @@ export default function DonationsSection({
 						<p className={"mt-4"}>
 							Unfortunately, we are unable to process refunds with
 							the online system. Please confirm you can attend the
-							conference (<b>November 6-7, 2021</b>) before
+							conference (<b>December 11-12, 2021</b>) before
 							donating!
 						</p>
 
@@ -200,7 +196,7 @@ export default function DonationsSection({
 					</>
 				)}
 			</div>
-			<div className="px-4 py-3 bg-gray-50 text-right sm:px-6 flex justify-between">
+			<div className="flex justify-between px-4 py-3 text-right bg-gray-50 sm:px-6">
 				<span className="inline-flex rounded-md shadow-sm">
 					<button
 						type="button"
