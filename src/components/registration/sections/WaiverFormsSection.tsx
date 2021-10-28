@@ -65,6 +65,7 @@ export default function WaiverFormsSection({
 	setStep,
 	setMaxStep,
 	user,
+	conferenceData
 }: {
 	user: User;
 	data: Record<string, any>;
@@ -75,6 +76,7 @@ export default function WaiverFormsSection({
 	setStepHasChanges: (hasChanges: boolean) => void;
 	setStep: (step: number) => void;
 	setMaxStep: (maxStep: number | ((old: number) => number)) => void;
+	conferenceData:any;
 }) {
 	const firebase = useFirebase();
 
