@@ -32,7 +32,7 @@ export default [
 		acronym: "sfmun",
 		text:
 			"Our second conference of the year is the San Francisco Model United Nations conference, held by Lowell High School. One of the most beginner-friendly conferences we attend, SFMUN is a great way to get started in Model UN, while also providing experienced delegates with plenty of chances to hone their skills. It’s a much less intense and more beginner-friendly conference, and it’s highly recommended for all delegates to attend.",
-		// registration: "/conferences/sfmun/register",
+		registration: "/conferences/sfmun21/register",
 	},
 	{
 		name: "Santa Clara Valley Model United Nations Conference",
