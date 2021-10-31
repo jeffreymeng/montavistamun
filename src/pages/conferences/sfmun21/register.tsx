@@ -14,7 +14,7 @@ export default function AboutPage({
 }): React.ReactElement {
 	return (
 		<Layout
-			title={"BruinMUN Registration"}
+			title={"SFMUN Registration"}
 			description={
 				"Register for SFMUN, our first in-person conference of the year!"
 			}
