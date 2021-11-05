@@ -23,6 +23,8 @@ export default function AdminLogPage(): React.ReactElement {
 		admin: userAdmin,
 	} = React.useContext(AuthContext);
 	const conferenceOptions = [
+		{ label: "SFMUN 2021 Registration", value: "sfmun21" },
+
 		{ label: "BruinMUN Registration", value: "bruinmun" },
 		{ label: "SBMUN Registration", value: "sbmun" },
 		{ label: "BMUN Registration", value: "bmun" },
@@ -33,6 +35,7 @@ export default function AdminLogPage(): React.ReactElement {
 	const hash =
 		typeof window !== "undefined" ? window.location.hash?.substring(1) : "";
 	const selectedConference = [
+		"sfmun21",
 		"bruinmun",
 		"sfmun",
 		"smunc",
@@ -41,13 +44,19 @@ export default function AdminLogPage(): React.ReactElement {
 		"sbmun",
 	].includes(hash)
 		? hash
-		: "bruinmun";
+		: "sfmun21";
 	if (
-		!["bruinmun", "sfmun", "smunc", "scvmun", "bmun", "sbmun"].includes(
-			selectedConference
-		)
+		![
+			"bruinmun",
+			"sfmun",
+			"smunc",
+			"scvmun",
+			"bmun",
+			"sbmun",
+			"sfmun21",
+		].includes(selectedConference)
 	) {
-		window.location.hash = "bruinmun";
+		window.location.hash = "sfmun21";
 	}
 	const setSelectedConference = (conf: string) => {
 		window.location.hash = conf;
@@ -144,6 +153,8 @@ export default function AdminLogPage(): React.ReactElement {
 			if (
 				(selectedConference === "sfmun" &&
 					user.data.confirm?.sfmunConfirmed) ||
+				(selectedConference === "sfmun21" &&
+					user.data.confirm?.sfmun21Confirmed) ||
 				(selectedConference === "smunc" &&
 					user.data.confirm?.smuncConfirmed) ||
 				(selectedConference === "scvmun" &&
@@ -163,6 +174,8 @@ export default function AdminLogPage(): React.ReactElement {
 			} else if (
 				(selectedConference === "sfmun" &&
 					user.data.preferences?.committee) ||
+				(selectedConference === "sfmun21" &&
+					user.data.preferences?.sfmun21Committee) ||
 				(selectedConference === "scvmun" &&
 					user.data.preferences?.scvmunCommittee &&
 					user.data.preferences?.scvmunPartnerPrefs) ||
@@ -179,6 +192,8 @@ export default function AdminLogPage(): React.ReactElement {
 			} else if (
 				(selectedConference === "sfmun" &&
 					user.data.forms?.sfmunForm) ||
+				(selectedConference === "sfmun21" &&
+					user.data.forms?.sfmun21FuhsdForm) ||
 				(selectedConference === "smunc" &&
 					user.data.forms?.smuncFuhsdForm) ||
 				(selectedConference === "scvmun" &&
@@ -275,10 +290,12 @@ export default function AdminLogPage(): React.ReactElement {
 				"Email",
 				"Phone Number",
 				...(allFields ? allFieldsHeaders : []),
-				...(selectedConference === "scvmun"
+				...(selectedConference === "scvmun" ||
+				selectedConference === "sfmun21"
 					? ["Requested Partner"]
 					: []),
 				...(selectedConference === "sfmun" ||
+				selectedConference === "sfmun21" ||
 				selectedConference === "scvmun" ||
 				selectedConference === "sbmun" ||
 				selectedConference === "bruinmun"
@@ -316,6 +333,15 @@ export default function AdminLogPage(): React.ReactElement {
 										"Catherine The Great's Coup",
 										"UNSC",
 										"Senate",
+								  ]
+								: selectedConference === "sfmun21"
+								? [
+										"WHO",
+										"Atlantic City Crime",
+										"UNESCO",
+										"Brundtland",
+										"UNHCR",
+										"UNSC",
 								  ]
 								: selectedConference === "bruinmun"
 								? [
@@ -368,6 +394,8 @@ export default function AdminLogPage(): React.ReactElement {
 					(r) =>
 						(selectedConference === "sfmun" &&
 							r.data.confirm?.sfmunConfirmed) ||
+						(selectedConference === "sfmun21" &&
+							r.data.confirm?.sfmun21Confirmed) ||
 						(selectedConference === "smunc" &&
 							r.data.confirm?.smuncConfirmed) ||
 						(selectedConference === "scvmun" &&
@@ -389,6 +417,8 @@ export default function AdminLogPage(): React.ReactElement {
 					Promise.all(
 						(selectedConference === "sfmun"
 							? ["fuhsdForm", "sfmunForm", "donation"]
+							: selectedConference === "sfmun21"
+							? ["sfmunFuhsdForm", "donation"]
 							: selectedConference === "smunc"
 							? ["smuncFuhsdForm", "smuncDonation"]
 							: selectedConference === "scvmun"
@@ -462,6 +492,8 @@ export default function AdminLogPage(): React.ReactElement {
 						csvRow: [
 							(selectedConference === "sfmun" &&
 								registration.data.confirm?.sfmunConfirmed) ||
+							(selectedConference === "sfmun21" &&
+								registration.data.confirm?.sfmun21Confirmed) ||
 							(selectedConference === "smunc" &&
 								registration.data.confirm?.smuncConfirmed) ||
 							(selectedConference === "scvmun" &&
@@ -525,6 +557,9 @@ export default function AdminLogPage(): React.ReactElement {
 										(selectedConference === "sfmun" &&
 											registration.data.forms
 												?.sfmunDonationOptOut) ||
+										(selectedConference === "sfmun21" &&
+											registration.data.forms
+												?.sfmun21DonationOptOut) ||
 										(selectedConference === "smunc" &&
 											registration.data.forms
 												?.smuncDonationOptOut) ||
@@ -550,6 +585,12 @@ export default function AdminLogPage(): React.ReactElement {
 											?.scvmunPartnerPrefs,
 								  ]
 								: []),
+							...(selectedConference === "sfmun21"
+								? [
+										registration.data.preferences
+											?.sfmun21PartnerPrefs,
+								  ]
+								: []),
 							...(selectedConference === "sfmun"
 								? [
 										...(registration.data.preferences
@@ -573,6 +614,27 @@ export default function AdminLogPage(): React.ReactElement {
 											  )
 											: Array(8).fill("")),
 								  ]
+								: selectedConference === "sfmun21"
+								? [
+										...(registration.data.preferences
+											?.committee || Array(6).fill("")),
+										...(registration.data.preferences
+											?.committee
+											? [
+													"WHO",
+													"Atlantic City Crime",
+													"UNESCO",
+													"Brundtland",
+													"UNHCR",
+													"UNSC",
+											  ].map(
+													(committee) =>
+														registration.data.preferences.committee.indexOf(
+															committee
+														) + 1
+											  )
+											: Array(6).fill("")),
+								  ]
 								: selectedConference === "sbmun"
 								? [
 										...(registration.data.preferences
@@ -595,14 +657,14 @@ export default function AdminLogPage(): React.ReactElement {
 											  )
 											: Array(6).fill("")),
 								  ]
-									: selectedConference === "bruinmun"
-										? [
-											...(registration.data.preferences
-													?.bruinmunCommittee ||
-												Array(8).fill("")),
-											...(registration.data.preferences
-												?.bruinmunCommittee
-												? [
+								: selectedConference === "bruinmun"
+								? [
+										...(registration.data.preferences
+											?.bruinmunCommittee ||
+											Array(8).fill("")),
+										...(registration.data.preferences
+											?.bruinmunCommittee
+											? [
 													"UNDP",
 													"ECOSOC",
 													"UNESCAP",
@@ -611,14 +673,14 @@ export default function AdminLogPage(): React.ReactElement {
 													"Ukrainskaya Revolyutsiya",
 													"Novice SOCHUM",
 													"Novice UNEP",
-												].map(
+											  ].map(
 													(committee) =>
 														registration.data.preferences.bruinmunCommittee.indexOf(
 															committee
 														) + 1
-												)
-												: Array(6).fill("")),
-										]
+											  )
+											: Array(6).fill("")),
+								  ]
 								: selectedConference === "scvmun"
 								? [
 										...(registration.data.preferences?.scvmunCommittee?.map(
@@ -907,6 +969,14 @@ export default function AdminLogPage(): React.ReactElement {
 					</button>
 					)
 				</p>
+				{selectedConference == "sfmun21" && (
+					<p>
+						<b>
+							Warning: SFMUN Reg export is not fully done yet, so the
+							export might be kind of sketchy
+						</b>
+					</p>
+				)}
 				<button
 					onClick={() => exportRegistration(false, exportAllFields)}
 					type="button"
