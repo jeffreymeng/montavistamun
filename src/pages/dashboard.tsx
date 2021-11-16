@@ -134,19 +134,19 @@ export default function AboutPage(): React.ReactElement {
 			  ]
 			: []),
 
-		//{
-		//	subtitle: "Registration Now Open",
-		//	title: "Berkeley Model United Nations (BMUN)",
-		//	primaryAction: {
-		//		title: "Register Now",
-		//		link: "/conferences/bmun/register",
-		//	},
-		// secondaryAction: {
-		// 	title: "Learn More",
-		// 	link: "/conferences/bmun",
-		// },
-		//	icon: "Calendar",
-		//},
+		{
+			subtitle: "Application Now Open",
+			title: "North American Invitational Model United Nations (BMUN)",
+			primaryAction: {
+				title: "Apply Now",
+				link: "https://bit.ly/naimun2022app",
+			},
+			secondaryAction: {
+				title: "Learn More",
+				link: "/conferences",
+			},
+			icon: "Calendar",
+		},
 		// {
 		// 	subtitle:
 		// 		"Conference You're Attending",
