@@ -136,7 +136,7 @@ export default function AboutPage(): React.ReactElement {
 
 		{
 			subtitle: "Application Now Open",
-			title: "North American Invitational Model United Nations (BMUN)",
+			title: "NAIMUN",
 			primaryAction: {
 				title: "Apply Now",
 				link: "https://bit.ly/naimun2022app",
