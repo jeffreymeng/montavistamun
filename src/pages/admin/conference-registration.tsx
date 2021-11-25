@@ -418,7 +418,7 @@ export default function AdminLogPage(): React.ReactElement {
 						(selectedConference === "sfmun"
 							? ["fuhsdForm", "sfmunForm", "donation"]
 							: selectedConference === "sfmun21"
-							? ["sfmunFuhsdForm", "donation"]
+							? ["sfmun21FuhsdForm", "donation"]
 							: selectedConference === "smunc"
 							? ["smuncFuhsdForm", "smuncDonation"]
 							: selectedConference === "scvmun"
@@ -617,21 +617,22 @@ export default function AdminLogPage(): React.ReactElement {
 								: selectedConference === "sfmun21"
 								? [
 										...(registration.data.preferences
-											?.committee || Array(6).fill("")),
+											?.sfmun21Committee || Array(6).fill("")),
 										...(registration.data.preferences
-											?.committee
+											?.sfmun21Committee
 											? [
-													"WHO",
-													"Atlantic City Crime",
-													"UNESCO",
-													"Brundtland",
-													"UNHCR",
-													"UNSC",
+												"World Health Organization",
+												"1929 Atlantic City Crime Conference",
+												"UNESCO",
+												"Commission",
+												"UNHCR",
+												"UNSC",
+												
 											  ].map(
 													(committee) =>
-														registration.data.preferences.committee.indexOf(
-															committee
-														) + 1
+														registration.data.preferences.sfmun21Committee.findIndex(
+															(el: string) => el.indexOf(committee) > -1
+														) + 1 ?? "ERROR"
 											  )
 											: Array(6).fill("")),
 								  ]
