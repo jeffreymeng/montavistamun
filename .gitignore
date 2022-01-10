@@ -10,3 +10,4 @@ built-netlify-functions/**
 .env
 firestore-debug.log
 ui-debug.log
+**/*.icloud

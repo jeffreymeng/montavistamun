@@ -1,6 +1,6 @@
 import axios from "axios";
 // Import React FilePond
-import callbackBlobToBuffer from "blob-to-buffer";
+import blobToBuffer from "../../registration2/blobToBuffer";
 import cx from "classnames";
 import { FilePond } from "filepond";
 import { User } from "firebase";
@@ -14,14 +14,6 @@ import * as pdfform from "../PDFForm";
 interface WaiverForms {
 	bruinmunFuhsdForm: string;
 }
-// make promise based
-const blobToBuffer = (blob: Blob) =>
-	new Promise((res, rej) =>
-		callbackBlobToBuffer(blob, (err, buffer) => {
-			if (err) rej();
-			else res(buffer);
-		})
-	);
 
 const isIOS = () => {
 	return (

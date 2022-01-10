@@ -9,12 +9,10 @@ import "../../../css/file-upload.css";
 import useFirebase from "../../../firebase/useFirebase";
 import FormUpload from "../FormUpload";
 import * as pdfform from "../PDFForm";
-import blobToBuffer from "../../registration2/blobToBuffer";
-
+import blobToBuffer from "../blobToBuffer";
 interface WaiverForms {
 	scvmunFuhsdForm: string;
 }
-
 
 const isIOS = () => {
 	return (
@@ -51,7 +49,6 @@ const openOrDownload = (
 	return Promise.resolve();
 };
 
-
 export default function WaiverFormsSection({
 	data,
 	setStepHasChanges,
@@ -70,7 +67,6 @@ export default function WaiverFormsSection({
 	setStep: (step: number) => void;
 	setMaxStep: (maxStep: number | ((old: number) => number)) => void;
 }) {
-
 	const firebase = useFirebase();
 
 	const [filledForms, setFilledForms] = useState<(Uint8Array | null)[]>([
@@ -90,6 +86,24 @@ export default function WaiverFormsSection({
 		fuhsdForm && fuhsdForm[0],
 		fuhsdForm && fuhsdForm[0]?.serverId,
 	]);
+	React.useEffect(() => {
+		if (!user || !data) return;
+		(async () => {
+			const response = await axios.get(
+				"/forms/test.pdf",
+				{
+					responseType: "arraybuffer",
+					headers: {
+						"Content-Type": "application/json",
+						Accept: "application/pdf",
+					},
+				}
+			);
+			const blob = new Blob([response.data]);
+			const pdf = (await blobToBuffer(blob)) as ArrayBuffer;
+			console.log(pdfform.list_fields(pdf));
+		})();
+	}, [user, data]);
 	React.useEffect(() => {
 		if (!user || !data) return;
 		(async () => {

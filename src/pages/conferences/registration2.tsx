@@ -1,13 +1,21 @@
 import { graphql } from "gatsby";
 import React from "react";
-import { RegistrationForm } from "../../components/conferences/registration";
 import FluidImage from "../../components/FluidImage";
 import Header from "../../components/Header";
-import { Layout, Main } from "../../components/layout";
+import { Layout } from "../../components/layout";
+import RegistrationSection from "../../components/registration2/RegistrationSection";
 
 const data = {
-	name: "SFMUN 2020",
-	date: "January 2, 2020 to January 3, 2020",
+	name: "SCVMUN 51",
+	key: "scvmun51",
+	date: "January 28, 2022 to January 29, 2022",
+	forms: [
+		{
+			url: "/forms/FUHSD-field-trip-form.pdf",
+			key:"fieldTripForm", // unique to the forms
+			name:""
+		},
+	],
 };
 export default function AboutPage({
 	data: { headerImage },
@@ -24,9 +32,7 @@ export default function AboutPage({
 			>
 				{data.date}
 			</Header>
-			<Main>
-				<RegistrationForm />
-			</Main>
+			<RegistrationSection name={data.name} key={data.key} />
 		</Layout>
 	);
 }
