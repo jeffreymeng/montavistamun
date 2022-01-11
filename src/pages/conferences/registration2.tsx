@@ -12,8 +12,27 @@ const data = {
 	forms: [
 		{
 			url: "/forms/FUHSD-field-trip-form.pdf",
-			key:"fieldTripForm", // unique to the forms
-			name:""
+			key: "fieldTripForm", // unique to the forms
+			name: "FUHSD Field Trip Form",
+			autofill: {
+				"Student's Name": "$FNAME $LNAME",
+				Destination: "Online Model UN Conference (SCVMUN)",
+				"Date(s)": "1/29/21 - 1/30/21",
+				"Depature Time": "None (Virtual)",
+				"Return Time": "None (Virtual)",
+				"Person in Charge": "David Hartford",
+				"Home Address":
+					"$HOME_ADDR_STREET, $HOME_ADDR_CITY, $HOME_ADDR_STATE, $HOME_ADDR_ZIP",
+				"Insurance Address": "$INSURANCE_ADDR_STREET",
+				"City/State": "$INSURANCE_ADDR_CITY, $INSURANCE_ADDR_STATE",
+				Zip: "$INSURANCE_ADDR_ZIP",
+				"Family Health Insurance Carrier": "$INSURANCE_CARRIER",
+				"Policy Number": "$INSURANCE_POLICY_NUMBER",
+				Telephone: "$PHONE",
+				Language: "$HOME_LANGUAGE",
+				"Emergency Contact Name and Telephone":
+					"$CONTACT_ONE_NAME   $CONTACT_ONE_PHONE",
+			},
 		},
 	],
 };

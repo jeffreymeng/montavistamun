@@ -1,5 +1,4 @@
 // Import React FilePond
-import callbackBlobToBuffer from "blob-to-buffer";
 import cx from "classnames";
 import { FilePond } from "filepond";
 import { User } from "firebase";
@@ -15,14 +14,6 @@ interface DonationForms {
 interface ConfirmationData {
 	scvmunConfirmed: true;
 }
-// make promise based
-const blobToBuffer = (blob: Blob) =>
-	new Promise((res, rej) =>
-		callbackBlobToBuffer(blob, (err, buffer) => {
-			if (err) rej();
-			else res(buffer);
-		})
-	);
 
 export default function DonationsSection({
 	data,
@@ -248,7 +239,8 @@ export default function DonationsSection({
 									.doc(user?.uid)
 									.update({
 										scvmunRegistered: true,
-										scvmunRegistrationTimestamp: firebase.firestore.FieldValue.serverTimestamp(),
+										scvmunRegistrationTimestamp:
+											firebase.firestore.FieldValue.serverTimestamp(),
 									});
 							})
 							.then(() => {

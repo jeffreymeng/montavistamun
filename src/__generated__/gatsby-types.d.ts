@@ -3379,6 +3379,11 @@ type RegisterPageQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 type RegisterPageQueryQuery = { readonly headerImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }> };
 
+type pageUsersjmengDocumentscodemontavistamunsrcpagesconferencesbruinmunregisterTsx608941466QueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type pageUsersjmengDocumentscodemontavistamunsrcpagesconferencesbruinmunregisterTsx608941466Query = { readonly headerImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }> };
+
 type pageUsersjmengDocumentscodemontavistamunsrcpagesconferencesbmunregisterTsx490389590QueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -3389,10 +3394,10 @@ type pageUsersjmengDocumentscodemontavistamunsrcpagesconferencessbmunregisterTsx
 
 type pageUsersjmengDocumentscodemontavistamunsrcpagesconferencessbmunregisterTsx3538352953Query = { readonly headerImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }> };
 
-type SMUNCRegisterPageQueryQueryVariables = Exact<{ [key: string]: never; }>;
+type pageUsersjmengDocumentscodemontavistamunsrcpagesconferencesscvmunregisterTsx1261803817QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type SMUNCRegisterPageQueryQuery = { readonly headerImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }> };
+type pageUsersjmengDocumentscodemontavistamunsrcpagesconferencesscvmunregisterTsx1261803817Query = { readonly headerImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }> };
 
 type SFMUNPageQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -3404,30 +3409,40 @@ type SFMUNRegisterPageQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 type SFMUNRegisterPageQueryQuery = { readonly headerImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }> };
 
+type pageUsersjmengDocumentscodemontavistamunsrcpagesconferencessfmun21RegisterTsx27263086QueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type pageUsersjmengDocumentscodemontavistamunsrcpagesconferencessfmun21RegisterTsx27263086Query = { readonly headerImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }> };
+
+type SMUNCRegisterPageQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type SMUNCRegisterPageQueryQuery = { readonly headerImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }> };
+
 type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type Unnamed_1_Query = { readonly hero: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }> };
+type Unnamed_1_Query = { readonly thumbnail: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }> };
 
 type Unnamed_2_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type Unnamed_2_Query = { readonly logo: Maybe<{ readonly childImageSharp: Maybe<{ readonly fixed: Maybe<GatsbyImageSharpFixed_withWebp_noBase64Fragment> }> }> };
+type Unnamed_2_Query = { readonly hero: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }> };
 
 type Unnamed_3_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
 type Unnamed_3_Query = { readonly socialsImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fixed: Maybe<GatsbyImageSharpFixedFragment> }> }> };
 
-type Unnamed_4_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type Unnamed_4_Query = { readonly thumbnail: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }> };
-
 type AuthLayoutQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 type AuthLayoutQueryQuery = { readonly headerImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }> };
+
+type Unnamed_4_QueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type Unnamed_4_Query = { readonly logo: Maybe<{ readonly childImageSharp: Maybe<{ readonly fixed: Maybe<GatsbyImageSharpFixed_withWebp_noBase64Fragment> }> }> };
 
 type Unnamed_5_QueryVariables = Exact<{ [key: string]: never; }>;
 

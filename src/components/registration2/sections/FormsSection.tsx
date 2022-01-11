@@ -7,9 +7,9 @@ import React, { useState } from "react";
 import { File } from "react-filepond";
 import "../../../css/file-upload.css";
 import useFirebase from "../../../firebase/useFirebase";
+import blobToBuffer from "../blobToBuffer";
 import FormUpload from "../FormUpload";
 import * as pdfform from "../PDFForm";
-import blobToBuffer from "../blobToBuffer";
 interface WaiverForms {
 	scvmunFuhsdForm: string;
 }
@@ -89,19 +89,29 @@ export default function WaiverFormsSection({
 	React.useEffect(() => {
 		if (!user || !data) return;
 		(async () => {
-			const response = await axios.get(
-				"/forms/test.pdf",
-				{
-					responseType: "arraybuffer",
-					headers: {
-						"Content-Type": "application/json",
-						Accept: "application/pdf",
-					},
-				}
-			);
+			const response = await axios.get("/forms/test3.pdf", {
+				responseType: "arraybuffer",
+				headers: {
+					"Content-Type": "application/json",
+					Accept: "application/pdf",
+				},
+			});
 			const blob = new Blob([response.data]);
 			const pdf = (await blobToBuffer(blob)) as ArrayBuffer;
-			console.log(pdfform.list_fields(pdf));
+			const fields = pdfform.list_fields(pdf);
+			console.log(fields);
+			const parsedFields: any[] = [];
+			for (const [fieldName, fieldTypes] of Object.entries(fields)) {
+				(fieldTypes as Record<string, any>[]).forEach((el, i) => {
+					parsedFields.push({
+						name:
+							fieldName +
+							(fieldTypes.length > 1 ? " " + i + 1 : ""),
+						type: el.type,
+					});
+				});
+			}
+			console.log(parsedFields);
 		})();
 	}, [user, data]);
 	React.useEffect(() => {

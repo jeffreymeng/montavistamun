@@ -1,5 +1,4 @@
 // Import React FilePond
-import callbackBlobToBuffer from "blob-to-buffer";
 import cx from "classnames";
 import { FilePond } from "filepond";
 import { User } from "firebase";
@@ -15,14 +14,6 @@ interface DonationForms {
 interface ConfirmationData {
 	sbmunConfirmed: true;
 }
-// make promise based
-const blobToBuffer = (blob: Blob) =>
-	new Promise((res, rej) =>
-		callbackBlobToBuffer(blob, (err, buffer) => {
-			if (err) rej();
-			else res(buffer);
-		})
-	);
 
 export default function DonationsSection({
 	data,
