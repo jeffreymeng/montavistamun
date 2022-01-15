@@ -3,9 +3,17 @@ import { PDFDocument, PDFTextField } from "pdf-lib";
 import blobToBuffer from "./blobToBuffer";
 function replaceText(text: string | undefined, data: Record<string, any>) {
 	if (!text) return "";
+	const tokenRegex = /$[A-Za-z_][A-Za-z0-9_]/g;
+	let result;
+
+	while ((result = tokenRegex.exec(text)) !== null) {
+		console.log(result, `Found ${result[0]}. Next starts at ${tokenRegex.lastIndex}.`);
+		// expected output: "Found foo. Next starts at 9."
+		// expected output: "Found foo. Next starts at 19."
+	}
 
 	return text
-		.split(" ")
+		.split(/$[A-Za-z_][A-Za-z0-9_]/g)
 		.map((token) => {
 			if (token.indexOf("$") === 0) {
 				const id = token.substring(1);

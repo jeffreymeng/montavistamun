@@ -10,7 +10,7 @@ import EmergencyInformationSchema from "./schema/EmergencyInformationSchema";
 import matchesSchema from "./schema/matchesSchema";
 import PersonalInformationSchema from "./schema/PersonalInformationSchema";
 import EmergencyInformationSection from "./sections/EmergencyInformationSection";
-import WaiverFormsSection from "./sections/FormsSection";
+import FormsSection from "./sections/FormsSection";
 import PersonalInformationSection from "./sections/PersonalInformationSection";
 
 function isFunction(
@@ -23,10 +23,18 @@ function isFunction(
 }
 export default function RegistrationSection({
 	name,
-	key,
+	regKey,
+	forms,
 }: {
 	name: string;
-	key: string;
+	regKey: string;
+	forms: {
+		url: string;
+		fallbackUrl: string;
+		key: string;
+		name: string;
+		fileName: string;
+	}[];
 }) {
 	useRequireLogin();
 	const firebase = useFirebase();
@@ -246,6 +254,8 @@ export default function RegistrationSection({
 		setStep,
 		setMaxStep,
 		user,
+		name,
+		regKey,
 	};
 
 	return (
@@ -324,7 +334,11 @@ export default function RegistrationSection({
 							/>
 						)}
 						{step === 2 && (
-							<WaiverFormsSection data={data} {...commonProps} />
+							<FormsSection
+								data={data}
+								forms={forms}
+								{...commonProps}
+							/>
 						)}
 						{/*{step === 3 && (*/}
 						{/*	<PreferencesSection*/}

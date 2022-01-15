@@ -3,11 +3,10 @@ import { Field } from "formik";
 import { Link } from "gatsby";
 import React from "react";
 import Select from "react-select";
-import * as Yup from "yup";
 import InputGroup from "../../shared/InputGroup";
 import RegisterFormSection from "../RegisterFormSection";
-import stateOptions from "../stateOptions";
 import PersonalInformationSchema from "../schema/PersonalInformationSchema";
+import stateOptions from "../stateOptions";
 
 interface PersonalInformation {
 	phone: string;
@@ -34,7 +33,11 @@ export default function PersonalInformationSection({
 	setStep,
 	setMaxStep,
 	user,
+	name,
+	key,
 }: {
+	name: string;
+	key: string;
 	user?: User;
 	data?: PersonalInformation;
 	handleUpdateData: (

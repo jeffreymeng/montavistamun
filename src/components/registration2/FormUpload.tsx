@@ -24,7 +24,7 @@ registerFilepondPlugin(
 	FilePondPluginImagePreview
 );
 const loadOrRestoreFile = (
-	firebase: typeof FirebaseType | null,
+	firebase: typeof firebaseType | null,
 	user: firebaseType.User | null,
 	fieldName: string,
 	fileName: string,
@@ -136,11 +136,11 @@ export default function FormUpload<Data>({
 			credits={false} // TODO: credit somewhere
 			allowImagePreview={allowImagePreview}
 			allowDownloadByUrl={true}
-			fileValidateTypeDetectType={(source: Blob) =>
-				fileType.fromBlob(source).then((type) => type?.mime)
+			fileValidateTypeDetectType={(source: File, type: string): Promise<string> =>
+				fileType.fromBlob(source).then((type) => type?.mime || "UNKNOWN")
 			}
 			imagePreviewMaxFileSize={"2MB"}
-			acceptedFileTypes={acceptedFileTypes || ["application/pdf"]}
+			acceptedFileTypes={acceptedFileTypes || ["application/pdf", "pdf"]}
 			labelFileTypeNotAllowed={
 				labelFileTypeNotAllowed || "That's not a PDF!"
 			}

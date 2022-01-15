@@ -2,11 +2,10 @@ import { User } from "firebase";
 import { Field } from "formik";
 import React from "react";
 import Select from "react-select";
-import * as Yup from "yup";
 import InputGroup from "../../shared/InputGroup";
 import RegisterFormSection from "../RegisterFormSection";
-import stateOptions from "../stateOptions";
 import EmergencyInformationSchema from "../schema/EmergencyInformationSchema";
+import stateOptions from "../stateOptions";
 
 interface EmergencyInformation {
 	contactOneName: string;
@@ -45,7 +44,11 @@ export default function EmergencyInformationSection({
 	setStep,
 	setMaxStep,
 	user,
+	name,
+	key,
 }: {
+	name: string;
+	key: string;
 	user: User;
 	data?: EmergencyInformation;
 	handleUpdateData: (
@@ -118,7 +121,8 @@ export default function EmergencyInformationSection({
 				<>
 					<div className="col-span-6 mt-4">
 						<h3 className="text-lg leading-6 font-medium text-gray-900">
-							Parent / Guardian Information (First Emergency Contact)
+							Parent / Guardian Information (First Emergency
+							Contact)
 						</h3>
 					</div>
 					<Field
