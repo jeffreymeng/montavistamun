@@ -255,8 +255,6 @@ type Directory_ctimeArgs = {
 type Site = Node & {
   readonly buildTime: Maybe<Scalars['Date']>;
   readonly siteMetadata: Maybe<SiteSiteMetadata>;
-  readonly port: Maybe<Scalars['Int']>;
-  readonly host: Maybe<Scalars['String']>;
   readonly polyfill: Maybe<Scalars['Boolean']>;
   readonly pathPrefix: Maybe<Scalars['String']>;
   readonly jsxRuntime: Maybe<Scalars['String']>;
@@ -402,11 +400,7 @@ type Potrace = {
 
 type ImageSharp = Node & {
   readonly fixed: Maybe<ImageSharpFixed>;
-  /** @deprecated Resolutions was deprecated in Gatsby v2. It's been renamed to "fixed" https://example.com/write-docs-and-fix-this-example-link */
-  readonly resolutions: Maybe<ImageSharpResolutions>;
   readonly fluid: Maybe<ImageSharpFluid>;
-  /** @deprecated Sizes was deprecated in Gatsby v2. It's been renamed to "fluid" https://example.com/write-docs-and-fix-this-example-link */
-  readonly sizes: Maybe<ImageSharpSizes>;
   readonly gatsbyImageData: Scalars['JSON'];
   readonly original: Maybe<ImageSharpOriginal>;
   readonly resize: Maybe<ImageSharpResize>;
@@ -440,55 +434,7 @@ type ImageSharp_fixedArgs = {
 };
 
 
-type ImageSharp_resolutionsArgs = {
-  width: Maybe<Scalars['Int']>;
-  height: Maybe<Scalars['Int']>;
-  base64Width: Maybe<Scalars['Int']>;
-  jpegProgressive?: Maybe<Scalars['Boolean']>;
-  pngCompressionSpeed?: Maybe<Scalars['Int']>;
-  grayscale?: Maybe<Scalars['Boolean']>;
-  duotone: Maybe<DuotoneGradient>;
-  traceSVG: Maybe<Potrace>;
-  quality: Maybe<Scalars['Int']>;
-  jpegQuality: Maybe<Scalars['Int']>;
-  pngQuality: Maybe<Scalars['Int']>;
-  webpQuality: Maybe<Scalars['Int']>;
-  toFormat?: Maybe<ImageFormat>;
-  toFormatBase64?: Maybe<ImageFormat>;
-  cropFocus?: Maybe<ImageCropFocus>;
-  fit?: Maybe<ImageFit>;
-  background?: Maybe<Scalars['String']>;
-  rotate?: Maybe<Scalars['Int']>;
-  trim?: Maybe<Scalars['Float']>;
-};
-
-
 type ImageSharp_fluidArgs = {
-  maxWidth: Maybe<Scalars['Int']>;
-  maxHeight: Maybe<Scalars['Int']>;
-  base64Width: Maybe<Scalars['Int']>;
-  grayscale?: Maybe<Scalars['Boolean']>;
-  jpegProgressive?: Maybe<Scalars['Boolean']>;
-  pngCompressionSpeed?: Maybe<Scalars['Int']>;
-  duotone: Maybe<DuotoneGradient>;
-  traceSVG: Maybe<Potrace>;
-  quality: Maybe<Scalars['Int']>;
-  jpegQuality: Maybe<Scalars['Int']>;
-  pngQuality: Maybe<Scalars['Int']>;
-  webpQuality: Maybe<Scalars['Int']>;
-  toFormat?: Maybe<ImageFormat>;
-  toFormatBase64?: Maybe<ImageFormat>;
-  cropFocus?: Maybe<ImageCropFocus>;
-  fit?: Maybe<ImageFit>;
-  background?: Maybe<Scalars['String']>;
-  rotate?: Maybe<Scalars['Int']>;
-  trim?: Maybe<Scalars['Float']>;
-  sizes?: Maybe<Scalars['String']>;
-  srcSetBreakpoints?: Maybe<ReadonlyArray<Maybe<Scalars['Int']>>>;
-};
-
-
-type ImageSharp_sizesArgs = {
   maxWidth: Maybe<Scalars['Int']>;
   maxHeight: Maybe<Scalars['Int']>;
   base64Width: Maybe<Scalars['Int']>;
@@ -570,35 +516,7 @@ type ImageSharpFixed = {
   readonly originalName: Maybe<Scalars['String']>;
 };
 
-type ImageSharpResolutions = {
-  readonly base64: Maybe<Scalars['String']>;
-  readonly tracedSVG: Maybe<Scalars['String']>;
-  readonly aspectRatio: Maybe<Scalars['Float']>;
-  readonly width: Scalars['Float'];
-  readonly height: Scalars['Float'];
-  readonly src: Scalars['String'];
-  readonly srcSet: Scalars['String'];
-  readonly srcWebp: Maybe<Scalars['String']>;
-  readonly srcSetWebp: Maybe<Scalars['String']>;
-  readonly originalName: Maybe<Scalars['String']>;
-};
-
 type ImageSharpFluid = {
-  readonly base64: Maybe<Scalars['String']>;
-  readonly tracedSVG: Maybe<Scalars['String']>;
-  readonly aspectRatio: Scalars['Float'];
-  readonly src: Scalars['String'];
-  readonly srcSet: Scalars['String'];
-  readonly srcWebp: Maybe<Scalars['String']>;
-  readonly srcSetWebp: Maybe<Scalars['String']>;
-  readonly sizes: Scalars['String'];
-  readonly originalImg: Maybe<Scalars['String']>;
-  readonly originalName: Maybe<Scalars['String']>;
-  readonly presentationWidth: Scalars['Int'];
-  readonly presentationHeight: Scalars['Int'];
-};
-
-type ImageSharpSizes = {
   readonly base64: Maybe<Scalars['String']>;
   readonly tracedSVG: Maybe<Scalars['String']>;
   readonly aspectRatio: Scalars['Float'];
@@ -822,8 +740,6 @@ type Query_allDirectoryArgs = {
 type Query_siteArgs = {
   buildTime: Maybe<DateQueryOperatorInput>;
   siteMetadata: Maybe<SiteSiteMetadataFilterInput>;
-  port: Maybe<IntQueryOperatorInput>;
-  host: Maybe<StringQueryOperatorInput>;
   polyfill: Maybe<BooleanQueryOperatorInput>;
   pathPrefix: Maybe<StringQueryOperatorInput>;
   jsxRuntime: Maybe<StringQueryOperatorInput>;
@@ -932,9 +848,7 @@ type Query_allSiteBuildMetadataArgs = {
 
 type Query_imageSharpArgs = {
   fixed: Maybe<ImageSharpFixedFilterInput>;
-  resolutions: Maybe<ImageSharpResolutionsFilterInput>;
   fluid: Maybe<ImageSharpFluidFilterInput>;
-  sizes: Maybe<ImageSharpSizesFilterInput>;
   gatsbyImageData: Maybe<JSONQueryOperatorInput>;
   original: Maybe<ImageSharpOriginalFilterInput>;
   resize: Maybe<ImageSharpResizeFilterInput>;
@@ -1024,9 +938,7 @@ type ImageSharpFilterListInput = {
 
 type ImageSharpFilterInput = {
   readonly fixed: Maybe<ImageSharpFixedFilterInput>;
-  readonly resolutions: Maybe<ImageSharpResolutionsFilterInput>;
   readonly fluid: Maybe<ImageSharpFluidFilterInput>;
-  readonly sizes: Maybe<ImageSharpSizesFilterInput>;
   readonly gatsbyImageData: Maybe<JSONQueryOperatorInput>;
   readonly original: Maybe<ImageSharpOriginalFilterInput>;
   readonly resize: Maybe<ImageSharpResizeFilterInput>;
@@ -1049,35 +961,7 @@ type ImageSharpFixedFilterInput = {
   readonly originalName: Maybe<StringQueryOperatorInput>;
 };
 
-type ImageSharpResolutionsFilterInput = {
-  readonly base64: Maybe<StringQueryOperatorInput>;
-  readonly tracedSVG: Maybe<StringQueryOperatorInput>;
-  readonly aspectRatio: Maybe<FloatQueryOperatorInput>;
-  readonly width: Maybe<FloatQueryOperatorInput>;
-  readonly height: Maybe<FloatQueryOperatorInput>;
-  readonly src: Maybe<StringQueryOperatorInput>;
-  readonly srcSet: Maybe<StringQueryOperatorInput>;
-  readonly srcWebp: Maybe<StringQueryOperatorInput>;
-  readonly srcSetWebp: Maybe<StringQueryOperatorInput>;
-  readonly originalName: Maybe<StringQueryOperatorInput>;
-};
-
 type ImageSharpFluidFilterInput = {
-  readonly base64: Maybe<StringQueryOperatorInput>;
-  readonly tracedSVG: Maybe<StringQueryOperatorInput>;
-  readonly aspectRatio: Maybe<FloatQueryOperatorInput>;
-  readonly src: Maybe<StringQueryOperatorInput>;
-  readonly srcSet: Maybe<StringQueryOperatorInput>;
-  readonly srcWebp: Maybe<StringQueryOperatorInput>;
-  readonly srcSetWebp: Maybe<StringQueryOperatorInput>;
-  readonly sizes: Maybe<StringQueryOperatorInput>;
-  readonly originalImg: Maybe<StringQueryOperatorInput>;
-  readonly originalName: Maybe<StringQueryOperatorInput>;
-  readonly presentationWidth: Maybe<IntQueryOperatorInput>;
-  readonly presentationHeight: Maybe<IntQueryOperatorInput>;
-};
-
-type ImageSharpSizesFilterInput = {
   readonly base64: Maybe<StringQueryOperatorInput>;
   readonly tracedSVG: Maybe<StringQueryOperatorInput>;
   readonly aspectRatio: Maybe<FloatQueryOperatorInput>;
@@ -1246,16 +1130,6 @@ type FileFieldsEnum =
   | 'childrenImageSharp.fixed.srcWebp'
   | 'childrenImageSharp.fixed.srcSetWebp'
   | 'childrenImageSharp.fixed.originalName'
-  | 'childrenImageSharp.resolutions.base64'
-  | 'childrenImageSharp.resolutions.tracedSVG'
-  | 'childrenImageSharp.resolutions.aspectRatio'
-  | 'childrenImageSharp.resolutions.width'
-  | 'childrenImageSharp.resolutions.height'
-  | 'childrenImageSharp.resolutions.src'
-  | 'childrenImageSharp.resolutions.srcSet'
-  | 'childrenImageSharp.resolutions.srcWebp'
-  | 'childrenImageSharp.resolutions.srcSetWebp'
-  | 'childrenImageSharp.resolutions.originalName'
   | 'childrenImageSharp.fluid.base64'
   | 'childrenImageSharp.fluid.tracedSVG'
   | 'childrenImageSharp.fluid.aspectRatio'
@@ -1268,18 +1142,6 @@ type FileFieldsEnum =
   | 'childrenImageSharp.fluid.originalName'
   | 'childrenImageSharp.fluid.presentationWidth'
   | 'childrenImageSharp.fluid.presentationHeight'
-  | 'childrenImageSharp.sizes.base64'
-  | 'childrenImageSharp.sizes.tracedSVG'
-  | 'childrenImageSharp.sizes.aspectRatio'
-  | 'childrenImageSharp.sizes.src'
-  | 'childrenImageSharp.sizes.srcSet'
-  | 'childrenImageSharp.sizes.srcWebp'
-  | 'childrenImageSharp.sizes.srcSetWebp'
-  | 'childrenImageSharp.sizes.sizes'
-  | 'childrenImageSharp.sizes.originalImg'
-  | 'childrenImageSharp.sizes.originalName'
-  | 'childrenImageSharp.sizes.presentationWidth'
-  | 'childrenImageSharp.sizes.presentationHeight'
   | 'childrenImageSharp.gatsbyImageData'
   | 'childrenImageSharp.original.width'
   | 'childrenImageSharp.original.height'
@@ -1338,16 +1200,6 @@ type FileFieldsEnum =
   | 'childImageSharp.fixed.srcWebp'
   | 'childImageSharp.fixed.srcSetWebp'
   | 'childImageSharp.fixed.originalName'
-  | 'childImageSharp.resolutions.base64'
-  | 'childImageSharp.resolutions.tracedSVG'
-  | 'childImageSharp.resolutions.aspectRatio'
-  | 'childImageSharp.resolutions.width'
-  | 'childImageSharp.resolutions.height'
-  | 'childImageSharp.resolutions.src'
-  | 'childImageSharp.resolutions.srcSet'
-  | 'childImageSharp.resolutions.srcWebp'
-  | 'childImageSharp.resolutions.srcSetWebp'
-  | 'childImageSharp.resolutions.originalName'
   | 'childImageSharp.fluid.base64'
   | 'childImageSharp.fluid.tracedSVG'
   | 'childImageSharp.fluid.aspectRatio'
@@ -1360,18 +1212,6 @@ type FileFieldsEnum =
   | 'childImageSharp.fluid.originalName'
   | 'childImageSharp.fluid.presentationWidth'
   | 'childImageSharp.fluid.presentationHeight'
-  | 'childImageSharp.sizes.base64'
-  | 'childImageSharp.sizes.tracedSVG'
-  | 'childImageSharp.sizes.aspectRatio'
-  | 'childImageSharp.sizes.src'
-  | 'childImageSharp.sizes.srcSet'
-  | 'childImageSharp.sizes.srcWebp'
-  | 'childImageSharp.sizes.srcSetWebp'
-  | 'childImageSharp.sizes.sizes'
-  | 'childImageSharp.sizes.originalImg'
-  | 'childImageSharp.sizes.originalName'
-  | 'childImageSharp.sizes.presentationWidth'
-  | 'childImageSharp.sizes.presentationHeight'
   | 'childImageSharp.gatsbyImageData'
   | 'childImageSharp.original.width'
   | 'childImageSharp.original.height'
@@ -1904,8 +1744,6 @@ type SiteFieldsEnum =
   | 'siteMetadata.title'
   | 'siteMetadata.description'
   | 'siteMetadata.author'
-  | 'port'
-  | 'host'
   | 'polyfill'
   | 'pathPrefix'
   | 'jsxRuntime'
@@ -2040,8 +1878,6 @@ type SiteGroupConnection_groupArgs = {
 type SiteFilterInput = {
   readonly buildTime: Maybe<DateQueryOperatorInput>;
   readonly siteMetadata: Maybe<SiteSiteMetadataFilterInput>;
-  readonly port: Maybe<IntQueryOperatorInput>;
-  readonly host: Maybe<StringQueryOperatorInput>;
   readonly polyfill: Maybe<BooleanQueryOperatorInput>;
   readonly pathPrefix: Maybe<StringQueryOperatorInput>;
   readonly jsxRuntime: Maybe<StringQueryOperatorInput>;
@@ -2950,16 +2786,6 @@ type ImageSharpFieldsEnum =
   | 'fixed.srcWebp'
   | 'fixed.srcSetWebp'
   | 'fixed.originalName'
-  | 'resolutions.base64'
-  | 'resolutions.tracedSVG'
-  | 'resolutions.aspectRatio'
-  | 'resolutions.width'
-  | 'resolutions.height'
-  | 'resolutions.src'
-  | 'resolutions.srcSet'
-  | 'resolutions.srcWebp'
-  | 'resolutions.srcSetWebp'
-  | 'resolutions.originalName'
   | 'fluid.base64'
   | 'fluid.tracedSVG'
   | 'fluid.aspectRatio'
@@ -2972,18 +2798,6 @@ type ImageSharpFieldsEnum =
   | 'fluid.originalName'
   | 'fluid.presentationWidth'
   | 'fluid.presentationHeight'
-  | 'sizes.base64'
-  | 'sizes.tracedSVG'
-  | 'sizes.aspectRatio'
-  | 'sizes.src'
-  | 'sizes.srcSet'
-  | 'sizes.srcWebp'
-  | 'sizes.srcSetWebp'
-  | 'sizes.sizes'
-  | 'sizes.originalImg'
-  | 'sizes.originalName'
-  | 'sizes.presentationWidth'
-  | 'sizes.presentationHeight'
   | 'gatsbyImageData'
   | 'original.width'
   | 'original.height'
@@ -3340,12 +3154,53 @@ type ConferenceAwardsDataSortInput = {
   readonly order: Maybe<ReadonlyArray<Maybe<SortOrderEnum>>>;
 };
 
-type PagesQueryQueryVariables = Exact<{ [key: string]: never; }>;
+type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type PagesQueryQuery = { readonly allSiteFunction: { readonly nodes: ReadonlyArray<Pick<SiteFunction, 'functionRoute'>> }, readonly allSitePage: { readonly nodes: ReadonlyArray<Pick<SitePage, 'path'>> } };
+type Unnamed_1_Query = { readonly socialsImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fixed: Maybe<GatsbyImageSharpFixedFragment> }> }> };
 
-type GatsbyImageSharpFluid_withWebpFragment = Pick<ImageSharpFluid, 'base64' | 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
+type Unnamed_2_QueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type Unnamed_2_Query = { readonly thumbnail: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }> };
+
+type Unnamed_3_QueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type Unnamed_3_Query = { readonly logo: Maybe<{ readonly childImageSharp: Maybe<{ readonly fixed: Maybe<GatsbyImageSharpFixed_withWebp_noBase64Fragment> }> }> };
+
+type Unnamed_4_QueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type Unnamed_4_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'description' | 'author'>> }> };
+
+type Unnamed_5_QueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type Unnamed_5_Query = { readonly headerImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }> };
+
+type awardsPageQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type awardsPageQueryQuery = { readonly headerImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }>, readonly awardsData: { readonly nodes: ReadonlyArray<(
+      Pick<ConferenceAwardsData, 'delegationAward' | 'id' | 'month' | 'name' | 'time' | 'year' | 'imageURL'>
+      & { readonly delegateAwards: Maybe<ReadonlyArray<Maybe<Pick<ConferenceAwardsData__DelegateAwards, 'awards' | 'type'>>>> }
+    )> } };
+
+type AuthLayoutQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type AuthLayoutQueryQuery = { readonly headerImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }> };
+
+type Unnamed_6_QueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type Unnamed_6_Query = { readonly headerImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }> };
+
+type Unnamed_7_QueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type Unnamed_7_Query = { readonly headerImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }> };
 
 type ConferencesPageQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -3354,6 +3209,36 @@ type ConferencesPageQueryQuery = { readonly headerImage: Maybe<{ readonly childI
         Pick<File, 'name'>
         & { readonly image: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }
       ) }> } };
+
+type RegisterPageQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type RegisterPageQueryQuery = { readonly headerImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }> };
+
+type SFMUNPageQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type SFMUNPageQueryQuery = { readonly headerImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }> };
+
+type Unnamed_8_QueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type Unnamed_8_Query = { readonly headerImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }> };
+
+type SFMUNRegisterPageQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type SFMUNRegisterPageQueryQuery = { readonly headerImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }> };
+
+type Unnamed_9_QueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type Unnamed_9_Query = { readonly headerImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }> };
+
+type Unnamed_10_QueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type Unnamed_10_Query = { readonly headerImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }> };
 
 type KennedyPageQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -3365,94 +3250,6 @@ type KennedyPageQueryQuery = { readonly headerImage: Maybe<{ readonly childImage
         Pick<File, 'name'>
         & { readonly image: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }
       ) }> } };
-
-type SecretariatPageQueryQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type SecretariatPageQueryQuery = { readonly headerImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }>, readonly placeholder: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }>, readonly images: { readonly edges: ReadonlyArray<{ readonly node: (
-        Pick<File, 'name'>
-        & { readonly image: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }
-      ) }> } };
-
-type RegisterPageQueryQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type RegisterPageQueryQuery = { readonly headerImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }> };
-
-type pageUsersjmengDocumentscodemontavistamunsrcpagesconferencessbmunregisterTsx3538352953QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type pageUsersjmengDocumentscodemontavistamunsrcpagesconferencessbmunregisterTsx3538352953Query = { readonly headerImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }> };
-
-type pageUsersjmengDocumentscodemontavistamunsrcpagesconferencesbmunregisterTsx490389590QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type pageUsersjmengDocumentscodemontavistamunsrcpagesconferencesbmunregisterTsx490389590Query = { readonly headerImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }> };
-
-type pageUsersjmengDocumentscodemontavistamunsrcpagesconferencesscvmunregisterTsx1261803817QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type pageUsersjmengDocumentscodemontavistamunsrcpagesconferencesscvmunregisterTsx1261803817Query = { readonly headerImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }> };
-
-type SFMUNPageQueryQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type SFMUNPageQueryQuery = { readonly headerImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }> };
-
-type SFMUNRegisterPageQueryQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type SFMUNRegisterPageQueryQuery = { readonly headerImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }> };
-
-type SMUNCRegisterPageQueryQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type SMUNCRegisterPageQueryQuery = { readonly headerImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }> };
-
-type pageUsersjmengDocumentscodemontavistamunsrcpagesconferencesscvmun22RegisterTsx490389590QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type pageUsersjmengDocumentscodemontavistamunsrcpagesconferencesscvmun22RegisterTsx490389590Query = { readonly headerImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }> };
-
-type pageUsersjmengDocumentscodemontavistamunsrcpagesconferencesbruinmunregisterTsx608941466QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type pageUsersjmengDocumentscodemontavistamunsrcpagesconferencesbruinmunregisterTsx608941466Query = { readonly headerImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }> };
-
-type pageUsersjmengDocumentscodemontavistamunsrcpagesconferencessfmun21RegisterTsx27263086QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type pageUsersjmengDocumentscodemontavistamunsrcpagesconferencessfmun21RegisterTsx27263086Query = { readonly headerImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }> };
-
-type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type Unnamed_1_Query = { readonly hero: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }> };
-
-type AuthLayoutQueryQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type AuthLayoutQueryQuery = { readonly headerImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }> };
-
-type Unnamed_2_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type Unnamed_2_Query = { readonly socialsImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fixed: Maybe<GatsbyImageSharpFixedFragment> }> }> };
-
-type Unnamed_3_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type Unnamed_3_Query = { readonly logo: Maybe<{ readonly childImageSharp: Maybe<{ readonly fixed: Maybe<GatsbyImageSharpFixed_withWebp_noBase64Fragment> }> }> };
-
-type Unnamed_4_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type Unnamed_4_Query = { readonly thumbnail: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }> };
-
-type Unnamed_5_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type Unnamed_5_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'description' | 'author'>> }> };
 
 type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 
@@ -3472,34 +3269,30 @@ type GatsbyImageSharpFluidLimitPresentationSizeFragment = { maxHeight: ImageShar
 
 type GatsbyImageSharpFluid_tracedSVGFragment = Pick<ImageSharpFluid, 'tracedSVG' | 'aspectRatio' | 'src' | 'srcSet' | 'sizes'>;
 
+type GatsbyImageSharpFluid_withWebpFragment = Pick<ImageSharpFluid, 'base64' | 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
+
 type GatsbyImageSharpFluid_withWebp_tracedSVGFragment = Pick<ImageSharpFluid, 'tracedSVG' | 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
 
 type GatsbyImageSharpFluid_noBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio' | 'src' | 'srcSet' | 'sizes'>;
 
 type GatsbyImageSharpFluid_withWebp_noBase64Fragment = Pick<ImageSharpFluid, 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
 
-type GatsbyImageSharpResolutionsFragment = Pick<ImageSharpResolutions, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
+type SecretariatPageQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
-type GatsbyImageSharpResolutions_tracedSVGFragment = Pick<ImageSharpResolutions, 'tracedSVG' | 'width' | 'height' | 'src' | 'srcSet'>;
 
-type GatsbyImageSharpResolutions_withWebpFragment = Pick<ImageSharpResolutions, 'base64' | 'width' | 'height' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp'>;
+type SecretariatPageQueryQuery = { readonly headerImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }>, readonly placeholder: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }>, readonly images: { readonly edges: ReadonlyArray<{ readonly node: (
+        Pick<File, 'name'>
+        & { readonly image: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }
+      ) }> } };
 
-type GatsbyImageSharpResolutions_withWebp_tracedSVGFragment = Pick<ImageSharpResolutions, 'tracedSVG' | 'width' | 'height' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp'>;
+type Unnamed_11_QueryVariables = Exact<{ [key: string]: never; }>;
 
-type GatsbyImageSharpResolutions_noBase64Fragment = Pick<ImageSharpResolutions, 'width' | 'height' | 'src' | 'srcSet'>;
 
-type GatsbyImageSharpResolutions_withWebp_noBase64Fragment = Pick<ImageSharpResolutions, 'width' | 'height' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp'>;
+type Unnamed_11_Query = { readonly hero: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }> };
 
-type GatsbyImageSharpSizesFragment = Pick<ImageSharpSizes, 'base64' | 'aspectRatio' | 'src' | 'srcSet' | 'sizes'>;
+type SMUNCRegisterPageQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
-type GatsbyImageSharpSizes_tracedSVGFragment = Pick<ImageSharpSizes, 'tracedSVG' | 'aspectRatio' | 'src' | 'srcSet' | 'sizes'>;
 
-type GatsbyImageSharpSizes_withWebpFragment = Pick<ImageSharpSizes, 'base64' | 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
-
-type GatsbyImageSharpSizes_withWebp_tracedSVGFragment = Pick<ImageSharpSizes, 'tracedSVG' | 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
-
-type GatsbyImageSharpSizes_noBase64Fragment = Pick<ImageSharpSizes, 'aspectRatio' | 'src' | 'srcSet' | 'sizes'>;
-
-type GatsbyImageSharpSizes_withWebp_noBase64Fragment = Pick<ImageSharpSizes, 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
+type SMUNCRegisterPageQueryQuery = { readonly headerImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }> };
 
 }
