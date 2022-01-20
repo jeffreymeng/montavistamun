@@ -1,5 +1,4 @@
 import axios from "axios";
-import fileType from "file-type/browser";
 import { FilePond, registerPlugin as registerFilepondPlugin } from "filepond";
 import FilePondPluginFileValidateSize from "filepond-plugin-file-validate-size";
 import FilePondPluginFileValidateType from "filepond-plugin-file-validate-type";
@@ -136,11 +135,11 @@ export default function FormUpload<Data>({
 			credits={false} // TODO: credit somewhere
 			allowImagePreview={allowImagePreview}
 			allowDownloadByUrl={true}
-			fileValidateTypeDetectType={(source: Blob) =>
-				fileType.fromBlob(source).then((type) => type?.mime)
+			fileValidateTypeDetectType={(source: File, type: string) =>
+				Promise.resolve(source.type)
 			}
 			imagePreviewMaxFileSize={"2MB"}
-			acceptedFileTypes={acceptedFileTypes || ["application/pdf"]}
+			acceptedFileTypes={acceptedFileTypes || ["application/pdf", "pdf"]}
 			labelFileTypeNotAllowed={
 				labelFileTypeNotAllowed || "That's not a PDF!"
 			}

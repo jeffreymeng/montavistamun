@@ -5,7 +5,7 @@ function replaceText(text: string | undefined, data: Record<string, any>) {
 	if (!text) return "";
 	const tokenRegex = /$[A-Za-z_][A-Za-z0-9_]/g;
 	let result;
-
+console.log("ref")
 	while ((result = tokenRegex.exec(text)) !== null) {
 		console.log(result, `Found ${result[0]}. Next starts at ${tokenRegex.lastIndex}.`);
 		// expected output: "Found foo. Next starts at 9."
