@@ -1,6 +1,6 @@
 {
 	"dependencies": {
-		"axios": "^0.25.0",
+		"axios": "^0.21.2",
 		"crypto": "^1.0.1",
 		"firebase-admin": "^10.0.1",
 		"jsonwebtoken": "^8.5.1",
