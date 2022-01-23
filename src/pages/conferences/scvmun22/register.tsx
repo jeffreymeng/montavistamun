@@ -6,8 +6,8 @@ import { Layout } from "../../../components/layout";
 import SCVMUN22RegistrationSection from "../../../components/registration/SCVMUN22RegistrationSection";
 
 export default function AboutPage({
-                                      data: { headerImage },
-                                  }: {
+    data: { headerImage },
+}: {
     data: {
         headerImage: FluidImage;
     };
@@ -27,7 +27,24 @@ export default function AboutPage({
                     {"Janurary 28-29, 2022"}
                 </Header>
 
-                <SCVMUN22RegistrationSection />
+                <div className={"mt-10 mt-5 md:mt-0 md:col-span-2 h-full"}>
+                    <h1
+                        className={
+                            "text-xl font-semibold leading-6 text-gray-900"
+                        }
+                    >
+                        SCVMUN Registration is now closed. If you have any
+                        questions, please email us at{" "}
+                        <a
+                            className={"link"}
+                            href={"mailto:montavistamun@gmail.com"}
+                        >
+                            montavistamun@gmail.com
+                        </a>
+                        .
+                    </h1>
+                </div>
+                {/* <SCVMUN22RegistrationSection /> */}
             </div>
         </Layout>
     );
