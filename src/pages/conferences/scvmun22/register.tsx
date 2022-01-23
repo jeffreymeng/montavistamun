@@ -27,7 +27,7 @@ export default function AboutPage({
                     {"Janurary 28-29, 2022"}
                 </Header>
 
-                <div className={"mt-10 mt-5 md:mt-0 md:col-span-2 h-full"}>
+                <div className={"mt-10 mt-5 px-10 h-full"}>
                     <h1
                         className={
                             "text-xl font-semibold leading-6 text-gray-900"
