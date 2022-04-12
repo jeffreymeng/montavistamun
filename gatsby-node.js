@@ -34,7 +34,7 @@ exports.sourceNodes = async ({
 			throw {
 				code: "NO_FIREBASE_KEY",
 				message:
-					"Please set the firebase service account key as an environment variable.",
+					"Please set the firebase service account key as an environment variable. The easiest way to do this is by creating a .env file and populating it with the required secrets, which can be found here: https://drive.google.com/file/d/1xMUy8PBSROb6Mc7mUoMDs_v6_4JDjS4p/view?usp=sharing (part of the MUN Officers folder).",
 			};
 		}
 		const FB_SERVICE_ACCOUNT = JSON.parse(process.env.FB_SERVICE_ACCOUNT);

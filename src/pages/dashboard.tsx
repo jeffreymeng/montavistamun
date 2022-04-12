@@ -134,19 +134,19 @@ export default function AboutPage(): React.ReactElement {
 			  ]
 			: []),
 
-		{
-			subtitle: "Application Now Open",
-			title: "NAIMUN",
-			primaryAction: {
-				title: "Apply Now",
-				link: "https://bit.ly/naimun2022app",
-			},
-			secondaryAction: {
-				title: "Learn More",
-				link: "/conferences",
-			},
-			icon: "Calendar",
-		},
+		// {
+		// 	subtitle: "Application Now Open",
+		// 	title: "NAIMUN",
+		// 	primaryAction: {
+		// 		title: "Apply Now",
+		// 		link: "https://bit.ly/naimun2022app",
+		// 	},
+		// 	secondaryAction: {
+		// 		title: "Learn More",
+		// 		link: "/conferences",
+		// 	},
+		// 	icon: "Calendar",
+		// },
 		// {
 		// 	subtitle:
 		// 		"Conference You're Attending",
