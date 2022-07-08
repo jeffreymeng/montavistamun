@@ -120,7 +120,7 @@
 		"lint-staged": "^10.5.4",
 		"mailcheck": "^1.1.1",
 		"majestic": "^1.8.0",
-		"moment": "^2.29.1",
+		"moment": "^2.29.4",
 		"netlify-lambda": "^2.0.3",
 		"pako": "^2.0.3",
 		"patch-package": "^6.2.2",
