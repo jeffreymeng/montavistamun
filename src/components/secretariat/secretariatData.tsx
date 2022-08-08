@@ -25,170 +25,22 @@ function ExpandableBio({
 }
 export default [
 	{
-		name: "Sylvia Li",
-		position: "Co-President",
-		bio: (
-			<>
-				Hello! I’m Sylvia Li and I’m one of your co-presidents this
-				year! I’m a senior and I’ve been in MUN since 8th grade, and
-				although at the time I had no idea what I was getting myself
-				into, I’ve grown fond of this club and all the people I’ve
-				become friends with. I joined (and stayed) in MUN because of my
-				curiosity towards discussions of the world and global issues,
-				despite the fact that my public speaking skills may not have
-				been the best. MUN has pushed me to improve myself, whether
-				self-confidence related, or creating strong rebuttal arguments
-				in under 30 seconds, and I truly believe the time and effort put
-				into this club is worth it. Outside of MUN, I’m a part of
-				yearbook, the color guard and I love sewing and doing all sorts
-				of crafts.
-			</>
-		),
-		memeBioNickname: "",
-		memeBio: "",
-	},
-	{
-		name: "Dylan Yang",
-		position: "Co-President",
-		bio: (
-			<>
-				Hi! My name is Dylan Yang, and I’m looking forward to serving as
-				your co-President this year! After starting MUN in eighth grade,
-				I joined MVMUN as a freshman, and I’ve never had any regrets
-				since. I’ve learned about all the things I originally signed up
-				for — speaking, debating, and even shouting — but I’ve also
-				learned and grown with many other skills. MUN has pushed me to
-				be a better negotiator and a better leader, but most of all it’s
-				pushed me to be a better community member. This year, I’d love
-				to welcome you to the MVMUN community, just as previous
-				generations of delegates welcomed me. So if you ever see me
-				around campus, or just want to chat, don’t be afraid to say hi!
-			</>
-		),
-		memeBioNickname: "",
-		memeBio: "",
-	},
-	{
 		name: "Janelle Cai",
-		position: "Vice President",
+		position: "President",
 		bio: (
 			<>
-				Hello! I’m Janelle Cai, and I will be your vice president this
-				year! I’m currently a junior, and I’ve been doing MUN since I
-				was in 7th grade. Being in Model UN is an amazing experience.
-				Through Model UN, I’ve gotten a better understanding of many
-				topics and issues in our world today, and it has also taught me
-				so many life long skills, such as communication, negotiation,
-				leadership, and collaboration. MUN has helped me build
-				confidence in myself, and I’ve also made many new friends. Aside
-				from MUN, I am also involved in math, coding, and robotics. I’m
-				excited to meet and work with all of you this year!
-			</>
-		),
-		memeBioNickname: "",
-		memeBio: "",
-	},
-	{
-		name: "Maggie Yang",
-		position: "Director of Finance",
-		bio: (
-			<>
-				Hi! My name is Maggie Yang and I’m your Finance officer for this
-				year! I’m a junior and I joined MUN as a freshman not really
-				knowing too much about it other than that it involved dealing
-				with world issues. Over time, MUN has not only taught me how to
-				speak and negotiate, but also how to research and write quality
-				papers in a limited amount of time. It’s also allowed me to make
-				a variety of friends from varying grade and experience levels,
-				and as a result become more involved in the community as a
-				whole. Although MUN requires a great level of effort and
-				dedication, I strongly believe that every extra minute put into
-				meetings, preparation, and research pays off in the form of
-				skills that will be applicable for many years beyond the club.
-				That being said, I can’t wait to meet and get to know all of you
-				in this next year - if you ever have questions about anything,
-				MUN or even just high school related, feel free to reach out!
-			</>
-		),
-		memeBioNickname: "",
-		memeBio: "",
-	},
-	{
-		name: "Jeffrey Meng",
-		position: "Director of Logistics, Webmaster",
-		bio: (
-			<>
-				Hello! I'm Jeffrey Meng and I'll be a logistics officer &
-				webmaster this year. I'm a senior and I joined MVMUN as a
-				sophomore with the goal of improving my public speaking skills
-				and having fun. I'm glad that I joined Model UN because in
-				addition to improving my speaking skills, it's also let me
-				practice leadership, improve negotiation skills, learn about
-				global affairs, and meet new people. When I'm not doing MUN, you
-				can find me programming, reading, and skiing.
-			</>
-		),
-		memeBioNickname: "",
-		memeBio: "",
-	},
-	{
-		name: "Kenneth Shui",
-		position: "Director of Logistics",
-		bio: (
-			<>
-				Hello everyone! My name is Kenneth Shui, and I’m thrilled to
-				serve as one of the logistics officers this year! I’m currently
-				a junior, and I joined MVMUN as a sophomore with the goal of
-				improving my confidence in public speaking and meeting new
-				people. Even though last year was virtual, I learned so much
-				about MUN and improved my verbal skills a lot. I’m really
-				looking forward to this year’s in-person committees as it is
-				basically vacation without parents. Outside of MUN, I’m also
-				involved in other clubs and competitions, but my biggest hobbies
-				are playing volleyball and singing.
-			</>
-		),
-		memeBioNickname: "",
-		memeBio: "",
-	},
-	{
-		name: "Amy Hu",
-		position: "Director of Public Relations",
-		bio: (
-			<>
-				Hi I am Amy Hu and I am going to be your PR officer this year. I
-				am a junior and joined Model UN in sophomore year seeking to
-				join an inclusive community of open-minded and creative people.
-				When I joined MVMUN, I was blown away at how talented MVMUN
-				members are and I was so excited to be able to contribute to the
-				MVMUN team. After a long year of being hypnotized by zoom, I
-				can’t wait to experience MUN person next year. I hope this year
-				is going to be a blast and I hope you will enjoy MVMUN as much
-				as I have enjoyed it so far. As an officer, I wish to be as
-				approachable as possible so feel free to message me about
-				anything at any time. My Instagram is @amy_whooo and I am always
-				open on discord and messenger!
-			</>
-		),
-		memeBioNickname: "",
-		memeBio: "",
-	},
-	{
-		name: "Elizabeth Lee",
-		position: "President of Kennedy, Kennedy/MVMUN Liaison",
-		bio: (
-			<>
-				Hello! My name is Elizabeth Lee and I’m the Kennedy president
-				and Kennedy/MVMUN liaison this year. I'm currently a senior
-				attending Monta Vista high school, I've been in MVMUN for three
-				years now. Although I've never previously thought of myself as
-				someone good at debate, public speaking, or even politics, MUN
-				has taught me so much about not only international affairs and
-				leadership, but also how to find confidence and determination.
-				From yelling for hours in committee to quiet late night chats,
-				my experiences in MUN have always been some of the most
-				memorable. Outside of MUN, I love music and reading. I look
-				forward to working with all of you this year!
+				Hello! I’m Janelle, and I will be your president this year! 
+				I am currently a senior and I’ve been doing MUN for 6 years. 
+				Being in Model UN is an amazing experience, and I’ve made so 
+				many amazing memories through the club. Through Model UN, 
+				I’ve also gotten a better understanding of many topics and 
+				issues in our world today, and it has also taught me so many 
+				life long skills, such as communication, negotiation, leadership, 
+				and collaboration. MUN has helped me build confidence in myself, 
+				and I’ve met an amazing community of people through MUN. 
+				Aside from MUN, I am also involved in math, coding, and robotics. 
+				I’m excited to meet and work with all of you this year!
+
 			</>
 		),
 		memeBioNickname: "",
@@ -196,20 +48,197 @@ export default [
 	},
 	{
 		name: "Grace Tan",
+		position: "Vice President",
+		bio: (
+			<>
+				Hi! I’m Grace, and I'm one of your vice presidents this year! 
+				I am currently a senior and I’ve been a part of MUN since 
+				seventh grade. During my time in MUN, I’ve become better 
+				acquainted with the world by expanding my perspective on 
+				global issues and meeting people with diverse opinions. 
+				Participating in conferences and weekly club meetings has 
+				encouraged me to be a better leader and communicator, 
+				and to grow as a person above all else. I’m truly grateful 
+				for all the memories and skills that I’ve picked up in MUN, 
+				and I’m looking forward to another exciting year with everyone! 
+
+			</>
+		),
+		memeBioNickname: "",
+		memeBio: "",
+	},
+	{
+		name: "Maggie Yang",
+		position: "Vice President",
+		bio: (
+			<>
+				Hi! I’m Maggie, and I will be one of your vice presidents this 
+				year. I am currently a senior, and I started MUN in my freshman 
+				year. Over the last few years, I’ve gained an invaluable 
+				understanding of diplomacy, international affairs, and public 
+				speaking through my various experiences. Attending and planning 
+				conferences has truly been so rewarding, and I’ve found myself 
+				within a community that is both accepting and diverse. I can’t 
+				wait to work with all of you this year, and feel free to reach 
+				out to me anytime if you have questions about MUN or high school 
+				in general!
+
+			</>
+		),
+		memeBioNickname: "",
+		memeBio: "",
+	},
+	{
+		name: "Riya Murthy",
 		position: "Director of Training",
 		bio: (
 			<>
-				Hello! I’m Grace Tan and I'll be one of your training officers
-				this year! I’m currently a junior and I joined MUN in seventh
-				grade. Prior to joining MUN, I never pegged myself as much of a
-				public speaker and had very minimal interest in current events
-				and politics, but I grew to enjoy discussing various political
-				issues, both during club meetings and during conferences.
-				Through MUN, I was able to build on my communication and
-				leadership abilities, as well as gain self-confidence. Outside
-				of MUN, I enjoy playing tennis and watching anime. I’m looking
-				forward to meeting everyone this year and feel free to reach out
-				anytime!
+				Hi everyone! I’m Riya and I’m super excited to be one of your 
+				training officers this year! I’m currently a sophomore at MVHS, 
+				and have been doing MUN for five years — since my first year of 
+				middle school! MUN is a super thrilling experience that alongside 
+				teaching you political relationships and real-world issues, allows 
+				you to learn about public speaking and coming up with speeches on 
+				the fly. Outside of MUN, I enjoy reading, writing (both with 
+				El Estoque and doing poetry), as well as editing (for a competition 
+				called Polyphony Lit). Looking forward to meeting you all!
+
+			</>
+		),
+		memeBioNickname: "",
+		memeBio: "",
+	},
+	{
+		name: "Clay Carson",
+		position: "Director of Training",
+		bio: (
+			<>
+				Hello! My name is Clay and I am excited to be a training officer 
+				this year! I am a senior and I joined Model UN last year because 
+				I am passionate about global issues and I have past experience 
+				with writing and public speaking. Initially, I had no idea what 
+				Model UN was, but I decided to try it and it ended up becoming 
+				one of my favorite extracurricular activities. Model UN has 
+				allowed me to meet new people both at Monta Vista and from other 
+				schools at conferences, and helped me build leadership and 
+				teamwork skills. In addition to Model UN, I am in Monta Vista’s 
+				mock trial and speech clubs, and I do youth orchestra outside of school. 
+				I am looking forward to working with everyone this year!
+
+			</>
+		),
+		memeBioNickname: "",
+		memeBio: "",
+	},
+	{
+		name: "Charlotte Zhou",
+		position: "Director of Logistics",
+		bio: (
+			<>
+				Hey everyone! I’m Charlotte, one of your logistics officers this 
+				year. I’m currently a sophomore and joined MVMUN in freshman year. 
+				MUN was something greatly out of my comfort zone at the time, but 
+				looking back I don’t regret my decision to take on the challenge 
+				at all. MUN is a great opportunity to put yourself out there and 
+				practice your public speaking and leadership skills, not to mention 
+				learning about current world affairs. Aside from MUN, I’m interested 
+				in art and the sciences. Feel free to reach out to me whenever you 
+				want for any questions, concerns, or just to talk. I’m excited to 
+				get to know you all better!
+
+			</>
+		),
+		memeBioNickname: "",
+		memeBio: "",
+	},
+	{
+		name: "Anushka Kumar",
+		position: "Director of Logistics",
+		bio: (
+			<>
+				Hello everyone! I’m Anushka and I’m very excited to be one of 
+				your logistics officers this year! I’m currently a sophomore, 
+				and I joined MUN as a freshman last year. I'm so happy I decided 
+				to join Model U.N because being a part of it has been a fantastic 
+				and incredibly fulfilling experience. I’ve gained a better 
+				understanding of several global issues and topics and have also 
+				learned to improve my confidence and public speaking skills 
+				through Model U.N. MUN has taught me so much this year and 
+				I’m so happy to be part of such a wonderful community! 
+				Aside from MUN, I’m in marching band, am passionate about 
+				environmental science, and love to bake! I’m looking forward 
+				to meeting and working with all of you this year!
+
+			</>
+		),
+		memeBioNickname: "",
+		memeBio: "",
+	},
+	{
+		name: "Kathryn Foo",
+		position: "Director of Public Relations",
+		bio: (
+			<>
+				Hey everyone! I’m Kathryn and I’m excited to be the PR Officer 
+				for this year. I’m currently a sophomore and I joined MUN last 
+				year as a freshman. Before joining, I only really knew MUN as 
+				being the quintessential movie nerd hobby. Now though, I’ve 
+				found that, looking back on the experiences I’ve had, MUN has 
+				genuinely become my haven for comfort and chaos. Here, I’ve 
+				grown my confidence, public-speaking skills, and ability to 
+				think on my toes and I can’t wait to see what else MUN has 
+				in store for me! Outside of MUN, I’m passionate anything 
+				with words: writing (on staff with El Estoque), reading 
+				(especially cheesy rom-com), and public-speaking.
+
+			</>
+		),
+		memeBioNickname: "",
+		memeBio: "",
+	},
+	{
+		name: "Jerry Want",
+		position: "Secretary",
+		bio: (
+			<>
+				Hello everyone! I’m Jerry and I’m so excited to serve as 
+				MVMUN secretary this year! I’m currently a sophomore, 
+				and I joined MUN in my freshman year. Joining MVMUN was 
+				singlehandedly a decision that I don’t regret even a 
+				single bit, due to how phenomenal my experience with 
+				it has been so far. Due to my low confidence in speaking, 
+				I was skeptical at first about going to conferences and 
+				fully immersing myself in MUN. However, I quickly learned 
+				that MUN was totally different from what I had envisioned. 
+				Besides getting to speak about issues that I genuinely 
+				cared about in front of an audience that shared my passion, 
+				I also got to make some of the best memories with the most 
+				welcoming MVMUN community. Outside of MUN, I enjoy learning 
+				about different cultures, socializing with others, and 
+				cooking new recipes. Going to conferences by yourself and 
+				speaking in front of an audience may seem daunting at 
+				first –– but I assure you that with some help from our 
+				meetings and some confidence to try it out, you’ll 
+				definitely be the type of delegate that you strive to be in no time! 
+
+			</>
+		),
+		memeBioNickname: "",
+		memeBio: "",
+	},
+	{
+		name: "Kenneth Shui",
+		position: "Webmaster",
+		bio: (
+			<>
+				Hey! I’m Kenneth, and I’m thrilled to serve as your webmaster 
+				this year. I’m currently a senior, and joining MVMUN was one 
+				of the best decisions I made in high school. Through Model UN, 
+				I’ve improved my confidence in public speaking, met so many 
+				wonderful people, and broadened my understanding of the world. 
+				I’m looking forward to creating some incredible resolutions and 
+				memories with you all. Outside of MUN, I love playing volleyball 
+				and singing.
 			</>
 		),
 		memeBioNickname: "",
