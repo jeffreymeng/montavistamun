@@ -90,7 +90,7 @@ export default [
 	},
 	{
 		name: "Riya Murthy",
-		position: "Director of Training",
+		position: "Training",
 		bio: (
 			<>
 				Hi everyone! I’m Riya and I’m super excited to be one of your 
@@ -110,7 +110,7 @@ export default [
 	},
 	{
 		name: "Clay Carson",
-		position: "Director of Training",
+		position: "Training",
 		bio: (
 			<>
 				Hello! My name is Clay and I am excited to be a training officer 
@@ -132,7 +132,7 @@ export default [
 	},
 	{
 		name: "Charlotte Zhou",
-		position: "Director of Logistics",
+		position: "Logistics",
 		bio: (
 			<>
 				Hey everyone! I’m Charlotte, one of your logistics officers this 
@@ -152,8 +152,8 @@ export default [
 		memeBio: "",
 	},
 	{
-		name: "Anushka Kumar",
-		position: "Director of Logistics",
+		name: "Anushka Kumaran",
+		position: "Logistics",
 		bio: (
 			<>
 				Hello everyone! I’m Anushka and I’m very excited to be one of 
@@ -176,7 +176,7 @@ export default [
 	},
 	{
 		name: "Kathryn Foo",
-		position: "Director of Public Relations",
+		position: "Public Relations",
 		bio: (
 			<>
 				Hey everyone! I’m Kathryn and I’m excited to be the PR Officer 
@@ -197,7 +197,7 @@ export default [
 		memeBio: "",
 	},
 	{
-		name: "Jerry Want",
+		name: "Jerry Wang",
 		position: "Secretary",
 		bio: (
 			<>

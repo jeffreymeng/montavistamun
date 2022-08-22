@@ -1,36 +1,115 @@
+import React, { useState } from "react";
+function ExpandableBio({
+	pre,
+	post,
+}: {
+	pre: React.ReactNode;
+	post: React.ReactNode;
+}) {
+	const [expanded, setExpanded] = useState(false);
+	return (
+		<>
+			{pre}
+			<button
+				className={
+					"py-3 my-2 md:my-1 md:py-1 px-4 md:px-1 rounded-md bg-indigo-500 active:bg-indigo-600 md:active:bg-white md:bg-white md:underline text-indigo-50 md:text-indigo-500 active:text-indigo-800"
+				}
+				onFocus={(e) => e.target.blur()}
+				onClick={() => setExpanded((old) => !old)}
+			>
+				{expanded ? "Read Less..." : "Read More..."}
+			</button>
+			{expanded && <>{post}</>}
+		</>
+	);
+}
 export default [
 	{
-		name: "Nelson Mu",
-		position: "President",
-		bio:
-			"Hey guys! I'm Nelson Mu, and I'm happy to serve as your President for this year! Although I am a Lawson " +
-			"alum, I have been honored to serve as an officer in KMUN for the last 2 years. Prior to my 3 years of MUN, " +
-			"I had no experience with leadership or communication, and this club really helped me develop those vital " +
-			"skills. Outside of MUN, I like to do volunteering and political advocacy and debate, and when I'm not being " +
-			"a complete nerd I like to chat with people and play video games. I am extremely excited to see how our club's " +
-			"delegates grow, not just as competitors, but as people. I will also be working to ensure that the year offers " +
-			"as many experiences for fun and growth as it did for me the last three years!",
-	},
-	{
-		name: "Elizabeth Lee",
-		position: "Training and PR",
-		bio:
-			"Hello! I'm Elizabeth and I'll be your training and PR director for this upcoming year! I'm currently a junior " +
-			"attending Monta Vista high school, I've been in MVMUN for three years now. Although I've never previously " +
-			"thought of myself as someone good at debate, public speaking, or even politics, MUN has taught me so much " +
-			"about not only international affairs, but also how to find confidence and determination. From yelling for " +
-			"hours in committee to quiet late night chats, my experiences in MUN have always been some of the most " +
-			"memorable. Outside of MUN, I enjoy chatting with her friends, crocheting, and baking. I'm looking forward " +
-			"to meeting all of you and helping you learn some new skills, and have a lot of fun!",
-	},
-	{
 		name: "Janelle Cai",
-		position: "Logistics",
-		bio:
-			"Hey everyone! I’m Janelle and I’ll be your logistics officer this year. I’m currently a sophomore and " +
-			"I’ve been doing MUN since I was in 7th grade. Being in MUN has taught me so much about communication, " +
-			"leadership, and working with others, and it’s given me a better understanding of so many different topics " +
-			"and issues in our world today. Outside of MUN, I’m involved in math, coding, and robotics. I’m excited to " +
-			"work with all of you this year!",
+		position: "President",
+		bio: (
+			<>
+				Hello! I’m Janelle, and I will be your KMUN president this year! 
+				I am currently a senior and I’ve been doing MUN for 6 years. 
+				Being in Model UN is an amazing experience, and I’ve made so many 
+				amazing memories through the club. Through Model UN, I’ve also 
+				gotten a better understanding of many topics and issues in our 
+				world today, and it has also taught me so many life long skills, 
+				such as communication, negotiation, leadership, and collaboration. 
+				MUN has helped me build confidence in myself, and I’ve met an 
+				amazing community of people through MUN. Aside from MUN, I am 
+				also involved in math, coding, and robotics. I’m excited to meet 
+				and work with all of you this year!
+
+			</>
+		),
+		memeBioNickname: "",
+		memeBio: "",
+	},
+	{
+		name: "Aarna Burji",
+		position: "Training",
+		bio: (
+			<>
+				
+				Hello everyone!! I’m Aarna and I’ll be one of your training officers 
+				for KMUN this year. I’m currently a sophomore at Monta Vista and a 
+				member of MVMUN. I’ve been doing MUN since 8th grade and it has been 
+				my favorite club ever since. KMUN fostered my love for Model UN, 
+				and taught me how to communicate effectively and confidently. 
+				It created valuable and memorable experiences that I hope you guys 
+				will find this year. Outside of MUN I enjoy robotics, hiking, and 
+				participating in various non-profits and local volunteering 
+				opportunities. I am excited to help you all grow as delegates, 
+				and I can’t wait for the upcoming year!
+
+
+			</>
+		),
+		memeBioNickname: "",
+		memeBio: "",
+	},
+	{
+		name: "Riya Murthy",
+		position: "Training",
+		bio: (
+			<>
+				Hi everyone! I’m Riya and I’m super excited to be one of your training 
+				officers for KMUN this year! I’m currently a sophomore at MVHS, and 
+				have been doing MUN for five years — since my first year of middle 
+				school! MUN is a super thrilling experience that alongside teaching 
+				you political relationships and real-world issues, allows you to 
+				learn about public speaking and coming up with speeches on the fly. 
+				Outside of MUN, I enjoy reading, writing (both with El Estoque and 
+				doing poetry), as well as editing (for a competition called Polyphony 
+				Lit). Looking forward to meeting you all!
+
+
+			</>
+		),
+		memeBioNickname: "",
+		memeBio: "",
+	},
+	{
+		name: "Kathryn Foo",
+		position: "Logistics and Public Relations",
+		bio: (
+			<>
+				Hey everyone! I’m Kathryn and I’m excited to be your Logistics and 
+				PR Officer for KMUN this year. I’m currently a sophomore and I joined 
+				MUN last year as a freshman. Before joining, I only really knew MUN 
+				as being the quintessential movie nerd hobby. Now though, I’ve found 
+				that, looking back on the experiences I’ve had, MUN has genuinely 
+				become my haven for comfort and chaos. Here, I’ve grown my confidence, 
+				public-speaking skills, and ability to think on my toes and I can’t 
+				wait to see what else MUN has in store for me! Outside of MUN, 
+				I’m passionate about anything with words: writing (on staff with 
+				El Estoque), reading (especially cheesy rom-com), and public-speaking.
+
+
+			</>
+		),
+		memeBioNickname: "",
+		memeBio: "",
 	},
 ];
