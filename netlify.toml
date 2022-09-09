@@ -10,5 +10,5 @@
   force = true # ensure that we always redirect
 [[redirects]]
   from = "/join"
-  to = "https://mailchi.mp/264e166a5d90/mvmun21-22"
+  to = "https://mailchi.mp/9caf71779f11/mvmun22-23"
   force = true # ensure that we always redirect
