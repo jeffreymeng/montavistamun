@@ -97,7 +97,7 @@
 		"flatpickr": "^4.6.9",
 		"flickity": "^2.2.2",
 		"formik": "^2.2.6",
-		"gatsby": "^4.5.4",
+		"gatsby": "^4.24.0",
 		"gatsby-background-image": "^1.6.0",
 		"gatsby-image": "^3.11.0",
 		"gatsby-plugin-create-client-paths": "^4.5.0",
