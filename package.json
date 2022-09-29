@@ -121,7 +121,7 @@
 		"mailcheck": "^1.1.1",
 		"majestic": "^1.8.0",
 		"moment": "^2.29.1",
-		"netlify-lambda": "^2.0.3",
+		"netlify-lambda": "2.0.15",
 		"pako": "^2.0.3",
 		"patch-package": "^6.2.2",
 		"pdf-lib": "^1.17.1",
