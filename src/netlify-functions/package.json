@@ -4,7 +4,7 @@
 		"axios": "^0.25.0",
 		"crypto": "^1.0.1",
 		"firebase-admin": "^10.0.1",
-		"jsonwebtoken": "^8.5.1",
+		"jsonwebtoken": "^9.0.0",
 		"netlify-lambda": "^2.0.15",
 		"webpack-node-externals": "^3.0.0"
 	}
