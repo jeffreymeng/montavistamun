@@ -160,7 +160,7 @@ export default function CreatePage({
 						</a>
 						<br />
 						Attend your first member meeting (Thursday lunches in
-						C207!)
+						C107!)
 					</h5>
 
 					{verificationComplete && (
