@@ -61,7 +61,7 @@ export default function KennedyPage({
 						<div className="mt-8 flex justify-center">
 							<div className="inline-flex rounded-md shadow">
 								<a
-									href="https://docs.google.com/forms/d/e/1FAIpQLSfvnloHZsjPOq8w7iRCRADJ9U6SDqcfyMylgehKO0bGMu0aIA/viewform"
+									href="https://docs.google.com/forms/d/e/1FAIpQLScs5sQN0kCcA7jYjl60hAsRxMY28C3pI6cu-Kflh6dHCh9YiQ/viewform"
 									target={"_blank"}
 									rel={"noopener noreferrer"}
 									className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-500 focus:outline-none focus:ring transition duration-150 ease-in-out"
