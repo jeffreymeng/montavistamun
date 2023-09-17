@@ -49,8 +49,8 @@ export default [
 		acronym: "naimun",
 		text:
 			"The North American Invitational Model United Nations Conference is one of our travel conferences. With over 3,000 delegates each year, NAIMUN is the largest student-run Model United Nations conference in the world, and many consider it the de facto national championship conference. Don’t let all that scare you, though: it’s often best remembered by delegates as a 6-day trip to Washington, DC, full of chances to meet new people and make new friends.",
-		registration: "https://bit.ly/naimun2022app",
-		registrationText: "Application Now Open",
+		//registration: "https://bit.ly/naimun2022app",
+		//registrationText: "Application Now Open",
 	},
 	{
 		name: "Berkeley Model United Nations Conference",

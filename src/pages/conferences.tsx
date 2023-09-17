@@ -47,11 +47,8 @@ export default function ConferencesPage({
 					In-person conferences are back!
 				</h1>
 				<p className="mt-3 text-lg">
-					Now that we’re in person, there is so much more we can do!
-					Meetings will be more productive, training will be more
-					efficient, and club operations will be smoother. Model UN is
-					best known for its conferences, which allow you to take
-					advantage of all the previous benefits as well as grow
+					Model UN is best known for its conferences, which allow you to take
+					advantage of the knowledge you gain from meetings as well as grow
 					closer to other members. Especially for travel conferences,
 					you are essentially going on a vacation with your favorite
 					people (yes, Model UN is that fun) while putting your
