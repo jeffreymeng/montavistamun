@@ -65,7 +65,17 @@ export default [
 		position: "Vice President",
 		bio: (
 			<>
-			Hey, I’m Jerry and I’m super excited to be your VP this year!
+			Hey, I’m Jerry and I’m super excited to be your VP this year! I joined MUN freshman 
+			year and after a lot of all-nighters, Model U.N still retains its appeal and 
+			enjoyable-ness to me currently as a Junior. I’ve been passionate about public speaking 
+			and geography from the beginning––and through Model U.N, I have been able to meet 
+			people from all around the world, discussing some of the most important modern day 
+			topics that humanity is still working to resolve. MUN really strengthens your ability 
+			to think critically, as well as gaining cultural perspectives and being more aware of 
+			global issues. Outside of MUN, I really enjoy listening to my favorite music, cooking, 
+			as well as socializing. I really hope that you gain some valuable experience from MUN 
+			while also enjoying the process; and MUN really is just a community, so we are all 
+			here for you! 
 			</>
 		),
 		memeBioNickname: "",
