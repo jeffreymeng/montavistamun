@@ -145,7 +145,12 @@ export default [
 		position: "Logistics",
 		bio: (
 			<>
-			Sitong Jian is a logistics officer.
+			Hi, I'm Sitong and I'm a logistics officer this year! I joined Model UN during my sophomore 
+			year. I'm mainly a crisis committee guy since I enjoy the fast-paced nature and the sheer insanity
+			present. My favorite aspect of Model UN is messing with people in committees.
+			Outside of Model UN, I'm a member of marching band and orchestra. I'm into alternate history, worldbuilding,
+			video games.
+			
 			</>
 		),
 		memeBioNickname: "",
