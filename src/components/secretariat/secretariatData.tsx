@@ -149,7 +149,7 @@ export default [
 			year. I'm mainly a crisis committee guy since I enjoy the fast-paced nature and the sheer insanity
 			present. My favorite aspect of Model UN is messing with people in committees.
 			Outside of Model UN, I'm a member of marching band and orchestra. I'm into alternate history, worldbuilding,
-			video games.
+			and video games.
 			
 			</>
 		),
