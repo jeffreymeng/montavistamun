@@ -25,22 +25,44 @@ function ExpandableBio({
 }
 export default [
 	{
-		name: "Janelle Cai",
+		name: "Riya Murthy",
 		position: "President",
 		bio: (
 			<>
-				Hello! I’m Janelle, and I will be your KMUN president this year! 
-				I am currently a senior and I’ve been doing MUN for 6 years. 
-				Being in Model UN is an amazing experience, and I’ve made so many 
-				amazing memories through the club. Through Model UN, I’ve also 
-				gotten a better understanding of many topics and issues in our 
-				world today, and it has also taught me so many life long skills, 
-				such as communication, negotiation, leadership, and collaboration. 
-				MUN has helped me build confidence in myself, and I’ve met an 
-				amazing community of people through MUN. Aside from MUN, I am 
-				also involved in math, coding, and robotics. I’m excited to meet 
-				and work with all of you this year!
-
+				Hi everyone! I’m Riya and I’m super excited to be your president this
+				year! I’m currently a junior at MVHS, and have been doing MUN for six years
+				— since my first year of middle school. MUN is a super thrilling experience
+				that alongside teaching you political relationships and real-world issues,
+				allows you to learn about public speaking and coming up with speeches on the
+				fly. Outside of MUN, I enjoy reading, writing (both with El Estoque and doing
+				poetry), as well as editing (for a competition called Polyphony Lit). Looking
+				forward to meeting you all!
+			</>
+		),
+		memeBioNickname: "",
+		memeBio: "",
+	},
+	{
+		name: "Sophia Yan",
+		position: "Officer",
+		bio: (
+			<>
+				Hi I’m Sophia and I’m a KMUN officer this year! I joined MUN in sophomore
+				year and this is my second year attending! I love the spirit of MUN delegates 
+				and my hobbies are art and dance!
+			</>
+		),
+		memeBioNickname: "",
+		memeBio: "",
+	},
+	{
+		name: "Jessica Zhou",
+		position: "Officer",
+		bio: (
+			<>
+				I’m Jessica and also a KMUN officer C: I joined MUN my sophomore year and my 
+				favorite part of it would probably be coming up with silly resolutions! Outside 
+				of MUN, I like to play video games and draw.
 			</>
 		),
 		memeBioNickname: "",
@@ -48,65 +70,10 @@ export default [
 	},
 	{
 		name: "Aarna Burji",
-		position: "Training",
+		position: "Officer",
 		bio: (
 			<>
-				
-				Hello everyone!! I’m Aarna and I’ll be one of your training officers 
-				for KMUN this year. I’m currently a sophomore at Monta Vista and a 
-				member of MVMUN. I’ve been doing MUN since 8th grade and it has been 
-				my favorite club ever since. KMUN fostered my love for Model UN, 
-				and taught me how to communicate effectively and confidently. 
-				It created valuable and memorable experiences that I hope you guys 
-				will find this year. Outside of MUN I enjoy robotics, hiking, and 
-				participating in various non-profits and local volunteering 
-				opportunities. I am excited to help you all grow as delegates, 
-				and I can’t wait for the upcoming year!
-
-
-			</>
-		),
-		memeBioNickname: "",
-		memeBio: "",
-	},
-	{
-		name: "Riya Murthy",
-		position: "Training",
-		bio: (
-			<>
-				Hi everyone! I’m Riya and I’m super excited to be one of your training 
-				officers for KMUN this year! I’m currently a sophomore at MVHS, and 
-				have been doing MUN for five years — since my first year of middle 
-				school! MUN is a super thrilling experience that alongside teaching 
-				you political relationships and real-world issues, allows you to 
-				learn about public speaking and coming up with speeches on the fly. 
-				Outside of MUN, I enjoy reading, writing (both with El Estoque and 
-				doing poetry), as well as editing (for a competition called Polyphony 
-				Lit). Looking forward to meeting you all!
-
-
-			</>
-		),
-		memeBioNickname: "",
-		memeBio: "",
-	},
-	{
-		name: "Kathryn Foo",
-		position: "Logistics and Public Relations",
-		bio: (
-			<>
-				Hey everyone! I’m Kathryn and I’m excited to be your Logistics and 
-				PR Officer for KMUN this year. I’m currently a sophomore and I joined 
-				MUN last year as a freshman. Before joining, I only really knew MUN 
-				as being the quintessential movie nerd hobby. Now though, I’ve found 
-				that, looking back on the experiences I’ve had, MUN has genuinely 
-				become my haven for comfort and chaos. Here, I’ve grown my confidence, 
-				public-speaking skills, and ability to think on my toes and I can’t 
-				wait to see what else MUN has in store for me! Outside of MUN, 
-				I’m passionate about anything with words: writing (on staff with 
-				El Estoque), reading (especially cheesy rom-com), and public-speaking.
-
-
+				Aarna is a KMUN officer.
 			</>
 		),
 		memeBioNickname: "",
