@@ -43,8 +43,8 @@ export default function ConferencesPage({
 				skills with your peers — all while having a blast!
 			</Header>
 			<Main>
-				<h1 className={"text-3xl leading-9 font-extrabold"}>
-					In-person conferences are back!
+				<h1 className={"text-3xl leading-7 font-extrabold"}>
+					More conferences to be announced in the future!
 				</h1>
 				<p className="mt-3 text-lg">
 					Model UN is best known for its conferences, which allow you to take
@@ -100,7 +100,7 @@ export default function ConferencesPage({
 										? `${
 												registrationText ||
 												"Registration Now Open"
-										  }${user ? "" : ": Login to Continue"}`
+										  }${(user || registration.indexOf("/") !== 0) ? "" : ": Login to Continue"}` // if logged in or the registration uses a google form don't display text
 										: undefined
 								}
 							>
