@@ -14,8 +14,8 @@ export default [
 	 	location: "Stanford University",
 	 	acronym: "smunc",
 	 	text: `The Stanford Model United Nations Conference is one of the most competitive conferences of the year, but also one with most to offer. With three days packed with five committee sessions, it may leave you a bit exhausted, but never with any regrets about attending!`,
-	 	// registration: "http://bit.ly/smunc2020app",
-	 	// registrationText: "Application Now Open",
+	 	registration: "https://docs.google.com/forms/d/1VdAGqj2s-GnTT_BoyWMhHmDeE3Vq1IAusn1C5Gvdoec",
+	 	registrationText: "Sign up now! Application closes 10/19",
 	},
 	/*{
 		name: "Bruin Model UN Conference",
@@ -68,7 +68,7 @@ export default [
 		location: "Monta Vista High School",
 		acronym: "sbmun",
 		text:
-			"South Bay Model United Nations Conference is our sixth conference of the year, and is co-hosted by yours truly at Monta Vista! It’s a great chance to hone your Model UN skills with other delegates from the Bay Area. MUN conferences are rare in the spring season, so this is a great way for you to keep honing on your MUN abilities.",
+			"South Bay Model United Nations Conference is one of our last conferences of the year, and is co-hosted by yours truly at Monta Vista! It’s a great chance to hone your Model UN skills with other delegates from the Bay Area. MUN conferences are rare in the spring season, so this is a great way for you to keep improving on your MUN abilities.",
 		// registration: "/conferences/sbmun/register",
 	},
 	/*{

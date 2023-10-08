@@ -44,7 +44,7 @@ export default function ConferencesPage({
 			</Header>
 			<Main>
 				<h1 className={"text-3xl leading-7 font-extrabold"}>
-					More conferences to be announced in the future!
+					More conferences to be announced!
 				</h1>
 				<p className="mt-3 text-lg">
 					Model UN is best known for its conferences, which allow you to take
