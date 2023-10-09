@@ -190,7 +190,7 @@ export default [
 			have a better experience with the club.
 			</>
 		),
-		memeBioNickname: "",
-		memeBio: "",
+		memeBioNickname: "Why is this exist",
+		memeBio: "to get here just put #memes at the end of the url, or use the konami code",
 	},
 ];
