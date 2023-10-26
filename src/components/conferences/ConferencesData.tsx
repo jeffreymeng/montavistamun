@@ -14,8 +14,8 @@ export default [
 	 	location: "Stanford University",
 	 	acronym: "smunc",
 	 	text: `The Stanford Model United Nations Conference is one of the most competitive conferences of the year, but also one with most to offer. With three days packed with five committee sessions, it may leave you a bit exhausted, but never with any regrets about attending!`,
-	 	registration: "https://docs.google.com/forms/d/1VdAGqj2s-GnTT_BoyWMhHmDeE3Vq1IAusn1C5Gvdoec",
-	 	registrationText: "Sign up now! Application closes 10/19",
+	 	//registration: "https://docs.google.com/forms/d/1VdAGqj2s-GnTT_BoyWMhHmDeE3Vq1IAusn1C5Gvdoec",
+	 	//registrationText: "Sign up now! Application closes 10/19",
 	},
 	/*{
 		name: "Bruin Model UN Conference",
@@ -27,15 +27,16 @@ export default [
 		// registration: "/conferences/bruinmun/register",
 		// registrationText: "Application Now Open",
 	},*/
-	/*{
+	{
 		name: "San Fransisco Model United Nations Conference",
-		date: "TBA",
+		date: "December 9, 2023 - December 10, 2023",
 		location: "Lowell High School",
 		acronym: "sfmun",
 		text:
 			"San Francisco Model United Nations conference is held by Lowell High School. One of the most beginner-friendly conferences we attend, SFMUN is a great way to get started in Model UN, while also providing experienced delegates with plenty of chances to hone their skills. It’s a much less intense and more beginner-friendly conference, and it’s highly recommended for all delegates to attend.",
 		// registration: "/conferences/sfmun21/register",
 	},
+	/*
 	{
 		name: "Santa Clara Valley Model United Nations Conference",
 		date: "January 28, 2022 - January 29, 2022",
@@ -46,7 +47,7 @@ export default [
 	},*/
 	{
 		name: "North American Invitational Model United Nations Conference",
-		date: "February 17, 2022 - February 20, 2022",
+		date: "February 15, 2024 - February 18, 2024",
 		location: "Georgetown University",
 		acronym: "naimun",
 		text:
