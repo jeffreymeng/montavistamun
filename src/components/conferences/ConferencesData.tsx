@@ -36,15 +36,14 @@ export default [
 			"San Francisco Model United Nations conference is held by Lowell High School. One of the most beginner-friendly conferences we attend, SFMUN is a great way to get started in Model UN, while also providing experienced delegates with plenty of chances to hone their skills. It’s a much less intense and more beginner-friendly conference, and it’s highly recommended for all delegates to attend.",
 		// registration: "/conferences/sfmun21/register",
 	},
-	/*
 	{
 		name: "Santa Clara Valley Model United Nations Conference",
-		date: "January 28, 2022 - January 29, 2022",
+		date: "February 2, 2024 - February 3, 2024",
 		location: "Santa Teresa High School",
 		acronym: "scvmun",
 		text:
 			"The Santa Clara Valley Model United Nations Conference is recommended for all members regardless of prior experience. SCVMUN is a great chance to prepare for more difficult or competitive conferences — but as the second-oldest and second-largest conference on the West Coast, it has plenty to offer of its own right as well.",
-	},*/
+	},
 	{
 		name: "North American Invitational Model United Nations Conference",
 		date: "February 15, 2024 - February 18, 2024",
@@ -72,12 +71,12 @@ export default [
 			"South Bay Model United Nations Conference is one of our last conferences of the year, and is co-hosted by yours truly at Monta Vista! It’s a great chance to hone your Model UN skills with other delegates from the Bay Area. MUN conferences are rare in the spring season, so this is a great way for you to keep improving on your MUN abilities.",
 		// registration: "/conferences/sbmun/register",
 	},
-	/*{
+	{
 		name: "Davis Model United Nations Conference",
-		date: "TBA",
+		date: "May 18, 2024 - May 19, 2024",
 		location: "University of California, Davis",
 		acronym: "dmunc",
 		text:
 			"Our final conference of the year, Davis Model United Nations Conference, is an excellent way for you to put the skills you’ve accumulated during the year to the test. DMUNC has a variety of both novices and experienced members, and we’re sure that you will do great after practicing for so long! DMUNC is our last overnight conference, including a likely 2-night stay at a hotel near the Davis campus.",
-	},*/
+	},
 ];
