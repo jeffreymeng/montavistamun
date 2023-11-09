@@ -43,7 +43,8 @@ export default [
 		acronym: "norcalmun",
 		text:
 			"Northern California Model United Nations Conference is held at Foothill Highschool. The conference has numerous committees for delegates of all skill levels and is recommended for both old and new delegates.",
-		// registration: "/conferences/sfmun21/register",
+		registration: "https://forms.gle/NZB5Kzm8MD9gbsfi8",
+		registrationText: "Sign up by 11/9!",
 	},
 	{
 		name: "Santa Clara Valley Model United Nations Conference",
