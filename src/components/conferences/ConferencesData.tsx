@@ -27,13 +27,22 @@ export default [
 		// registration: "/conferences/bruinmun/register",
 		// registrationText: "Application Now Open",
 	},*/
-	{
+	/*{
 		name: "San Fransisco Model United Nations Conference",
 		date: "December 9, 2023 - December 10, 2023",
 		location: "Lowell High School",
 		acronym: "sfmun",
 		text:
 			"San Francisco Model United Nations conference is held by Lowell High School. One of the most beginner-friendly conferences we attend, SFMUN is a great way to get started in Model UN, while also providing experienced delegates with plenty of chances to hone their skills. It’s a much less intense and more beginner-friendly conference, and it’s highly recommended for all delegates to attend.",
+		// registration: "/conferences/sfmun21/register",
+	},*/
+	{
+		name: "North California Model United Nations Conference",
+		date: "December 9, 2023 - December 10, 2023",
+		location: "Foothill High School",
+		acronym: "norcalmun",
+		text:
+			"Northern California Model United Nations Conference is held at Foothill Highschool. The conference has numerous committees for delegates of all skill levels and is recommended for both old and new delegates.",
 		// registration: "/conferences/sfmun21/register",
 	},
 	{

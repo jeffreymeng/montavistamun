@@ -73,7 +73,7 @@ export default [
 		position: "Officer",
 		bio: (
 			<>
-				Aarna is a KMUN officer.
+				Hi everyone! My name is Aarna and I am a junior at MVHS. 
 			</>
 		),
 		memeBioNickname: "",
