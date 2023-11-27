@@ -68,7 +68,7 @@ export default [
 		name: "Nation High School Model United Nations Conference",
 		date: "March 8, 2024 - March 11, 2024",
 		location: "New York Hilton Midtown and United Nations Headquaters",
-		acronym: "naimun",
+		acronym: "nhsmun",
 		text:
 			"The National High School Model United Nations Conference is one of our travel conferences. NHSMUN is the world's largest, most diverse, and most prestigious MUN conference for high-school students, with students from over 130 countries hosted. Don’t let all that scare you, though: it’s often best remembered by delegates as a 5-day trip to New York City, NY, full of chances to meet new people and make new friends.",
 		registration: "https://forms.gle/UCbJ9vVxqaYU8caT7",
