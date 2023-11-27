@@ -43,8 +43,8 @@ export default [
 		acronym: "norcalmun",
 		text:
 			"Northern California Model United Nations Conference is held at Foothill Highschool. The conference has numerous committees for delegates of all skill levels and is recommended for both old and new delegates.",
-		registration: "https://forms.gle/NZB5Kzm8MD9gbsfi8",
-		registrationText: "Sign up by 11/9!",
+		//registration: "https://forms.gle/NZB5Kzm8MD9gbsfi8",
+		//registrationText: "Sign up by 11/9!",
 	},
 	{
 		name: "Santa Clara Valley Model United Nations Conference",
@@ -54,7 +54,7 @@ export default [
 		text:
 			"The Santa Clara Valley Model United Nations Conference is recommended for all members regardless of prior experience. SCVMUN is a great chance to prepare for more difficult or competitive conferences — but as the second-oldest and second-largest conference on the West Coast, it has plenty to offer of its own right as well.",
 	},
-	{
+	/*{
 		name: "North American Invitational Model United Nations Conference",
 		date: "February 15, 2024 - February 18, 2024",
 		location: "Georgetown University",
@@ -63,6 +63,16 @@ export default [
 			"The North American Invitational Model United Nations Conference is one of our travel conferences. With over 3,000 delegates each year, NAIMUN is the largest student-run Model United Nations conference in the world, and many consider it the de facto national championship conference. Don’t let all that scare you, though: it’s often best remembered by delegates as a 6-day trip to Washington, DC, full of chances to meet new people and make new friends.",
 		//registration: "https://bit.ly/naimun2022app",
 		//registrationText: "Application Now Open",
+	},*/
+	{
+		name: "Nation High School Model United Nations Conference",
+		date: "March 8, 2024 - March 11, 2024",
+		location: "New York Hilton Midtown and United Nations Headquaters",
+		acronym: "naimun",
+		text:
+			"The National High School Model United Nations Conference is one of our travel conferences. NHSMUN is the world's largest, most diverse, and most prestigious MUN conference for high-school students, with students from over 130 countries hosted. Don’t let all that scare you, though: it’s often best remembered by delegates as a 5-day trip to New York City, NY, full of chances to meet new people and make new friends.",
+		registration: "https://forms.gle/UCbJ9vVxqaYU8caT7",
+		registrationText: "Apply Now! Applications due 12/1",
 	},
 	/*{
 		name: "Berkeley Model United Nations Conference",
