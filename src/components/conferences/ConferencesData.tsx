@@ -53,6 +53,8 @@ export default [
 		acronym: "scvmun",
 		text:
 			"The Santa Clara Valley Model United Nations Conference is recommended for all members regardless of prior experience. SCVMUN is a great chance to prepare for more difficult or competitive conferences — but as the second-oldest and second-largest conference on the West Coast, it has plenty to offer of its own right as well.",
+		registration: "/conferences/scvmun24/register",
+		registrationText: "App not open",
 	},
 	{
 		name: "North American Invitational Model United Nations Conference",
