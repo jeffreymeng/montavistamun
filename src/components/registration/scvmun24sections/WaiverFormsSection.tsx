@@ -211,6 +211,7 @@ export default function WaiverFormsSection({
 						fieldName={"scvmun24FuhsdForm"}
 						data={data}
 						handleUpdateData={handleUpdateData}
+						conferenceName={"scvmun24"}
 					/>
 				</div>
 			</div>

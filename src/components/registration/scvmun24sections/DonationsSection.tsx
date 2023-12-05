@@ -1,4 +1,5 @@
 // Import React FilePond
+import axios from "axios";
 import cx from "classnames";
 import { FilePond } from "filepond";
 import { User } from "firebase";
@@ -241,7 +242,19 @@ export default function DonationsSection({
 							.then(() => {
 								setSubmitting(false);
 								//upload once to the sheet
-								//WriteToGform("1eB5yjKsHS5Pug_ip7mxzzZ4UwFWXKF1RSGxIb3l0wHo", user?.uid, user?.displayName);
+								try {
+									axios.post(
+										"/.netlify/functions/update-google-sheet", 
+										{
+											spreadsheetID: "1eB5yjKsHS5Pug_ip7mxzzZ4UwFWXKF1RSGxIb3l0wHo",
+											UID: user?.uid,
+											data: [user?.displayName, user?.scvmun24Registered],
+										}
+									);
+								} catch(error) {
+									console.log("failed to upload to google sheets");
+									console.log(error);
+								}
 								setStep(5);
 								setMaxStep((o) => Math.max(6)); // maxStep is one higher to check it
 							});
