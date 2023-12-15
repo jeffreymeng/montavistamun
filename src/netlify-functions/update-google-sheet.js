@@ -61,7 +61,6 @@ export async function handler(event, context) {
     console.log("spreadsheet");
 	} catch (error) {
 		console.log("INTERNAL ERROR", error);
-    errmsg = error;
 		return {
 			statusCode: 500,
 			body: `{"success":false, "code":"internal_error", "message":""}`,
