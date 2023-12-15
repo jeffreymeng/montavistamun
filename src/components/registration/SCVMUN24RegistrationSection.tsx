@@ -226,7 +226,6 @@ export default function SCVMUN24RegistrationSection() {
 		setMaxStep,
 		user,
 	};
-
 	return (
 		<div className={"bg-gray-100 w-full"}>
 			<Main wide noMobileXPadding>
