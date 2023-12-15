@@ -44,7 +44,9 @@ export async function handler(event, context) {
 				body: `{"success":false, "code":"unauthorized", "message":"params not valid"}`,
       };
     }
+    console.log(data);
     const dataRow = { values: [...data, UID] };
+    console.log(dataRow);
     const res = await googleSheets.spreadsheets.values.append({
       spreadsheetId: spreadsheetID,
       range: "A1",
