@@ -47,7 +47,6 @@ export async function handler(event, context) {
     console.log(data);
     let values = [data];
     const resource = {values};
-    console.log(dataRow);
     const res = await googleSheets.spreadsheets.values.append({
       spreadsheetId: spreadsheetID,
       range: "A1",
