@@ -1,5 +1,6 @@
 const { google } = require("googleapis");
 
+const FB_SERVICE_ACCOUNT = JSON.parse(process.env.FB_SERVICE_ACCOUNT);
 
 // https://docs.google.com/spreadsheets/d/--spreadsheetID--/edit#gid=--sheetGID--
 //export default async function handler(spreadsheetID, UID, ...data) {
@@ -16,10 +17,9 @@ export async function handler(event, context) {
   const {spreadsheetID, UID, ...data} = params;
 
   console.log("processed variables");
-  const FB_SERVICE_ACCOUNT = JSON.parse(process.env.FB_SERVICE_ACCOUNT);
-  console.log(FB_SERVICE_ACCOUNT);
+  //console.log(FB_SERVICE_ACCOUNT);
   try {
-    const client = google.auth.fromJSON({FB_SERVICE_ACCOUNT});
+    const client = google.auth.fromJSON(FB_SERVICE_ACCOUNT);
     if (!client) {
       return {
 				statusCode: 403,
