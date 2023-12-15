@@ -14,7 +14,7 @@ export async function handler(event, context) {
   }
   if (!event.body) return { statusCode: 400, body: "Invalid parameters." };
 	const params = JSON.parse(event.body);
-  const {spreadsheetID, ...data} = params;
+  const {spreadsheetID, data} = params;
 
   console.log("processed variables");
   //console.log(FB_SERVICE_ACCOUNT);
