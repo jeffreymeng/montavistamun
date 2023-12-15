@@ -45,7 +45,7 @@ export async function handler(event, context) {
       };
     }
     console.log(data);
-    const dataRow = { values: data };
+    const dataRow = { values: [...data] };
     console.log(dataRow);
     const res = await googleSheets.spreadsheets.values.append({
       spreadsheetId: spreadsheetID,
