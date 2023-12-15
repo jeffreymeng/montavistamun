@@ -252,7 +252,6 @@ export default function DonationsSection({
 										"/.netlify/functions/update-google-sheet", 
 										{
 											spreadsheetID: "1eB5yjKsHS5Pug_ip7mxzzZ4UwFWXKF1RSGxIb3l0wHo",
-											UID: user?.uid,
 											data: [user.displayName ?? "none", data.personalInformation.city ?? false],
 										}
 									);

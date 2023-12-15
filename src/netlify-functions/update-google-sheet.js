@@ -14,7 +14,7 @@ export async function handler(event, context) {
   }
   if (!event.body) return { statusCode: 400, body: "Invalid parameters." };
 	const params = JSON.parse(event.body);
-  const {spreadsheetID, UID, ...data} = params;
+  const {spreadsheetID, ...data} = params;
 
   console.log("processed variables");
   //console.log(FB_SERVICE_ACCOUNT);
@@ -38,14 +38,14 @@ export async function handler(event, context) {
     }
     console.log("has sheets");
     //appends a row with all the user data
-    if (!data || !UID) {
+    if (!data) {
       return {
 				statusCode: 400,
 				body: `{"success":false, "code":"unauthorized", "message":"params not valid"}`,
       };
     }
     console.log(data);
-    const dataRow = { values: [...data, UID] };
+    const dataRow = { values: data };
     console.log(dataRow);
     const res = await googleSheets.spreadsheets.values.append({
       spreadsheetId: spreadsheetID,
