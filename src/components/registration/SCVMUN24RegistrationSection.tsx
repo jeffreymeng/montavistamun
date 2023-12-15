@@ -278,7 +278,6 @@ export default function SCVMUN24RegistrationSection() {
 								maxSwitchableStep={Math.min(
 									!data.forms?.scvmun24FuhsdForm ? 2 : 1000,
 									maxStep,
-									maxStep === 6 ? -1 : 1000 // If the registration is complete, lock the ability to go to a previous step
 								)}
 								onStepSwitch={(i) => {
 									if (stepHasChanges) {

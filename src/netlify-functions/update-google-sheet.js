@@ -5,6 +5,7 @@ const FB_SERVICE_ACCOUNT = JSON.parse(process.env.FB_SERVICE_ACCOUNT);
 // https://docs.google.com/spreadsheets/d/--spreadsheetID--/edit#gid=--sheetGID--
 //export default async function handler(spreadsheetID, UID, ...data) {
 export async function handler(event, context) {
+  console.log("start");
   if (event.httpMethod !== "POST") {
     return {
       statusCode: 405,
@@ -15,6 +16,7 @@ export async function handler(event, context) {
 	const params = JSON.parse(event.body);
   const {spreadsheetID, UID, ...data} = params;
 
+  console.log("processed variables");
   try {
     const auth = new google.auth.GoogleAuth({
       keyId: FB_SERVICE_ACCOUNT.private_key_id,
@@ -28,6 +30,7 @@ export async function handler(event, context) {
 				body: `{"success":false, "code":"unauthorized", "message":"unable to authorize"}`,
       };
     }
+    console.log("no auth");
     const client = await auth.getClient();
     if (!client) {
       return {
@@ -35,6 +38,7 @@ export async function handler(event, context) {
 				body: `{"success":false, "code":"unauthorized", "message":"no auth client"}`,
       };
     }
+    console.log("no client");
 
     const googleSheets = google.sheets({ version: "v4", auth: client });
     if (!googleSheets) {
@@ -43,6 +47,7 @@ export async function handler(event, context) {
 				body: `{"success":false, "code":"unauthorized", "message":"unable to create google sheets instance"}`,
       };
     }
+    console.log("has sheets");
     //appends a row with all the user data
     if (!data || !UID) {
       return {
@@ -58,6 +63,7 @@ export async function handler(event, context) {
       valueInputOption: "USER_ENTERED",
       insertDataOption: "INSERT_ROWS",
     });
+    console.log("put data on sheets")
     if (!res) {
       return {
         statusCode: 500,

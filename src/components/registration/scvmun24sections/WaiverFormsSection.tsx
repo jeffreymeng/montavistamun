@@ -107,7 +107,7 @@ export default function WaiverFormsSection({
 			const filled = pdfform.fillForm(pdf, {
 				"Student's Name": [user?.displayName],
 				"Destination": ["Santa Teresa High School"],
-				"Date(s)": ["2/2/24 to 2/3/22"],
+				"Date(s)": ["2/2/24 to 2/3/24"],
 				"Depature Time": ["7:00am"],
 				"Return Time": ["5:00pm"],
 				"Person in Charge": ["Pete Pelkey"],

@@ -227,8 +227,12 @@ export default function DonationsSection({
 							scvmun24Confirmed: true,
 						})
 							.then(() => {
-								if (!firebase) return;
-								return firebase
+								if (!firebase) {
+									console.log("no firebase");
+									return;
+								}
+								console.log("firesroe upload");
+								/*return firebase
 									.firestore()
 									.collection("users")
 									.doc(user?.uid)
@@ -237,9 +241,10 @@ export default function DonationsSection({
 										scvmun24RegistrationTimestamp:
 											firebase.firestore.FieldValue.serverTimestamp(),
 									});
-								
+								*/
 							})
 							.then(() => {
+								console.log("UPLOAD SUCCESS!");
 								setSubmitting(false);
 								//upload once to the sheet
 								try {
@@ -248,7 +253,7 @@ export default function DonationsSection({
 										{
 											spreadsheetID: "1eB5yjKsHS5Pug_ip7mxzzZ4UwFWXKF1RSGxIb3l0wHo",
 											UID: user?.uid,
-											data: [user?.displayName, user?.scvmun24Registered],
+											data: [user.displayName ?? "none", data.personalInformation.city ?? false],
 										}
 									);
 								} catch(error) {
@@ -257,7 +262,7 @@ export default function DonationsSection({
 								}
 								setStep(5);
 								setMaxStep((o) => Math.max(6)); // maxStep is one higher to check it
-							});
+							})
 					}}
 					disabled={
 						uploading ||

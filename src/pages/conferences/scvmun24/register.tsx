@@ -24,7 +24,7 @@ export default function AboutPage({
                     title={"SCVMUN Registration"}
                     backgroundImage={headerImage}
                 >
-                    {"Janurary 28-29, 2022"}
+                    {"February 2-3, 2024"}
                 </Header>
 
                 { <SCVMUN24RegistrationSection /> }
