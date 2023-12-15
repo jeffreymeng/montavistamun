@@ -18,26 +18,14 @@ export async function handler(event, context) {
 
   console.log("processed variables");
   try {
-    const auth = new google.auth.GoogleAuth({
-      keyId: FB_SERVICE_ACCOUNT.private_key_id,
-      key: FB_SERVICE_ACCOUNT.private_key,
-      email: FB_SERVICE_ACCOUNT.client_email,
-      scopes: "https://www.googleapis.com/auth/spreadsheets",
-    });
-    if (!auth) {
-      return {
-				statusCode: 403,
-				body: `{"success":false, "code":"unauthorized", "message":"unable to authorize"}`,
-      };
-    }
-    console.log("no auth");
-    const client = await auth.getClient();
+    const client = new google.auth.fromJSON({FB_SERVICE_ACCOUNT});
     if (!client) {
       return {
 				statusCode: 403,
 				body: `{"success":false, "code":"unauthorized", "message":"no auth client"}`,
       };
     }
+    client.scopes = ["https://www.googleapis.com/auth/spreadsheets"];
     console.log("no client");
 
     const googleSheets = google.sheets({ version: "v4", auth: client });
@@ -73,9 +61,10 @@ export async function handler(event, context) {
     console.log("spreadsheet");
 	} catch (error) {
 		console.log("INTERNAL ERROR", error);
+    errmsg = error;
 		return {
 			statusCode: 500,
-			body: `{"success":false, "code":"internal_error", "message":"error writing to google sheets"}`,
+			body: `{"success":false, "code":"internal_error", "message":""}`,
 		};
 	}
 
