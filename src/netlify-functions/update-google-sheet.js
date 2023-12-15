@@ -18,7 +18,7 @@ export async function handler(event, context) {
 
   console.log("processed variables");
   try {
-    const client = new google.auth.fromJSON({FB_SERVICE_ACCOUNT});
+    const client = google.auth.fromJSON({FB_SERVICE_ACCOUNT});
     if (!client) {
       return {
 				statusCode: 403,
