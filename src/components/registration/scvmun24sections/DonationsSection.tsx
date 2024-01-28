@@ -134,7 +134,7 @@ export default function DonationsSection({
 									target={"_blank"}
 									rel={"noopener noreferrer"}
 									href={
-										"example.com"
+										"https://montavista.myschoolcentral.com/"
 									}
 									className={"link"}
 								>
