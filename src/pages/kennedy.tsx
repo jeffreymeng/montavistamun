@@ -136,7 +136,7 @@ export default function KennedyPage({
 								{
 									name:
 										"Silicon Valley Model United Nations Conference",
-									date: "January 29, 2021 - January 30, 2021",
+									date: "February 2, 2024 - February 3, 2024",
 									location: "Santa Teresa High School",
 									acronym: "scvmun",
 									text:
@@ -144,7 +144,7 @@ export default function KennedyPage({
 								},
 								{
 									name: "South Bay Model United Nations",
-									date: "Date TBA", // TODO when available
+									date: "April 6, 2024", // TODO when available
 									location: "Monta Vista High School",
 									acronym: "sbmun",
 									text:
