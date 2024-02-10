@@ -3356,22 +3356,22 @@ type PagesQueryQuery = { readonly allSiteFunction: { readonly nodes: ReadonlyArr
 type Unnamed_9_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type Unnamed_9_Query = { readonly thumbnail: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }> };
-
-type AuthLayoutQueryQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type AuthLayoutQueryQuery = { readonly headerImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }> };
+type Unnamed_9_Query = { readonly socialsImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fixed: Maybe<GatsbyImageSharpFixedFragment> }> }> };
 
 type Unnamed_10_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type Unnamed_10_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'description' | 'author'>> }> };
+type Unnamed_10_Query = { readonly thumbnail: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }> };
 
 type Unnamed_11_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
 type Unnamed_11_Query = { readonly hero: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }> };
+
+type AuthLayoutQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type AuthLayoutQueryQuery = { readonly headerImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }> };
 
 type Unnamed_12_QueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -3381,7 +3381,7 @@ type Unnamed_12_Query = { readonly logo: Maybe<{ readonly childImageSharp: Maybe
 type Unnamed_13_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type Unnamed_13_Query = { readonly socialsImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fixed: Maybe<GatsbyImageSharpFixedFragment> }> }> };
+type Unnamed_13_Query = { readonly site: Maybe<{ readonly siteMetadata: Maybe<Pick<SiteSiteMetadata, 'title' | 'description' | 'author'>> }> };
 
 type GatsbyImageSharpFixedFragment = Pick<ImageSharpFixed, 'base64' | 'width' | 'height' | 'src' | 'srcSet'>;
 
