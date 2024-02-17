@@ -7,6 +7,7 @@ import React, { useState } from "react";
 import "../../../css/file-upload.css";
 import useFirebase from "../../../firebase/useFirebase";
 import FormUpload from "../FormUpload";
+import { getGrade } from "../../../utils/schoolYearUtils";
 
 interface DonationForms {
 	sbmun24Donation?: string;
@@ -250,7 +251,7 @@ export default function DonationsSection({
 										"/.netlify/functions/update-google-sheet", 
 										{
 											spreadsheetID: "1eB5yjKsHS5Pug_ip7mxzzZ4UwFWXKF1RSGxIb3l0wHo",
-											data: [user.displayName ?? "none", data.personalInformation.city ?? false],
+											data: [user.displayName.split(' ')[0], user.displayName.split(' ')[1] , getGrade(data.classOf), user.email, data.sbmun24Committee.join(', '), data.sbmun24PartnerPrefs],
 										}
 									);
 								} catch(error) {
