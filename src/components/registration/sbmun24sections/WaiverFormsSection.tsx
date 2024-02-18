@@ -318,6 +318,7 @@ export default function WaiverFormsSection({
 						fieldName={"sbmun24FuhsdForm"}
 						data={data}
 						handleUpdateData={handleUpdateData}
+                        conferenceName={"sbmun24"}
 					/>
 				</div>
 				<div className={"mt-4"}>
@@ -364,6 +365,7 @@ export default function WaiverFormsSection({
 						fieldName={"sbmun24Form"}
 						data={data}
 						handleUpdateData={handleUpdateData}
+                        conferenceName={"sbmun24"}
 					/>
 				</div>
 			</div>
