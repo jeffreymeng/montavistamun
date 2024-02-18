@@ -251,7 +251,7 @@ export default function DonationsSection({
 										"/.netlify/functions/update-google-sheet", 
 										{
 											spreadsheetID: "1eB5yjKsHS5Pug_ip7mxzzZ4UwFWXKF1RSGxIb3l0wHo",
-											data: [user.displayName.split(' ')[0], user.displayName.split(' ')[1] , getGrade(data.classOf), user.email, data.sbmun24Committee.join(', '), data.sbmun24PartnerPrefs],
+											data: [user.displayName.split(' ')[0], user.displayName.split(' ')[1] , getGrade(data.classOf), user.email, data.preferences.sbmun24Committee.join(', '), data.preferences.sbmun24PartnerPrefs],
 										}
 									);
 								} catch(error) {
