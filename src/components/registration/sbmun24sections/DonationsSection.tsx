@@ -117,7 +117,17 @@ export default function DonationsSection({
 										"/.netlify/functions/update-google-sheet", 
 										{
 											spreadsheetID: "1eB5yjKsHS5Pug_ip7mxzzZ4UwFWXKF1RSGxIb3l0wHo",
-											data: [user.displayName.split(' ')[0], user.displayName.split(' ')[1] , getGrade(data.classOf), user.email, data.preferences.sbmun24Committee.join(', '), data.preferences.sbmun24PartnerPrefs],
+											data: [
+												user.displayName, 
+												getGrade(data.classOf), 
+												user.email, 
+												data.emergencyInformation.contactOneName, 
+												data.emergencyInformation.contactOnePhone, 
+												data.preferences.sbmun24Committee.join(', '), 
+												data.preferences.sbmun24PartnerPrefs, 
+												`https://console.firebase.google.com/u/0/project/montavistamodelun/storage/montavistamodelun.appspot.com/files/~2Fforms~2Fsbmun24~2F${user?.uid}~2Fsbmun24FuhsdForm`,
+												`https://console.firebase.google.com/u/0/project/montavistamodelun/storage/montavistamodelun.appspot.com/files/~2Fforms~2Fsbmun24~2F${user?.uid}~2Fsbmun24Form`,
+											],
 										}
 									);
 								} catch(error) {
