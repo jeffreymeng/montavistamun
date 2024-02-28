@@ -56,7 +56,7 @@ export default function DonationsSection({
 				<h3 className="text-xl leading-6 font-bold text-gray-900">
 					Hang in there — you’re almost done!
 				</h3>
-				<p className="mt-2">
+				<p className="mt-4">
                     Because Monta Vista MUN is cohosting SBMUN, you don't have to pay a delegation fee!
                     To submit your registration for SBMUN, please click the button below.
                     Note that after submitting you cannot go back and change the details of your registration.
@@ -116,7 +116,7 @@ export default function DonationsSection({
 									axios.post(
 										"/.netlify/functions/update-google-sheet", 
 										{
-											spreadsheetID: "1eB5yjKsHS5Pug_ip7mxzzZ4UwFWXKF1RSGxIb3l0wHo",
+											spreadsheetID: "1I71shfcDI_t9j9vtkGsmWiThQl72newDan1kxAs6XRk",
 											data: [
 												user.displayName, 
 												getGrade(data.classOf), 
