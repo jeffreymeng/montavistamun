@@ -255,17 +255,17 @@ export default function SBMUN24RegistrationSection() {
 									{
 										title: "Committee Preferences",
 										description:
-											"Now comes the fun part! Look into the different committees offered at SCVMUN and indicate how much you like each one.",
+											"Now comes the fun part! Look into the different committees offered at SBMUN and indicate how much you like each one.",
 									},
 									{
 										title: "Donations",
 										description:
-											"To cover conference fees charged by SCVMUN, we request a donation, which will go directly towards making this conference possible.",
+											"A donation is not needed for this conference, so this section is here just to confirm your registration.",
 									},
 									{
 										title: "You're Done!",
 										description:
-											"You're now registered for SCVMUN! You may still edit or cancel your registration until the deadline.",
+											"You're now registered for SBMUN! You may still edit or cancel your registration until the deadline.",
 									},
 								]}
 								currentStep={step}
