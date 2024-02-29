@@ -23,7 +23,7 @@ registerFilepondPlugin(
 	FilePondPluginImagePreview
 );
 const loadOrRestoreFile = (
-	firebase: typeof FirebaseType | null,
+	firebase: typeof firebaseType | null,
 	user: firebaseType.User | null,
 	fieldName: string,
 	fileName: string,
@@ -31,7 +31,8 @@ const loadOrRestoreFile = (
 	error: (msg: string) => void,
 	progress: (isCalculable: boolean, current: number, max: number) => void,
 	abort: () => void,
-	request: any
+	request: any,
+	conferenceName?: string,
 ) => {
 	if (!firebase || !user) return;
 	// reset our progress
@@ -39,7 +40,7 @@ const loadOrRestoreFile = (
 	// fetch the download URL from firebase
 	firebase
 		.storage()
-		.ref(`forms/sfmun/${user?.uid}/${fieldName}/${fileName}`)
+		.ref(conferenceName ? `forms/${conferenceName}/${user?.uid}/${fieldName}/${fileName}` : `forms/sfmun/${user?.uid}/${fieldName}/${fileName}`)
 		.getDownloadURL()
 		.then((url: string) => {
 			return axios.get(url, {
@@ -76,6 +77,7 @@ export default function FormUpload<Data>({
 	handleUpdateData,
 	allowImagePreview,
 	user,
+	conferenceName,
 }: {
 	onInstanceChange: (newInstance: FilePond | null) => void;
 	user: User;
@@ -91,6 +93,7 @@ export default function FormUpload<Data>({
 	labelIdle?: string;
 	data: Record<string, any>;
 	handleUpdateData: (name: string, data: any) => Promise<void>;
+	conferenceName?: string;
 }) {
 	const firebase = useFirebase();
 	const [instance, setInstance] = useState<FilePond | null>(null);
@@ -101,9 +104,10 @@ export default function FormUpload<Data>({
 		if (!data || !firebase || !user) return;
 		if (!file && data.forms && data.forms[fieldName]) {
 			const fileName = data.forms[fieldName];
+			const filePath = conferenceName ? `forms/${conferenceName}/${user?.uid}/${fieldName}/${fileName}` : `forms/sfmun/${user?.uid}/${fieldName}/${fileName}`;
 			firebase
 				.storage()
-				.ref(`forms/sfmun/${user?.uid}/${fieldName}/${fileName}`)
+				.ref(filePath)
 				.getDownloadURL()
 				.then((url) => {
 					setFile([
@@ -170,7 +174,7 @@ export default function FormUpload<Data>({
 					const uploadTask = firebase
 						.storage()
 						.ref(
-							`forms/sfmun/${user?.uid}/${fieldName}/${fileName}`
+							conferenceName ? `forms/${conferenceName}/${user?.uid}/${fieldName}/${fileName}` : `forms/sfmun/${user?.uid}/${fieldName}/${fileName}`
 						)
 						.put(file);
 
@@ -247,7 +251,7 @@ export default function FormUpload<Data>({
 					};
 				},
 				restore: (...props) =>
-					loadOrRestoreFile(firebase, user, fieldName, ...props),
+					loadOrRestoreFile(firebase, user, fieldName, ...props, conferenceName),
 				revert: (fileName, load, error) => {
 					if (!firebase) return;
 					setUploading(true);
@@ -255,7 +259,7 @@ export default function FormUpload<Data>({
 					firebase
 						.storage()
 						.ref(
-							`forms/sfmun/${user?.uid}/${fieldName}/${fileName}`
+							conferenceName ? `forms/${conferenceName}/${user?.uid}/${fieldName}/${fileName}` : `forms/sfmun/${user?.uid}/${fieldName}/${fileName}`
 						)
 						.delete()
 						.then(() => handleUpdateData("forms." + fieldName, ""))
@@ -275,7 +279,7 @@ export default function FormUpload<Data>({
 				},
 				// this loads an already uploaded image to firebase
 				load: (...props) =>
-					loadOrRestoreFile(firebase, user, fieldName, ...props),
+					loadOrRestoreFile(firebase, user, fieldName, ...props, conferenceName),
 			}}
 			labelIdle={labelIdle || "Drag a pdf here or click to browse"}
 		/>
