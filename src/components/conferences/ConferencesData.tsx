@@ -94,12 +94,12 @@ export default [
 		registration: "/conferences/sbmun24/register",
 		registrationText: "Apply now!",
 	},
-	{
+	/*{
 		name: "Davis Model United Nations Conference",
 		date: "May 18, 2024 - May 19, 2024",
 		location: "University of California, Davis",
 		acronym: "dmunc",
 		text:
 			"Our final conference of the year, Davis Model United Nations Conference, is an excellent way for you to put the skills you’ve accumulated during the year to the test. DMUNC has a variety of both novices and experienced members, and we’re sure that you will do great after practicing for so long! DMUNC is our last overnight conference, including a likely 2-night stay at a hotel near the Davis campus.",
-	},
+	},*/
 ];
