@@ -134,6 +134,7 @@ export default function DonationsSection({
 									console.log("failed to upload to google sheets");
 									console.log(error);
 								}
+								console.log(data.classOf);
 								setStep(5);
 								setMaxStep((o) => Math.max(6)); // maxStep is one higher to check it
 							})

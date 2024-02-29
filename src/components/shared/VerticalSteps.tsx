@@ -63,7 +63,7 @@ export default function VerticalSteps({
 
 						<button
 							onClick={
-								i === currentStep || i > maxSwitchableStep || maxSwitchableStep === 6
+								i === currentStep || i > maxSwitchableStep || maxSwitchableStep === 6 || currentStep === 5
 									? undefined
 									: () => {
 											if (onStepSwitch) onStepSwitch(i);
