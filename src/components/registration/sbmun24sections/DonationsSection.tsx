@@ -95,7 +95,7 @@ export default function DonationsSection({
 						})
 							.then(() => {
 								if (!firebase) {
-									return;
+									return 2020;
 								}
                                 //uncomment this code if possible
 								/*return firebase
@@ -108,8 +108,17 @@ export default function DonationsSection({
 											firebase.firestore.FieldValue.serverTimestamp(),
 									});
 								*/
+								return firebase
+								.firestore()
+								.collection("users")
+								.doc(user?.uid)
+								.get()
+								.then((snapshot) => {
+									const data = snapshot.data() || {classOf: 2020};
+									return data.classOf;
+								});
 							})
-							.then(() => {
+							.then((classOf) => {
 								setSubmitting(false);
 								//upload once to the sheet
 								try {
@@ -119,7 +128,7 @@ export default function DonationsSection({
 											spreadsheetID: "1I71shfcDI_t9j9vtkGsmWiThQl72newDan1kxAs6XRk",
 											data: [
 												user.displayName, 
-												getGrade(data.classOf), 
+												getGrade(classOf), 
 												user.email, 
 												data.emergencyInformation.contactOneName, 
 												data.emergencyInformation.contactOnePhone, 
