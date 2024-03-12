@@ -25,24 +25,7 @@ export default function AboutPage({
 					{"April 6, 2024"}
 				</Header>
 				
-                <div className={"mt-10 mt-5 px-10 h-full"}>
-                    <h1
-                        className={
-                            "text-xl font-semibold leading-6 text-gray-900"
-                        }
-                    >
-                        SBMUN Registration is now closed. If you have any
-                        questions, please email us at{" "}
-                        <a
-                            className={"link"}
-                            href={"mailto:montavistamun@gmail.com"}
-                        >
-                            montavistamun@gmail.com
-                        </a>
-                        .
-                    </h1>
-                </div>
-				{/*<SBMUN24RegistrationSection />*/}
+				<SBMUN24RegistrationSection />
 			</div>
 		</Layout>
 	);
