@@ -91,8 +91,8 @@ export default [
 		acronym: "sbmun",
 		text:
 			"South Bay Model United Nations Conference is one of our last conferences of the year, and is co-hosted by yours truly at Monta Vista! It’s a great chance to hone your Model UN skills with other delegates from the Bay Area. MUN conferences are rare in the spring season, so this is a great way for you to keep improving on your MUN abilities. Note that Monta Vista delegates are unable to win awards.",
-		registration: "/conferences/sbmun24/register",
-		registrationText: "Apply now!",
+		//registration: "/conferences/sbmun24/register",
+		//registrationText: "Apply now!",
 	},
 	/*{
 		name: "Davis Model United Nations Conference",
