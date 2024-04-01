@@ -117,21 +117,6 @@ export default [
 		memeBio: "",
 	},
 	{
-		name: "Ganesh Batchu",
-		position: "Training",
-		bio: (
-			<>
-				Hi, my name is Ganesh Batchu, and I am the Training Officer this year! I 
-				started MUN at Kennedy in 7th Grade, and continued it when I moved into 
-				high school. Some of the things that I enjoy a lot about MUN are crisis 
-				committees, and also forming a close bond with partners at various competitions. 
-				Some other things I enjoy are reading, programming, and volunteering at various events. 
-			</>
-		),
-		memeBioNickname: "",
-		memeBio: "",
-	},
-	{
 		name: "Lily Jiang",
 		position: "Logistics",
 		bio: (
@@ -147,30 +132,53 @@ export default [
 		memeBio: "",
 	},
 	{
-		name: "Sitong Jian",
-		position: "Logistics",
+		name: "Shreyas Chatterjee",
+		position: "Training",
 		bio: (
 			<>
-			Hi, I'm Sitong and I'm a logistics officer this year! I joined Model UN during my sophomore 
-			year. I'm mainly a crisis committee guy since I enjoy the fast-paced nature and the sheer insanity
-			present. My favorite aspect of Model UN is messing with people in committees.
-			Outside of Model UN, I'm a member of marching band and orchestra. I'm into alternate history, worldbuilding,
-			and video games.
-			
+			Hello! I am Shreyas, one of MVMUN’s training officers. This is my third year as a 
+			MUN delegate. For me, MUN has always been a way to debate important issues while 
+			also having fun. I have had the opportunity to meet so many incredible people and 
+			hear many imaginative ideas during my time as a delegate. Outside of MUN, I enjoy 
+			editing videos, watching stand up comedy, etc. I look forward to meeting all of you!
 			</>
 		),
 		memeBioNickname: "",
 		memeBio: "",
 	},
 	{
-		name: "Pranav Gupta",
+		name: "Dhruv Yadati",
+		position: "Training",
+		bio: (
+			<>
+			Hi! I’m Dhruv and this year’s training officer! I’ve always loved public speaking 
+			and just talking with people in general - which is why I joined MUN in the first 
+			place! I’ve been doing MUN for two years now and have attended several conferences, 
+			discussing with other fellow delegates and crafting creative resolutions that work 
+			to solve all sorts of issues in our world today. MUN has allowed me to improve on 
+			my critical thinking and public speaking skills and has given me the best opportunity 
+			to meet new people and see issues/ideas from different perspectives. I’ve met so many 
+			people during my time in MUN and have had the most fun traveling and getting to know 
+			new people as a part of my journey. Outside of MUN, I enjoy playing soccer, playing 
+			video games, and watching tons of movies/TV shows…I’m excited to meet everyone and 
+			have a great year full of fun :)
+			</>
+		),
+		memeBioNickname: "",
+		memeBio: "",
+	},
+	{
+		name: "Dylan Nguyen",
 		position: "PR",
 		bio: (
 			<>
-			Hi, my name is Pranav Gupta and I am the PR officer this year. I 
-			joined Model UN back in middle school and have been involved since. 
-			I’ve always been pretty good at speaking, so I joined MUN. Other 
-			than Model UN, I like bouldering, playing soccer, and meeting new people.
+			Hi, I’m Dylan and I’m your PR officer this year! I joined Model UN in my sophomore 
+			year but officially started doing conferences. year. Joining MUN has allowed me to 
+			meet so many new people with different backgrounds and has motivated my journey to 
+			becoming a better public speaker. My favorite part about MUN would have to be catching 
+			up with people outside of conferences and talking to people who are from different 
+			cities/countries! Outside of MUN, I enjoy thrifting new clothes, driving to places 
+			with friends, and rating new food places! I’m so excited to give you the best year in MUN!
 			</>
 		),
 		memeBioNickname: "",
