@@ -132,6 +132,25 @@ export default [
 		memeBio: "",
 	},
 	{
+		name: "Shreya Rao",
+		position: "Logistics",
+		bio: (
+			<>
+			Hi, I’m Shreya, and I’m thrilled to be a logistics officer this year! I’ve been 
+			involved in Model UN since 7th grade, which makes this my fourth year participating. 
+			What I love most about Model UN is the amazing chance it gives me to connect with 
+			people from all around the world. It’s been a fantastic experience that has greatly 
+			boosted my confidence, improved my public speaking skills, and taught me how to 
+			collaborate effectively. Additionally, Model UN has sharpened my research skills, 
+			which has been beneficial both in and out of committee. Outside of Model UN, I enjoy
+			spending time with friends, singing, volunteering, and going on walks. I’m really
+			looking forward to having a great year with everyone! :)
+			</>
+		),
+		memeBioNickname: "",
+		memeBio: "",
+	},
+	{
 		name: "Shreyas Chatterjee",
 		position: "Training",
 		bio: (
