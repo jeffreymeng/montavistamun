@@ -30,7 +30,7 @@ export default [
 		bio: (
 			<>
 			Hi, I’m Charlotte and I am MVMUN’s co-president this year! I’m currently a 
-			junior and joined MVMUN in freshman year. Through MUN, I got the opportunity 
+			senior and joined MVMUN in freshman year. Through MUN, I got the opportunity 
 			to really put myself out there and cultivate lifelong public speaking, 
 			negotiation, and leadership skills, and it’s an experience I’d recommend to 
 			anyone! Aside from MUN, I’m interested in art and the sciences. Feel free to 
@@ -47,7 +47,7 @@ export default [
 		bio: (
 			<>
 			Hi, I’m Anushka and I am co-president of MVMUN this year! I joined MVMUN 
-			in my freshman year and I am currently a junior. I’ve always been passionate 
+			in my freshman year and I am currently a senior. I’ve always been passionate 
 			about public speaking and political science and through Model UN I was able 
 			to meet and work with so many amazing people and gain more valuable experience 
 			in these fields. My favorite part of MUN is working and discussing global issues 
@@ -67,7 +67,7 @@ export default [
 			<>
 			Hey, I’m Jerry and I’m super excited to be your VP this year! I joined MUN freshman 
 			year and after a lot of all-nighters, Model U.N still retains its appeal and 
-			enjoyable-ness to me currently as a Junior. I’ve been passionate about public speaking 
+			enjoyable-ness to me currently as a senior. I’ve been passionate about public speaking 
 			and geography from the beginning––and through Model U.N, I have been able to meet 
 			people from all around the world, discussing some of the most important modern day 
 			topics that humanity is still working to resolve. MUN really strengthens your ability 
@@ -104,7 +104,7 @@ export default [
 		bio: (
 			<>
 			Hi everyone! I’m Riya and I’m super excited to be your Head of Training this 
-			year! I’m currently a junior at MVHS, and have been doing MUN for six years 
+			year! I’m currently a senior at MVHS, and have been doing MUN for six years 
 			— since my first year of middle school. MUN is a super thrilling experience 
 			that alongside teaching you political relationships and real-world issues, 
 			allows you to learn about public speaking and coming up with speeches on the 
@@ -122,7 +122,7 @@ export default [
 		bio: (
 			<>
 			Hi, I’m Lily and I’m a logistics officer this year! I joined Model UN as a 
-			freshman and this is my third year in MUN! My favorite part about MUN is forming 
+			freshman and this is my fourth year in MUN! My favorite part about MUN is forming 
 			resolutions with other delegates and meeting people from different parts of the 
 			country/world in the same committee. Outside of MUN, I enjoy binging shows, playing 
 			the violin, and hanging out with my dog!
@@ -155,7 +155,7 @@ export default [
 		position: "Training",
 		bio: (
 			<>
-			Hello! I am Shreyas, one of MVMUN’s training officers. This is my third year as a 
+			Hello! I am Shreyas, one of MVMUN’s training officers. This is my fourth year as a 
 			MUN delegate. For me, MUN has always been a way to debate important issues while 
 			also having fun. I have had the opportunity to meet so many incredible people and 
 			hear many imaginative ideas during my time as a delegate. Outside of MUN, I enjoy 
@@ -172,7 +172,7 @@ export default [
 			<>
 			Hi! I’m Dhruv and this year’s training officer! I’ve always loved public speaking 
 			and just talking with people in general - which is why I joined MUN in the first 
-			place! I’ve been doing MUN for two years now and have attended several conferences, 
+			place! I’ve been doing MUN for three years now and have attended several conferences, 
 			discussing with other fellow delegates and crafting creative resolutions that work 
 			to solve all sorts of issues in our world today. MUN has allowed me to improve on 
 			my critical thinking and public speaking skills and has given me the best opportunity 
@@ -192,7 +192,7 @@ export default [
 		bio: (
 			<>
 			Hi, I’m Dylan and I’m your PR officer this year! I joined Model UN in my sophomore 
-			year but officially started doing conferences. year. Joining MUN has allowed me to 
+			year but officially started doing conferences junior year. Joining MUN has allowed me to 
 			meet so many new people with different backgrounds and has motivated my journey to 
 			becoming a better public speaker. My favorite part about MUN would have to be catching 
 			up with people outside of conferences and talking to people who are from different 
@@ -209,7 +209,7 @@ export default [
 		bio: (
 			<>
 			Hi, my name is Ethan Kellogg and I will be your webmaster this year. I 
-			joined model UN as a freshman and have been participating in it for 2 
+			joined model UN as a freshman and have been participating in it for 4 
 			years. At first, I wasn't too sure about model UN as I was a bad speaker. 
 			However, I really enjoyed the arguing and debate aspect of model UN so I 
 			stuck with it. Other than model UN, I enjoy playing the trombone and 
