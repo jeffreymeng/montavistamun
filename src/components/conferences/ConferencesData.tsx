@@ -1,5 +1,5 @@
 export default [
-	{
+	/*{
 	 	name: "Gunn Model UN Conference",
 	 	date: "October 21, 2023",
 	 	location: "Henry M. Gunn High School",
@@ -7,15 +7,15 @@ export default [
 	 	text: `Gunn Model United Nations Conference is our first conference of the year, and the one where we always take the most novices too. Fun fact: Monta Vista won the Best Delegation award at GMUNC for 3 years in a row!`,
 		//registration: "https://docs.google.com/forms/d/1koPXq06Gys8j8nLwvW6ilxE6U-avNnudD7ou9rMTaIc/",
 		//registrationText: "Application deadline 9/21",
-	},
+	},*/
 	{
 	 	name: "Stanford Model UN Conference",
-	 	date: "November 10, 2023 - November 12, 2023",
+	 	date: "November 8, 2024 - November 10, 2024",
 	 	location: "Stanford University",
 	 	acronym: "smunc",
 	 	text: `The Stanford Model United Nations Conference is one of the most competitive conferences of the year, but also one with most to offer. With three days packed with five committee sessions, it may leave you a bit exhausted, but never with any regrets about attending!`,
-	 	//registration: "https://docs.google.com/forms/d/1VdAGqj2s-GnTT_BoyWMhHmDeE3Vq1IAusn1C5Gvdoec",
-	 	//registrationText: "Sign up now! Application closes 10/19",
+	 	registration: "https://forms.gle/wT7dVvmyFF2cUaT6A",
+	 	registrationText: "Sign up now! Application closes 9/19",
 	},
 	/*{
 		name: "Bruin Model UN Conference",
