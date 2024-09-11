@@ -5,7 +5,7 @@
 		"crypto": "^1.0.1",
 		"firebase-admin": "^10.0.1",
 		"jsonwebtoken": "^8.5.1",
-		"netlify-lambda": "^2.0.15",
+		"netlify-cli": "17.34.3",
 		"webpack-node-externals": "^3.0.0"
 	}
 }
