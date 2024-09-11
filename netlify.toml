@@ -2,6 +2,8 @@
   command = "yarn build"
   functions = "built-netlify-functions"
   publish = "public/"
+[functions]
+  node_bundler = "esbuild"
 [[plugins]]
   package = "netlify-plugin-gatsby-cache"
 [[redirects]]
