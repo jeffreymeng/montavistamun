@@ -1,6 +1,7 @@
 [functions]
   node_bundler = "esbuild"
   directory = "/built-netlify-functions"
+  included_files = "../node_modules/axios"
 [build]
   command = "yarn build"
   publish = "public/"
