@@ -1,5 +1,4 @@
 [functions]
-  node_bundler = "esbuild"
   directory = "/built-netlify-functions"
   external_node_modules = ["axios"]
 [build]
