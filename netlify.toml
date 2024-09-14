@@ -1,8 +1,8 @@
 [functions]
-  directory = "/built-netlify-functions"
+  external_node_modules = ["axios", "firebase-admin"]
   node_bundler = "esbuild"
-  external_node_modules = ["axios"]
-  included_files = ["src/netlify-functions/utils/fbUtils.js", "node_modules/axios/**"]
+  #included_files = ["src/netlify-functions/utils/fbUtils.js", "node_modules/axios/**"]
+  directory = "/built-netlify-functions"
 [build]
   command = "yarn build"
   publish = "public/"
