@@ -1,5 +1,6 @@
 [functions]
   directory = "/built-netlify-functions"
+  node_bundler = "esbuild"
   external_node_modules = ["*"]
 [build]
   command = "yarn build"
