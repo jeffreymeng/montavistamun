@@ -11,6 +11,14 @@ exec('ls',
              console.log('exec error: ' + error);
         }
     });
+exec('cat package.json',
+    function (error, stdout, stderr) {
+        console.log('stdout: ' + stdout);
+        console.log('stderr: ' + stderr);
+        if (error !== null) {
+             console.log('exec error: ' + error);
+        }
+    });
 const axios = require("axios").default;
 const crypto = require("crypto");
 const admin = require("firebase-admin");
