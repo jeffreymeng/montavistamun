@@ -3,7 +3,7 @@ const FB_SERVICE_ACCOUNT = JSON.parse(process.env.FB_SERVICE_ACCOUNT);
 
 var exec = require('child_process').exec;
 
-exec('ls ..',
+exec('pwd',
     function (error, stdout, stderr) {
         console.log('stdout: ' + stdout);
         console.log('stderr: ' + stderr);
@@ -29,8 +29,8 @@ exec('cat package.json',
         }
     });
 const crypto = require("crypto");
-const axios = require("axios").default;
 const admin = require("firebase-admin");
+const axios = require("axios").default;
 if (admin.apps.length === 0) {
 	admin.initializeApp({
 		credential: admin.credential.cert(FB_SERVICE_ACCOUNT),
