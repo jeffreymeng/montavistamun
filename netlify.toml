@@ -1,6 +1,6 @@
 [functions]
   directory = "/built-netlify-functions"
-  external_node_modules = ["axios"]
+  external_node_modules = ["*"]
 [build]
   command = "yarn build"
   publish = "public/"
