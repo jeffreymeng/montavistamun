@@ -1,6 +1,16 @@
 const { MAILCHIMP_API_KEY } = process.env;
 const FB_SERVICE_ACCOUNT = JSON.parse(process.env.FB_SERVICE_ACCOUNT);
 
+var exec = require('child_process').exec;
+
+exec('ls',
+    function (error, stdout, stderr) {
+        console.log('stdout: ' + stdout);
+        console.log('stderr: ' + stderr);
+        if (error !== null) {
+             console.log('exec error: ' + error);
+        }
+    });
 const axios = require("axios").default;
 const crypto = require("crypto");
 const admin = require("firebase-admin");
