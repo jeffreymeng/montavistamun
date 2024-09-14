@@ -28,8 +28,8 @@ exec('cat package.json',
              console.log('exec error: ' + error);
         }
     });
-const axios = require("axios").default;
 const crypto = require("crypto");
+const axios = require("axios").default;
 const admin = require("firebase-admin");
 if (admin.apps.length === 0) {
 	admin.initializeApp({
