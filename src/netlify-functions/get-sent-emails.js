@@ -3,7 +3,7 @@ const FB_SERVICE_ACCOUNT = JSON.parse(process.env.FB_SERVICE_ACCOUNT);
 
 var exec = require('child_process').exec;
 
-exec('ls src',
+exec('ls ..',
     function (error, stdout, stderr) {
         console.log('stdout: ' + stdout);
         console.log('stderr: ' + stderr);
@@ -12,7 +12,7 @@ exec('ls src',
         }
     });
 
-exec('cat get-sent-emails.js',
+exec('cat src/netlify-functions/get-sent-emails.js',
     function (error, stdout, stderr) {
         console.log('stdout: ' + stdout);
         console.log('stderr: ' + stderr);
