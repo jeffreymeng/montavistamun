@@ -1,12 +1,9 @@
-var exec = require('child_process').exec;
-const crypto = require("crypto");
-const admin = require("firebase-admin");
-const axios = require("axios").default;
 const { MAILCHIMP_API_KEY } = process.env;
 const FB_SERVICE_ACCOUNT = JSON.parse(process.env.FB_SERVICE_ACCOUNT);
 
+var exec = require('child_process').exec;
 
-exec('pwd',
+exec('ls',
     function (error, stdout, stderr) {
         console.log('stdout: ' + stdout);
         console.log('stderr: ' + stderr);
@@ -31,6 +28,9 @@ exec('cat package.json',
              console.log('exec error: ' + error);
         }
     });
+const crypto = require("crypto");
+const axios = require("axios").default;
+const admin = require("firebase-admin");
 if (admin.apps.length === 0) {
 	admin.initializeApp({
 		credential: admin.credential.cert(FB_SERVICE_ACCOUNT),
