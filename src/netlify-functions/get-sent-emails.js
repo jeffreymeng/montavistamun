@@ -1,33 +1,6 @@
 const { MAILCHIMP_API_KEY } = process.env;
 const FB_SERVICE_ACCOUNT = JSON.parse(process.env.FB_SERVICE_ACCOUNT);
 
-var exec = require('child_process').exec;
-
-exec('ls src',
-    function (error, stdout, stderr) {
-        console.log('stdout: ' + stdout);
-        console.log('stderr: ' + stderr);
-        if (error !== null) {
-             console.log('exec error: ' + error);
-        }
-    });
-
-exec('cat get-sent-emails.js',
-    function (error, stdout, stderr) {
-        console.log('stdout: ' + stdout);
-        console.log('stderr: ' + stderr);
-        if (error !== null) {
-             console.log('exec error: ' + error);
-        }
-    });
-exec('cat package.json',
-    function (error, stdout, stderr) {
-        console.log('stdout: ' + stdout);
-        console.log('stderr: ' + stderr);
-        if (error !== null) {
-             console.log('exec error: ' + error);
-        }
-    });
 const axios = require("axios").default;
 const crypto = require("crypto");
 const admin = require("firebase-admin");
@@ -47,7 +20,7 @@ if (admin.apps.length === 0) {
  *
  * Requires a firebase Bearer token. If the user is not an administrator, they may only retrieve the updates sent to their email.
  */
-export async function handler(event, context) {
+exports.hander = async function(event, context) {
 	if (event.httpMethod !== "GET") {
 		return { statusCode: 405, body: "Method Not Allowed" };
 	}

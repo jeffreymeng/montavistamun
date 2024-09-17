@@ -9,7 +9,7 @@ if (admin.apps.length === 0) {
 	});
 }
 
-export async function handler(event, context) {
+exports.handler = async function(event, context) {
 	if (event.httpMethod !== "GET") {
 		return {
 			statusCode: 405,

@@ -4,7 +4,7 @@ const FB_SERVICE_ACCOUNT = JSON.parse(process.env.FB_SERVICE_ACCOUNT);
 
 // https://docs.google.com/spreadsheets/d/--spreadsheetID--/edit#gid=--sheetGID--
 //export default async function handler(spreadsheetID, UID, ...data) {
-export async function handler(event, context) {
+exports.handler = async function(event, context) {
   console.log("start");
   if (event.httpMethod !== "POST") {
     return {
