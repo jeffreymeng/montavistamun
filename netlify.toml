@@ -1,8 +1,5 @@
 [functions]
   directory = "/built-netlify-functions"
-  node_bundler = "esbuild"
-  external_node_modules = ["axios"]
-  included_files = ["src/netlify-functions/utils/fbUtils.js", "node_modules/axios/**"]
 [build]
   command = "yarn build"
   publish = "public/"
