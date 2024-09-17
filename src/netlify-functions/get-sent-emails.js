@@ -47,7 +47,7 @@ if (admin.apps.length === 0) {
  *
  * Requires a firebase Bearer token. If the user is not an administrator, they may only retrieve the updates sent to their email.
  */
-export async function handler(event, context) {
+exports.handler = async function(event, context) {
 	if (event.httpMethod !== "GET") {
 		return { statusCode: 405, body: "Method Not Allowed" };
 	}
