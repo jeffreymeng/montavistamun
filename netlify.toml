@@ -1,10 +1,5 @@
 [functions]
-  #external_node_modules = ["axios", "firebase-admin"]
-  node_bundler = "esbuild"
-  included_files = ["node_modules/axios/**/*"]
   directory = "/built-netlify-functions"
-#[functions.get-sent-emails]
-#included_files = ["node_modules/axios/**/*"]
 [build]
   command = "yarn build"
   publish = "public/"
