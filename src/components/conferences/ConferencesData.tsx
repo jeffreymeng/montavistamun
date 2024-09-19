@@ -38,7 +38,7 @@ export default [
 	},*/
 	{
 		name: "North California Model United Nations Conference",
-		date: "December 9, 2023 - December 10, 2023",
+		date: "January 18, 2025 - January 19, 2025",
 		location: "Foothill High School",
 		acronym: "norcalmun",
 		text:
@@ -48,7 +48,7 @@ export default [
 	},
 	{
 		name: "Santa Clara Valley Model United Nations Conference",
-		date: "February 2, 2024 - February 3, 2024",
+		date: "January 31, 2025 - February 1, 2025",
 		location: "Santa Teresa High School",
 		acronym: "scvmun",
 		text:
@@ -56,7 +56,7 @@ export default [
 		//registration: "/conferences/scvmun24/register",
 		//registrationText: "App not open",
 	},
-	{
+	/*{
 		name: "North American Invitational Model United Nations Conference",
 		date: "February 15, 2024 - February 18, 2024",
 		location: "Georgetown University",
@@ -65,7 +65,7 @@ export default [
 			"The North American Invitational Model United Nations Conference is one of our travel conferences. With over 3,000 delegates each year, NAIMUN is the largest student-run Model United Nations conference in the world, and many consider it the de facto national championship conference. Don’t let all that scare you, though: it’s often best remembered by delegates as a 6-day trip to Washington, DC, full of chances to meet new people and make new friends.",
 		//registration: "https://bit.ly/naimun2022app",
 		//registrationText: "Application Open!",
-	},
+	},*/
 	/*{
 		name: "Nation High School Model United Nations Conference",
 		date: "March 8, 2024 - March 11, 2024",
@@ -76,17 +76,17 @@ export default [
 		registration: "https://forms.gle/UCbJ9vVxqaYU8caT7",
 		registrationText: "Apply Now! Applications due 12/1",
 	},*/
-	/*{
+	{
 		name: "Berkeley Model United Nations Conference",
-		date: "March 4, 2022 - March 6, 2022",
+		date: "March 7, 2025 - March 9, 2025",
 		location: "University of California, Berkeley",
 		acronym: "bmun",
 		text:
 			"Our fifth conference of the year, Berkeley Model United Nations Conference, is the oldest high school Model UN conference in the world. With over 2,000 delegates each year, it ranks with NAIMUN among the premier high school conferences in the world — and, likewise, among those with the most fun in store. BMUN is our second overnight conference, located in nearby Berkeley, California, including a 2-night hotel stay.",
-	},*/
+	},
 	{
 		name: "South Bay Model United Nations",
-		date: "April 6, 2024",
+		date: "TBD",
 		location: "Monta Vista High School",
 		acronym: "sbmun",
 		text:
