@@ -56,16 +56,16 @@ export default [
 		//registration: "/conferences/scvmun24/register",
 		//registrationText: "App not open",
 	},
-	/*{
+	{
 		name: "North American Invitational Model United Nations Conference",
-		date: "February 15, 2024 - February 18, 2024",
+		date: "February 13, 2025 - February 16, 2025",
 		location: "Georgetown University",
 		acronym: "naimun",
 		text:
 			"The North American Invitational Model United Nations Conference is one of our travel conferences. With over 3,000 delegates each year, NAIMUN is the largest student-run Model United Nations conference in the world, and many consider it the de facto national championship conference. Don’t let all that scare you, though: it’s often best remembered by delegates as a 6-day trip to Washington, DC, full of chances to meet new people and make new friends.",
 		//registration: "https://bit.ly/naimun2022app",
 		//registrationText: "Application Open!",
-	},*/
+	},
 	/*{
 		name: "Nation High School Model United Nations Conference",
 		date: "March 8, 2024 - March 11, 2024",
