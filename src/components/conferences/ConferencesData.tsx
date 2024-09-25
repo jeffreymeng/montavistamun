@@ -15,7 +15,7 @@ export default [
 	 	acronym: "smunc",
 	 	text: `The Stanford Model United Nations Conference is one of the most competitive conferences of the year, but also one with most to offer. With three days packed with five committee sessions, it may leave you a bit exhausted, but never with any regrets about attending!`,
 	 	registration: "https://forms.gle/wT7dVvmyFF2cUaT6A",
-	 	registrationText: "Sign up now! Application closes 9/19",
+	 	registrationText: "Application deadline has been extended! Signups close 9/26",
 	},
 	/*{
 		name: "Bruin Model UN Conference",
