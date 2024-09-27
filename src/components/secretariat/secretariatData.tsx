@@ -62,7 +62,7 @@ export default [
 	},
 	{
 		name: "Jerry Wang",
-		position: "Vice President",
+		position: "Internal VP",
 		bio: (
 			<>
 			Hey, I’m Jerry and I’m super excited to be your VP this year! I joined MUN freshman 
@@ -82,25 +82,8 @@ export default [
 		memeBio: "",
 	},
 	{
-		name: "Kathryn Foo",
-		position: "Vice President",
-		bio: (
-			<>
-			Hey everyone! I’m Kathryn Foo and I’m one of your VPs this year. I joined 
-			model un my freshman year and I’ve really found my community here. I’ve so 
-			many friends along the way (many shows here) and I’m genuinely so grateful 
-			for the people I’ve met along the way. More on me, I love taking photos and 
-			reporting on different events, so you might see around with a camera. I also 
-			really enjoy reading in my free time and love watching cheesy romance films 
-			to pass the time. I’m a total people-person, so if you ever see me around say hi!
-			</>
-		),
-		memeBioNickname: "",
-		memeBio: "",
-	},
-	{
 		name: "Riya Murthy",
-		position: "Head of Training",
+		position: "VP of Training",
 		bio: (
 			<>
 			Hi everyone! I’m Riya and I’m super excited to be your Head of Training this 
@@ -118,7 +101,7 @@ export default [
 	},
 	{
 		name: "Lily Jiang",
-		position: "Logistics",
+		position: "VP of Logistics",
 		bio: (
 			<>
 			Hi, I’m Lily and I’m a logistics officer this year! I joined Model UN as a 
