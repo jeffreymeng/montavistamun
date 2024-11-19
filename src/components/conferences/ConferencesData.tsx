@@ -36,7 +36,7 @@ export default [
 			"San Francisco Model United Nations conference is held by Lowell High School. One of the most beginner-friendly conferences we attend, SFMUN is a great way to get started in Model UN, while also providing experienced delegates with plenty of chances to hone their skills. It’s a much less intense and more beginner-friendly conference, and it’s highly recommended for all delegates to attend.",
 		// registration: "/conferences/sfmun21/register",
 	},*/
-	{
+	/*{
 		name: "North California Model United Nations Conference",
 		date: "January 18, 2025 - January 19, 2025",
 		location: "Foothill High School",
@@ -45,7 +45,7 @@ export default [
 			"Northern California Model United Nations Conference is held at Foothill Highschool. The conference has numerous committees for delegates of all skill levels and is recommended for both old and new delegates.",
 		//registration: "https://forms.gle/NZB5Kzm8MD9gbsfi8",
 		//registrationText: "Sign up by 11/9!",
-	},
+	},*/
 	{
 		name: "Santa Clara Valley Model United Nations Conference",
 		date: "January 31, 2025 - February 1, 2025",
