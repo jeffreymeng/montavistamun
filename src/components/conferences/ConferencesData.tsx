@@ -27,15 +27,15 @@ export default [
 		// registration: "/conferences/bruinmun/register",
 		// registrationText: "Application Now Open",
 	},*/
-	/*{
+	{
 		name: "San Fransisco Model United Nations Conference",
-		date: "December 9, 2023 - December 10, 2023",
+		date: "January 25, 2025 - January 26, 2025",
 		location: "Lowell High School",
 		acronym: "sfmun",
 		text:
 			"San Francisco Model United Nations conference is held by Lowell High School. One of the most beginner-friendly conferences we attend, SFMUN is a great way to get started in Model UN, while also providing experienced delegates with plenty of chances to hone their skills. It’s a much less intense and more beginner-friendly conference, and it’s highly recommended for all delegates to attend.",
 		// registration: "/conferences/sfmun21/register",
-	},*/
+	},
 	/*{
 		name: "North California Model United Nations Conference",
 		date: "January 18, 2025 - January 19, 2025",
@@ -56,7 +56,7 @@ export default [
 		//registration: "/conferences/scvmun24/register",
 		//registrationText: "App not open",
 	},
-	{
+	/*{
 		name: "North American Invitational Model United Nations Conference",
 		date: "February 13, 2025 - February 16, 2025",
 		location: "Georgetown University",
@@ -65,7 +65,7 @@ export default [
 			"The North American Invitational Model United Nations Conference is one of our travel conferences. With over 3,000 delegates each year, NAIMUN is the largest student-run Model United Nations conference in the world, and many consider it the de facto national championship conference. Don’t let all that scare you, though: it’s often best remembered by delegates as a 6-day trip to Washington, DC, full of chances to meet new people and make new friends.",
 		//registration: "https://bit.ly/naimun2022app",
 		//registrationText: "Application Open!",
-	},
+	},*/
 	/*{
 		name: "Nation High School Model United Nations Conference",
 		date: "March 8, 2024 - March 11, 2024",
