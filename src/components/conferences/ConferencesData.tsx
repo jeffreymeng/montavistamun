@@ -14,8 +14,8 @@ export default [
 	 	location: "Stanford University",
 	 	acronym: "smunc",
 	 	text: `The Stanford Model United Nations Conference is one of the most competitive conferences of the year, but also one with most to offer. With three days packed with five committee sessions, it may leave you a bit exhausted, but never with any regrets about attending!`,
-	 	registration: "https://forms.gle/wT7dVvmyFF2cUaT6A",
-	 	registrationText: "Application deadline has been extended! Signups close 9/26",
+	 	//registration: "https://forms.gle/wT7dVvmyFF2cUaT6A",
+	 	//registrationText: "Application deadline has been extended! Signups close 9/26",
 	},
 	/*{
 		name: "Bruin Model UN Conference",
@@ -27,15 +27,16 @@ export default [
 		// registration: "/conferences/bruinmun/register",
 		// registrationText: "Application Now Open",
 	},*/
-	/*{
+	{
 		name: "San Fransisco Model United Nations Conference",
 		date: "January 25, 2025 - January 26, 2025",
 		location: "Lowell High School",
 		acronym: "sfmun",
 		text:
 			"San Francisco Model United Nations conference is held by Lowell High School. One of the most beginner-friendly conferences we attend, SFMUN is a great way to get started in Model UN, while also providing experienced delegates with plenty of chances to hone their skills. It’s a much less intense and more beginner-friendly conference, and it’s highly recommended for all delegates to attend.",
-		// registration: "/conferences/sfmun21/register",
-	},*/
+		registration: "https://forms.gle/soPm4LGVpHCQRLJt7",
+		registrationText: "Application closes 1/17"
+	},
 	/*{
 		name: "North California Model United Nations Conference",
 		date: "January 18, 2025 - January 19, 2025",
