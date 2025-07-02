@@ -87,7 +87,7 @@ export default [
 	},
 	{
 		name: "South Bay Model United Nations",
-		date: "TBD",
+		date: "April 5, 2025",
 		location: "Monta Vista High School",
 		acronym: "sbmun",
 		text:
