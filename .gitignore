@@ -11,3 +11,4 @@ built-netlify-functions/**
 firestore-debug.log
 ui-debug.log
 **/*.icloud
+CLAUDE.md

@@ -9,7 +9,7 @@ if (admin.apps.length === 0) {
 	});
 }
 
-exports.handler = async function(event, context) {
+exports.handler = async function (event, context) {
 	if (event.httpMethod !== "GET") {
 		return {
 			statusCode: 405,
@@ -87,4 +87,4 @@ exports.handler = async function(event, context) {
 			body: `{"success":false, "code":"internal_error", "message":"The server encountered an internal error while fetching the user data."}`,
 		};
 	}
-}
+};

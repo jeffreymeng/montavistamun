@@ -9,7 +9,7 @@ if (admin.apps.length === 0) {
 		databaseURL: "https://montavistamodelun.firebaseio.com",
 	});
 }
-exports.handler = async function(event, context) {
+exports.handler = async function (event, context) {
 	if (event.httpMethod !== "POST") {
 		return { statusCode: 405, body: "Method Not Allowed" };
 	}
@@ -146,4 +146,4 @@ exports.handler = async function(event, context) {
 		statusCode: 200,
 		body: `{"success":true}`,
 	};
-}
+};

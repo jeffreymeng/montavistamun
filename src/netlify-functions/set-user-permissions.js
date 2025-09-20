@@ -8,7 +8,7 @@ if (admin.apps.length === 0) {
 		databaseURL: "https://montavistamodelun.firebaseio.com",
 	});
 }
-exports.handler = async function(event, context) {
+exports.handler = async function (event, context) {
 	if (event.httpMethod !== "POST") {
 		return {
 			statusCode: 405,
@@ -127,4 +127,4 @@ exports.handler = async function(event, context) {
 			body: `{"success":false, "code":"internal_error", "message":"The server encountered an internal error while modifying the claims."}`,
 		};
 	}
-}
+};

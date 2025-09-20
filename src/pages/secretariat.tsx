@@ -46,41 +46,43 @@ export default function SecretariatPage({
 	const description =
 		"Who exactly do you contact when you need help? Who is behind" +
 		" those emails to you? That would be us, the secretariat! Get to" +
-		" know us, we’re always looking for new friends!";
+		" know us, we're always looking for new friends!";
 	return (
 		<Layout title={"Secretariat"} description={description}>
 			<Header title={"Secretariat"} backgroundImage={data.headerImage}>
-				{description}
+				<></>
 			</Header>
 			<Main>
-				{secretariatData.map(
-					({ name, position, bio, memeBio, memeBioNickname }) => (
-						<HorizontalCard
-							subtitle={position}
-							title={
-								memeMode
-									? `${
-											name.split(" ")[0]
-									  } "${memeBioNickname}" ${name
-											.split(" ")
-											.slice(1)
-											.join(" ")}`
-									: name
-							}
-							key={name}
-							image={
-								(images.find((img) => {
-									return (
-										img[0].toLowerCase() ==
-										name.toLowerCase().replace(/\s/g, "_")
-									);
-								}) || [null, data.placeholder])[1]
-							}
-						>
-							{memeMode ? memeBio : bio}
-						</HorizontalCard>
-					)
-				)}
+				<div className="space-y-6 max-w-5xl mx-auto">
+					{secretariatData.map(
+						({ name, position, bio, memeBio, memeBioNickname }) => (
+							<HorizontalCard
+								subtitle={position}
+								title={
+									memeMode
+										? `${
+												name.split(" ")[0]
+										  } "${memeBioNickname}" ${name
+												.split(" ")
+												.slice(1)
+												.join(" ")}`
+										: name
+								}
+								key={name}
+								image={
+									(images.find((img) => {
+										return (
+											img[0].toLowerCase() ==
+											name.toLowerCase().replace(/\s/g, "_")
+										);
+									}) || [null, data.placeholder])[1]
+								}
+							>
+								{memeMode ? memeBio : bio}
+							</HorizontalCard>
+						)
+					)}
+				</div>
 				{memeMode && (
 					<div className="fixed bottom-0 inset-x-0 pb-2 sm:pb-5">
 						<div className="max-w-screen-xl mx-auto px-2 sm:px-6 lg:px-8">
@@ -143,7 +145,7 @@ export default function SecretariatPage({
 
 export const query = graphql`
 	query SecretariatPageQuery {
-		headerImage: file(relativePath: { eq: "headers/secretariat.jpg" }) {
+		headerImage: file(relativePath: { eq: "headers/recropped.JPG" }) {
 			childImageSharp {
 				fluid(maxWidth: 1200, quality: 90) {
 					...GatsbyImageSharpFluid_withWebp
