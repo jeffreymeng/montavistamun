@@ -161,7 +161,7 @@ export const query = graphql`
 		}
 		images: allFile(
 			filter: {
-				relativePath: { glob: "secretariat/*.{jpg,jpeg,png,gif}" }
+				relativePath: { glob: "secretariat/*.{jpg,jpeg,png,gif,webp}" }
 			}
 		) {
 			edges {

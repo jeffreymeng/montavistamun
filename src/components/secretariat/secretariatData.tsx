@@ -113,7 +113,17 @@ export default [
 	{
 		name: "Sophie Xu",
 		position: "PR Officer",
-		bio: <></>,
+		bio: (
+			<>
+			Hi! My name is Sophie and I am currently a junior. This year will be my 
+			second year doing MUN. My favorite part of MUN has to be the travelling 
+			aspect because I have been able to do so many fun activities with my 
+			friends as we've travelled to places like Berkeley and D.C. for conferences 
+			(including trying new foods!) as well as getting to meet new people. 
+			Outside of school, I enjoy shopping, playing the piano, going on walks 
+			and volunteer work!
+			</>
+		),
 		memeBioNickname: "",
 		memeBio: "",
 	},

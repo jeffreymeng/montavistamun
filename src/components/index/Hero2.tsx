@@ -68,7 +68,7 @@ export default function Hero({
 								Nations.
 							</p>
 							{<p className="mt-3 text-base font-bold text-indigo-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-								Meetings every Thursday at lunch in C107!
+								Meetings every Friday at lunch in C107!
 							</p>}
 							<div className="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
 								<div className="rounded-md shadow">

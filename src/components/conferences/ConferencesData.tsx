@@ -10,7 +10,7 @@ export default [
 	},*/
 	{
 	 	name: "Stanford Model UN Conference",
-	 	date: "November 8, 2024 - November 10, 2024",
+	 	date: "November 7, 2025 - November 9, 2025",
 	 	location: "Stanford University",
 	 	acronym: "smunc",
 	 	text: `The Stanford Model United Nations Conference is one of the most competitive conferences of the year, but also one with most to offer. With three days packed with five committee sessions, it may leave you a bit exhausted, but never with any regrets about attending!`,
