@@ -1,1 +1,1 @@
-export default ["Secretariat", "Conferences", "Awards", "Calendar"];
+export default ["Secretariat", "Conferences", "Awards", "Calendar", "Guide"];
