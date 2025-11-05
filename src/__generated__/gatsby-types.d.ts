@@ -3268,17 +3268,6 @@ type ConferencesPageQueryQuery = { readonly headerImage: Maybe<{ readonly childI
         & { readonly image: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }
       ) }> } };
 
-type KennedyPageQueryQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type KennedyPageQueryQuery = { readonly headerImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }>, readonly placeholder: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }>, readonly secretariatImages: { readonly edges: ReadonlyArray<{ readonly node: (
-        Pick<File, 'name'>
-        & { readonly image: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }
-      ) }> }, readonly conferencesImages: { readonly edges: ReadonlyArray<{ readonly node: (
-        Pick<File, 'name'>
-        & { readonly image: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }
-      ) }> } };
-
 type SecretariatPageQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -3352,6 +3341,22 @@ type SMUNCRegisterPageQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 type SMUNCRegisterPageQueryQuery = { readonly headerImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }> };
 
+type GuidePageQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type GuidePageQueryQuery = { readonly headerImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }> };
+
+type KennedyPageQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type KennedyPageQueryQuery = { readonly headerImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }>, readonly placeholder: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }>, readonly secretariatImages: { readonly edges: ReadonlyArray<{ readonly node: (
+        Pick<File, 'name'>
+        & { readonly image: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }
+      ) }> }, readonly conferencesImages: { readonly edges: ReadonlyArray<{ readonly node: (
+        Pick<File, 'name'>
+        & { readonly image: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }
+      ) }> } };
+
 type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -3360,17 +3365,17 @@ type Unnamed_1_Query = { readonly hero: Maybe<{ readonly childImageSharp: Maybe<
 type Unnamed_2_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-type Unnamed_2_Query = { readonly thumbnail: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }> };
+type Unnamed_2_Query = { readonly socialsImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fixed: Maybe<GatsbyImageSharpFixedFragment> }> }> };
+
+type Unnamed_3_QueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type Unnamed_3_Query = { readonly thumbnail: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }> };
 
 type AuthLayoutQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 type AuthLayoutQueryQuery = { readonly headerImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }> };
-
-type Unnamed_3_QueryVariables = Exact<{ [key: string]: never; }>;
-
-
-type Unnamed_3_Query = { readonly socialsImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fixed: Maybe<GatsbyImageSharpFixedFragment> }> }> };
 
 type Unnamed_4_QueryVariables = Exact<{ [key: string]: never; }>;
 

@@ -49,14 +49,20 @@ export default function GuidePage({ data }: GuidePageProps): React.ReactElement 
 
 	return (
 		<Layout title="MUN Guide" description="Comprehensive guide to Model United Nations procedures, committees, and strategies">
-			<Header 
-				title="MUN Guide" 
-				backgroundImage={data.headerImage}
-			>
-				<p className="text-xl text-white/90 max-w-3xl mx-auto text-center">
-					Your comprehensive resource for mastering Model UN procedures, strategies, and success tips
-				</p>
-			</Header>
+			<div className="relative overflow-hidden bg-black">
+				<div className="relative py-8 sm:py-12 md:py-16">
+					<div className="mx-auto max-w-screen-xl px-4 sm:px-6">
+						<div className="text-center">
+							<h2 className="text-3xl tracking-tight leading-10 font-extrabold text-gray-100 sm:text-4xl sm:leading-none md:text-5xl">
+								MUN Guide
+							</h2>
+							<p className="mt-2 max-w-md mx-auto text-sm text-gray-300 sm:text-base md:mt-3 md:text-lg md:max-w-3xl">
+								Your comprehensive resource for mastering Model UN procedures, strategies, and success tips
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
 			<Main>
 				<div className="max-w-5xl mx-auto">
 					{/* Search and Controls */}
