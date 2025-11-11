@@ -3260,6 +3260,14 @@ type PagesQueryQuery = { readonly allSiteFunction: { readonly nodes: ReadonlyArr
 
 type GatsbyImageSharpFluid_withWebpFragment = Pick<ImageSharpFluid, 'base64' | 'aspectRatio' | 'src' | 'srcSet' | 'srcWebp' | 'srcSetWebp' | 'sizes'>;
 
+type awardsPageQueryQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+type awardsPageQueryQuery = { readonly headerImage: Maybe<{ readonly childImageSharp: Maybe<{ readonly fluid: Maybe<GatsbyImageSharpFluid_withWebpFragment> }> }>, readonly awardsData: { readonly nodes: ReadonlyArray<(
+      Pick<ConferenceAwardsData, 'delegationAward' | 'id' | 'month' | 'name' | 'time' | 'year' | 'imageURL'>
+      & { readonly delegateAwards: Maybe<ReadonlyArray<Maybe<Pick<ConferenceAwardsData__DelegateAwards, 'awards' | 'type'>>>> }
+    )> } };
+
 type ConferencesPageQueryQueryVariables = Exact<{ [key: string]: never; }>;
 
 

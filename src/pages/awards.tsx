@@ -56,10 +56,35 @@ export default function AwardsPage(): React.ReactElement {
 	`);
 
 	// const highlightTitle = "SMUNC 2019";
-	const highlightIndex = 0;
+	const highlightIndex = -1; // Set to -1 to not highlight any conference
 	// if (highlightTitle) {
 	// 	highlightIndex = awardsData.findIndex((p) => p.name == highlightTitle);
 	// }
+
+	// SMUNC XXIX data
+	const smuncData: ConferenceAwardsData = {
+		name: "SMUNC XXIX",
+		month: "November",
+		year: 2025,
+		time: null as any,
+		delegationAward: null,
+		delegateAwards: [
+			{
+				type: "Honorable",
+				awards: [
+					"Parth Samdadiya [WHO]",
+					"Shreya Rao [FAO]",
+					"Sophie Xu [FAO]",
+					"Leo Wang [FAO]",
+					"Harly Liu [WHO]"
+				]
+			},
+			{
+				type: "Research",
+				awards: ["Yashavi Sehgal [WHO]"]
+			}
+		]
+	};
 
 	return (
 		<Layout title={"Awards"} className={"bg-gray-50"}>
@@ -67,10 +92,11 @@ export default function AwardsPage(): React.ReactElement {
 				{""}
 			</Header>
 			<Main wide>
-				<SpotlightConference data={awardsData[highlightIndex]} />
+				<SpotlightConference data={smuncData} />
+				{highlightIndex >= 0 && <SpotlightConference data={awardsData[highlightIndex]} />}
 				<div className="mt-12 grid gap-5 max-w-lg mx-auto lg:grid-cols-3 lg:max-w-none">
 					{awardsData
-						.filter((e, i) => i !== highlightIndex)
+						.filter((e, i) => highlightIndex < 0 || i !== highlightIndex)
 						.map((conf) => {
 							const { imageURL, name, ...props } = conf;
 							return (
@@ -97,73 +123,82 @@ export function SpotlightConference({
 }): ReactElement {
 	console.log(data);
 	return (
-		<HorizontalCard
-			imageURL={
-				data.imageURL ||
-				"https://images.unsplash.com/photo-1561137260-bf428bc5e6a5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=975&h=800&q=80"
-			}
-			large
-			title={data.name}
-			subtitle={data.month + " " + data.year}
-		>
-			{data.delegationAward && (
-				<p
-					className={
-						"text-lg md:text-xl lg:text-2xl text-indigo-600 font-bold italic pb-3"
-					}
-				>
-					{data.delegationAward}
-				</p>
-			)}
-			{data.delegateAwards
-				.sort((a, b) => {
-					const awards = [
-						"Best Delegate",
-						"Outstanding",
-						"Honorable",
-						"Verbal",
-						"Research",
-					];
-
-					return awards.indexOf(a.type) - awards.indexOf(b.type);
-				})
-				.map((group) => (
-					<div key={group.type}>
-						<h3
-							className={
-								"pt-2" +
-								(group.type === "Best Delegate"
-									? "text-lg md:text-xl lg:text-2xl"
-									: "")
-							}
-						>
-							<b>
-								{
-									{
-										"Best Delegate": "Best Delegate",
-										Outstanding: "Outstanding Delegate",
-										Honorable: "Honorable Mention",
-										Verbal: "Verbal Commendation",
-										Research: "Research Award",
-									}[
-										group.type as
-											| "Best Delegate"
-											| "Outstanding"
-											| "Honorable"
-											| "Verbal"
-											| "Research"
-									]
-								}
-							</b>
-						</h3>
-						<ul className={"list-none"}>
-							{group.awards.map((delegate) => (
-								<li key={delegate}>{delegate}</li>
+		<div className="max-w-full my-10 mx-auto">
+			<div className="md:flex bg-white rounded-lg shadow-lg overflow-hidden">
+				<div className="h-48 md:h-auto md:w-96 flex-shrink-0">
+					<img
+						className="w-full h-full object-cover"
+						alt="Conference Image"
+						src={
+							data.imageURL ||
+							"https://images.unsplash.com/photo-1561137260-bf428bc5e6a5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=975&h=800&q=80"
+						}
+					/>
+				</div>
+				<div className="p-6 flex-1">
+					<p className="text-lg md:text-xl lg:text-2xl text-gray-600 font-semibold">
+						{data.month + " " + data.year}
+					</p>
+					<h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-gray-900 mb-4">
+						{data.name}
+					</h2>
+					<div className="text-gray-700">
+						{data.delegationAward && (
+							<p className="text-lg md:text-xl lg:text-2xl text-indigo-600 font-bold italic pb-3">
+								{data.delegationAward}
+							</p>
+						)}
+						{data.delegateAwards
+							.sort((a, b) => {
+								const awards = [
+									"Best Delegate",
+									"Outstanding",
+									"Honorable",
+									"Verbal",
+									"Research",
+								];
+								return awards.indexOf(a.type) - awards.indexOf(b.type);
+							})
+							.map((group) => (
+								<div key={group.type}>
+									<h3
+										className={
+											"pt-2 " +
+											(group.type === "Best Delegate"
+												? "text-lg md:text-xl lg:text-2xl"
+												: "")
+										}
+									>
+										<b>
+											{
+												{
+													"Best Delegate": "Best Delegate",
+													Outstanding: "Outstanding Delegate",
+													Honorable: "Honorable Mention",
+													Verbal: "Verbal Commendation",
+													Research: "Research Award",
+												}[
+													group.type as
+														| "Best Delegate"
+														| "Outstanding"
+														| "Honorable"
+														| "Verbal"
+														| "Research"
+												]
+											}
+										</b>
+									</h3>
+									<ul className="list-none">
+										{group.awards.map((delegate) => (
+											<li key={delegate}>{delegate}</li>
+										))}
+									</ul>
+								</div>
 							))}
-						</ul>
 					</div>
-				))}
-		</HorizontalCard>
+				</div>
+			</div>
+		</div>
 	);
 }
 export function ConferenceAwardCard({
