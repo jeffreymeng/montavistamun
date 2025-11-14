@@ -80,6 +80,10 @@ export default function AwardsPage(): React.ReactElement {
 				]
 			},
 			{
+				type: "Verbal",
+				awards: ["Hruday Mulky [IUCN]"]
+			},
+			{
 				type: "Research",
 				awards: ["Yashavi Sehgal [WHO]"]
 			}
