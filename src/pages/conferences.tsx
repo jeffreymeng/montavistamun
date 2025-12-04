@@ -30,6 +30,37 @@ export default function ConferencesPage({
 		{ childImageSharp: edge.node.image },
 	]);
 	const { user } = useContext(AuthContext);
+
+	const upcomingConferences = [
+		{
+			name: "GauchoMUN XVII",
+			date: "January 24-25, 2025",
+			location: "UC Santa Barbara",
+			acronym: "gauchomun",
+			text: "GauchoMUN XVII is a conference hosted at UC Santa Barbara. Join us for an exciting weekend of debate and diplomacy in beautiful Santa Barbara.",
+		},
+		{
+			name: "Berkeley Model United Nations",
+			date: "March 6-8, 2026",
+			location: "UC Berkeley",
+			acronym: "bmun",
+			text: "BMUN is the oldest high school Model UN conference in the world. With over 2,000 delegates each year, it ranks among the premier high school conferences.",
+		},
+		{
+			name: "TinoMUN",
+			date: "Date TBD",
+			location: "Cupertino High School",
+			acronym: "tinomun",
+			text: "TinoMUN is a local conference hosted by Cupertino High School. It's a great opportunity for delegates to practice their skills close to home.",
+		},
+		{
+			name: "South Bay Model United Nations",
+			date: "Date TBD",
+			location: "Homestead High School",
+			acronym: "sbmun",
+			text: "South Bay Model United Nations is a spring conference in the Bay Area. It's a great chance to keep your MUN skills sharp late in the school year.",
+		},
+	];
 	return (
 		<Layout
 			title={"Conferences"}
@@ -43,8 +74,24 @@ export default function ConferencesPage({
 				skills with your peers — all while having a blast!
 			</Header>
 			<Main>
-				<h1 className={"text-3xl leading-7 font-extrabold"}>
-					More conferences to be announced!
+				<div className="bg-white rounded-lg shadow-lg p-6 mb-8">
+					<h2 className="text-2xl font-bold text-gray-900 mb-4">Upcoming Conferences</h2>
+					<div className="space-y-3">
+						{upcomingConferences.map(({ name, date, location, acronym }, i) => (
+							<div key={i} className="border-l-4 border-indigo-500 pl-4 py-2">
+								<h3 className="font-semibold text-lg text-gray-900">
+									{acronym.toUpperCase()}: {name}
+								</h3>
+								<p className="text-gray-600">
+									{date} | {location}
+								</p>
+							</div>
+						))}
+					</div>
+				</div>
+
+				<h1 className={"text-3xl leading-7 font-extrabold mt-12 mb-6"}>
+					Conference Details
 				</h1>
 				<p className="mt-3 text-lg">
 					Model UN is best known for its conferences, which allow you to take
@@ -55,7 +102,7 @@ export default function ConferencesPage({
 					speaking and leadership skills to the test. Of course, you
 					will also be able to participate in mock conferences before
 					actual conferences to master conference etiquette and work
-					out the kinks. We’re sure you will have a great experience
+					out the kinks. We're sure you will have a great experience
 					with conferences, and we hope you join us for our next one!
 				</p>
 				{conferencesData.map(
