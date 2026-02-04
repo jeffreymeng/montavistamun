@@ -46,7 +46,7 @@ export default [
 	},
 	{
 		name: "Harly Liu",
-		position: "Vice President",
+		position: "VP of Logistics",
 		bio: (
 			<>
 			Hi, I'm Harly, and I'm excited to be your VP this year. I've been in MUN 
@@ -62,49 +62,68 @@ export default [
 		memeBio: "",
 	},
 	{
-		name: "Naina Singhal",
-		position: "Logistics Officer",
-		bio: (
-			<>
-			Hi, I'm Naina, and I'm super excited to be a logistics officer this year! 
-			I joined Model UN as a sophomore and this is my third year in MUN. What 
-			I love about MUN is that it has given me the opportunity to meet people 
-			with diverse perspectives, and to discuss and debate global issues. By 
-			improving my public speaking and communication skills, MUN has greatly 
-			boosted my confidence and ability to negotiate. Outside of MUN, I enjoy 
-			hanging out with my friends, shopping, reading, and crochet! I'm so 
-			excited to meet everyone and can't wait to have a great year :)
-			</>
-		),
-		memeBioNickname: "",
-		memeBio: "",
-	},
-	{
-		name: "Sahana Suresh",
-		position: "Logistics Officer",
-		bio: (
-			<>
-			Hi, I'm Sahana, and I'm so excited to be a logistics officer this year! 
-			I joined Model UN in my sophomore year, and this will be my third year 
-			as a delegate. My favorite part of MUN is meeting new people from different 
-			parts of the country in the same committee. Through MUN, I've had the 
-			opportunity to improve my public speaking skills and step out of my comfort 
-			zone. Outside of MUN, I love biking, listening to music, and going to the 
-			beach! I'm so excited to meet everyone!
-			</>
-		),
-		memeBioNickname: "",
-		memeBio: "",
-	},
-	{
 		name: "Parth Samdadiya",
-		position: "Training Officer",
+		position: "Vice President",
 		bio: (
 			<>
 			Hi, I'm Parth S, a junior in Monta Vista High School. I've been doing 
 			MUN since 8th grade and look forward to serving as your training officer 
 			this year. Outside of school, some of my favorite things to do are play 
 			soccer and video games!
+			</>
+		),
+		memeBioNickname: "",
+		memeBio: "",
+	},
+	{
+		name: "Dhruv Yadati",
+		position: "VP of Training",
+		bio: (
+			<>
+			Hi i'm Dhruv! I'm in 11th grade and have been doing Model UN for four years
+			now and have enjoyed going to different conferences and meeting new people.
+			My favorite part of Model UN is hearing all the creative ideas people come
+			up with and debate about, as well as meeting a bunch of new people with
+			similar interests. Outside of Model UN, I love to watch different shows
+			and play soccer. I'm so excited to meet everyone and look forward to a
+			great year!
+			</>
+		),
+		memeBioNickname: "",
+		memeBio: "",
+	},
+	{
+		name: "Sophia Chen",
+		position: "Logistics",
+		bio: (
+			<>
+			Hi, I'm Sophia, and I'm so excited to be one of your logistics officers
+			this year! I have been doing Model UN since my sophomore year. My favorite
+			parts of MUN are making new friends and travelling to different conferences.
+			MUN has helped me to increase my confidence, as well as gain critical thinking,
+			public speaking, and research skills, which I can apply later on. Outside of
+			the club, I enjoy playing tennis, piano, and listening to music. I'm excited
+			to meet everyone and have another great year!
+			</>
+		),
+		memeBioNickname: "",
+		memeBio: "",
+	},
+	{
+		name: "Sumedha Kumar",
+		position: "Logistics",
+		bio: (
+			<>
+			Hi, I'm Sumedha, and I'm excited to serve as your Logistics officer this
+			year. I've been involved in MUN throughout high school, and what I love most
+			about it is the spontaneity—thinking on your feet, adapting in real time, and
+			seeing debates take unexpected turns. I also really enjoy meeting people from
+			different schools and backgrounds, which makes every conference a unique
+			experience. MUN has helped me grow as a speaker and collaborator, especially
+			through impromptu speeches and fast-paced discussion. Outside of MUN, I'm
+			involved in research, FBLA, and run a nonprofit. In my free time, I love
+			spending time with friends, eating good food, watching new TV shows, and the
+			occasional gaming. I'm looking forward to a great year with all of you.
 			</>
 		),
 		memeBioNickname: "",

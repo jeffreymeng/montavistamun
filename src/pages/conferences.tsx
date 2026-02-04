@@ -33,25 +33,11 @@ export default function ConferencesPage({
 
 	const upcomingConferences = [
 		{
-			name: "GauchoMUN XVII",
-			date: "January 24-25, 2025",
-			location: "UC Santa Barbara",
-			acronym: "gauchomun",
-			text: "GauchoMUN XVII is a conference hosted at UC Santa Barbara. Join us for an exciting weekend of debate and diplomacy in beautiful Santa Barbara.",
-		},
-		{
 			name: "Berkeley Model United Nations",
 			date: "March 6-8, 2026",
 			location: "UC Berkeley",
 			acronym: "bmun",
 			text: "BMUN is the oldest high school Model UN conference in the world. With over 2,000 delegates each year, it ranks among the premier high school conferences.",
-		},
-		{
-			name: "TinoMUN",
-			date: "Date TBD",
-			location: "Cupertino High School",
-			acronym: "tinomun",
-			text: "TinoMUN is a local conference hosted by Cupertino High School. It's a great opportunity for delegates to practice their skills close to home.",
 		},
 		{
 			name: "South Bay Model United Nations",

@@ -61,42 +61,12 @@ export default function AwardsPage(): React.ReactElement {
 	// 	highlightIndex = awardsData.findIndex((p) => p.name == highlightTitle);
 	// }
 
-	// SMUNC XXIX data
-	const smuncData: ConferenceAwardsData = {
-		name: "SMUNC XXIX",
-		month: "November",
-		year: 2025,
-		time: null as any,
-		delegationAward: null,
-		delegateAwards: [
-			{
-				type: "Honorable",
-				awards: [
-					"Parth Samdadiya [WHO]",
-					"Shreya Rao [FAO]",
-					"Sophie Xu [FAO]",
-					"Leo Wang [FAO]",
-					"Harly Liu [WHO]"
-				]
-			},
-			{
-				type: "Verbal",
-				awards: ["Hruday Mulky [IUCN]"]
-			},
-			{
-				type: "Research",
-				awards: ["Yashavi Sehgal [WHO]"]
-			}
-		]
-	};
-
 	return (
 		<Layout title={"Awards"} className={"bg-gray-50"}>
 			<Header title={"Awards"} backgroundImage={headerImage}>
 				{""}
 			</Header>
 			<Main wide>
-				<SpotlightConference data={smuncData} />
 				{highlightIndex >= 0 && <SpotlightConference data={awardsData[highlightIndex]} />}
 				<div className="mt-12 grid gap-5 max-w-lg mx-auto lg:grid-cols-3 lg:max-w-none">
 					{awardsData
